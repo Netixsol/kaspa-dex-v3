@@ -1,24 +1,19 @@
-import type { WindowProvider } from 'wagmi/window'
-
-export interface ExtendEthereum extends WindowProvider {
-  isSafePal?: true
-  isCoin98?: true
-  isBlocto?: true
-  isMathWallet?: true
-  isTrustWallet?: true
-  isBlocto?: true
-}
+import type { Ethereum } from '@wagmi/core'
 
 declare global {
   interface Window {
-    coin98?: true
-    ethereum?: ExtendEthereum
     BinanceChain?: {
       bnbSign?: (address: string, message: string) => Promise<{ publicKey: string; signature: string }>
       switchNetwork?: (networkId: string) => Promise<string>
     } & Ethereum
     kastle?: {
-      ethereum(ethereum: any): unknown
+      kaspa?: {
+        request: (args: { method: string; params?: any[] }) => Promise<any>
+        on: (event: string, handler: (...args: any[]) => void) => void
+        removeListener: (event: string, handler: (...args: any[]) => void) => void
+        isConnected: () => boolean
+        selectedAddress?: string
+      }
     }
     Kaskeeper?: {
       requestAccounts: () => Promise<string[]>
@@ -27,7 +22,7 @@ declare global {
       getBalance: () => Promise<{ total: number }>
       getPublicKey: () => Promise<string>
       getNetwork: () => Promise<string>
-      switchNetwork: (network: string) => Promise<void>
+      switchNetwork: (network: string) => Promise<string>
       getLayer: () => Promise<string>
       switchLayer: (layer: string) => Promise<void>
       signMessage: (message: string) => Promise<string>
@@ -49,7 +44,6 @@ declare global {
       _isConnected?: boolean
     }
     kasware?: {
-      ethereum?: ExtendEthereum
       requestAccounts: () => Promise<string[]>
       getAccounts: () => Promise<string[]>
       getVersion: () => Promise<string>
@@ -100,8 +94,16 @@ declare global {
       }) => Promise<string>
       on: (event: string, handler: (data: any) => void) => void
       removeListener: (event: string, handler: (data: any) => void) => void
+      // EVM Provider for Layer 2 / Ethereum compatibility
+      ethereum?: {
+        isKasWare: boolean
+        request: (args: { method: string; params?: any[] }) => Promise<any>
+        on: (event: string, handler: (...args: any[]) => void) => void
+        removeListener: (event: string, handler: (...args: any[]) => void) => void
+        isConnected: () => boolean
+        chainId?: string
+        selectedAddress?: string
+      } & Ethereum
     }
   }
 }
-
-export {}

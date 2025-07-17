@@ -194,12 +194,14 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     userDataLoaded: v3UserDataLoaded,
   } = useFarmsV3WithPositions({ mockApr })
 
+
+  console.log({ farmsV3 })
   const farmsLP: V2AndV3Farms = useMemo(() => {
     return [
       ...farmsV3.map((f) => ({ ...f, version: 3 } as V3FarmWithoutStakedValue)),
-      ...farmsV2.map((f) => ({ ...f, version: 2 } as V2FarmWithoutStakedValue)),
+      // ...farmsV2.map((f) => ({ ...f, version: 2 } as V2FarmWithoutStakedValue)),
     ]
-  }, [farmsV2, farmsV3])
+  }, [farmsV3])
 
   const cakePrice = usePriceCakeUSD()
 
@@ -291,13 +293,13 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
         const totalLiquidity = totalLiquidityFromLp.eq(BIG_INT_ZERO) && mockApr ? BIG_INT_ONE : totalLiquidityFromLp
         const { cakeRewardsApr, lpRewardsApr } = isActive
           ? getFarmApr(
-              chainId,
-              new BigNumber(farm.poolWeight),
-              cakePrice,
-              totalLiquidity,
-              farm.lpAddress,
-              regularCakePerBlock,
-            )
+            chainId,
+            new BigNumber(farm.poolWeight),
+            cakePrice,
+            totalLiquidity,
+            farm.lpAddress,
+            regularCakePerBlock,
+          )
           : { cakeRewardsApr: 0, lpRewardsApr: 0 }
 
         return { ...farm, apr: cakeRewardsApr, lpRewardsApr, liquidity: totalLiquidity }
@@ -431,7 +433,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <FarmsV3Context.Provider value={providerValue}>
-      <PageHeader>
+      {/* <PageHeader>
         <Flex flexDirection="column">
           <Box m="24px 0">
             <FarmV3MigrationBanner />
@@ -442,7 +444,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                 {t('Farms')}
               </FarmH1>
               <FarmH2 scale="lg" color="text">
-                {t('Stake LP tokens to earn.')}
+                {t('Stake LP tokens to earn. ')}
               </FarmH2>
               <NextLinkFromReactRouter to="/farms/auction" prefetch={false}>
                 <Button p="0" variant="text">
@@ -453,15 +455,15 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                 </Button>
               </NextLinkFromReactRouter>
             </Box>
-            {/* After boosted enable */}
-            {/* {chainId === ChainId.BSC && (
+            After boosted enable
+            {chainId === ChainId.BSC && (
               <Box>
                 <BCakeBoosterCard />
               </Box>
-            )} */}
+            )}
           </FarmFlexWrapper>
         </Flex>
-      </PageHeader>
+      </PageHeader> */}
       <Page>
         <ControlContainer>
           <ViewControls>
@@ -566,7 +568,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
           </Flex>
         )}
         {chosenFarms.length > 0 && <div ref={observerRef} />}
-        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} />
+        {/* <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} /> */}
         <V3SubgraphHealthIndicator />
       </Page>
     </FarmsV3Context.Provider>

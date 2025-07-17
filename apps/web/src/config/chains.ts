@@ -12,13 +12,13 @@ export const CHAIN_QUERY_NAME = {
 } as const // satisfies Record<ChainId, string>
 
 export const kasplexMainnet = {
-  id: 167013,
+  id: 56,
   name: 'Kasplex Mainnet',
   network: 'KasplexMainnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'KAS',
-    symbol: 'KAS',
+    name: 'BNB',
+    symbol: 'BNB',
   },
   rpcUrls: {
     ...bsc_.rpcUrls,

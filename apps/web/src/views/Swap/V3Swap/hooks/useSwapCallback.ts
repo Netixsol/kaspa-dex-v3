@@ -62,12 +62,12 @@ export function useSwapCallback({
 
   return useMemo(() => {
     if (!trade || !account || !chainId || !callback) {
-      console.error('[useSwapCallback] INVALID: Missing dependencies')
+      // console.error('[useSwapCallback] INVALID: Missing dependencies')
       return { state: SwapCallbackState.INVALID, error: t('Missing dependencies') }
     }
     if (!recipient) {
       if (recipientAddress !== null) {
-        console.error('[useSwapCallback] INVALID: Invalid recipient')
+        // console.error('[useSwapCallback] INVALID: Invalid recipient')
         return { state: SwapCallbackState.INVALID, error: t('Invalid recipient') }
       }
       return { state: SwapCallbackState.LOADING }

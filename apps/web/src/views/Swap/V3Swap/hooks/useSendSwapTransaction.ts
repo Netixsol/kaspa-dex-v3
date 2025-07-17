@@ -64,7 +64,7 @@ export default function useSendSwapTransaction(
     return {
       callback: async function onSwap(): Promise<SendTransactionResult> {
         const isKasplex = chainId === ChainId.KASPLEX_TESTNET
-        const DEFAULT_GAS = 21000000n
+        const DEFAULT_GAS = 25000000n
         const estimatedCalls: SwapCallEstimate[] = await Promise.all(
           swapCalls.map((call) => {
             const { address, calldata, value } = call
@@ -133,6 +133,7 @@ export default function useSendSwapTransaction(
           ...(isKasplex ? { gasPrice: 2n } : {}),
         }
         if (isKasplex) {
+          // eslint-disable-next-line no-console
           console.log('onSwap - Kasplex detected, setting gasPrice to 2 wei')
         }
         return sendTransactionAsync(txParams)

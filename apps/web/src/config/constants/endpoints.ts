@@ -50,7 +50,8 @@ export const BLOCKS_CLIENT_WITH_CHAIN = {
   [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/blocks',
 }
 
-export const ASSET_CDN = 'https://assets.pancakeswap.finance'
+// export const ASSET_CDN = 'https://assets.pancakeswap.finance'
+export const ASSET_CDN = 'http://localhost:3000'
 
 export const V3_SUBGRAPH_URLS = {
   [ChainId.ETHEREUM]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-eth',
@@ -58,6 +59,8 @@ export const V3_SUBGRAPH_URLS = {
   [ChainId.BSC]: `https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc`,
   [ChainId.BSC_TESTNET]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-chapel',
   [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/exchange-v3-kasplexV2',
+  [ChainId.KASPLEX_MAINNET]: `https://gateway-arbitrum.network.thegraph.com/api/e2d66e372446eaac5ac26924208834a8/subgraphs/id/Hv1GncLY5docZoGtXjo4kwbTvxm3MAhVZqBZE4sUT9eZ`,
+  // [ChainId.KASPLEX_MAINNET]: `https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc`,
 } satisfies Record<ChainId, string>
 
 export const TRADING_REWARD_API = 'https://pancake-trading-fee-rebate-api.pancake.run/api/v1'

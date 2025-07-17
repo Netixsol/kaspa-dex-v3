@@ -9,7 +9,31 @@ export const CHAIN_QUERY_NAME = {
   [ChainId.BSC]: 'bsc',
   [ChainId.BSC_TESTNET]: 'bscTestnet',
   [ChainId.KASPLEX_TESTNET]: 'kasplexTestnet',
+  [ChainId.KASPLEX_MAINNET]: 'kasplexMainnet',
 } as const satisfies Record<ChainId, string>
+
+
+export const kasplexMainnet = {
+  id: 167013,
+  name: 'Kasplex Mainnet',
+  network: 'KasplexMainnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'KAS',
+    symbol: 'KAS',
+  },
+  rpcUrls: {
+    ...bsc_.rpcUrls,
+    public: {
+      ...bsc_.rpcUrls,
+      http: ['https://bsc-dataseed.bnbchain.org/'],
+    },
+    default: {
+      ...bsc_.rpcUrls.default,
+      http: ['https://bsc-dataseed.bnbchain.org/'],
+    },
+  },
+} satisfies Chain
 
 export const kasplexTestnet = {
   id: 167012,

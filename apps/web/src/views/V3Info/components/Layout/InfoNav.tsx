@@ -13,6 +13,7 @@ import {
 } from '@pancakeswap/uikit'
 import { ChainLogo } from 'components/Logo/ChainLogo'
 import { ASSET_CDN } from 'config/constants/endpoints'
+import { kasplexMainnet, kasplexTestnet } from 'config/chains'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { multiChainId, multiChainPaths } from 'state/info/constant'
@@ -21,7 +22,6 @@ import styled from 'styled-components'
 import { chains } from 'utils/wagmi'
 import { v3InfoPath } from '../../constants'
 import Search from '../Search'
-import { kasplexMainnet, kasplexTestnet } from 'config/chains'
 
 const NavWrapper = styled(Flex)`
   background: ${({ theme }) => theme.colors.gradientCardHeader};
@@ -96,7 +96,7 @@ export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex
     <UserMenu
       alignItems="top"
       ml="8px"
-      avatarSrc={`${ASSET_CDN}/web/chains/${multiChainId[chainName]}.png`}
+      avatarSrc={`/images/chains/${multiChainId[chainName]}.png`}
       text={
         foundChain ? (
           <>

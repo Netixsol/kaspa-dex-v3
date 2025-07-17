@@ -1,6 +1,6 @@
 import { TOKEN_BLACKLIST } from 'config/constants/info'
 import { gql } from 'graphql-request'
-import { MultiChainName, multiChainQueryMainToken, getMultiChainQueryEndPointWithStableSwap } from '../../constant'
+import { MultiChainName, multiChainQueryMainToken, getMultiChainQueryEndPointWithStableSwap, MultiChainNameExtend } from '../../constant'
 
 /**
  * Data for showing Pools table on the Token page
@@ -39,7 +39,7 @@ export interface PoolsForTokenResponse {
 }
 
 const fetchPoolsForToken = async (
-  chainName: MultiChainName,
+  chainName: MultiChainNameExtend,
   address: string,
 ): Promise<{
   error: boolean

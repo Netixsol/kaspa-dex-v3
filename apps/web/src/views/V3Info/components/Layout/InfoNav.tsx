@@ -19,7 +19,6 @@ import { multiChainId, multiChainPaths } from 'state/info/constant'
 import { useChainNameByQuery, useMultiChainPath } from 'state/info/hooks'
 import styled from 'styled-components'
 import { chains } from 'utils/wagmi'
-import { bsc, mainnet } from 'wagmi/chains'
 import { v3InfoPath } from '../../constants'
 import Search from '../Search'
 import { kasplexMainnet, kasplexTestnet } from 'config/chains'
@@ -68,14 +67,14 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
         </Box>
         <NetworkSwitcher activeIndex={activeIndex} />
       </Flex>
-      <Box width={['100%', '100%', '250px']}>
+      {/* <Box width={['100%', '100%', '250px']}>
         <Search />
-      </Box>
+      </Box> */}
     </NavWrapper>
   )
 }
 
-const targetChains = [kasplexTestnet, kasplexMainnet]
+const targetChains = [kasplexTestnet] // add kasplexMainnet if needed
 
 export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex }) => {
   const { t } = useTranslation()
@@ -86,7 +85,6 @@ export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex
   const switchNetwork = useCallback(
     (chainId: number) => {
       const chainPath = multiChainPaths[chainId]
-      console.log("chainPath:::", chainPath);
       if (activeIndex === 0) router.push(`/${v3InfoPath}${chainPath}`)
       if (activeIndex === 1) router.push(`/${v3InfoPath}${chainPath}/pairs`)
       if (activeIndex === 2) router.push(`/${v3InfoPath}${chainPath}/tokens`)

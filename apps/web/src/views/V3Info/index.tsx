@@ -109,10 +109,12 @@ export default function Home() {
     return formatDollarAmount(liquidityHover, 2, true)
   }, [liquidityHover])
 
+  console.log("protocolData:::::", protocolData);
+
   return (
     <Page>
       <Heading scale="lg" mb="16px">
-        {t('PancakeSwap Info & Analytics')}
+        {t('KaspaFinance Info & Analytics')}
       </Heading>
       <ChartCardsContainer>
         <Card>

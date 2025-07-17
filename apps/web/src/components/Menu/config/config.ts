@@ -1,22 +1,19 @@
 import {
   MenuItemsType,
-  DropdownMenuItemType,
   SwapIcon,
   SwapFillIcon,
   EarnFillIcon,
   EarnIcon,
-  TrophyIcon,
-  TrophyFillIcon,
-  NftIcon,
-  NftFillIcon,
-  MoreIcon,
   DropdownMenuItems,
+  FaucetIcon,
+  FaucetIconFill,
+  BarChartIcon,
 } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
-import { SUPPORTED_CHAIN_IDS as POOL_SUPPORTED_CHAINS } from '@pancakeswap/pools'
-import { nftsBaseUrl } from 'views/Nft/market/constants'
+// import { SUPPORTED_CHAIN_IDS as POOL_SUPPORTED_CHAINS } from '@pancakeswap/pools'
+// import { nftsBaseUrl } from 'views/Nft/market/constants'
 // import { getPerpetualUrl } from 'utils/getPerpetualUrl'
-import { SUPPORT_ONLY_BSC } from 'config/constants/supportChains'
+// import { SUPPORT_ONLY_BSC } from 'config/constants/supportChains'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & { hideSubNav?: boolean }
 export type ConfigMenuItemsType = Omit<MenuItemsType, 'items'> & { hideSubNav?: boolean; image?: string } & {
@@ -112,8 +109,8 @@ const config: (
     {
       label: t('Faucet'),
       href: '/faucets',
-      icon: EarnIcon,
-      fillIcon: EarnFillIcon,
+      icon: FaucetIcon,
+      fillIcon: FaucetIconFill,
       image: '/images/decorations/pe2.png',
       items: [
         // {
@@ -193,15 +190,16 @@ const config: (
     //   ],
     // },
     {
-      label: '',
-      href: '/info',
-      icon: MoreIcon,
-      hideSubNav: true,
+      label: t('Analytics'),
+      href: '/info/v3',
+      image: '/images/decorations/pe2.png',
+      icon: BarChartIcon,
+      fillIcon: BarChartIcon,
       items: [
-        {
-          label: t('V3 Info'),
-          href: '/info/v3',
-        },
+        // {
+        //   label: t('V3 Info'),
+        //   href: '/info/v3',
+        // },
         // {
         //   label: t('IFO'),
         //   href: '/ifo',

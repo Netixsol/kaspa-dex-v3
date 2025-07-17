@@ -5,7 +5,7 @@ export interface NavThemeType {
 }
 
 export const light: NavThemeType = {
-  background: lightColors.backgroundAlt,
+  background: darkColors.backgroundAlt,
 };
 
 export const dark: NavThemeType = {

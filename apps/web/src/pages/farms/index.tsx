@@ -9,10 +9,11 @@ import FarmCard from 'views/Farms/components/FarmCard/FarmCard'
 import ProxyFarmContainer, {
   YieldBoosterStateContext,
 } from 'views/Farms/components/YieldBooster/components/ProxyFarmContainer'
+import BigNumber from 'bignumber.js'
 
 export const ProxyFarmCardContainer = ({ farm }) => {
   const { address: account } = useAccount()
-  const cakePrice = usePriceCakeUSD()
+  const cakePrice = new BigNumber(0.1) // usePriceCakeUSD()
 
   const { proxyFarm, shouldUseProxyFarm } = useContext(YieldBoosterStateContext)
   const finalFarm = shouldUseProxyFarm ? proxyFarm : farm
@@ -37,22 +38,22 @@ const FarmsPage = () => {
   return (
     <>
       {chosenFarmsMemoized?.map((farm) => {
-        if (farm.version === 2) {
-          return farm.boosted ? (
-            <ProxyFarmContainer farm={farm} key={`${farm.pid}-${farm.version}`}>
-              <ProxyFarmCardContainer farm={farm} />
-            </ProxyFarmContainer>
-          ) : (
-            <FarmCard
-              key={`${farm.pid}-${farm.version}`}
-              farm={farm}
-              displayApr={getDisplayApr(farm.apr, farm.lpRewardsApr)}
-              cakePrice={cakePrice}
-              account={account}
-              removed={false}
-            />
-          )
-        }
+        // if (farm.version === 2) {
+        //   return farm.boosted ? (
+        //     <ProxyFarmContainer farm={farm} key={`${farm.pid}-${farm.version}`}>
+        //       <ProxyFarmCardContainer farm={farm} />
+        //     </ProxyFarmContainer>
+        //   ) : (
+        //     <FarmCard
+        //       key={`${farm.pid}-${farm.version}`}
+        //       farm={farm}
+        //       displayApr={getDisplayApr(farm.apr, farm.lpRewardsApr)}
+        //       cakePrice={cakePrice}
+        //       account={account}
+        //       removed={false}
+        //     />
+        //   )
+        // }
 
         return (
           <FarmV3Card

@@ -25,7 +25,7 @@ const NotFound = ({ statusCode = 404 }: { statusCode?: number }) => {
         <LogoIcon width="64px" mb="8px" />
         <Heading scale="xxl">{statusCode}</Heading>
         <Text mb="16px">{t("Oops, page not found.")}</Text>
-        <Link href="/" passHref>
+        <Link href="/swap" passHref>
           <Button scale="sm">{t("Back Home")}</Button>
         </Link>
       </StyledNotFound>

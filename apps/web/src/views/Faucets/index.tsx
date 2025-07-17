@@ -495,7 +495,7 @@ export const FaucetsPage = () => {
     )
 
     const getTokenIcon = (symbol: string) => {
-        const logoPath = `/TokenLogos/${symbol.toUpperCase()}.png`
+        const logoPath = `/images/chains/${symbol.toUpperCase()}.png`
         return logoPath
     }
 
@@ -570,7 +570,7 @@ export const FaucetsPage = () => {
                                         <Flex alignItems="center" flex="1">
                                             <TokenIconContainer>
                                                 <img
-                                                    src={getTokenIcon(token.symbol)}
+                                                    src={getTokenIcon(token.address)}
                                                     alt={token.symbol}
                                                     onError={(e) => {
                                                         // eslint-disable-next-line no-param-reassign

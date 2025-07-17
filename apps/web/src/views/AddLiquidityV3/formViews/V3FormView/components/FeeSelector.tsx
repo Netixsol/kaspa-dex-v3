@@ -215,11 +215,11 @@ export default function FeeSelector({
                 using state instead of replacing url to /v2 here
                 avoid pages keep in v2 when user change the tokens in selection
               */}
-              <Button variant="text" onClick={handleSelectV2}>
+              {/* <Button variant="text" onClick={handleSelectV2}>
                 <Text color="textSubtle" bold>
                   {t('Add V2 Liquidity')}
                 </Text>
-              </Button>
+              </Button> */}
             </AtomBox>
           )}
         </>

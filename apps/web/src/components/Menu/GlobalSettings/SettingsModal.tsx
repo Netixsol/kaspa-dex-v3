@@ -331,7 +331,7 @@ function RoutingSettings() {
               onChange={() => setV3Enable((s) => !s)}
             />
           </Flex>
-          <Flex justifyContent="space-between" alignItems="center" mb="24px">
+          {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
               <Text>PancakeSwap V2</Text>
               <QuestionHelper
@@ -407,7 +407,7 @@ function RoutingSettings() {
               onChange={(e) => setIsMMLinkedPoolByDefault(e.target.checked)}
               scale="md"
             />
-          </Flex>
+          </Flex> */}
           {onlyOneAMMSourceEnabled && (
             <Message variant="warning">
               <MessageText>

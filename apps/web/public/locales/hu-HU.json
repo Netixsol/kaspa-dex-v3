@@ -274,7 +274,7 @@
   "Search Farms": "Gazdaságok keresése",
   "Collect as": "Begyűjti, mint",
   "You will also collect fees earned from this position.": "Az ebből a pozícióból származó díjakat is be fogja szedni.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "Ez a likviditási pozíció jelenleg a hozamfarmban van tétként. A likviditás hozzáadásával vagy eltávolításával is a pénztárcádba gyűjtöd be az esetleg nem igényelt CAKE-t.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "Ez a likviditási pozíció jelenleg a hozamfarmban van tétként. A likviditás hozzáadásával vagy eltávolításával is a pénztárcádba gyűjtöd be az esetleg nem igényelt CAKE-t.",
   "To Top": "A tetejére",
   "Total value of the funds in this farm’s liquidity pair": "A hozamgazdaság likviditáspárjában lévő pénzeszközök összértéke",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "A szorzó az egyes hozamgazdaságoknak az egyes blokkokban előállított CAKE arányában kapott CAKE jutalmainak arányát jelenti.",

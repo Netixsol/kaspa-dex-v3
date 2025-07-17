@@ -276,7 +276,7 @@
   "Search Farms": "Hae viljelmiä",
   "Collect as": "Kerää muodossa",
   "You will also collect fees earned from this position.": "Keräät myös tästä positiosta ansaitut maksut.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "Tämä likviditeettipositio panostaa tällä hetkellä viljelmään. Likviditeetin lisääminen tai poistaminen korjaa lisäksi lunastamattoman CAKEn lompakkoosi.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "Tämä likviditeettipositio panostaa tällä hetkellä viljelmään. Likviditeetin lisääminen tai poistaminen korjaa lisäksi lunastamattoman CAKEn lompakkoosi.",
   "To Top": "Ylös",
   "Total value of the funds in this farm’s liquidity pair": "Varojen kokonaisarvo tämän viljelmän likviditeettiparissa",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "Kerroin kuvaa CAKE-palkintojen osuutta, jonka kukin viljelmä saa, osuutena kunkin lohkon tuottamasta CAKEsta.",

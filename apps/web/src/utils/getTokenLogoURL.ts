@@ -7,22 +7,34 @@ const mapping = {
   [ChainId.ETHEREUM]: 'ethereum',
 }
 
+// const getTokenLogoURL = memoize(
+//   (token?: Token) => {
+//     if (token && mapping[token.chainId]) {
+//       const address = getAddress(token.address) // ensures checksummed address
+//       return `/images/chains/${address}.png`
+//     }
+//     return null
+//   },
+//   (t) => `${t.chainId}#${t.address.toLowerCase()}`,
+// )
 const getTokenLogoURL = memoize(
   (token?: Token) => {
-    if (token && mapping[token.chainId]) {
-      return `https://assets-cdn.trustwallet.com/blockchains/${mapping[token.chainId]}/assets/${getAddress(
-        token.address,
-      )}/logo.png`
+    if (token?.address) {
+      console.log({token})
+      const address = getAddress(token.address) // checksummed
+      return `/images/chains/${address}.png`
     }
     return null
   },
-  (t) => `${t.chainId}#${t.address}`,
+  (t) => `${t?.chainId}#${t?.address.toLowerCase()}`,
 )
+
+
 
 export const getTokenLogoURLByAddress = memoize(
   (address?: string, chainId?: number) => {
     if (address && chainId && mapping[chainId]) {
-      return `https://assets-cdn.trustwallet.com/blockchains/${mapping[chainId]}/assets/${getAddress(address)}/logo.png`
+      return `/images/chains/${address}.png`
     }
     return null
   },

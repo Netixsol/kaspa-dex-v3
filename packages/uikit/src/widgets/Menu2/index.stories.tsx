@@ -1,9 +1,7 @@
 import noop from "lodash/noop";
 import React, { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Language } from "@pancakeswap/localization";
 import { BrowserRouter, Link, MemoryRouter } from "react-router-dom";
-import { SubMenuItemsType } from "../../components";
 import Box from "../../components/Box/Box";
 import Flex from "../../components/Box/Flex";
 import Button from "../../components/Button/Button";
@@ -14,12 +12,14 @@ import Heading from "../../components/Heading/Heading";
 import Input from "../../components/Input/Input";
 import { CogIcon, LanguageCurrencyIcon } from "../../components/Svg";
 import Text from "../../components/Text/Text";
-import { BottomDrawer, Modal, ModalProps, useModal } from "../Modal";
-import Menu from "./Menu";
+import { Modal, ModalProps, useModal } from "../Modal";
 import UserMenu from "./components/UserMenu";
 import { Variant, variants } from "./components/UserMenu/types";
+import Menu from "./Menu";
+import { Language, NavProps } from "./types";
+import BottomDrawer from "../../components/BottomDrawer/BottomDrawer";
+import { SubMenuItemsType } from "../../components";
 import { links, userMenulinks } from "./testConfig";
-import { NavProps } from "./types";
 
 export default {
   title: "Widgets/Menu",
@@ -78,7 +78,7 @@ const defaultProps = {
   linkComponent: ({ href, ...props }) => {
     return <Link to={href} {...props} />;
   },
-  account: "0xBdDa50183d817c3289f895a4472EB475967Dc980",
+  account: "0xbdda50183d817c3289f895a4472eb475967dc980",
   login: noop,
   logout: noop,
   isDark: false,
@@ -94,7 +94,7 @@ const defaultProps = {
   rightSide: (
     <>
       <GlobalMenuComponent />
-      <UserMenuComponent account="0xBdDa50183d817c3289f895a4472EB475967Dc980" />
+      <UserMenuComponent account="0xbdda50183d817c3289f895a4472eb475967dc980" />
     </>
   ),
   activeItem: "/swap",

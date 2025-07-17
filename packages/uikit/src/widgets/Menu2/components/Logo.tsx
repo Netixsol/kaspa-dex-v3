@@ -17,14 +17,14 @@ const StyledLink = styled("a")`
   display: flex;
   .mobile-icon {
     width: 32px;
-    ${({ theme }) => theme.mediaQueries.xl} {
+    ${({ theme }) => theme.mediaQueries.lg} {
       display: none;
     }
   }
   .desktop-icon {
-    width: 245px;
+    width: 160px;
     display: none;
-    ${({ theme }) => theme.mediaQueries.xl} {
+    ${({ theme }) => theme.mediaQueries.lg} {
       display: block;
     }
   }
@@ -48,19 +48,17 @@ const Logo: React.FC<React.PropsWithChildren<Props>> = ({ href }) => {
     <>
       <LogoIcon className="mobile-icon" />
       <LogoWithTextIcon className="desktop-icon" />
-      {/* <img src="/LogoMain.png" className="mobile-icon" alt="Kaspa Finance Logo" />
-      <img src="/images/kaspa-finance-logo-v1.png" className="desktop-icon" alt="Kaspa Finance Logo" /> */}
     </>
   );
 
   return (
     <Flex alignItems="center">
       {isAbsoluteUrl ? (
-        <StyledLink as="a" href={href} aria-label="Kaspa Finance home page">
+        <StyledLink as="a" href={href} aria-label="Pancake home page">
           {innerLogo}
         </StyledLink>
       ) : (
-        <StyledLink href={href} as={linkComponent} aria-label="Kaspa Finance home page">
+        <StyledLink href={href} as={linkComponent} aria-label="Pancake home page">
           {innerLogo}
         </StyledLink>
       )}

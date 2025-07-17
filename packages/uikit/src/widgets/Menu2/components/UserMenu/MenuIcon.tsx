@@ -1,13 +1,11 @@
 import React from "react";
-import  styled  from "styled-components";
+import styled from "styled-components";
+import { Variant, variants } from "./types";
 import { Image } from "../../../../components/Image";
 import { RefreshIcon, WalletFilledIcon, WarningIcon } from "../../../../components/Svg";
 import { Colors } from "../../../../theme/types";
-import { Variant, variants } from "./types";
 
-const MenuIconWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "borderColor",
-})<{ borderColor: keyof Colors }>`
+const MenuIconWrapper = styled.div<{ borderColor: keyof Colors }>`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.background};
   border-color: ${({ theme, borderColor }) => theme.colors[borderColor]};
@@ -21,14 +19,14 @@ const MenuIconWrapper = styled.div.withConfig({
   position: absolute;
   top: 0;
   width: 32px;
-  z-index: 20;
+  z-index: 102;
 `;
 
 const ProfileIcon = styled(Image)`
   left: 0;
   position: absolute;
   top: 0;
-  z-index: 20;
+  z-index: 102;
 
   & > img {
     border-radius: 50%;
@@ -59,9 +57,11 @@ export const DangerMenuIcon: React.FC<React.PropsWithChildren> = () => (
   </MenuIconWrapper>
 );
 
-const MenuIcon: React.FC<
-  React.PropsWithChildren<{ avatarSrc?: string; variant: Variant; className?: string; fallbackSrc?: string }>
-> = ({ avatarSrc, variant, className, fallbackSrc }) => {
+const MenuIcon: React.FC<React.PropsWithChildren<{ avatarSrc?: string; variant: Variant; className?: string }>> = ({
+  avatarSrc,
+  variant,
+  className,
+}) => {
   if (variant === variants.DANGER) {
     return <DangerMenuIcon />;
   }
@@ -78,20 +78,7 @@ const MenuIcon: React.FC<
     return <NoProfileMenuIcon />;
   }
 
-  return (
-    <ProfileIcon
-      src={avatarSrc}
-      height={32}
-      width={32}
-      className={className}
-      onError={(e) => {
-        const target = e.target as HTMLImageElement;
-        if (target.src !== fallbackSrc) {
-          target.src = fallbackSrc || "/images/chains/167012.png"; // Fallback to a default placeholder if fallbackSrc is not provided
-        }
-      }}
-    />
-  );
+  return <ProfileIcon src={avatarSrc} height={32} width={32} className={className} />;
 };
 
 export default MenuIcon;

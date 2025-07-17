@@ -1,7 +1,7 @@
 import { ChainId } from '@pancakeswap/sdk'
 import memoize from 'lodash/memoize'
 import invert from 'lodash/invert'
-import { bsc as bsc_, bscTestnet, goerli, mainnet, Chain } from 'wagmi/chains'
+import { bsc as bsc_, bscTestnet, goerli, mainnet, Chain, sepolia, polygonZkEvm, polygonZkEvmTestnet, zkSync, arbitrum, arbitrumGoerli, lineaTestnet, baseGoerli } from 'wagmi/chains'
 
 export const CHAIN_QUERY_NAME = {
   [ChainId.ETHEREUM]: 'eth',
@@ -88,4 +88,4 @@ const bsc = {
   },
 } satisfies Chain
 
-export const CHAINS = [bsc, mainnet, bscTestnet, goerli, kasplexTestnet]
+export const CHAINS = [bsc, mainnet, bscTestnet, goerli, kasplexTestnet, kasplexMainnet]

@@ -9,6 +9,7 @@ import { pancakePairV2ABI } from './abis/IPancakePair'
 
 let TOKEN_DECIMALS_CACHE: { [chainId: number]: { [address: string]: number } } = {
   [ChainId.BSC]: {},
+  [ChainId.KASPLEX_TESTNET]: {},
 }
 export const kasplexTestnet = {
   id: 167012,

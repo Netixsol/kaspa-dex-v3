@@ -309,7 +309,7 @@ function RoutingSettings() {
           <PreTitle mb="24px">{t('Liquidity source')}</PreTitle>
           <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
-              <Text>PancakeSwap V3</Text>
+              <Text>Kaspa Finance V3</Text>
               <QuestionHelper
                 text={
                   <Flex>
@@ -331,9 +331,9 @@ function RoutingSettings() {
               onChange={() => setV3Enable((s) => !s)}
             />
           </Flex>
-          <Flex justifyContent="space-between" alignItems="center" mb="24px">
+          {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
-              <Text>PancakeSwap V2</Text>
+              <Text>Kaspa Finance V2</Text>
               <QuestionHelper
                 text={
                   <Flex flexDirection="column">
@@ -358,7 +358,7 @@ function RoutingSettings() {
           </Flex>
           <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
-              <Text>PancakeSwap {t('StableSwap')}</Text>
+              <Text>Kaspa Finance {t('StableSwap')}</Text>
               <QuestionHelper
                 text={
                   <Flex flexDirection="column">
@@ -382,10 +382,10 @@ function RoutingSettings() {
                 setIsStableSwapByDefault((s) => !s)
               }}
             />
-          </Flex>
-          <Flex justifyContent="space-between" alignItems="center" mb="24px">
+          </Flex> */}
+          {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
             <Flex alignItems="center">
-              <Text>{`PancakeSwap ${t('MM Linked Pool')}`}</Text>
+              <Text>{`Kaspa Finance ${t('MM Linked Pool')}`}</Text>
               <QuestionHelper
                 text={
                   <Flex flexDirection="column">
@@ -407,14 +407,14 @@ function RoutingSettings() {
               onChange={(e) => setIsMMLinkedPoolByDefault(e.target.checked)}
               scale="md"
             />
-          </Flex>
-          {onlyOneAMMSourceEnabled && (
+          </Flex> */}
+          {/* {onlyOneAMMSourceEnabled && (
             <Message variant="warning">
               <MessageText>
                 {t('At least one AMM liquidity source has to be enabled to support normal trading.')}
               </MessageText>
             </Message>
-          )}
+          )} */}
         </AtomBox>
         <AtomBox>
           <PreTitle mb="24px">{t('Routing preference')}</PreTitle>

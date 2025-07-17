@@ -58,27 +58,27 @@ const config: (
           label: t('Liquidity'),
           href: '/liquidity',
         },
-        {
-          label: t('Perpetual'),
-          href: getPerpetualUrl({
-            chainId,
-            languageCode,
-            isDark,
-          }),
-          confirmModalId: 'usCitizenConfirmModal',
-          type: DropdownMenuItemType.EXTERNAL_LINK,
-        },
-        {
-          label: t('Bridge'),
-          href: 'https://bridge.pancakeswap.finance/',
-          type: DropdownMenuItemType.EXTERNAL_LINK,
-        },
-        {
-          label: `${t('Limit')} (V2)`,
-          href: '/limit-orders',
-          supportChainIds: SUPPORT_ONLY_BSC,
-          image: '/images/decorations/3d-coin.png',
-        },
+        // {
+        //   label: t('Perpetual'),
+        //   href: getPerpetualUrl({
+        //     chainId,
+        //     languageCode,
+        //     isDark,
+        //   }),
+        //   confirmModalId: 'usCitizenConfirmModal',
+        //   type: DropdownMenuItemType.EXTERNAL_LINK,
+        // },
+        // {
+        //   label: t('Bridge'),
+        //   href: 'https://bridge.pancakeswap.finance/',
+        //   type: DropdownMenuItemType.EXTERNAL_LINK,
+        // },
+        // {
+        //   label: `${t('Limit')} (V2)`,
+        //   href: '/limit-orders',
+        //   supportChainIds: SUPPORT_ONLY_BSC,
+        //   image: '/images/decorations/3d-coin.png',
+        // },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
     {

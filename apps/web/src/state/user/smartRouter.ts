@@ -2,8 +2,8 @@ import { atom, useAtom, useAtomValue } from 'jotai'
 import { userSingleHopAtom } from '@pancakeswap/utils/user'
 import atomWithStorageWithErrorCatch from 'utils/atomWithStorageWithErrorCatch'
 
-const userUseStableSwapAtom = atomWithStorageWithErrorCatch<boolean>('pcs:useStableSwap', true)
-const userUseV2SwapAtom = atomWithStorageWithErrorCatch<boolean>('pcs:useV2Swap', true)
+const userUseStableSwapAtom = atomWithStorageWithErrorCatch<boolean>('pcs:useStableSwap', false)
+const userUseV2SwapAtom = atomWithStorageWithErrorCatch<boolean>('pcs:useV2Swap', false)
 const userUseV3SwapAtom = atomWithStorageWithErrorCatch<boolean>('pcs:useV3Swap', true)
 const userUserSplitRouteAtom = atomWithStorageWithErrorCatch<boolean>('pcs:useSplitRouting', true)
 
@@ -24,7 +24,7 @@ export function useUserSplitRouteEnable() {
 }
 
 const derivedOnlyOneAMMSourceEnabledAtom = atom((get) => {
-  return [get(userUseStableSwapAtom), get(userUseV2SwapAtom), get(userUseV3SwapAtom)].filter(Boolean).length === 1
+  return false
 })
 
 export function useOnlyOneAMMSourceEnabled() {

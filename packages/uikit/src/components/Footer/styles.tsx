@@ -1,17 +1,21 @@
-import styled from "styled-components";
+import  styled from "styled-components";
 import { darkColors } from "../../theme/colors";
 import { Box, Flex } from "../Box";
 import SocialLinks from "./Components/SocialLinks";
+import { MOBILE_MENU_HEIGHT } from "../../widgets/Menu/config";
 
 export const StyledFooter = styled(Flex)`
   background: ${darkColors.backgroundAlt};
+  @media screen and (max-width: 968px) {
+    margin-bottom: ${MOBILE_MENU_HEIGHT}px;
+  }
 `;
 
 export const StyledList = styled.ul`
   list-style: none;
   margin-bottom: 40px;
 
-  ${({ theme }) => theme.mediaQueries.md} {
+  ${({ theme }) => theme.mediaQueries.lg} {
     margin-bottom: 0px;
   }
 `;
@@ -49,7 +53,7 @@ export const StyledToolsContainer = styled(Flex)`
 `;
 
 export const StyledSocialLinks = styled(SocialLinks)`
-  border-bottom: 1px solid ${darkColors.cardBorder};
+  // border-bottom: 1px solid ${darkColors.cardBorder};
 `;
 
 export const StyledText = styled.span`

@@ -103,7 +103,7 @@ const SingleFarmV3Card: React.FunctionComponent<
     const { t } = useTranslation()
     const cakePrice = usePriceCakeUSD()
     const { tokenId } = position
-    const { isDark } = useTheme()
+    const isDark = true
 
     const title = `${lpSymbol} (#${tokenId.toString()})`
     const liquidityUrl = `/liquidity/${tokenId.toString()}?chain=${CHAIN_QUERY_NAME[chainId]}`

@@ -38,13 +38,9 @@ const ColoredIconButton = styled(IconButton)`
       background: -webkit-linear-gradient(
         left,
         ${({ theme }) =>
-          theme.isDark
-            ? `rgba(39,38,44, 0) 0%,
+    `rgba(39,38,44, 0) 0%,
         rgba(39,38,44, 0) 100%`
-            : `rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(128, 186, 232, 0) 99%,
-        rgba(125, 185, 232, 0) 100%`}
+      ``}
       );
     }
   }

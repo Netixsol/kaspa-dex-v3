@@ -188,7 +188,7 @@ export const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
   const [showExpertModeAcknowledgement, setShowExpertModeAcknowledgement] = useUserExpertModeAcknowledgement()
 
-  const isDark = resolvedTheme === 'dark'
+  const isDark = true // resolvedTheme === 'dark'
 
   const handleExpertModeToggle = () => {
     if (expertMode || !showExpertModeAcknowledgement) {

@@ -50,7 +50,7 @@ const PerpetualBanner = () => {
     currentLanguage: { code },
   } = useTranslation()
   const { isDesktop, isMobile } = useMatchBreakpoints()
-  const { isDark } = useTheme()
+  const isDark = true
   const { chainId } = useActiveChainId()
 
   const perpetualUrl = useMemo(() => getPerpetualUrl({ chainId, languageCode: code, isDark }), [chainId, code, isDark])

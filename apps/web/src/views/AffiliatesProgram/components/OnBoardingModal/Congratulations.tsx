@@ -13,7 +13,7 @@ const Congratulations = () => {
     currentLanguage: { code },
   } = useTranslation()
   const { chainId } = useActiveChainId()
-  const { isDark } = useTheme()
+  const isDark = true
   const [isOpen, setIsOpen] = useState(false)
   const [userNotUsCitizenAcknowledgement] = useUserNotUsCitizenAcknowledgement()
   const perpetualUrl = useMemo(() => getPerpetualUrl({ chainId, languageCode: code, isDark }), [chainId, code, isDark])

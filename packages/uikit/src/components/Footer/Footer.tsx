@@ -1,26 +1,27 @@
+// import { isMobile, isTablet } from "react-device-detect";
 import { useIsMounted } from "@pancakeswap/hooks";
 import React from "react";
 import { useMatchBreakpoints } from "../../contexts";
 import { Box, Flex } from "../Box";
-import { Link } from "../Link";
-import {
-  StyledFooter,
-  StyledIconMobileContainer,
-  StyledList,
-  StyledListItem,
-  StyledSocialLinks,
-  StyledText,
-  StyledToolsContainer,
-} from "./styles";
+// import { Link } from "../Link";
+// import {
+//   StyledFooter,
+//   StyledIconMobileContainer,
+//   StyledList,
+//   StyledListItem,
+//   StyledSocialLinks,
+//   StyledText,
+//   StyledToolsContainer,
+// } from "./styles";
 
-import { vars } from "../../css/vars.css";
-import { Button } from "../Button";
-import CakePrice from "../CakePrice/CakePrice";
-import LangSelector from "../LangSelector/LangSelector";
+// import { vars } from "../../css/vars.css";
+// import { Button } from "../Button";
+// import CakePrice from "../CakePrice/CakePrice";
+// import LangSelector from "../LangSelector/LangSelector";
 import { ArrowForwardIcon, LogoIcon, LogoWithTextIcon } from "../Svg";
 import { FooterProps } from "./types";
 import { Text } from "../Text";
-import { isMobile, isTablet } from "react-device-detect";
+import { StyledFooter, StyledSocialLinks } from "./styles";
 
 const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
   items,
@@ -56,12 +57,12 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
         {/* Powered By Text and Logo Start */}
         <Flex alignItems="center" flexDirection={["column", null, "row"]} justifyContent={["center", null, null, "start"]}>
           <Text fontSize="15px">Powered By</Text>
-          <Box borderRight="1px solid #fff" height="100%" mx={["0", null, "20px"]} mt={["8px", null, "0"]}/>
+          <Box borderRight="1px solid #fff" height="100%" mx={["0", null, "20px"]} mt={["8px", null, "0"]} />
           <Box>
             <LogoWithTextIcon width="200px" />
           </Box>
         </Flex>
-        {/* Powered By Text and Logo End*/}
+        {/* Powered By Text and Logo End */}
 
         {/* Socials Start */}
         <Flex justifyContent={["center", null, null, "end"]} mt={["20px", null, null, "0px"]}>

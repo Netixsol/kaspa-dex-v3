@@ -91,6 +91,7 @@ const topRightImage = {
 
 const WinSection = () => {
   const { t } = useTranslation()
+  const isDark = true
   const { theme } = useTheme()
 
   return (
@@ -103,7 +104,7 @@ const WinSection = () => {
           <CompositeImage {...topRightImage} />
         </TopRightImgWrapper>
       </BgWrapper>
-      <TransparentFrame isDark={theme.isDark}>
+      <TransparentFrame isDark={isDark}>
         <Flex flexDirection="column" alignItems="center" justifyContent="center">
           <ColoredWordHeading textAlign="center" text={t('Win millions in prizes')} />
           <Text color="textSubtle">{t('Provably fair, on-chain games.')}</Text>

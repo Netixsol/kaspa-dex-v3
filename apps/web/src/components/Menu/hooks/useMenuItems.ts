@@ -14,7 +14,7 @@ export const useMenuItems = (onUsCitizenModalPresent?: () => void): ConfigMenuIt
     currentLanguage: { code: languageCode },
   } = useTranslation()
   const { chainId } = useActiveChainId()
-  const { isDark } = useTheme()
+  const isDark = true
   const menuItemsStatus = useMenuItemsStatus()
 
   const menuItems = useMemo(() => {

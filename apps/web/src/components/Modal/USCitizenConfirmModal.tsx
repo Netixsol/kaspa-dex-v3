@@ -15,7 +15,7 @@ const USCitizenConfirmModal: React.FC<{ onDismiss?: () => void }> = ({ onDismiss
   } = useTranslation()
   const [, setHasAcceptedRisk] = useUserNotUsCitizenAcknowledgement()
   const { chainId } = useActiveChainId()
-  const { isDark } = useTheme()
+  const isDark = true
 
   const handleSuccess = useCallback(() => {
     setHasAcceptedRisk(true)

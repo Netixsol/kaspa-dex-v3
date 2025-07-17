@@ -172,19 +172,20 @@ function FarmV3ApyButton_({ farm, existingPosition, isPositionStaked }: FarmV3Ap
 
   const aprTooltip = useTooltip(
     <>
-      <Text>
+      <Text style={{ color: "black" }}>
         {t('Combined APR')}: <b>{displayApr}%</b>
       </Text>
       <ul>
-        <li>
+        <li style={{ color: "black" }}>
           {t('Farm APR')}: <b>{cakeAprDisplay}%</b>
         </li>
-        <li>
+        <li style={{ color: "black" }}>
           {t('LP Fee APR')}: <b>{lpAprDisplay}%</b>
         </li>
       </ul>
       <br />
-      <Text>
+      <Text style={{ color: "black" }}>
+
         {t('Calculated using the total active liquidity staked versus the CAKE reward emissions for the farm.')}
       </Text>
       <Text>{t('APRs for individual positions may vary depending on the configs.')}</Text>

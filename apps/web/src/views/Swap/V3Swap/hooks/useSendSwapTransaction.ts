@@ -63,6 +63,8 @@ export default function useSendSwapTransaction(
     }
     return {
       callback: async function onSwap(): Promise<SendTransactionResult> {
+        const isKasplex = chainId === ChainId.KASPLEX_TESTNET
+        const DEFAULT_GAS = 21000000n
         const estimatedCalls: SwapCallEstimate[] = await Promise.all(
           swapCalls.map((call) => {
             const { address, calldata, value } = call
@@ -76,7 +78,9 @@ export default function useSendSwapTransaction(
                     data: calldata,
                     value: hexToBigInt(value),
                   }
-
+            if (isKasplex) {
+              return Promise.resolve({ call, gasEstimate: DEFAULT_GAS })
+            }
             return publicClient
               .estimateGas(tx)
               .then((gasEstimate) => {
@@ -101,7 +105,13 @@ export default function useSendSwapTransaction(
         // check if any calls errored with a recognizable error
         if (!bestCallOption) {
           const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
-          if (errorCalls.length > 0) throw errorCalls[errorCalls.length - 1].error
+          console.error('onSwap - No best call found, checking for errors:', {
+            errorCallsCount: errorCalls.length,
+          })
+          if (errorCalls.length > 0) {
+            console.error('onSwap - Throwing error from failed call:', errorCalls[errorCalls.length - 1].error)
+            throw errorCalls[errorCalls.length - 1].error
+          }
           const firstNoErrorCall = estimatedCalls.find<SwapCallEstimate>(
             (call): call is SwapCallEstimate => !('error' in call),
           )
@@ -113,14 +123,19 @@ export default function useSendSwapTransaction(
           call: { address, calldata, value },
         } = bestCallOption
 
-        return sendTransactionAsync({
+        const txParams = {
           account,
           chainId,
           to: address,
           data: calldata,
           value: value && !isZero(value) ? hexToBigInt(value) : 0n,
           ...('gasEstimate' in bestCallOption ? { gas: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
-        })
+          ...(isKasplex ? { gasPrice: 2n } : {}),
+        }
+        if (isKasplex) {
+          console.log('onSwap - Kasplex detected, setting gasPrice to 2 wei')
+        }
+        return sendTransactionAsync(txParams)
           .then((response) => {
             const inputSymbol = trade.inputAmount.currency.symbol
             const outputSymbol = trade.outputAmount.currency.symbol
@@ -179,6 +194,14 @@ export default function useSendSwapTransaction(
             return response
           })
           .catch((error) => {
+            console.error('onSwap - Transaction failed:', {
+              error: error.message,
+              isUserRejected: isUserRejected(error),
+              address,
+              calldata: `${calldata.slice(0, 10)}...`,
+              value,
+            })
+
             // if the user rejected the tx, pass this along
             if (isUserRejected(error)) {
               throw new TransactionRejectedError(t('Transaction rejected'))

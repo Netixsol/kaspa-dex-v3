@@ -141,6 +141,7 @@ export const SwapCommitButton = memo(function SwapCommitButton({
       return
     }
     if (!swapCallback) {
+      console.error('[SwapCommitButton] handleSwap: swapCallback is not available')
       return
     }
     setSwapState({ attemptingTxn: true, tradeToConfirm, swapErrorMessage: undefined, txHash: undefined })
@@ -150,6 +151,7 @@ export const SwapCommitButton = memo(function SwapCommitButton({
       })
       .catch((error) => {
         if (error instanceof TransactionRejectedError) {
+          console.error('[SwapCommitButton] handleSwap: TransactionRejectedError caught')
           handleConfirmDismiss()
           return
         }

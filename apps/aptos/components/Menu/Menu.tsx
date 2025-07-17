@@ -69,7 +69,7 @@ export const Menu = ({ children }: { children: ReactNode }) => {
       links={menuItems}
       activeItem={activeMenuItem?.href}
       isDark={isDark}
-      banner={show ? <PhishingWarningBanner /> : undefined}
+      banner={undefined}
       rightSide={
         <>
           <SettingsButton mr="8px" />

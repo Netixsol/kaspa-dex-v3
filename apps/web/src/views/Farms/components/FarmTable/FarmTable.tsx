@@ -206,7 +206,7 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
         initialActivity,
         apr: {
           // not really used in farms v3
-          value: '',
+          value: '569748',
           pid: farm.pid,
         },
         farm: {
@@ -255,6 +255,8 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
     return rowData.map(generateSortedRow)
   }, [farms, generateRow])
 
+  console.log({ sortedRows })
+
   return (
     <Container id="farms-table">
       {header}
@@ -264,9 +266,10 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
             <TableBody>
               {sortedRows.map((row) => {
                 return row.type === 'v2' && row?.details?.boosted ? (
-                  <ProxyFarmContainer key={`table-row-${row.farm.pid}-${row.type}`} farm={row.details}>
-                    <Row {...row} userDataReady={userDataReady} />
-                  </ProxyFarmContainer>
+                  // <ProxyFarmContainer key={`table-row-${row.farm.pid}-${row.type}`} farm={row.details}>
+                  //   <Row {...row} userDataReady={userDataReady} />
+                  // </ProxyFarmContainer>
+                  <></>
                 ) : (
                   <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}-${row.type}`} />
                 )

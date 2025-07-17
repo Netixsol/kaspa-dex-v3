@@ -67,28 +67,28 @@ const ControlContainer = styled.div`
   }
 `
 
-const FarmFlexWrapper = styled(Flex)`
-  flex-wrap: wrap;
-  ${({ theme }) => theme.mediaQueries.md} {
-    flex-wrap: nowrap;
-  }
-`
-const FarmH1 = styled(Heading)`
-  font-size: 32px;
-  margin-bottom: 8px;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    font-size: 64px;
-    margin-bottom: 24px;
-  }
-`
-const FarmH2 = styled(Heading)`
-  font-size: 16px;
-  margin-bottom: 8px;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-`
+// const FarmFlexWrapper = styled(Flex)`
+//   flex-wrap: wrap;
+//   ${({ theme }) => theme.mediaQueries.md} {
+//     flex-wrap: nowrap;
+//   }
+// `
+// const FarmH1 = styled(Heading)`
+//   font-size: 32px;
+//   margin-bottom: 8px;
+//   ${({ theme }) => theme.mediaQueries.sm} {
+//     font-size: 64px;
+//     margin-bottom: 24px;
+//   }
+// `
+// const FarmH2 = styled(Heading)`
+//   font-size: 16px;
+//   margin-bottom: 8px;
+//   ${({ theme }) => theme.mediaQueries.sm} {
+//     font-size: 24px;
+//     margin-bottom: 18px;
+//   }
+// `
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -139,11 +139,11 @@ const ViewControls = styled.div`
   }
 `
 
-const StyledImage = styled(Image)`
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 58px;
-`
+// const StyledImage = styled(Image)`
+//   margin-left: auto;
+//   margin-right: auto;
+// margin-top: 58px;
+// `
 
 const FinishedTextContainer = styled(Flex)`
   padding-bottom: 32px;
@@ -186,16 +186,16 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
   const mockApr = Boolean(urlQuery.mockApr)
   const { t } = useTranslation()
   const { chainId } = useActiveChainId()
-  const { data: farmsV2, userDataLoaded: v2UserDataLoaded, poolLength: v2PoolLength, regularCakePerBlock } = useFarms()
+  // const { data: farmsV2, userDataLoaded: v2UserDataLoaded, poolLength: v2PoolLength, regularCakePerBlock } = useFarms()
   const {
     farmsWithPositions: farmsV3,
     poolLength: v3PoolLength,
     isLoading,
     userDataLoaded: v3UserDataLoaded,
+    cakePerSecond
   } = useFarmsV3WithPositions({ mockApr })
 
-
-  console.log({ farmsV3 })
+  console.log({ cakePerSecond })
   const farmsLP: V2AndV3Farms = useMemo(() => {
     return [
       ...farmsV3.map((f) => ({ ...f, version: 3 } as V3FarmWithoutStakedValue)),
@@ -203,7 +203,8 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     ]
   }, [farmsV3])
 
-  const cakePrice = usePriceCakeUSD()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cakePrice = new BigNumber(.10) // usePriceCakeUSD()
 
   const [_query, setQuery] = useState('')
   const normalizedUrlSearch = useMemo(() => (typeof urlQuery?.search === 'string' ? urlQuery.search : ''), [urlQuery])
@@ -225,7 +226,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   // Users with no wallet connected should see 0 as Earned amount
   // Connected users should see loading indicator until first userData has loaded
-  const userDataReady = !account || (!!account && v2UserDataLoaded && v3UserDataLoaded)
+  const userDataReady = !account || (!!account && v3UserDataLoaded)
 
   const [stakedOnly, setStakedOnly] = useUserFarmStakedOnly(isActive)
   const [v3FarmOnly, setV3FarmOnly] = useState(false)
@@ -238,7 +239,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     (farm) =>
       farm.pid !== 0 &&
       farm.multiplier !== '0X' &&
-      (farm.version === 3 ? !v3PoolLength || v3PoolLength >= farm.pid : !v2PoolLength || v2PoolLength > farm.pid),
+      (!v3PoolLength || v3PoolLength >= farm.pid),
   )
 
   const inactiveFarms = farmsLP.filter((farm) => farm.pid !== 0 && farm.multiplier === '0X')
@@ -282,7 +283,51 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     (farmsToDisplay: V2AndV3Farms): V2StakeValueAndV3Farm[] => {
       const farmsToDisplayWithAPR: any = farmsToDisplay.map((farm) => {
         if (farm.version === 3) {
-          return farm
+          // Process V3 farms
+          const lmPoolLiquidityBN = new BigNumber(farm.lmPoolLiquidity || '0')
+          const quoteTokenPrice = Number(farm.quoteTokenPriceBusd || 0)
+          const liquidityUSD = lmPoolLiquidityBN.div(1e18).times(quoteTokenPrice)
+          // console.log('farm in farmList', farm)
+          // Calculate total pending rewards
+          const totalEarned = farm.pendingCakeByTokenIds
+            ? Object.values(farm.pendingCakeByTokenIds).reduce((total, amount) => {
+              return total + Number(amount.toString())
+            }, 0)
+            : 0
+
+          // Improved APR calculation
+          const calculatedApr =
+            farm.cakeApr ||
+            (() => {
+              if (!liquidityUSD.isGreaterThan(0)) return 0 // No APR if no liquidity
+
+              // Better approach: Use farm's reward rate if available
+              if (cakePerSecond) {
+                const blocksPerYear = (60 / 3) * 60 * 24 * 365 // Assuming 3s block time
+                const yearlyRewards = new BigNumber(cakePerSecond).times(blocksPerYear)
+                const apr = yearlyRewards.times(cakePrice).div(liquidityUSD).times(100)
+                return apr.toNumber()
+              }
+
+              // Fallback: Use TVL-based calculation if reward rate unavailable
+              return 0 // Don't return arbitrary default
+            })()
+
+          // Handle activeTvlUSD more safely
+          const activeTvlUSD = liquidityUSD.isGreaterThan(0) ? liquidityUSD.toString() : '0' // Better to show 0 than misleading small value
+
+          const processedV3Farm = {
+            ...farm,
+            activeTvlUSD,
+            cakeApr: calculatedApr,
+            liquidity: liquidityUSD,
+            totalEarned,
+            apr: calculatedApr,
+            lpRewardsApr: 0,
+          }
+          // console.log('processed farm', processedV3Farm)
+
+          return processedV3Farm
         }
 
         if (!farm.quoteTokenAmountTotal || !farm.quoteTokenPriceBusd) {
@@ -298,7 +343,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
             cakePrice,
             totalLiquidity,
             farm.lpAddress,
-            regularCakePerBlock,
+            +cakePerSecond,
           )
           : { cakeRewardsApr: 0, lpRewardsApr: 0 }
 
@@ -307,7 +352,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
       return filterFarmsByQuery(farmsToDisplayWithAPR, query)
     },
-    [query, isActive, chainId, cakePrice, regularCakePerBlock, mockApr],
+    [query, isActive, chainId, cakePrice, cakePerSecond, mockApr],
   )
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -328,13 +373,12 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
       chosenFs = stakedOnly ? farmsList(stakedArchivedFarms) : farmsList(archivedFarms)
     }
 
-    if (v3FarmOnly || v2FarmOnly || boostedOnly || stableSwapOnly) {
+    if (v3FarmOnly) {
       const filterFarms = chosenFs.filter(
         (farm) =>
-          (v3FarmOnly && farm.version === 3) ||
-          (v2FarmOnly && farm.version === 2) ||
-          (boostedOnly && farm.boosted) ||
-          (stableSwapOnly && farm.isStable),
+          (v3FarmOnly && farm.version === 3) // ||
+        // (boostedOnly && farm.boosted) ||
+        // (stableSwapOnly && farm.isStable),
       )
 
       const stakedFilterFarms = chosenFs.filter(
@@ -360,10 +404,10 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     inactiveFarms,
     stakedArchivedFarms,
     archivedFarms,
-    boostedOnly,
-    stableSwapOnly,
+    // boostedOnly,
+    // stableSwapOnly,
     v3FarmOnly,
-    v2FarmOnly,
+    // v2FarmOnly,
   ])
 
   const chosenFarmsMemoized = useMemo(() => {
@@ -554,7 +598,8 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               </FinishedTextLink>
             </Flex>
           </FinishedTextContainer>
-        )}
+        )}.
+
 
         {!isLoading && // FarmV3 initial data will be slower, wait for it loads for now to prevent showing the v2 farm from config and then v3 pop up later
           (viewMode === ViewMode.TABLE ? (
@@ -562,7 +607,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
           ) : (
             <FlexLayout>{children}</FlexLayout>
           ))}
-        {account && !v2UserDataLoaded && !v3UserDataLoaded && stakedOnly && (
+        {account && !v3UserDataLoaded && stakedOnly && (
           <Flex justifyContent="center">
             <Loading />
           </Flex>

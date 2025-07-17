@@ -105,7 +105,7 @@ export const FarmTypesFilter: React.FC<FarmTypesFilterProps> = ({
                   {t('Farm Types')}
                 </Text>
               </FarmTypesWrapper>
-              <Box height="240px" overflowY="auto">
+              <Box height="80px" overflowY="auto">
                 <StyledItemRow alignItems="center" px="16px" py="8px" ml="8px" mt="8px">
                   <TradeIcon />
                   <Text fontSize={16} ml="10px" style={{ flex: 1 }} bold>
@@ -125,7 +125,7 @@ export const FarmTypesFilter: React.FC<FarmTypesFilterProps> = ({
                     />
                   </ToggleWrapper>
                 </StyledItemRow>
-                <StyledItemRow alignItems="center" px="16px" py="8px" ml="8px" mt="8px">
+                {/* <StyledItemRow alignItems="center" px="16px" py="8px" ml="8px" mt="8px">
                   <FarmIcon />
                   <Text fontSize={16} ml="10px" style={{ flex: 1 }} bold>
                     {t('V2 Farms')}
@@ -181,7 +181,7 @@ export const FarmTypesFilter: React.FC<FarmTypesFilterProps> = ({
                       scale="sm"
                     />
                   </ToggleWrapper>
-                </StyledItemRow>
+                </StyledItemRow> */}
               </Box>
             </Box>
           </InlineMenu>

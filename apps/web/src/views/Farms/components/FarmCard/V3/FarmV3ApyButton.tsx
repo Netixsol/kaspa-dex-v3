@@ -188,7 +188,7 @@ function FarmV3ApyButton_({ farm, existingPosition, isPositionStaked }: FarmV3Ap
 
         {t('Calculated using the total active liquidity staked versus the CAKE reward emissions for the farm.')}
       </Text>
-      <Text>{t('APRs for individual positions may vary depending on the configs.')}</Text>
+      <Text style={{ color: "black" }}>{t('APRs for individual positions may vary depending on the configs.')}</Text>
     </>,
   )
   const existingPositionAprTooltip = useTooltip(

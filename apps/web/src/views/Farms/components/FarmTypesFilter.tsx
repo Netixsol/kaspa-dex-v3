@@ -97,7 +97,7 @@ export const FarmTypesFilter: React.FC<FarmTypesFilterProps> = ({
               </Button>
             }
             isOpen={isOpen}
-            options={{ placement: 'top' }} s
+            options={{ placement: 'top' }}
           >
             <Box width={['100%', '345px']} ref={menuRef}>
               <FarmTypesWrapper alignItems="center" p="16px">

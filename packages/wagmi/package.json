@@ -64,6 +64,21 @@
       "types": "./dist/connectors/trustWallet.d.ts",
       "import": "./dist/connectors/trustWallet.mjs",
       "require": "./dist/connectors/trustWallet.js"
+    },
+    "./connectors/kastleWallet": {
+      "types": "./dist/connectors/kastleWallet.d.ts",
+      "import": "./dist/connectors/kastleWallet.mjs",
+      "require": "./dist/connectors/kastleWallet.js"
+    },
+    "./connectors/kasKeeper": {
+      "types": "./dist/connectors/kasKeeper.d.ts",
+      "import": "./dist/connectors/kasKeeper.mjs",
+      "require": "./dist/connectors/kasKeeper.js"
+    },
+    "./connectors/kasWare": {
+      "types": "./dist/connectors/kasWare.d.ts",
+      "import": "./dist/connectors/kasWare.mjs",
+      "require": "./dist/connectors/kasWare.js"
     }
   },
   "peerDependenciesMeta": {

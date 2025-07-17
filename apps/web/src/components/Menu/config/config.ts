@@ -54,6 +54,7 @@ const config: (
           label: t('Swap'),
           href: '/swap',
         },
+
         {
           label: t('Liquidity'),
           href: '/liquidity',
@@ -93,6 +94,10 @@ const config: (
           href: '/farms',
         },
         {
+          label: t('AirDrop'),
+          href: '/airdrop',
+        },
+        {
           label: t('Pools'),
           href: '/pools',
           supportChainIds: POOL_SUPPORTED_CHAINS,
@@ -102,6 +107,33 @@ const config: (
           href: '/liquid-staking',
           supportChainIds: POOL_SUPPORTED_CHAINS,
         },
+      ].map((item) => addMenuItemSupported(item, chainId)),
+    },
+    {
+      label: t('Faucet'),
+      href: '/faucets',
+      icon: EarnIcon,
+      fillIcon: EarnFillIcon,
+      image: '/images/decorations/pe2.png',
+      items: [
+        // {
+        //   label: t('Farms'),
+        //   href: '/farms',
+        // },
+        // {
+        //   label: t('AirDrop'),
+        //   href: '/airdrop',
+        // },
+        // {
+        //   label: t('Pools'),
+        //   href: '/pools',
+        //   supportChainIds: POOL_SUPPORTED_CHAINS,
+        // },
+        // {
+        //   label: t('Liquid Staking'),
+        //   href: '/liquid-staking',
+        //   supportChainIds: POOL_SUPPORTED_CHAINS,
+        // },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
     {

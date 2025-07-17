@@ -203,3 +203,6 @@ export default {
     97: '0x',
   },
 } as const satisfies Record<string, Record<number, `0x${string}`>>
+export const FAUCET_CONTRACT_ADDRESS_KASPLEX_TESTNET = '0xcEb40E309D108F9b93D97043598763fCA3ebC622' as const
+export const KAS_USDC_FAUCET_CONTRACT_ADDRESS_KASPLEX_TESTNET = '0xa081B1EdfD190c5a59BFB3fcD558607fec3E5703' as const
+export const FARM_V3_ADDRESS_KASPLEX_TESTNET = '0x6C1E826062eb56440aA4C733cbCF9F2F6fca8c70' as const

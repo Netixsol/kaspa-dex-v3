@@ -1,32 +1,34 @@
-import { useTranslation } from '@pancakeswap/localization'
-import { Currency } from '@pancakeswap/sdk'
-import { BottomDrawer, Flex, Modal, ModalV2, useMatchBreakpoints } from '@pancakeswap/uikit'
-import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
+// import { useTranslation } from '@pancakeswap/localization'
+// import { Currency } from '@pancakeswap/sdk'
+// import { BottomDrawer, Flex, Modal, ModalV2, useMatchBreakpoints } from '@pancakeswap/uikit'
+import { Flex } from '@pancakeswap/uikit'
+// import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
 import { AppBody } from 'components/App'
 import { useRouter } from 'next/router'
-import { useCallback, useContext, useEffect, useState } from 'react'
-import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
-import { currencyId } from 'utils/currencyId'
+import { useContext, useEffect, useState } from 'react'
+// import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
+// import { currencyId } from 'utils/currencyId'
 
 import { useSwapHotTokenDisplay } from 'hooks/useSwapHotTokenDisplay'
-import { useCurrency } from 'hooks/Tokens'
-import { Field } from 'state/swap/actions'
-import { useDefaultsFromURLSearch, useSingleTokenSwapInfo, useSwapState } from 'state/swap/hooks'
+// import { useCurrency } from 'hooks/Tokens'
+// import { Field } from 'state/swap/actions'
+// import { useDefaultsFromURLSearch, useSingleTokenSwapInfo, useSwapState } from 'state/swap/hooks'
+import { useDefaultsFromURLSearch } from 'state/swap/hooks'
 import Page from '../Page'
-import PriceChartContainer from './components/Chart/PriceChartContainer'
-import HotTokenList from './components/HotTokenList'
-import useWarningImport from './hooks/useWarningImport'
+// import PriceChartContainer from './components/Chart/PriceChartContainer'
+// import HotTokenList from './components/HotTokenList'
+// import useWarningImport from './hooks/useWarningImport'
 import { V3SwapForm } from './V3Swap'
 import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 import { SwapFeaturesContext } from './SwapFeaturesContext'
 
 export default function Swap() {
   const { query } = useRouter()
-  const { isDesktop } = useMatchBreakpoints()
-  const { isChartExpanded, isChartDisplayed, setIsChartDisplayed, setIsChartExpanded, isChartSupported } =
-    useContext(SwapFeaturesContext)
+  // const { isDesktop } = useMatchBreakpoints()
+  // const { isChartExpanded, isChartDisplayed, setIsChartDisplayed, setIsChartExpanded, isChartSupported } =
+  const { isChartExpanded, isChartDisplayed, setIsChartDisplayed } = useContext(SwapFeaturesContext)
   const [isSwapHotTokenDisplay, setIsSwapHotTokenDisplay] = useSwapHotTokenDisplay()
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
   const [firstTime, setFirstTime] = useState(true)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,41 +48,41 @@ export default function Swap() {
   }, [firstTime, isChartDisplayed, isSwapHotTokenDisplay, query, setIsSwapHotTokenDisplay, toggleChartDisplayed])
 
   // swap state & price data
-  const {
-    [Field.INPUT]: { currencyId: inputCurrencyId },
-    [Field.OUTPUT]: { currencyId: outputCurrencyId },
-  } = useSwapState()
-  const inputCurrency = useCurrency(inputCurrencyId)
-  const outputCurrency = useCurrency(outputCurrencyId)
+  // const {
+  //   [Field.INPUT]: { currencyId: inputCurrencyId },
+  //   [Field.OUTPUT]: { currencyId: outputCurrencyId },
+  // } = useSwapState()
+  // const inputCurrency = useCurrency(inputCurrencyId)
+  // const outputCurrency = useCurrency(outputCurrencyId)
 
-  const currencies: { [field in Field]?: Currency } = {
-    [Field.INPUT]: inputCurrency ?? undefined,
-    [Field.OUTPUT]: outputCurrency ?? undefined,
-  }
+  // const currencies: { [field in Field]?: Currency } = {
+  //   [Field.INPUT]: inputCurrency ?? undefined,
+  //   [Field.OUTPUT]: outputCurrency ?? undefined,
+  // }
 
-  const singleTokenPrice = useSingleTokenSwapInfo(inputCurrencyId, inputCurrency, outputCurrencyId, outputCurrency)
-  const warningSwapHandler = useWarningImport()
+  // const singleTokenPrice = useSingleTokenSwapInfo(inputCurrencyId, inputCurrency, outputCurrencyId, outputCurrency)
+  // const warningSwapHandler = useWarningImport()
   useDefaultsFromURLSearch()
-  const { onCurrencySelection } = useSwapActionHandlers()
+  // const { onCurrencySelection } = useSwapActionHandlers()
 
-  const handleOutputSelect = useCallback(
-    (newCurrencyOutput: Currency) => {
-      onCurrencySelection(Field.OUTPUT, newCurrencyOutput)
-      warningSwapHandler(newCurrencyOutput)
+  // const handleOutputSelect = useCallback(
+  //   (newCurrencyOutput: Currency) => {
+  //     onCurrencySelection(Field.OUTPUT, newCurrencyOutput)
+  //     warningSwapHandler(newCurrencyOutput)
 
-      const newCurrencyOutputId = currencyId(newCurrencyOutput)
-      if (newCurrencyOutputId === inputCurrencyId) {
-        replaceBrowserHistory('inputCurrency', outputCurrencyId)
-      }
-      replaceBrowserHistory('outputCurrency', newCurrencyOutputId)
-    },
+  //     const newCurrencyOutputId = currencyId(newCurrencyOutput)
+  //     if (newCurrencyOutputId === inputCurrencyId) {
+  //       replaceBrowserHistory('inputCurrency', outputCurrencyId)
+  //     }
+  //     replaceBrowserHistory('outputCurrency', newCurrencyOutputId)
+  //   },
 
-    [inputCurrencyId, outputCurrencyId, onCurrencySelection, warningSwapHandler],
-  )
+  //   [inputCurrencyId, outputCurrencyId, onCurrencySelection, warningSwapHandler],
+  // )
 
   return (
-    <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
-      <Flex width={['328px', '100%']} height="100%" justifyContent="center" position="relative" alignItems="flex-start">
+    <Page removePadding={false} hideFooterOnDesktop={false}>
+      <Flex width="800px" height="100%" justifyContent="center" position="relative" alignItems="flex-start">
         {/* {isDesktop && isChartSupported && (
           <PriceChartContainer
             inputCurrencyId={inputCurrencyId}
@@ -131,7 +133,7 @@ export default function Swap() {
         </ModalV2> */}
         <Flex flexDirection="column">
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
-            <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
+            <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'} mb="24px">
               <AppBody>
                 <V3SwapForm />
               </AppBody>

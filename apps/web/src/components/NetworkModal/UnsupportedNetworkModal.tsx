@@ -13,7 +13,13 @@ import { ChainId } from '@pancakeswap/sdk'
 import Dots from '../Loader/Dots'
 
 // Where chain is not supported or page not supported
-export function UnsupportedNetworkModal({ pageSupportedChains, onDismiss }: { pageSupportedChains: number[], onDismiss: () => void }) {
+export function UnsupportedNetworkModal({
+  pageSupportedChains,
+  onDismiss,
+}: {
+  pageSupportedChains: number[]
+  onDismiss: () => void
+}) {
   const { switchNetworkAsync, isLoading, canSwitch } = useSwitchNetwork()
   const switchNetworkLocal = useSwitchNetworkLocal()
   const { chains } = useNetwork()
@@ -37,7 +43,12 @@ export function UnsupportedNetworkModal({ pageSupportedChains, onDismiss }: { pa
   )
 
   return (
-    <Modal title={t('Check your network')} hideCloseButton={false} headerBackground="gradientCardHeader" onDismiss={onDismiss}>
+    <Modal
+      title={t('Check your network')}
+      hideCloseButton={false}
+      headerBackground="gradientCardHeader"
+      onDismiss={onDismiss}
+    >
       <Grid style={{ gap: '16px' }} maxWidth="336px">
         <Text>
           {t('Currently %feature% only supported in', { feature: typeof title === 'string' ? title : 'this page' })}{' '}
@@ -62,7 +73,7 @@ export function UnsupportedNetworkModal({ pageSupportedChains, onDismiss }: { pa
               if (supportedMainnetChains.map((c) => c.id).includes(chainId)) {
                 switchNetworkAsync(chainId)
               } else {
-                switchNetworkAsync(ChainId.BSC)
+                switchNetworkAsync(ChainId.KASPLEX_TESTNET)
               }
             }}
           >

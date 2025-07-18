@@ -13,12 +13,12 @@ const InlineLink = styled(Link)`
 `;
 
 interface FarmMultiplierInfoProps {
-  farmCakePerSecond: string;
+  farmKFCPerSecond: string;
   totalMultipliers: string;
 }
 
 export const FarmMultiplierInfo: React.FC<React.PropsWithChildren<FarmMultiplierInfoProps>> = ({
-  farmCakePerSecond,
+  farmKFCPerSecond,
   totalMultipliers,
 }) => {
   const { t } = useTranslation();
@@ -26,8 +26,8 @@ export const FarmMultiplierInfo: React.FC<React.PropsWithChildren<FarmMultiplier
   return (
     <>
       <Text bold style={{ color: 'black' }}>
-        {t("Farm’s CAKE Per Second:")}
-        <InlineText marginLeft={2} style={{ color: 'black' }}>{farmCakePerSecond}</InlineText>
+        {t("Farm’s KFC Per Second:")}
+        <InlineText marginLeft={2} style={{ color: 'black' }}>{farmKFCPerSecond}</InlineText>
       </Text>
       <Text bold style={{ color: 'black' }}>
         {t("Total Multipliers:")}
@@ -35,18 +35,18 @@ export const FarmMultiplierInfo: React.FC<React.PropsWithChildren<FarmMultiplier
       </Text>
       <Text my="24px" style={{ color: 'black' }}>
         {t(
-          "The Farm Multiplier represents the proportion of CAKE rewards each farm receives as a proportion of its farm group."
+          "The Farm Multiplier represents the proportion of KFC rewards each farm receives as a proportion of its farm group."
         )}
       </Text>
       <Text my="24px" style={{ color: 'black' }}>
-        {t("For example, if a 1x farm received 1 CAKE per block, a 40x farm would receive 40 CAKE per block.")}
+        {t("For example, if a 1x farm received 1 KFC per block, a 40x farm would receive 40 KFC per block.")}
       </Text>
       <Text style={{ color: 'black' }}>
         {t("Different farm groups have different sets of multipliers.")}
         {/* <InlineLink
           mt="8px"
           display="inline"
-          href="https://docs.pancakeswap.finance/products/yield-farming/faq#why-a-2x-farm-in-v3-has-less-apr-than-a-1x-farm-in-v2"
+          href="https://docs.panKFCswap.finance/products/yield-farming/faq#why-a-2x-farm-in-v3-has-less-apr-than-a-1x-farm-in-v2"
           external
         >
           {t("Learn More")}

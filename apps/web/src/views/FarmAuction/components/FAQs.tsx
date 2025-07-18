@@ -78,17 +78,17 @@ const FAQs = () => {
               </Text>
               <Text color="textSubtle">
                 {t(
-                  'You can then commit CAKE to bid during the auction, competing against other project for one of the available farms.',
+                  'You can then commit KFC to bid during the auction, competing against other project for one of the available farms.',
                 )}
               </Text>
             </FoldableText>
             <FoldableText title={t('Step 4: After the auction')} mt="24px">
               <Text color="textSubtle">
-                {t('If your bid was not successful, you can reclaim your CAKE on this page.')}
+                {t('If your bid was not successful, you can reclaim your KFC on this page.')}
               </Text>
               <Text color="textSubtle">
                 {t(
-                  'If your bid was successful, your farm will begin at the specified time. The CAKE you bid will not be returned to you and will be added to our weekly CAKE burn.',
+                  'If your bid was successful, your farm will begin at the specified time. The KFC you bid will not be returned to you and will be added to our weekly CAKE burn.',
                 )}
               </Text>
               <Text color="textSubtle">
@@ -96,7 +96,7 @@ const FAQs = () => {
               </Text>
               <Text color="textSubtle">
                 {t(
-                  'If two or more projects bid the exact same CAKE amount and are contending for a spot in the winning bidders, their bids may be invalidated.',
+                  'If two or more projects bid the exact same KFC amount and are contending for a spot in the winning bidders, their bids may be invalidated.',
                 )}
               </Text>
             </FoldableText>

@@ -24,7 +24,7 @@ const getTokenLogoURL = memoize(
     if (token?.address) {
       // console.log({ token })
       const address = getAddress(token.address) // checksummed
-      return `${ASSET_CDN}/images/chains/${token.address}.png`
+      return `${ASSET_CDN}/images/chains/${token.address.toLowerCase()}.png`
     }
     return null
   },

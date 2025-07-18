@@ -74,7 +74,7 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
   )
 }
 
-const targetChains = [kasplexTestnet] // add kasplexMainnet if needed
+const targetChains = [kasplexTestnet, kasplexMainnet] // add kasplexMainnet if needed
 
 export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex }) => {
   const { t } = useTranslation()
@@ -85,6 +85,7 @@ export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex
   const switchNetwork = useCallback(
     (chainId: number) => {
       const chainPath = multiChainPaths[chainId]
+      console.log("chainPath::::::", chainPath, chainId);
       if (activeIndex === 0) router.push(`/${v3InfoPath}${chainPath}`)
       if (activeIndex === 1) router.push(`/${v3InfoPath}${chainPath}/pairs`)
       if (activeIndex === 2) router.push(`/${v3InfoPath}${chainPath}/tokens`)

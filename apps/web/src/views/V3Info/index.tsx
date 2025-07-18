@@ -93,7 +93,7 @@ export default function Home() {
       return Object.values(topTokensData)
         .map((d) => d)
         .filter(notEmpty)
-        .filter((d) => d.tvlUSD > 0)
+        // .filter((d) => d.tvlUSD > 0)
     return []
   }, [topTokensData])
 
@@ -109,10 +109,12 @@ export default function Home() {
     return formatDollarAmount(liquidityHover, 2, true)
   }, [liquidityHover])
 
+  console.log("protocolData:::::", protocolData);
+
   return (
     <Page>
       <Heading scale="lg" mb="16px">
-        {t('PancakeSwap Info & Analytics')}
+        {t('KaspaFinance Info & Analytics')}
       </Heading>
       <ChartCardsContainer>
         <Card>
@@ -240,11 +242,11 @@ export default function Home() {
         {t('Top Pairs')}
       </Heading>
       <PoolTable poolDatas={poolDatas} />
-      <Heading scale="lg" mt="40px" mb="16px">
+      {/* <Heading scale="lg" mt="40px" mb="16px">
         {t('Transactions')}
       </Heading>
 
-      {transactionData ? <TransactionsTable transactions={transactionData} /> : null}
+      {transactionData ? <TransactionsTable transactions={transactionData} /> : null} */}
     </Page>
   )
 }

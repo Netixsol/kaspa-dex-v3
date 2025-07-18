@@ -274,7 +274,7 @@
   "Search Farms": "খামার অনুসন্ধান করুন",
   "Collect as": "... হিসাবে সংগ্রহ করুন",
   "You will also collect fees earned from this position.": "আপনি এই অবস্থান থেকে অর্জিত ফি-ও সংগ্রহ করবেন।",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "এই তারল্য অবস্থান বর্তমানে খামারে স্টেক হচ্ছে। তারল্য যোগ করা বা অপসারণ করলে আপনার ওয়ালেট থেকে দাবি বিহীন CAKE-ও সংগ্রহ করা হবে।",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "এই তারল্য অবস্থান বর্তমানে খামারে স্টেক হচ্ছে। তারল্য যোগ করা বা অপসারণ করলে আপনার ওয়ালেট থেকে দাবি বিহীন CAKE-ও সংগ্রহ করা হবে।",
   "To Top": "উপরে",
   "Total value of the funds in this farm’s liquidity pair": "এই খামারের লিকুইডিটি পেয়ারে তহবিলের মোট মান",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "গুণক প্রতিটি ব্লকে উৎপন্ন CAKE এর অনুপাত হিসাবে প্রতিটি খামারের প্রাপ্ত CAKE পুরস্কারের অনুপাত উপস্থাপন করে।",

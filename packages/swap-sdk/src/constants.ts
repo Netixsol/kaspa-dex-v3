@@ -8,6 +8,7 @@ export enum ChainId {
   BSC = 56,
   BSC_TESTNET = 97,
   KASPLEX_TESTNET = 167012,
+  KASPLEX_MAINNET = 167013,
 }
 
 export const ZERO_PERCENT = new Percent('0')
@@ -23,6 +24,7 @@ export const FACTORY_ADDRESS_MAP: Record<number, Address> = {
   [ChainId.BSC]: FACTORY_ADDRESS,
   [ChainId.BSC_TESTNET]: '0x6725f303b657a9451d8ba641348b6761a6cc7a17',
   [ChainId.KASPLEX_TESTNET]: '0x71a6A2cbf1b7bAEaa53643E4456A90F4Cbf6C216',
+  [ChainId.KASPLEX_MAINNET]: FACTORY_ADDRESS,
 }
 export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
 
@@ -33,6 +35,7 @@ export const INIT_CODE_HASH_MAP: Record<number, Hash> = {
   [ChainId.BSC]: INIT_CODE_HASH,
   [ChainId.BSC_TESTNET]: '0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66',
   [ChainId.KASPLEX_TESTNET]: '0x5901d5094dc38c25423a045dc57ac02ed471c2d2c6a0b6e1e6014505b28dbc5d',
+  [ChainId.KASPLEX_MAINNET]: INIT_CODE_HASH,
 }
 
 export const WETH9 = {
@@ -75,6 +78,14 @@ export const WETH9 = {
     'WETH',
     'Wrapped Ether',
     'https://weth.io'
+  ),
+  [ChainId.KASPLEX_MAINNET]: new ERC20Token(
+    ChainId.KASPLEX_MAINNET,
+    '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
+    18,
+    'ETH',
+    'Binance-Peg Ethereum Token',
+    'https://ethereum.org'
   ),
 }
 
@@ -135,6 +146,11 @@ export const NATIVE: Record<
   },
   [ChainId.KASPLEX_TESTNET]: {
     name: 'Kasplex Testnet Native Token',
+    symbol: 'KAS',
+    decimals: 18,
+  },
+  [ChainId.KASPLEX_MAINNET]: {
+    name: 'Kasplex Mainnet Native Token',
     symbol: 'KAS',
     decimals: 18,
   },

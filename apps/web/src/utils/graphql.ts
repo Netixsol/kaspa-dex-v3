@@ -39,6 +39,7 @@ export const v3Clients = {
   [ChainId.BSC]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.BSC]),
   [ChainId.BSC_TESTNET]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.BSC_TESTNET]),
   [ChainId.KASPLEX_TESTNET]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.KASPLEX_TESTNET]),
+  [ChainId.KASPLEX_MAINNET]: new GraphQLClient(V3_SUBGRAPH_URLS[ChainId.KASPLEX_MAINNET]),
 }
 
 export const v3InfoClients = { ...v3Clients, [ChainId.BSC]: new GraphQLClient(V3_BSC_INFO_CLIENT) }

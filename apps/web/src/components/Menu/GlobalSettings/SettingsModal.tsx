@@ -63,25 +63,25 @@ const ScrollableContainer = styled(Flex)`
 
 export const withCustomOnDismiss =
   (Component) =>
-  ({
-    onDismiss,
-    customOnDismiss,
-    mode,
-    ...props
-  }: {
-    onDismiss?: () => void
-    customOnDismiss: () => void
-    mode: SettingsMode
-  }) => {
-    const handleDismiss = useCallback(() => {
-      onDismiss?.()
-      if (customOnDismiss) {
-        customOnDismiss()
-      }
-    }, [customOnDismiss, onDismiss])
+    ({
+      onDismiss,
+      customOnDismiss,
+      mode,
+      ...props
+    }: {
+      onDismiss?: () => void
+      customOnDismiss: () => void
+      mode: SettingsMode
+    }) => {
+      const handleDismiss = useCallback(() => {
+        onDismiss?.()
+        if (customOnDismiss) {
+          customOnDismiss()
+        }
+      }, [customOnDismiss, onDismiss])
 
-    return <Component {...props} mode={mode} onDismiss={handleDismiss} />
-  }
+      return <Component {...props} mode={mode} onDismiss={handleDismiss} />
+    }
 
 const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ onDismiss, mode }) => {
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
@@ -95,8 +95,8 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
   const [tokenRisk, setTokenRisk] = useUserTokenRisk()
 
   const { t } = useTranslation()
-  const { isDark, setTheme } = useTheme()
-
+  const { setTheme } = useTheme()
+  const isDark = true
   if (showConfirmExpertModal) {
     return (
       <ExpertModal

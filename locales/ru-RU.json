@@ -276,7 +276,7 @@
   "Search Farms": "Поиск фармов",
   "Collect as": "Забрать как",
   "You will also collect fees earned from this position.": "Вы также получите комиссии с этой позиции.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "Эта позиция ликвидности сейчас вложена в фарминг. При добавлении (удалении) ликвидности в кошелек будут собраны неполученные CAKE.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "Эта позиция ликвидности сейчас вложена в фарминг. При добавлении (удалении) ликвидности в кошелек будут собраны неполученные CAKE.",
   "To Top": "Наверх",
   "Total value of the funds in this farm’s liquidity pair": "Общая стоимость средств в паре ликвидности этого фарма",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "Множитель представляет собой часть вознаграждения CAKE, получаемого каждым фармом, в виде доли CAKE, произведенных каждым блоком.",

@@ -274,7 +274,7 @@
   "Search Farms": "Buscar granjas",
   "Collect as": "Recoger como",
   "You will also collect fees earned from this position.": "También recogerás las comisiones ganadas por esta posición.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "Esta posición de liquidez actualmente se está invertida en la Granja. Si agregas o quitas liquidez, también cosecharás cualquier CAKE que no hayas reclamado en tu monedero.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "Esta posición de liquidez actualmente se está invertida en la Granja. Si agregas o quitas liquidez, también cosecharás cualquier CAKE que no hayas reclamado en tu monedero.",
   "To Top": "Hacia arriba",
   "Total value of the funds in this farm’s liquidity pair": "Valor total de los fondos del par de liquidez en esta granja",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "El multiplicador representa la proporción de recompensas en CAKE que recibe cada granja, como una proporción de los CAKE que se produjeron en cada bloque.",

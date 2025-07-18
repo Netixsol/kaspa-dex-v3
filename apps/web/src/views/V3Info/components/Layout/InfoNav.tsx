@@ -13,13 +13,13 @@ import {
 } from '@pancakeswap/uikit'
 import { ChainLogo } from 'components/Logo/ChainLogo'
 import { ASSET_CDN } from 'config/constants/endpoints'
+import { kasplexMainnet, kasplexTestnet } from 'config/chains'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { multiChainId, multiChainPaths } from 'state/info/constant'
 import { useChainNameByQuery, useMultiChainPath } from 'state/info/hooks'
 import styled from 'styled-components'
 import { chains } from 'utils/wagmi'
-import { bsc, mainnet } from 'wagmi/chains'
 import { v3InfoPath } from '../../constants'
 import Search from '../Search'
 
@@ -67,14 +67,14 @@ const InfoNav: React.FC<{ isStableSwap: boolean }> = ({ isStableSwap }) => {
         </Box>
         <NetworkSwitcher activeIndex={activeIndex} />
       </Flex>
-      <Box width={['100%', '100%', '250px']}>
+      {/* <Box width={['100%', '100%', '250px']}>
         <Search />
-      </Box>
+      </Box> */}
     </NavWrapper>
   )
 }
 
-const targetChains = [mainnet, bsc]
+const targetChains = [kasplexTestnet] // add kasplexMainnet if needed
 
 export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex }) => {
   const { t } = useTranslation()
@@ -83,8 +83,8 @@ export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex
   const symbol = foundChain?.nativeCurrency?.symbol
   const router = useRouter()
   const switchNetwork = useCallback(
-    (chianId: number) => {
-      const chainPath = multiChainPaths[chianId]
+    (chainId: number) => {
+      const chainPath = multiChainPaths[chainId]
       if (activeIndex === 0) router.push(`/${v3InfoPath}${chainPath}`)
       if (activeIndex === 1) router.push(`/${v3InfoPath}${chainPath}/pairs`)
       if (activeIndex === 2) router.push(`/${v3InfoPath}${chainPath}/tokens`)
@@ -96,7 +96,7 @@ export const NetworkSwitcher: React.FC<{ activeIndex: number }> = ({ activeIndex
     <UserMenu
       alignItems="top"
       ml="8px"
-      avatarSrc={`${ASSET_CDN}/web/chains/${multiChainId[chainName]}.png`}
+      avatarSrc={`${ASSET_CDN}/images/chains/${multiChainId[chainName]}.png`}
       text={
         foundChain ? (
           <>

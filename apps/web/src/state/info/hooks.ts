@@ -20,7 +20,7 @@ import useSWRImmutable from 'swr/immutable'
 import { getAprsForStableFarm } from 'utils/getAprsForStableFarm'
 import { getDeltaTimestamps } from 'utils/getDeltaTimestamps'
 import { useBlockFromTimeStampSWR } from 'views/Info/hooks/useBlocksFromTimestamps'
-import { MultiChainName, checkIsStableSwap, multiChainId } from './constant'
+import { MultiChainName, MultiChainNameExtend, checkIsStableSwap, multiChainId } from './constant'
 import { ChartEntry, PoolData, PriceChartEntry, ProtocolData, TokenData } from './types'
 
 // Protocol hooks
@@ -294,13 +294,13 @@ export const useGetChainName = () => {
   return result
 }
 
-export const useChainNameByQuery = () => {
+export const useChainNameByQuery = (): MultiChainNameExtend => {
   const { query } = useRouter()
   const chainName = useMemo(() => {
-    if (query?.chainName === 'eth') return 'ETH'
-    return 'BSC'
+    if (query?.chainName === 'kasplex-mainnet') return 'KASPLEX_MAINNET'
+    return 'KASPLEX_TESTNET'
   }, [query])
-  return chainName
+  return chainName as MultiChainNameExtend
 }
 
 export const useChainIdByQuery = () => {

@@ -276,7 +276,7 @@
   "Search Farms": "팜 검색",
   "Collect as": "다음으로 수집:",
   "You will also collect fees earned from this position.": "이 포지션에서 획득한 수수료도 수집합니다.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "이 유동성 포지션은 팜에 현재 스테이킹되어 있습니다. 유동성을 추가하거나 제거하면 클레임되지 않은 CAKE도 지갑에 수확됩니다.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "이 유동성 포지션은 팜에 현재 스테이킹되어 있습니다. 유동성을 추가하거나 제거하면 클레임되지 않은 CAKE도 지갑에 수확됩니다.",
   "To Top": "맨 위로",
   "Total value of the funds in this farm’s liquidity pair": "이 팜의 유동성 쌍에 있는 자금의 총 가치",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "승수는 각 블록을 생성한 CAKE의 비율로, 각 팜이 받는 CAKE 리워드의 비율을 나타냅니다.",

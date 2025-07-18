@@ -25,6 +25,16 @@ const TokenLogo: React.FC<React.PropsWithChildren<TokenLogoProps>> = ({ srcs, us
         onError={() => {
           // eslint-disable-next-line no-param-reassign
           if (src) BAD_SRCS[src] = true;
+           const tokenAddress = src.match(/0x[a-fA-F0-9]{40}/)?.[0];
+          if (tokenAddress && !src.includes("/images/tokens/")) {
+            console.log({tokenAddress})
+            const fallbackSrcs = [
+              `/images/chains/${tokenAddress.toLowerCase()}.png`,
+              `/images/chains/${tokenAddress.toUpperCase()}.png`,
+              // `/TokenLogos/default.png`, // Final fallback
+            ];
+            srcs.push(...fallbackSrcs);
+          }
           refresh((i) => i + 1);
         }}
       />

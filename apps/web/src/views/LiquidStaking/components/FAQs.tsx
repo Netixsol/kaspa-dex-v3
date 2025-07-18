@@ -60,7 +60,7 @@ const config = (t) => [
           {t('our swap page')}.{' '}
         </Link>
         {t(
-          'PancakeSwap is also working to support a conversion contract on our liquid staking page to convert WBETH back to ETH seamlessly.',
+          'Kaspa Finance is also working to support a conversion contract on our liquid staking page to convert WBETH back to ETH seamlessly.',
         )}
       </>
     ),

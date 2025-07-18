@@ -81,6 +81,7 @@ const FarmAuction = () => {
   const { address: account } = useAccount()
 
   const { currentAuction, bidders, connectedBidder, refreshBidders } = useCurrentFarmAuction(account)
+  const isDark = true
 
   return (
     <>
@@ -104,7 +105,7 @@ const FarmAuction = () => {
               {t('Community Farm Auction')}
             </Heading>
             <Text color="textSubtle" mb="24px">
-              {t('Each week, qualifying projects can bid CAKE for the right to host a 10-day Farm on PancakeSwap.')}
+              {t('Each week, qualifying projects can bid CAKE for the right to host a 10-day Farm on Kaspa Finance.')}
             </Text>
             <Text color="textSubtle">{t('This page is for projects to bid for farms.')}</Text>
             <Text color="textSubtle" mb="24px">
@@ -153,7 +154,7 @@ const FarmAuction = () => {
           </AuctionContainer>
         </PageSection>
         <PageSection
-          background={theme.isDark ? CAKE_BURN_BG_DARK : CAKE_BURN_BG_LIGHT}
+          background={isDark ? CAKE_BURN_BG_DARK : CAKE_BURN_BG_LIGHT}
           index={2}
           innerProps={{ style: { width: '100%' } }}
           dividerPosition="top"
@@ -162,7 +163,7 @@ const FarmAuction = () => {
           <AuctionCakeBurn />
         </PageSection>
         <PageSection
-          background={theme.isDark ? FAQ_BG_DARK : FAQS_BG_LIGHT}
+          background={isDark ? FAQ_BG_DARK : FAQS_BG_LIGHT}
           clipFill={{ light: '#CBD7EF', dark: '#434575' }}
           dividerFill={{ light: CAKE_BURN_BG_LIGHT, dark: CAKE_BURN_BG_DARK }}
           concaveDivider

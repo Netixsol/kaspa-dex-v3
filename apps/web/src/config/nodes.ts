@@ -9,6 +9,11 @@ export const SERVER_NODES = {
   ].filter(Boolean),
   [ChainId.BSC_TESTNET]: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
   [ChainId.KASPLEX_TESTNET]: ['https://rpc.kasplextest.xyz'],
+  [ChainId.KASPLEX_MAINNET]: [
+    process.env.NEXT_PUBLIC_NODE_PRODUCTION,
+    'https://bsc-dataseed1.defibit.io',
+    'https://bsc-dataseed1.binance.org',
+  ].filter(Boolean),
   [ChainId.ETHEREUM]: [
     getNodeRealUrlV2(ChainId.ETHEREUM, process.env.SERVER_NODE_REAL_API_ETH),
     'https://eth.llamarpc.com',
@@ -29,6 +34,12 @@ export const PUBLIC_NODES = {
   ].filter(Boolean),
   [ChainId.BSC_TESTNET]: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
   [ChainId.KASPLEX_TESTNET]: ['https://rpc.kasplextest.xyz'],
+  [ChainId.KASPLEX_MAINNET]: [
+    process.env.NEXT_PUBLIC_NODE_PRODUCTION,
+    getNodeRealUrlV2(ChainId.KASPLEX_MAINNET, process.env.NEXT_PUBLIC_NODE_REAL_API_ETH),
+    'https://bsc-dataseed1.defibit.io',
+    'https://bsc-dataseed1.binance.org',
+  ].filter(Boolean),
   [ChainId.ETHEREUM]: [
     getNodeRealUrlV2(ChainId.ETHEREUM, process.env.NEXT_PUBLIC_NODE_REAL_API_ETH),
     'https://eth.llamarpc.com',

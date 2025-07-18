@@ -274,7 +274,7 @@
   "Search Farms": "ファームを検索する",
   "Collect as": "回収:",
   "You will also collect fees earned from this position.": "このポジションから獲得した手数料も回収します。",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "この流動性ポジションは現在ファームでステーキング中です。流動性を追加または削除すると、未請求のCAKEがウォレットに収穫されます。",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "この流動性ポジションは現在ファームでステーキング中です。流動性を追加または削除すると、未請求のCAKEがウォレットに収穫されます。",
   "To Top": "トップへ",
   "Total value of the funds in this farm’s liquidity pair": "このファームの流動性ペアにある資金の合計価格",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "乗数は、各ファームが各ブロックで生産されたCAKEの一部として受け取るCAKE報酬の割合を表しています。",

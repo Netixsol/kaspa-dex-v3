@@ -11,7 +11,7 @@ const title = {
   dark: '/images/nav-title-dark.png',
   light: '/images/nav-title-light.png',
 }
-const StyledWallet = styled(Flex)<{ isActive: boolean }>`
+const StyledWallet = styled(Flex) <{ isActive: boolean }>`
   padding: 6px 11px;
   position: absolute;
   left: 18px;
@@ -71,7 +71,7 @@ const Navbar = ({ height = 44 }) => {
         }}
       >
         <Wallet />
-        <Image height={20} width={130} src={isDark ? title.dark : title.light} />
+        <Image height={20} width={130} src={title.dark} />
       </Box>
       <Box style={{ height: `${height + top}px` }} />
     </Box>

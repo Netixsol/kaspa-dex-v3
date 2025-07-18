@@ -276,7 +276,7 @@
   "Search Farms": "搜尋農場",
   "Collect as": "收集為",
   "You will also collect fees earned from this position.": "您還將收集從此部位賺取的費用。",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "此流動性部位目前正在農場中質押。新增或移除流動性也會將任何未領取的 CAKE 收割至您的錢包中。",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "此流動性部位目前正在農場中質押。新增或移除流動性也會將任何未領取的 CAKE 收割至您的錢包中。",
   "To Top": "至頂部",
   "Total value of the funds in this farm’s liquidity pair": "該農場流動性幣對中的資金總價值",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "倍數代表每個農場獲得的 CAKE 獎勵比例，以每個區塊生產的 CAKE 的持份比例來表示。",

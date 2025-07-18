@@ -87,17 +87,19 @@ const useFarmV3Actions = ({ tokenId }: { tokenId: string }): FarmV3ActionContain
       value: hexToBigInt(value),
       account,
       chain: signer.chain,
+      gas: 20000000n
     }
 
     const resp = await fetchWithCatchTxError(() =>
-      publicClient.estimateGas(txn).then((estimate) => {
-        const newTxn = {
-          ...txn,
-          gas: calculateGasMargin(estimate),
-        }
+      // publicClient.estimateGas(txn).then((estimate) => {
+      //   const newTxn = {
+      //     ...txn,
+      //     gas: calculateGasMargin(estimate),
+      //   }
 
-        return sendTransactionAsync(newTxn)
-      }),
+      //   return
+      // }),
+      sendTransactionAsync(txn)
     )
 
     if (resp?.status) {
@@ -113,7 +115,7 @@ const useFarmV3Actions = ({ tokenId }: { tokenId: string }): FarmV3ActionContain
     fetchWithCatchTxError,
     masterChefV3Address,
     nftPositionManagerAddress,
-    publicClient,
+    // publicClient,
     sendTransactionAsync,
     signer,
     t,

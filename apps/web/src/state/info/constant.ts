@@ -14,7 +14,7 @@ import {
 
 export type MultiChainName = 'BSC' | 'ETH' | 'BSC_TESTNET'
 
-export type MultiChainNameExtend = MultiChainName | 'BSC_TESTNET' | 'KASPLEX_TESTNET'
+export type MultiChainNameExtend = MultiChainName | 'BSC_TESTNET' | 'KASPLEX_TESTNET' | 'KASPLEX_MAINNET'
 
 export const multiChainName: Record<number | string, MultiChainNameExtend> = {
   [ChainId.BSC]: 'BSC',
@@ -33,6 +33,7 @@ export const multiChainBlocksClient = {
   ETH: BLOCKS_CLIENT_ETH,
   BSC_TESTNET: 'https://api.thegraph.com/subgraphs/name/lengocphuc99/bsc_testnet-blocks',
   KASPLEX_TESTNET: 'https://graph.kaspafinance.io/subgraphs/name/blocks',
+  KASPLEX_MAINNET: "https://gateway.thegraph.com/api/e2d66e372446eaac5ac26924208834a8/subgraphs/id/9dSPXfKXaqYpoGAPXx96LyDF1VYR8PiT6HA7HRKEGRdS",
 }
 
 export const multiChainStartTime = {
@@ -43,11 +44,14 @@ export const multiChainStartTime = {
 export const multiChainId = {
   BSC: ChainId.BSC,
   ETH: ChainId.ETHEREUM,
+  KASPLEX_TESTNET: ChainId.KASPLEX_TESTNET,
+  KASPLEX_MAINNET: ChainId.KASPLEX_MAINNET,
 }
 
 export const multiChainPaths = {
-  [ChainId.BSC]: '',
+  [ChainId.KASPLEX_TESTNET]: '',
   [ChainId.ETHEREUM]: '/eth',
+  [ChainId.KASPLEX_MAINNET]: '/kasplex-mainnet',
 }
 
 export const multiChainQueryClient = {
@@ -75,7 +79,7 @@ export const multiChainTokenWhiteList = {
   ETH: ETH_TOKEN_WHITELIST,
 }
 
-export const getMultiChainQueryEndPointWithStableSwap = (chainName: MultiChainName): GraphQLClient => {
+export const getMultiChainQueryEndPointWithStableSwap = (chainName: MultiChainNameExtend): GraphQLClient => {
   const isStableSwap = checkIsStableSwap()
   if (isStableSwap) return infoStableSwapClient
   return multiChainQueryClient[chainName]

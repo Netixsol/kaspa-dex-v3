@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
         }
       }
     `)
-    const cake = await (await fetch('https://farms-api.pancakeswap.com/price/cake')).json()
+    const cake = { "price": "0.1", "updatedAt": "2025-07-17T18:35:35.158Z" } as any
     const { totalLiquidityUSD } = result.pancakeFactories[0]
     const cakeVaultV2 = getCakeVaultAddress()
     const cakeContract = getCakeContract()

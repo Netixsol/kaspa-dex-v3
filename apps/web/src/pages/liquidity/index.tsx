@@ -64,8 +64,8 @@ export const StableContextProvider = (props: { pair: LPStablePair; account: stri
 }
 
 enum FILTER {
-  ALL = 0,
-  V3 = 1,
+  V3 = 0,
+  ALL = 1,
   STABLE = 2,
   V2 = 3,
 }
@@ -80,7 +80,7 @@ export default function PoolListPage() {
   const { account } = useWeb3React()
   const { t } = useTranslation()
 
-  const [selectedTypeIndex, setSelectedTypeIndex] = useState(FILTER.ALL)
+  const [selectedTypeIndex, setSelectedTypeIndex] = useState(FILTER.V3)
   const [hideClosedPositions, setHideClosedPositions] = useHideClosePosition()
 
   const { positions, loading: v3Loading } = useV3Positions(account)
@@ -199,7 +199,7 @@ export default function PoolListPage() {
   return (
     <Page>
       <Flex m="24px 0" maxWidth="854px">
-        <FarmV3MigrationBanner />
+        {/* <FarmV3MigrationBanner /> */}
       </Flex>
       <AppBody
         style={{
@@ -236,10 +236,10 @@ export default function PoolListPage() {
                 onItemClick={(index) => setSelectedTypeIndex(index)}
                 variant="subtle"
               >
-                <ButtonMenuItem>{t('All')}</ButtonMenuItem>
+                {/* <ButtonMenuItem>{t('All')}</ButtonMenuItem> */}
                 <ButtonMenuItem>V3</ButtonMenuItem>
-                <ButtonMenuItem>{t('StableSwap')}</ButtonMenuItem>
-                <ButtonMenuItem>V2</ButtonMenuItem>
+                {/* <ButtonMenuItem>{t('StableSwap')}</ButtonMenuItem>
+                <ButtonMenuItem>V2</ButtonMenuItem> */}
               </ButtonMenu>
             </>
           }

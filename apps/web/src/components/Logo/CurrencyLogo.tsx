@@ -45,7 +45,7 @@ export default function CurrencyLogo({
       return <BinanceIcon width={size} style={style} />
     }
     return (
-      <StyledLogo size={size} srcs={[`${ASSET_CDN}/web/chains/${currency.chainId}.png`]} width={size} style={style} />
+      <StyledLogo size={size} srcs={[`/images/chains/${currency.chainId}.png`]} width={size} style={style} />
     )
   }
 

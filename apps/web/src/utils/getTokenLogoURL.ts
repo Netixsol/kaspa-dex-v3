@@ -1,6 +1,8 @@
 import { getAddress } from 'viem'
 import memoize from 'lodash/memoize'
+
 import { ChainId, Token } from '@pancakeswap/sdk'
+import { ASSET_CDN } from 'config/constants/endpoints'
 
 const mapping = {
   [ChainId.BSC]: 'smartchain',
@@ -22,19 +24,17 @@ const getTokenLogoURL = memoize(
     if (token?.address) {
       // console.log({token})
       const address = getAddress(token.address) // checksummed
-      return `/images/chains/${address}.png`
+      return `${ASSET_CDN}/images/chains/${address}.png`
     }
     return null
   },
   (t) => `${t?.chainId}#${t?.address.toLowerCase()}`,
 )
 
-
-
 export const getTokenLogoURLByAddress = memoize(
   (address?: string, chainId?: number) => {
     if (address && chainId && mapping[chainId]) {
-      return `/images/chains/${address}.png`
+      return `${ASSET_CDN}/images/chains/${address}.png`
     }
     return null
   },

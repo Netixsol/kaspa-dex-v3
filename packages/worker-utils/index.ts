@@ -5,6 +5,8 @@ export const CORS_ALLOW = [
   'https://pancakeswap.finance',
   'https://pancakeswap.com',
   /^http:\/\/localhost(:\d+)?$/,
+  'https://kaspa-dex-v3-lake.vercel.app'
+
 ]
 
 function isString(s: any): s is string {
@@ -46,7 +48,7 @@ export const handleCors = (allowedOrigin: any, methods: string, headers: string)
   const isAllowed = isOriginAllowed(reqOrigin, allowedOrigin)
   if (isAllowed && reqOrigin) {
     const corsHeaders = {
-      'Access-Control-Allow-Origin': reqOrigin,
+      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': methods,
       'Access-Control-Allow-Headers': headers,
     }

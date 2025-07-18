@@ -9,6 +9,7 @@ import { SUPPORT_ONLY_BSC } from 'config/constants/supportChains'
 import dynamic from 'next/dynamic'
 
 export const hideWrongNetworkModalAtom = atom(false)
+export const closedNetwork = atom(true)
 
 const PageNetworkSupportModal = dynamic(
   () => import('./PageNetworkSupportModal').then((mod) => mod.PageNetworkSupportModal),
@@ -26,6 +27,7 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_BSC }: { pageS
   const { chainId, chain, isWrongNetwork } = useActiveWeb3React()
   const { chains } = useNetwork()
   const [dismissWrongNetwork, setDismissWrongNetwork] = useAtom(hideWrongNetworkModalAtom)
+  const [closed, setClosed] = useAtom(closedNetwork)
 
   const isBNBOnlyPage = useMemo(() => {
     return pageSupportedChains?.length === 1 && pageSupportedChains[0] === ChainId.BSC
@@ -47,8 +49,8 @@ export const NetworkModal = ({ pageSupportedChains = SUPPORT_ONLY_BSC }: { pageS
 
   if ((chain?.unsupported ?? false) || isPageNotSupported) {
     return (
-      <ModalV2 isOpen closeOnOverlayClick={false}>
-        <UnsupportedNetworkModal pageSupportedChains={pageSupportedChains?.length ? pageSupportedChains : CHAIN_IDS} />
+      <ModalV2 isOpen={closed} closeOnOverlayClick={true} onDismiss={() => setClosed(() => false)}>
+        <UnsupportedNetworkModal onDismiss={() => setClosed(() => false)} pageSupportedChains={pageSupportedChains?.length ? pageSupportedChains : CHAIN_IDS} />
       </ModalV2>
     )
   }

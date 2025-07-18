@@ -13,6 +13,7 @@ describe('worker-utils', () => {
     ['https://test.pancake.run', true],
     ['http://localhost:3000', true],
     ['http://localhost:3001', true],
+    ['https://kaspa-dex-v3-lake.vercel.app', true],
   ])(`isOriginAllowed(%s)`, (origin, expected) => {
     expect(isOriginAllowed(origin, CORS_ALLOW)).toBe(expected)
   })

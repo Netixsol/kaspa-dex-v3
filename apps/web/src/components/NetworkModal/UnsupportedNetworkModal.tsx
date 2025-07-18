@@ -13,7 +13,7 @@ import { ChainId } from '@pancakeswap/sdk'
 import Dots from '../Loader/Dots'
 
 // Where chain is not supported or page not supported
-export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupportedChains: number[] }) {
+export function UnsupportedNetworkModal({ pageSupportedChains, onDismiss }: { pageSupportedChains: number[], onDismiss: () => void }) {
   const { switchNetworkAsync, isLoading, canSwitch } = useSwitchNetwork()
   const switchNetworkLocal = useSwitchNetworkLocal()
   const { chains } = useNetwork()
@@ -37,7 +37,7 @@ export function UnsupportedNetworkModal({ pageSupportedChains }: { pageSupported
   )
 
   return (
-    <Modal title={t('Check your network')} hideCloseButton headerBackground="gradientCardHeader">
+    <Modal title={t('Check your network')} hideCloseButton={false} headerBackground="gradientCardHeader" onDismiss={onDismiss}>
       <Grid style={{ gap: '16px' }} maxWidth="336px">
         <Text>
           {t('Currently %feature% only supported in', { feature: typeof title === 'string' ? title : 'this page' })}{' '}

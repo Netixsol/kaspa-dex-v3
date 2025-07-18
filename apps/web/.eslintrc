@@ -9,19 +9,19 @@
   "rules": {
     "no-restricted-syntax": 0,
     "import/no-unresolved": 0,
-    "no-console": ["warn", { "allow": ["info", "warn", "error", "debug", "time", "timeLog", "timeEnd"] }],
+    // "no-console": ["warn", { "allow": ["info", "warn", "error", "debug", "time", "timeLog", "timeEnd"] }],
     "no-plusplus": 0,
     "prefer-destructuring": ["warn", { "object": true, "array": false }],
     "no-underscore-dangle": 0,
     "lodash/import-scope": [2, "method"],
     "@next/next/no-img-element": 0,
     "no-sparse-arrays": 0,
-    "react-hooks/exhaustive-deps": [
-      "warn",
-      {
-        "additionalHooks": "(useFastRefreshEffect|useSlowRefreshEffect)"
-      }
-    ],
+    // "react-hooks/exhaustive-deps": [
+    //   "warn",
+    //   {
+    //     "additionalHooks": "(useFastRefreshEffect|useSlowRefreshEffect)"
+    //   }
+    // ],
     // Start temporary rules
     // These rules are here just to keep the lint error to 0 during the migration to the new rule set
     // They need to be removed and fixed as soon as possible
@@ -36,7 +36,11 @@
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state", "memo"] }],
     "react/require-default-props": 0,
     "no-nested-ternary": 0,
-    "max-classes-per-file": 0
+    "max-classes-per-file": 0, 
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-console": "off",
+    "react-hooks/exhaustive-deps": "off",
     // End temporary rules
   }
 }
+

@@ -150,6 +150,7 @@ export const USDC = {
 
 export const USDT = {
   [ChainId.BSC]: USDT_BSC,
+  [ChainId.KASPLEX_MAINNET]: USDT_BSC,
   [ChainId.ETHEREUM]: USDT_ETH,
   [ChainId.KASPLEX_TESTNET]: new ERC20Token(
     ChainId.KASPLEX_TESTNET,
@@ -174,5 +175,5 @@ export const STABLE_COIN = {
   [ChainId.BSC]: USDT[ChainId.BSC],
   [ChainId.BSC_TESTNET]: BUSD[ChainId.BSC_TESTNET],
   [ChainId.KASPLEX_TESTNET]: USDT[ChainId.KASPLEX_TESTNET],
-  
+  [ChainId.KASPLEX_MAINNET]: USDT[ChainId.KASPLEX_MAINNET],
 } satisfies Record<ChainId, ERC20Token>

@@ -21,6 +21,14 @@ const defaultTokenAndPoolList: TokenAndPoolList = {
     tokens: [],
     pools: [],
   },
+  [ChainId.KASPLEX_TESTNET]: {
+    tokens: [],
+    pools: [],
+  },
+  [ChainId.KASPLEX_MAINNET]: {
+    tokens: [],
+    pools: [],
+  },
 }
 
 const tokensAtom = atomWithStorage('pcs:infoSavedTOkensAndPools', defaultTokenAndPoolList)

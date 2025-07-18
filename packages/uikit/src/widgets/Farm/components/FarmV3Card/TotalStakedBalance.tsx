@@ -39,7 +39,7 @@ const TotalStakedBalance: React.FunctionComponent<React.PropsWithChildren<TotalS
           <Flex flexDirection="column">
             <Flex>
               <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px" pr="4px">
-                CAKE
+              KFC
               </Text>
               <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
                 {t("Earned")}

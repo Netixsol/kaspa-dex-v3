@@ -13,8 +13,7 @@ export const SEO: DefaultSeoProps = {
   openGraph: {
     title: '👻 Kaspa Finance - A next evolution DeFi exchange on KASPLEX Chain (KAS)',
     description:
-      'The most popular AMM on BSC by user count! Earn CAKE through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by Kaspa Finance), NFTs, and more, on a platform you can trust.',
+      'The most popular AMM on BSC by user count! Earn KFC through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by Kaspa Finance), NFTs, and more, on a platform you can trust.',
     images: [{ url: 'https://assets.pancakeswap.finance/web/og/hero.jpg' }],
   },
 }
-  

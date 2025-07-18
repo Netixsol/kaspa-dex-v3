@@ -17,6 +17,20 @@ export const BATCH_MULTICALL_CONFIGS: ChainMap<BatchMulticallConfigs> = {
       multicallChunk: 50,
     },
   },
+  [ChainId.KASPLEX_MAINNET]: {
+    defaultConfig: {
+      multicallChunk: 150,
+      gasLimitOverride: 1_000_000,
+    },
+    gasErrorFailureOverride: {
+      gasLimitOverride: 1_000_000,
+      multicallChunk: 30,
+    },
+    successRateFailureOverrides: {
+      gasLimitOverride: 1_000_000,
+      multicallChunk: 50,
+    },
+  },
   [ChainId.KASPLEX_TESTNET]: {
     defaultConfig: {
       multicallChunk: 150,

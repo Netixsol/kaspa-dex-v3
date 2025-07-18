@@ -22,6 +22,7 @@ const DEFAULT_BATCH_RETRIES = 2
 const SUCCESS_RATE_CONFIG = {
   [ChainId.BSC_TESTNET]: 0.1,
   [ChainId.KASPLEX_TESTNET]: 0.1,
+  [ChainId.KASPLEX_MAINNET]: 0.1,
   [ChainId.BSC]: 0.1,
   [ChainId.ETHEREUM]: 0.1,
   [ChainId.GOERLI]: 0.1,

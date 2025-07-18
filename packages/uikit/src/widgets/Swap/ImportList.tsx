@@ -26,7 +26,7 @@ const TextDot = styled.div`
   border-radius: 50%;
 `;
 
-const Card = styled(Box)<{
+const Card = styled(Box) <{
   width?: string;
   padding?: string;
   border?: string;

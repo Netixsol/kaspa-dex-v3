@@ -59,7 +59,7 @@ export function UnsupportedNetworkModal({
             layout="fixed"
             width={194}
             height={175}
-            src="/images/check-your-network.png"
+            src="/images/decorations/KF_05.png"
             alt="check your network"
           />
         </div>

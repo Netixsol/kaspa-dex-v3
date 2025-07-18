@@ -17,6 +17,7 @@ export function ConfirmationPendingContent({ pendingText }: { pendingText?: stri
     <Wrapper>
       <ConfirmedIcon>
         <Spinner />
+
       </ConfirmedIcon>
       <AutoColumn gap="12px" justify="center">
         {pendingText ? (

@@ -44,9 +44,17 @@ export const TradeSummary = memo(function TradeSummary({
             {isExactIn ? t('Minimum received') : t('Maximum sold')}
           </Text>
           <QuestionHelper
-            text={t(
-              'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.',
-            )}
+          
+            // text={t(
+            //   'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.',
+            // )}
+            text={
+              <>
+                <Text display="inline-block">
+                  {t('Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.')}
+                </Text>
+              </>
+            }
             ml="4px"
             placement="top"
           />
@@ -68,7 +76,7 @@ export const TradeSummary = memo(function TradeSummary({
             <QuestionHelper
               text={
                 <>
-                  <Text>
+                  <Text >
                     <Text bold display="inline-block">
                       {t('AMM')}
                     </Text>
@@ -173,7 +181,7 @@ export const AdvancedSwapDetails = memo(function AdvancedSwapDetails({
   const [isModalOpen, setIsModalOpen] = useState(false)
   const showRoute = Boolean(path && path.length > 1)
   return (
-    <AutoColumn gap="0px">
+    <AutoColumn gap="0px" style={{ margin: 'auto' }}>
       {inputAmount && (
         <>
           <TradeSummary
@@ -190,7 +198,7 @@ export const AdvancedSwapDetails = memo(function AdvancedSwapDetails({
             <>
               <RowBetween style={{ padding: '0 24px' }}>
                 <span style={{ display: 'flex', alignItems: 'center' }}>
-                  <Text fontSize="14px" color="textSubtle">
+                  <Text fontSize="14px" color="textSubtle" style={{ color: "black" }}>
                     {t('Route')}
                   </Text>
                   <QuestionHelper
@@ -204,7 +212,7 @@ export const AdvancedSwapDetails = memo(function AdvancedSwapDetails({
                 <ModalV2 closeOnOverlayClick isOpen={isModalOpen} onDismiss={() => setIsModalOpen(false)}>
                   <Modal
                     title={
-                      <Flex justifyContent="center">
+                      <Flex justifyContent="center" style={{ color: "black" }}>
                         {t('Route')}{' '}
                         <QuestionHelper
                           text={t(

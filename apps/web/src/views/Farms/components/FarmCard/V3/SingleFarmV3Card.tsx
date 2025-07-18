@@ -202,6 +202,7 @@ const SingleFarmV3Card: React.FunctionComponent<
                         style={{
                           maxWidth: '160px',
                           position: 'relative',
+                          color: "black"
                         }}
                       >
                         {outOfRangeUnstaked ? (

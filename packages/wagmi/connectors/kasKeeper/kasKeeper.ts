@@ -51,11 +51,21 @@ export class KasKeeperConnector extends Connector<KasKeeperProvider | undefined,
 
   // Helper function to convert Kaspa address to Ethereum-compatible address
   private static kaspaToEthAddress(kaspaAddress: string): string {
-    // Remove the kaspa prefix and create a deterministic Ethereum address
+    // Remove the kaspa prefix
     const cleanAddress = kaspaAddress.replace(/^kaspa(test)?:/, '')
 
-    // Take first 40 characters and pad if needed, then add 0x prefix
-    const ethHex = cleanAddress.slice(0, 40).padEnd(40, '0')
+    // Convert the address to a hex string, ensuring it's valid hex
+    const addressBuffer = Buffer.from(cleanAddress)
+    const hexString = addressBuffer.toString('hex')
+
+    // Take first 40 characters of the hex and pad if needed
+    const ethHex = hexString.slice(0, 40).padEnd(40, '0')
+
+    // Ensure the result is a valid hex string
+    if (!/^[0-9a-f]{40}$/i.test(ethHex)) {
+      throw new Error('Failed to generate valid Ethereum address from Kaspa address')
+    }
+
     return `0x${ethHex}`
   }
 
@@ -372,7 +382,7 @@ export class KasKeeperConnector extends Connector<KasKeeperProvider | undefined,
           }),
           ...(args.nonce && { nonce: `0x${BigInt(args.nonce).toString(16)}` }),
         }
-
+        console.log('here is connected to kaskeeper', txParams)
         // Convert all BigInt values to hex strings recursively
         const _convertedParams = KasKeeperConnector.convertBigIntToHex(txParams)
 

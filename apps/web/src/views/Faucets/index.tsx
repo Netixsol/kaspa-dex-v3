@@ -18,6 +18,7 @@ import {
 } from 'hooks/useFaucetContract'
 // import { SimpleTooltip } from '@pancakeswap/uikit/src/components/SimpleTooltip'
 import KASFaucetCard from './components/KASFaucetsCard'
+import { ASSET_CDN } from 'config/constants/endpoints'
 
 const PageContainer = styled.div`
   padding: 24px;
@@ -495,7 +496,7 @@ export const FaucetsPage = () => {
     )
 
     const getTokenIcon = (symbol: string) => {
-        const logoPath = `/images/chains/${symbol.toUpperCase()}.png`
+        const logoPath = `${ASSET_CDN}/images/chains/${symbol.toLowerCase()}.png`
         return logoPath
     }
 

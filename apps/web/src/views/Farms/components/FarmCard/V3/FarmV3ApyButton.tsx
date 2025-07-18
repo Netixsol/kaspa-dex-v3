@@ -186,21 +186,21 @@ function FarmV3ApyButton_({ farm, existingPosition, isPositionStaked }: FarmV3Ap
       <br />
       <Text style={{ color: "black" }}>
 
-        {t('Calculated using the total active liquidity staked versus the CAKE reward emissions for the farm.')}
+        {t('Calculated using the total active liquidity staked versus the KFC reward emissions for the farm.')}
       </Text>
       <Text style={{ color: "black" }}>{t('APRs for individual positions may vary depending on the configs.')}</Text>
     </>,
   )
   const existingPositionAprTooltip = useTooltip(
     <>
-      <Text>
+      <Text style={{ color: 'black' }}>
         {t('Combined APR')}: <b>{positionDisplayApr}%</b>
       </Text>
       <ul>
-        <li>
+        <li style={{ color: 'black' }}>
           {t('Farm APR')}: <b>{positionCakeAprDisplay}%</b>
         </li>
-        <li>
+        <li style={{ color: 'black' }}>
           {t('LP Fee APR')}: <b>{lpAprDisplay}%</b>
         </li>
       </ul>
@@ -208,7 +208,7 @@ function FarmV3ApyButton_({ farm, existingPosition, isPositionStaked }: FarmV3Ap
   )
 
   if (farm.multiplier === '0X') {
-    return <Text fontSize="14px">0%</Text>
+    return <Text fontSize="14px" style={{ color: 'black' }}>0%</Text>
   }
 
   if (!displayApr) {

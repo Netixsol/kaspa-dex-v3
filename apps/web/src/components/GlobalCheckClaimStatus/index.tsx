@@ -85,32 +85,32 @@ const GlobalCheckClaim: React.FC<React.PropsWithChildren<GlobalCheckClaimStatusP
   )
 
   // Check claim status
-  useEffect(() => {
-    const fetchClaimAnniversaryStatus = async () => {
-      const canV3ClaimReward = await v3Airdop.read.isClaimed([account])
-      const isWhitelistAddress = data?.v3WhitelistAddress[account.toLowerCase()]
-      // TODO: also need check json acc is whitelisted or not.
-      if (!canV3ClaimReward && isWhitelistAddress) {
-        setCanClaimReward(true)
-      } else {
-        closeV3AirdropModal()
-      }
-    }
+  // useEffect(() => {
+  //   const fetchClaimAnniversaryStatus = async () => {
+  //     const canV3ClaimReward = await v3Airdop.read.isClaimed([account])
+  //     const isWhitelistAddress = data?.v3WhitelistAddress[account.toLowerCase()]
+  //     // TODO: also need check json acc is whitelisted or not.
+  //     if (!canV3ClaimReward && isWhitelistAddress) {
+  //       setCanClaimReward(true)
+  //     } else {
+  //       closeV3AirdropModal()
+  //     }
+  //   }
 
-    if (account && chainId === ChainId.BSC) {
-      fetchClaimAnniversaryStatus()
-    }
-  }, [data, account, chainId, canClaimReward, closeV3AirdropModal, v3Airdop.read])
+  //   if (account && chainId === ChainId.BSC) {
+  //     fetchClaimAnniversaryStatus()
+  //   }
+  // }, [data, account, chainId, canClaimReward, closeV3AirdropModal, v3Airdop.read])
 
   // // Check if we need to display the modal
-  useEffect(() => {
-    const matchesSomeLocations = excludeLocations.some((location) => pathname.includes(location))
+  // useEffect(() => {
+  //   const matchesSomeLocations = excludeLocations.some((location) => pathname.includes(location))
 
-    if (canClaimReward && !matchesSomeLocations && !hasDisplayedModal.current) {
-      onPresentV3AirdropModal()
-      hasDisplayedModal.current = true
-    }
-  }, [pathname, excludeLocations, hasDisplayedModal, canClaimReward, onPresentV3AirdropModal])
+  //   if (canClaimReward && !matchesSomeLocations && !hasDisplayedModal.current) {
+  //     onPresentV3AirdropModal()
+  //     hasDisplayedModal.current = true
+  //   }
+  // }, [pathname, excludeLocations, hasDisplayedModal, canClaimReward, onPresentV3AirdropModal])
 
   // Reset the check flag when account changes
   useEffect(() => {

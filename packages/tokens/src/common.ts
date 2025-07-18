@@ -174,4 +174,5 @@ export const STABLE_COIN = {
   [ChainId.BSC]: USDT[ChainId.BSC],
   [ChainId.BSC_TESTNET]: BUSD[ChainId.BSC_TESTNET],
   [ChainId.KASPLEX_TESTNET]: USDT[ChainId.KASPLEX_TESTNET],
+  
 } satisfies Record<ChainId, ERC20Token>

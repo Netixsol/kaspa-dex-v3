@@ -25,23 +25,23 @@ export const FarmMultiplierInfo: React.FC<React.PropsWithChildren<FarmMultiplier
 
   return (
     <>
-      <Text bold>
+      <Text bold style={{ color: 'black' }}>
         {t("Farm’s CAKE Per Second:")}
-        <InlineText marginLeft={2}>{farmCakePerSecond}</InlineText>
+        <InlineText marginLeft={2} style={{ color: 'black' }}>{farmCakePerSecond}</InlineText>
       </Text>
-      <Text bold>
+      <Text bold style={{ color: 'black' }}>
         {t("Total Multipliers:")}
-        <InlineText marginLeft={2}>{totalMultipliers}</InlineText>
+        <InlineText marginLeft={2} style={{ color: 'black' }}>{totalMultipliers}</InlineText>
       </Text>
-      <Text my="24px">
+      <Text my="24px" style={{ color: 'black' }}>
         {t(
           "The Farm Multiplier represents the proportion of CAKE rewards each farm receives as a proportion of its farm group."
         )}
       </Text>
-      <Text my="24px">
+      <Text my="24px" style={{ color: 'black' }}>
         {t("For example, if a 1x farm received 1 CAKE per block, a 40x farm would receive 40 CAKE per block.")}
       </Text>
-      <Text>
+      <Text style={{ color: 'black' }}>
         {t("Different farm groups have different sets of multipliers.")}
         {/* <InlineLink
           mt="8px"

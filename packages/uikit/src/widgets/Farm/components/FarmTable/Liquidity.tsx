@@ -42,7 +42,7 @@ export const StakedLiquidity: React.FunctionComponent<React.PropsWithChildren<Fa
   const { t } = useTranslation();
   const tooltip = useTooltip(
     <>
-      <Text>{t("Total active (in-range) liquidity staked in the farm.")}</Text>
+      <Text style={{ color: 'black' }}>{t("Total active (in-range) liquidity staked in the farm.")}</Text>
       {updatedAt && <Text>Updated {distanceToNow(updatedAt)}</Text>}
     </>,
     {

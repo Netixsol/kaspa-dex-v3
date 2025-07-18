@@ -22,15 +22,15 @@ import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { chains } from 'utils/wagmi'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { ASSET_CDN } from 'config/constants/endpoints'
 
 import { ChainLogo } from './Logo/ChainLogo'
 
-const AptosChain = {
-  id: 1,
-  name: 'Aptos',
-}
+// const AptosChain = {
+//   id: 1,
+//   name: 'Aptos',
+// }
 
 const NetworkSelect = ({ switchNetwork, chainId }) => {
   const { t } = useTranslation()
@@ -42,20 +42,19 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
       </Box>
       <UserMenuDivider />
       {/* // .filter((chain) => !('testnet' in chain && chain.testnet) || chain.id === chainId) */}
-      {chains
-        .map((chain) => (
-          <UserMenuItem
-            key={chain.id}
-            style={{ justifyContent: 'flex-start' }}
-            onClick={() => chain.id !== chainId && switchNetwork(chain.id)}
-          >
-            <ChainLogo chainId={chain.id} />
-            <Text color={chain.id === chainId ? 'secondary' : 'text'} bold={chain.id === chainId} pl="12px">
-              {chain.name}
-            </Text>
-          </UserMenuItem>
-        ))}
-      <UserMenuItem
+      {chains.map((chain) => (
+        <UserMenuItem
+          key={chain.id}
+          style={{ justifyContent: 'flex-start' }}
+          onClick={() => chain.id !== chainId && switchNetwork(chain.id)}
+        >
+          <ChainLogo chainId={chain.id} />
+          <Text color={chain.id === chainId ? 'secondary' : 'text'} bold={chain.id === chainId} pl="12px">
+            {chain.name}
+          </Text>
+        </UserMenuItem>
+      ))}
+      {/* <UserMenuItem
         key={`aptos-${AptosChain.id}`}
         style={{ justifyContent: 'flex-start' }}
         as="a"
@@ -72,7 +71,7 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
         <Text color="text" pl="12px">
           {AptosChain.name}
         </Text>
-      </UserMenuItem>
+      </UserMenuItem> */}
     </>
   )
 }

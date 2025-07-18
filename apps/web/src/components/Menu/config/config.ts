@@ -15,7 +15,7 @@ import {
 import { ContextApi } from '@pancakeswap/localization'
 import { SUPPORTED_CHAIN_IDS as POOL_SUPPORTED_CHAINS } from '@pancakeswap/pools'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
-import { getPerpetualUrl } from 'utils/getPerpetualUrl'
+// import { getPerpetualUrl } from 'utils/getPerpetualUrl'
 import { SUPPORT_ONLY_BSC } from 'config/constants/supportChains'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & { hideSubNav?: boolean }

@@ -8,6 +8,7 @@ const Menu = () => {
   const theme = useTheme()
   const { setTheme } = useNextTheme()
   const { currentLanguage, setLanguage, t } = useTranslation()
+  const isDark = true
 
   return (
     <Flex height="56px" bg="backgroundAlt" px="16px" alignItems="center" justifyContent="space-between" zIndex={9}>
@@ -17,7 +18,7 @@ const Menu = () => {
       <Flex alignItems="center">
         <NoSSR>
           <Box mr="16px">
-            <ThemeSwitcher isDark={theme.isDark} toggleTheme={() => setTheme(theme.isDark ? 'light' : 'dark')} />
+            <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme('dark')} />
           </Box>
         </NoSSR>
         <LangSelector

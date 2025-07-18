@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { usePopper } from "react-popper";
-import styled from "styled-components";
+import  styled from "styled-components";
 import { Box, Flex } from "../../../../components/Box";
 import { ChevronDownIcon } from "../../../../components/Svg";
-import { UserMenuProps, variants } from "./types";
 import MenuIcon from "./MenuIcon";
 import { UserMenuItem } from "./styles";
+import { UserMenuProps, variants } from "./types";
 
 export const StyledUserMenu = styled(Flex)`
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.tertiary};
+  background-color: ${({ theme }) => theme.colors.secondary10};
   border-radius: 16px;
   box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -36,7 +36,7 @@ export const LabelText = styled.div`
   }
 `;
 
-const Menu = styled.div<{ isOpen: boolean }>`
+const Menu = styled.div<{ $isOpen: boolean }>`
   background-color: ${({ theme }) => theme.card.background};
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   border-radius: 16px;
@@ -47,8 +47,8 @@ const Menu = styled.div<{ isOpen: boolean }>`
   visibility: visible;
   z-index: 1001;
 
-  ${({ isOpen }) =>
-    !isOpen &&
+  ${({ $isOpen }) =>
+    !$isOpen &&
     `
     pointer-events: none;
     visibility: hidden;
@@ -67,6 +67,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   account,
   text,
   avatarSrc,
+  fallbackSrc,
   avatarClassName,
   variant = variants.DEFAULT,
   children,
@@ -74,6 +75,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   placement = "bottom-end",
   recalculatePopover,
   ellipsis = true,
+  popperStyle = {},
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -122,14 +124,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
           setIsOpen((s) => !s);
         }}
       >
-        <MenuIcon className={avatarClassName} avatarSrc={avatarSrc} variant={variant} />
+        <MenuIcon className={avatarClassName} avatarSrc={avatarSrc} variant={variant} fallbackSrc={fallbackSrc} />
         <LabelText title={typeof text === "string" ? text || account : account}>
           {text || (ellipsis ? accountEllipsis : account)}
         </LabelText>
         {!disabled && <ChevronDownIcon color="text" width="24px" />}
       </StyledUserMenu>
-      {!disabled && (
-        <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
+      {!disabled && children && (
+        <Menu style={{ ...styles.popper, ...popperStyle }} ref={setTooltipRef} {...attributes.popper} $isOpen={isOpen}>
           <Box onClick={() => setIsOpen(false)}>{children?.({ isOpen })}</Box>
         </Menu>
       )}

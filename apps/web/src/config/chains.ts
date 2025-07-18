@@ -1,7 +1,21 @@
 import { ChainId } from '@pancakeswap/sdk'
 import memoize from 'lodash/memoize'
 import invert from 'lodash/invert'
-import { bsc as bsc_, bscTestnet, goerli, mainnet, Chain, sepolia, polygonZkEvm, polygonZkEvmTestnet, zkSync, arbitrum, arbitrumGoerli, lineaTestnet, baseGoerli } from 'wagmi/chains'
+import {
+  bsc as bsc_,
+  bscTestnet,
+  // goerli,
+  // mainnet,
+  Chain,
+  // sepolia,
+  // polygonZkEvm,
+  // polygonZkEvmTestnet,
+  // zkSync,
+  // arbitrum,
+  // arbitrumGoerli,
+  // lineaTestnet,
+  // baseGoerli,
+} from 'wagmi/chains'
 
 export const CHAIN_QUERY_NAME = {
   // [ChainId.ETHEREUM]: 'eth',
@@ -12,13 +26,13 @@ export const CHAIN_QUERY_NAME = {
 } as const // satisfies Record<ChainId, string>
 
 export const kasplexMainnet = {
-  id: 167013,
+  id: 56,
   name: 'Kasplex Mainnet',
   network: 'KasplexMainnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'KAS',
-    symbol: 'KAS',
+    name: 'BNB',
+    symbol: 'BNB',
   },
   rpcUrls: {
     ...bsc_.rpcUrls,
@@ -86,4 +100,4 @@ const bsc = {
   },
 } satisfies Chain
 
-export const CHAINS = [bsc, mainnet, bscTestnet, goerli, kasplexTestnet, kasplexMainnet]
+export const CHAINS = [kasplexTestnet]

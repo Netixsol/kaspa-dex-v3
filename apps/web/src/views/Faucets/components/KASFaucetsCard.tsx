@@ -245,7 +245,7 @@ const KASFaucetCard: React.FC = () => {
     <FaucetContainer>
       {/* Header */}
       <HeaderSection>
-        <FaucetIcon src="/TokenLogos/KAS.png" alt="KAS Token" />
+        <FaucetIcon src="/images/chains/KAS.png" alt="KAS Token" />
         <Heading as="h1" size="xl" color="#ffffff" mb="8px">
           {t('KAS Faucet')}
         </Heading>

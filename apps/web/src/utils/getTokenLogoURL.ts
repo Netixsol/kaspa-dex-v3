@@ -20,7 +20,7 @@ const mapping = {
 const getTokenLogoURL = memoize(
   (token?: Token) => {
     if (token?.address) {
-      console.log({token})
+      // console.log({token})
       const address = getAddress(token.address) // checksummed
       return `/images/chains/${address}.png`
     }

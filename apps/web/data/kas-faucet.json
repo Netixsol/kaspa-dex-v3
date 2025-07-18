@@ -1,0 +1,37 @@
+{
+  "claims": [
+    {
+      "address": "0x40af333b09d912e4ef2f94e9ac9eddeef791bcba",
+      "amount": "50",
+      "timestamp": 1752839422047,
+      "status": "completed",
+      "txHash": "0xdeb97668664650bda37f5640c00b264a1398abdf19225f658e0b0fad18dee64a"
+    },
+    {
+      "address": "0x774e65b92077e621fdb2f5c8bd17945501b09355",
+      "amount": "50",
+      "timestamp": 1752839535741,
+      "status": "completed",
+      "txHash": "0x34fc0fdc65f024f1ac931d257b8cfbd04d40abce964670d73349c2712591e36d"
+    },
+    {
+      "address": "0xa5d073469e879eb4bf847ce4cc886888414c92f5",
+      "amount": "50",
+      "timestamp": 1752839589707,
+      "status": "completed",
+      "txHash": "0x7d07b773ba1301f1ee75dc52bae4e738c08930eaa4bccd24535f0aa6160adfe4"
+    }
+  ],
+  "queue": [],
+  "systemStatus": {
+    "isPaused": false,
+    "queueCapacity": 30,
+    "rateLimitWindow": 600000,
+    "rateLimitRequests": 5
+  },
+  "rateLimits": {
+    "0x40Af333b09D912E4EF2F94E9Ac9eddEEF791BCba": [1752839422047],
+    "0x774e65b92077E621FDb2F5C8bd17945501B09355": [1752839535741],
+    "0xA5d073469e879EB4Bf847CE4Cc886888414c92f5": [1752839589707]
+  }
+}

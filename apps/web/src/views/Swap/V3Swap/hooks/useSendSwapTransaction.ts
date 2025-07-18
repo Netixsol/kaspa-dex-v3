@@ -64,23 +64,22 @@ export default function useSendSwapTransaction(
     return {
       callback: async function onSwap(): Promise<SendTransactionResult> {
         const isKasplex = chainId === ChainId.KASPLEX_TESTNET
-        const DEFAULT_GAS = 25000000n
+        // Default gas for Kasplex testnet - reasonable amount
+        const DEFAULT_GAS = 2000000n // 2M gas instead of 25M
         const estimatedCalls: SwapCallEstimate[] = await Promise.all(
           swapCalls.map((call) => {
             const { address, calldata, value } = call
 
-            const tx =
-              !value || isZero(value)
-                ? { account, to: address, data: calldata, value: 0n }
-                : {
-                    account,
-                    to: address,
-                    data: calldata,
-                    value: hexToBigInt(value),
-                  }
+            const tx = {
+              account,
+              to: address,
+              data: calldata,
+              value: hexToBigInt(value),
+            }
             if (isKasplex) {
               return Promise.resolve({ call, gasEstimate: DEFAULT_GAS })
             }
+
             return publicClient
               .estimateGas(tx)
               .then((gasEstimate) => {
@@ -90,12 +89,19 @@ export default function useSendSwapTransaction(
                 }
               })
               .catch((gasError) => {
+                console.log('onSwap - Gas estimation failed for call:', {
+                  address,
+                  calldata: `${calldata.slice(0, 10)}...`,
+                  value,
+                  gasError,
+                })
                 console.debug('Gas estimate failed, trying eth_call to extract error', call)
                 return { call, error: transactionErrorToUserReadableMessage(gasError, t) }
               })
           }),
         )
 
+        console.log('estimatedCalls >>>>', estimatedCalls)
         // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
         let bestCallOption: SuccessfulCall | SwapCallEstimate | undefined = estimatedCalls.find(
           (el, ix, list): el is SuccessfulCall =>

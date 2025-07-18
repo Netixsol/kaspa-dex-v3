@@ -10,7 +10,7 @@ export const BLOCKED_ADDRESSES: string[] = [
 ]
 
 // default allowed slippage, in bips
-export const INITIAL_ALLOWED_SLIPPAGE = 50
+export const INITIAL_ALLOWED_SLIPPAGE = 100
 // 20 minutes, denominated in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 20
 
@@ -27,4 +27,4 @@ export const PREDICTION_TOOLTIP_DISMISS_KEY = 'prediction-switcher-dismiss-toolt
 // Gelato uses this address to define a native currency in all chains
 export const GELATO_NATIVE = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
 
-export const EXCHANGE_HELP_URLS = 'https://docs.pancakeswap.finance/help'
+export const EXCHANGE_HELP_URLS = '#'

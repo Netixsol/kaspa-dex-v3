@@ -195,7 +195,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     cakePerSecond
   } = useFarmsV3WithPositions({ mockApr })
 
-  console.log({ farmsV3 })
+  // console.log({ farmsV3 })
   const farmsLP: V2AndV3Farms = useMemo(() => {
     return [
       ...farmsV3.map((f) => ({ ...f, version: 3 } as V3FarmWithoutStakedValue)),

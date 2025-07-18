@@ -31,7 +31,7 @@ export const CurrencyLogo: React.FC<
   const imagePath = chainName === 'KASPLEX_TESTNET' ? '' : `${chainName?.toLowerCase()}/`
   const checkedSumAddress = isAddress(address)
   const srcFromPCS = checkedSumAddress
-    ? `https://kaspa-dex-v3-lake.vercel.app/images/${imagePath}${checkedSumAddress}.png`
+    ? `https://kaspa-dex-v3-lake.vercel.app/images/chains/${checkedSumAddress}.png`
     : ''
   return <StyledLogo size={size} srcs={[srcFromPCS, src]} alt="token logo" useFilledIcon {...rest} />
 }

@@ -51,7 +51,7 @@ export const BLOCKS_CLIENT_WITH_CHAIN = {
 }
 
 // export const ASSET_CDN = 'https://assets.pancakeswap.finance'
-export const ASSET_CDN = 'http://localhost:3000'
+export const ASSET_CDN = "https://stage.kaspafinance.io"
 
 export const V3_SUBGRAPH_URLS = {
   [ChainId.ETHEREUM]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-eth',

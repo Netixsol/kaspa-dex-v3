@@ -22,9 +22,9 @@ const mapping = {
 const getTokenLogoURL = memoize(
   (token?: Token) => {
     if (token?.address) {
-      // console.log({token})
+      console.log({ token })
       const address = getAddress(token.address) // checksummed
-      return `${ASSET_CDN}/images/chains/${address}.png`
+      return `${ASSET_CDN}/images/chains/${token.address}.png`
     }
     return null
   },
@@ -34,6 +34,7 @@ const getTokenLogoURL = memoize(
 export const getTokenLogoURLByAddress = memoize(
   (address?: string, chainId?: number) => {
     if (address && chainId && mapping[chainId]) {
+      console.log({ address })
       return `${ASSET_CDN}/images/chains/${address}.png`
     }
     return null

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const DashBox = styled(Box)`
   background: #252136;
   border-radius: 25px;
-  overflow: auto;
+  /* overflow: auto; */
   padding: 30px;
   min-width: 390px;
   width: 31%;

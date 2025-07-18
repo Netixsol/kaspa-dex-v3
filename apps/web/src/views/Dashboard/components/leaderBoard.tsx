@@ -3,6 +3,7 @@ import { Flex, IconButton as UiKitIconButton, Text, Box, ProfileAvatar } from '@
 import { AvatarContainer, AvatarImage, CrownBadge, DashBox, PositionLabel } from '../style'
 import { ShareIcon } from '../icons/share.ico'
 import { CrownIcon } from '../icons/crown.ico'
+import { ContentBox } from '../liquidityProvision'
 
 const IconButton = styled(UiKitIconButton)`
   background: transparent;
@@ -16,33 +17,6 @@ interface LeaderboardAvatarProps {
   crownScale?: number // Multiplier for crown size (0.8, 1, 1.2 etc)
   labelScale?: number // Multiplier for label size
 }
-const Row = styled.div`
-  display: contents;
-  align-items: center;
-
-  & > div {
-    padding: 16px 33px 16px 33px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 20px;
-    background: #120f1f;
-    position: relative;
-    width: 100%;
-    &:first-child {
-      width: 10px;
-    }
-    &:not(:first-child)::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 60%;
-      width: 2px;
-      background-color: #252136;
-    }
-  }
-`
 const LeaderboardAvatar = ({
   imageUrl,
   position,
@@ -99,53 +73,54 @@ export const LeaderBoard = ({ title }) => {
           <ShareIcon color="#ffffff" width="24" height="22" viewBox="0 0 24 22" fill="none" />
         </IconButton>
       </Flex>
-      <Flex justifyContent="space-between" alignItems="center">
-        <Flex flexDirection="column" justifyContent="center" alignItems="center" style={{ gap: 10 }}>
-          <LeaderboardAvatar
-            labelText="2"
-            position={2}
-            imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
-            avatarSize={70}
-            crownScale={1}
-          />
-          <Box>
-            <Text textAlign="center">@hilary</Text>
-            <Text textAlign="center" color="#1FD26F" fontSize="14px">
-              25000 Points
-            </Text>
-          </Box>
-        </Flex>
-        <Flex flexDirection="column" justifyContent="center" alignItems="center" style={{ gap: 10 }}>
-          <LeaderboardAvatar
-            labelText="1"
-            position={1}
-            imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
-            avatarSize={90}
-            crownScale={2}
-          />
-          <Box>
-            <Text textAlign="center">@tessa</Text>
-            <Text textAlign="center" color="#1FD26F" fontSize="14px">
-              32000 Points
-            </Text>
-          </Box>
-        </Flex>
-        <Flex flexDirection="column" justifyContent="center" alignItems="center" style={{ gap: 10 }}>
-          <LeaderboardAvatar
-            labelText="3"
-            position={3}
-            imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
-            avatarSize={70}
-            crownScale={1}
-          />
-          <Box>
-            <Text textAlign="center">@roland</Text>
-            <Text textAlign="center" color="#1FD26F" fontSize="14px">
-              25000 Points
-            </Text>
-          </Box>
-        </Flex>
-        {/* <LeaderboardAvatar
+      <Box paddingTop="40px">
+        <Flex justifyContent="space-between" alignItems="center">
+          <Flex flexDirection="column" justifyContent="center" alignItems="center" style={{ gap: 10 }}>
+            <LeaderboardAvatar
+              labelText="2"
+              position={2}
+              imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
+              avatarSize={70}
+              crownScale={1}
+            />
+            <Box>
+              <Text textAlign="center">@hilary</Text>
+              <Text textAlign="center" color="#1FD26F" fontSize="14px">
+                25000 Points
+              </Text>
+            </Box>
+          </Flex>
+          <Flex flexDirection="column" justifyContent="center" alignItems="center" style={{ gap: 10 }}>
+            <LeaderboardAvatar
+              labelText="1"
+              position={1}
+              imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
+              avatarSize={90}
+              crownScale={2}
+            />
+            <Box>
+              <Text textAlign="center">@tessa</Text>
+              <Text textAlign="center" color="#1FD26F" fontSize="14px">
+                32000 Points
+              </Text>
+            </Box>
+          </Flex>
+          <Flex flexDirection="column" justifyContent="center" alignItems="center" style={{ gap: 10 }}>
+            <LeaderboardAvatar
+              labelText="3"
+              position={3}
+              imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
+              avatarSize={70}
+              crownScale={1}
+            />
+            <Box>
+              <Text textAlign="center">@roland</Text>
+              <Text textAlign="center" color="#1FD26F" fontSize="14px">
+                25000 Points
+              </Text>
+            </Box>
+          </Flex>
+          {/* <LeaderboardAvatar
           labelText="1"
           position={1}
           imageUrl="https://as2.ftcdn.net/v2/jpg/03/25/73/59/1000_F_325735908_TkxHU7okor9CTWHBhkGfdRumONWfIDEb.jpg"
@@ -159,38 +134,339 @@ export const LeaderBoard = ({ title }) => {
           avatarSize={70}
           crownScale={1}
           /> */}
-      </Flex>
-      <Flex width="100%">
-        <Row>
-          <div
-            style={{
-              borderRadius: '10px 0 0 10px',
-            }}
-          >
-            <Flex alignItems="center" height="100%">
-              <Text>4</Text>
-            </Flex>
-          </div>
-          <div
-            style={{
-              borderRadius: '0',
-            }}
-          >
-            <Flex style={{ gap: '10px' }} alignItems="center">
-              <ProfileAvatar width={44} height={44} style={{ border: 'none' }} />
+        </Flex>
+      </Box>
+      <Flex width="100%" flexDirection="column" marginTop="20px" style={{ gap: '10px' }}>
+        <ContentBox style={{ padding: '0px' }}>
+          <Flex justifyContent="space-between" alignItems="center" position="relative">
+            {/* Column 1 */}
+            <Box width="20%" position="relative" style={{ alignSelf: 'stretch' }}>
+              <Text height="100%" paddingTop="auto" textAlign="center" style={{ placeContent: 'center' }}>
+                4
+              </Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Box>
+
+            {/* Column 2 */}
+            <Flex
+              style={{ gap: '10px' }}
+              alignItems="center"
+              width="40%"
+              paddingX="16px"
+              paddingY="10px"
+              position="relative"
+            >
+              <ProfileAvatar
+                width={44}
+                height={44}
+                style={{
+                  border: 'none',
+                  flexShrink: 0,
+                }}
+              />
               <Text> @Jhon</Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
             </Flex>
-          </div>
-          <div
-            style={{
-              borderRadius: '0 10px 10px 0',
-            }}
-          >
-            <Flex alignItems="center" height="100%">
-              <Text>32000 points</Text>
+
+            {/* Column 3 */}
+            <Box width="40%" paddingX="16px">
+              <Text fontSize="14px" color="#1FD26F">
+                18000 points
+              </Text>
+            </Box>
+          </Flex>
+        </ContentBox>
+        <ContentBox style={{ padding: '0px' }}>
+          <Flex justifyContent="space-between" alignItems="center" position="relative">
+            {/* Column 1 */}
+            <Box width="20%" position="relative" style={{ alignSelf: 'stretch' }}>
+              <Text height="100%" textAlign="center" paddingTop="auto" style={{ placeContent: 'center' }}>
+                4
+              </Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Box>
+
+            {/* Column 2 */}
+            <Flex
+              style={{ gap: '10px' }}
+              alignItems="center"
+              width="40%"
+              paddingX="16px"
+              paddingY="10px"
+              position="relative"
+            >
+              <ProfileAvatar
+                width={44}
+                height={44}
+                style={{
+                  border: 'none',
+                  flexShrink: 0,
+                }}
+              />
+              <Text> @Jhon</Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
             </Flex>
-          </div>
-        </Row>
+
+            {/* Column 3 */}
+            <Box width="40%" paddingX="16px">
+              <Text fontSize="14px" color="#1FD26F">
+                18000 points
+              </Text>
+            </Box>
+          </Flex>
+        </ContentBox>
+        <ContentBox style={{ padding: '0px' }}>
+          <Flex justifyContent="space-between" alignItems="center" position="relative">
+            {/* Column 1 */}
+            <Box width="20%" position="relative" style={{ alignSelf: 'stretch' }}>
+              <Text height="100%" paddingTop="auto" style={{ placeContent: 'center' }}>
+                4
+              </Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Box>
+
+            {/* Column 2 */}
+            <Flex
+              style={{ gap: '10px' }}
+              alignItems="center"
+              width="40%"
+              paddingX="16px"
+              paddingY="10px"
+              position="relative"
+            >
+              <ProfileAvatar
+                width={44}
+                height={44}
+                style={{
+                  border: 'none',
+                  flexShrink: 0,
+                }}
+              />
+              <Text> @Jhon</Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Flex>
+
+            {/* Column 3 */}
+            <Box width="40%" paddingX="16px">
+              <Text fontSize="14px" color="#1FD26F">
+                18000 points
+              </Text>
+            </Box>
+          </Flex>
+        </ContentBox>
+        <ContentBox style={{ padding: '0px' }}>
+          <Flex justifyContent="space-between" alignItems="center" position="relative">
+            {/* Column 1 */}
+            <Box width="20%" position="relative" style={{ alignSelf: 'stretch' }}>
+              <Text height="100%" paddingTop="auto" style={{ placeContent: 'center' }}>
+                4
+              </Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Box>
+
+            {/* Column 2 */}
+            <Flex
+              style={{ gap: '10px' }}
+              alignItems="center"
+              width="40%"
+              paddingX="16px"
+              paddingY="10px"
+              position="relative"
+            >
+              <ProfileAvatar
+                width={44}
+                height={44}
+                style={{
+                  border: 'none',
+                  flexShrink: 0,
+                }}
+              />
+              <Text> @Jhon</Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Flex>
+
+            {/* Column 3 */}
+            <Box width="40%" paddingX="16px">
+              <Text fontSize="14px" color="#1FD26F">
+                18000 points
+              </Text>
+            </Box>
+          </Flex>
+        </ContentBox>
+        <ContentBox style={{ padding: '0px' }}>
+          <Flex justifyContent="space-between" alignItems="center" position="relative">
+            {/* Column 1 */}
+            <Box width="20%" position="relative" style={{ alignSelf: 'stretch' }}>
+              <Text height="100%" paddingTop="auto" style={{ placeContent: 'center' }}>
+                4
+              </Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Box>
+
+            {/* Column 2 */}
+            <Flex
+              style={{ gap: '10px' }}
+              alignItems="center"
+              width="40%"
+              paddingX="16px"
+              paddingY="10px"
+              position="relative"
+            >
+              <ProfileAvatar
+                width={44}
+                height={44}
+                style={{
+                  border: 'none',
+                  flexShrink: 0,
+                }}
+              />
+              <Text> @Jhon</Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Flex>
+
+            {/* Column 3 */}
+            <Box width="40%" paddingX="16px">
+              <Text fontSize="14px" color="#1FD26F">
+                18000 points
+              </Text>
+            </Box>
+          </Flex>
+        </ContentBox>
+        <ContentBox style={{ padding: '0px' }}>
+          <Flex justifyContent="space-between" alignItems="center" position="relative">
+            {/* Column 1 */}
+            <Box width="20%" position="relative" style={{ alignSelf: 'stretch' }}>
+              <Text height="100%" paddingTop="auto" style={{ placeContent: 'center' }}>
+                4
+              </Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Box>
+
+            {/* Column 2 */}
+            <Flex
+              style={{ gap: '10px' }}
+              alignItems="center"
+              width="40%"
+              paddingX="16px"
+              paddingY="10px"
+              position="relative"
+            >
+              <ProfileAvatar
+                width={44}
+                height={44}
+                style={{
+                  border: 'none',
+                  flexShrink: 0,
+                }}
+              />
+              <Text> @Jhon</Text>
+              {/* Right separator */}
+              <Box
+                position="absolute"
+                right="0"
+                top="50%"
+                style={{ transform: 'translateY(-50%)', height: '60%' }}
+                width="2px"
+                backgroundColor="#252136"
+              />
+            </Flex>
+
+            {/* Column 3 */}
+            <Box width="40%" paddingX="16px">
+              <Text fontSize="14px" color="#1FD26F">
+                18000 points
+              </Text>
+            </Box>
+          </Flex>
+        </ContentBox>
       </Flex>
     </DashBox>
   )

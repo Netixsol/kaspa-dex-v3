@@ -1,37 +1,101 @@
-import { Flex, Heading, Text } from '@pancakeswap/uikit'
+import { Flex, Heading, IconButton, Text } from '@pancakeswap/uikit'
 import { DashBox } from './style'
 import ProgressBar from './components/ProgressBar'
 import { ContentBox, Highlight } from './liquidityProvision'
 import { LeaderBoard } from './components/leaderBoard'
 import TickIcon from './icons/tick.ico'
+import { useTradingSwap } from './hooks/useTradingSwap'
+import { ShareIcon } from './icons/share.ico'
 
 export const TradingSwap = () => {
-  const isDisabled = false
-  const isActive = !isDisabled
+  const { data } = useTradingSwap()
   return (
     <>
-      <Heading scale="xxl">Daily Activity</Heading>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Heading scale="xxl">Trading & Swaps</Heading>
+        <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius:"100%" }}>
+          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
+        </IconButton>
+      </Flex>
       <Flex width="100%" flexWrap="wrap" justifyContent="space-between" style={{ gap: '32px' }} marginTop="32px">
-        <Flex width="69%" style={{ gap: '32px' }} flexWrap="wrap">
-          <DashBox>
+        <Flex
+          flex="1 1 calc(33.33% - 32px)"
+          minWidth="280px"
+          flexDirection="column"
+          alignItems="stretch"
+          style={{ gap: '32px' }}
+        >
+          <DashBox style={{ width: '100%' }}>
             <Text fontSize="24px" fontWeight={500}>
-              Maintain 7-Day Liquidity
+              Daily Activity
             </Text>
             <ProgressBar
               colorStart="#5CED9D"
               colorEnd="#1FD26F"
               size={250}
-              currentDay={4}
-              totalDays={7}
+              currentDay={data?.dailyActivity?.todaySwaps}
+              totalDays={data?.dailyActivity?.totalSwap}
               textSize="3rem"
             />
             <ContentBox marginTop="38px">
               Just 2 more swaps and <Highlight color="#000000">200 points</Highlight> are yours!
             </ContentBox>
           </DashBox>
-          <DashBox>
+          <DashBox style={{ width: '100%' }}>
+            <Text fontSize="24px" fontWeight={500} marginBottom="20px">
+              First Stake
+            </Text>
+            <ContentBox>
+              <Flex justifyContent="space-between">
+                <Text fontSize="16px" fontWeight={500} color={data?.firstSwap ? '#1FD26F' : '#45434D'}>
+                  500 Points
+                </Text>
+                <Flex
+                  width={28}
+                  height={28}
+                  borderRadius="100%"
+                  background={data?.firstSwap ? '#1FD26F' : '#45434D'}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
+                </Flex>
+              </Flex>
+            </ContentBox>
+          </DashBox>
+          <DashBox style={{ width: '100%' }}>
+            <Text fontSize="24px" fontWeight={500} marginBottom="20px">
+              Cross $10,000 Weekly Volume
+            </Text>
+            <ContentBox>
+              <Flex justifyContent="space-between">
+                <Text fontSize="16px" fontWeight={500} color={data?.crossTenThousandVolume ? '#1FD26F' : '#45434D'}>
+                  500 Points
+                </Text>
+                <Flex
+                  width={28}
+                  height={28}
+                  borderRadius="100%"
+                  background={data?.crossTenThousandVolume ? '#1FD26F' : '#45434D'}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
+                </Flex>
+              </Flex>
+            </ContentBox>
+          </DashBox>
+        </Flex>
+        <Flex
+          flex="1 1 calc(33.33% - 32px)"
+          minWidth="280px"
+          flexDirection="column"
+          alignItems="stretch"
+          style={{ gap: '32px' }}
+        >
+          <DashBox style={{ width: '100%' }}>
             <Text fontSize="24px" fontWeight={500}>
-              Maintain 7-Day Liquidity
+              Weekly Volume
             </Text>
             <ProgressBar
               colorStart="#5CED9D"
@@ -45,42 +109,20 @@ export const TradingSwap = () => {
               Just 3 more days and <Highlight color="#000000">+50% bonus points</Highlight> are yours!
             </ContentBox>
           </DashBox>
-          <DashBox>
-            <Text fontSize="24px" fontWeight={500} marginBottom="20px">
-              Current Stake
-            </Text>
-            <ContentBox>
-              <Flex justifyContent="space-between">
-                <Text fontSize="16px" fontWeight={500} color="#1FD26F">
-                  500 Points
-                </Text>
-                <Flex
-                  width={28}
-                  height={28}
-                  borderRadius="100%"
-                  background={isActive ? '#1FD26F' : '#45434D'}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <TickIcon width={14} height={10} fill="none" padding="auto" />
-                </Flex>
-              </Flex>
-            </ContentBox>
-          </DashBox>
-          <DashBox>
+          <DashBox style={{ width: '100%' }}>
             <Text fontSize="24px" fontWeight={500} marginBottom="20px">
               Cross $1,000 Weekly Volume
             </Text>
             <ContentBox>
               <Flex justifyContent="space-between">
-                <Text fontSize="16px" fontWeight={500} color="#1FD26F">
+                <Text fontSize="16px" fontWeight={500} color={data?.crossThousandVolume ? '#1FD26F' : '#45434D'}>
                   500 Points
                 </Text>
                 <Flex
                   width={28}
                   height={28}
                   borderRadius="100%"
-                  background={isActive ? '#1FD26F' : '#45434D'}
+                  background={data?.crossThousandVolume ? '#1FD26F' : '#45434D'}
                   justifyContent="center"
                   alignItems="center"
                 >
@@ -89,29 +131,7 @@ export const TradingSwap = () => {
               </Flex>
             </ContentBox>
           </DashBox>
-          <DashBox>
-            <Text fontSize="24px" fontWeight={500} marginBottom="20px">
-              Cross $10,000 Weekly Volume
-            </Text>
-            <ContentBox>
-              <Flex justifyContent="space-between">
-                <Text fontSize="16px" fontWeight={500} color={isDisabled ? '#1FD26F' : '#45434D'}>
-                  500 Points
-                </Text>
-                <Flex
-                  width={28}
-                  height={28}
-                  borderRadius="100%"
-                  background={isDisabled ? '#1FD26F' : '#45434D'}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <TickIcon width={14} height={10} fill="none" padding="auto" />
-                </Flex>
-              </Flex>
-            </ContentBox>
-          </DashBox>
-          <DashBox>
+          <DashBox style={{ width: '100%' }}>
             <Text fontSize="24px" fontWeight={500} marginBottom="20px">
               Weekly Volume Leader (Top 50)
             </Text>
@@ -124,7 +144,13 @@ export const TradingSwap = () => {
             </ContentBox>
           </DashBox>
         </Flex>
-        <Flex width="31%" flexGrow={1}>
+        <Flex
+          flex="1 1 calc(33.33% - 32px)"
+          minWidth="280px"
+          flexDirection="column"
+          alignItems="stretch"
+          style={{ gap: '32px' }}
+        >
           <LeaderBoard title="Leaderboard" />
         </Flex>
       </Flex>

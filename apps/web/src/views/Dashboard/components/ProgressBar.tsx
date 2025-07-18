@@ -15,14 +15,14 @@ interface SubscriptionProgressBarProps {
 }
 
 const ProgressBar: React.FC<SubscriptionProgressBarProps> = ({
-  currentDay = 25,
-  totalDays = 30,
+  currentDay = 0,
+  totalDays = 0,
   size = 252, // Default diameter
   thickness = 20,
   colorStart = '#00c6ff',
   colorEnd = '#0072ff',
   backgroundColor = '#e0e0e0',
-  textColor = '#333',
+  textColor = '#fffff',
   textSize = '1rem',
 }) => {
   const radius = size / 2 // Calculate radius from diameter

@@ -1,6 +1,6 @@
-import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import styled from 'styled-components'
-import { Button, Flex, Heading, Text } from '@pancakeswap/uikit'
+import { Button, Flex, Heading, IconButton, Text } from '@pancakeswap/uikit'
 import { DashBox } from './style'
 import { ContentBox, Highlight as HighlightOrg } from './liquidityProvision'
 import TickIcon from './icons/tick.ico'
@@ -9,6 +9,9 @@ import { RetweetIcon } from './icons/retweet.ico'
 import { ContentIcon } from './icons/content.ico'
 import { MessageIcon } from './icons/message.ico'
 import { ViralIcon } from './icons/viral.ico'
+import { useRewardTwitter } from './hooks/useRewardTwitter'
+import { ShareIcon } from './icons/share.ico'
+import ScreenShortContainer from './components/CanvasContainer'
 
 const Box = styled(DashBox)`
   padding-inline: 64px;
@@ -24,167 +27,173 @@ const Highlight = styled(HighlightOrg)`
   font-weight: 400px;
 `
 const SocialAmplification = () => {
-  const searchParams = useSearchParams()
+  const { data } = useRewardTwitter()
+  const [canvas, setCanvas] = useState(null)
   return (
     <>
-      <Heading textAlign="center" scale="xxl">
-        Social Media Amplification
-      </Heading>
-      <Flex alignItems="center" justifyContent="center" marginTop="36px">
-        <Box>
-          <Text fontSize="24px" textAlign="center" marginBottom="6px">
-            Twitter/X Actions
-          </Text>
-          <ContentBox>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+      {/* <Flex justifyContent="space-between" alignItems="center">
+        <Heading scale="xxl">Social Media Amplification</Heading>
+        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
+          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
+        </IconButton>
+      </Flex> */}
+      <ScreenShortContainer title="Social Media Amplification">
+        <Flex alignItems="center" justifyContent="center" marginTop="36px">
+          <Box>
+            <Text fontSize="24px" textAlign="center" marginBottom="6px">
+              Twitter/X Actions
+            </Text>
+            <ContentBox>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex
+                    width={50}
+                    height={50}
+                    borderRadius="100%"
+                    background="#1FD26F"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <TwitterIcon width="33" height="33" viewBox="0 0 33 33" fill="none" />
+                  </Flex>
+                  <Text fontSize="16px">Follow @KaspaFinance:</Text>
+                </Flex>
+                <Highlight>12h 22m</Highlight>
                 <Flex
-                  width={50}
-                  height={50}
+                  width={28}
+                  height={28}
                   borderRadius="100%"
-                  background="#1FD26F"
+                  background={data?.hasFollowed ? '#1FD26F' : '#45434D'}
                   justifyContent="center"
                   alignItems="center"
+                  marginLeft="30px"
                 >
-                  <TwitterIcon width="33" height="33" viewBox="0 0 33 33" fill="none" />
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
                 </Flex>
-                <Text fontSize="16px">Follow @KaspaFinance:</Text>
               </Flex>
-              <Highlight>12h 22m</Highlight>
-              <Flex
-                width={28}
-                height={28}
-                borderRadius="100%"
-                background="#1FD26F"
-                justifyContent="center"
-                alignItems="center"
-                marginLeft="30px"
-              >
-                <TickIcon width={14} height={10} fill="none" padding="auto" />
-              </Flex>
-            </Flex>
-          </ContentBox>
-          <ContentBox>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+            </ContentBox>
+            <ContentBox>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex
+                    width={50}
+                    height={50}
+                    borderRadius="100%"
+                    background="#1FD26F"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <RetweetIcon width="30" height="20" viewBox="0 0 30 20" fill="none" />
+                  </Flex>
+                  <Text fontSize="16px">Retweet launch announcement:</Text>
+                </Flex>
+                <Highlight>100 Points</Highlight>
                 <Flex
-                  width={50}
-                  height={50}
+                  width={28}
+                  height={28}
                   borderRadius="100%"
-                  background="#1FD26F"
+                  background={data?.launchPostRetweet ? '#1FD26F' : '#45434D'}
                   justifyContent="center"
                   alignItems="center"
+                  marginLeft="30px"
                 >
-                  <RetweetIcon width="30" height="20" viewBox="0 0 30 20" fill="none" />
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
                 </Flex>
-                <Text fontSize="16px">Retweet launch announcement:</Text>
               </Flex>
-              <Highlight>100 Points</Highlight>
-              <Flex
-                width={28}
-                height={28}
-                borderRadius="100%"
-                background="#1FD26F"
-                justifyContent="center"
-                alignItems="center"
-                marginLeft="30px"
-              >
-                <TickIcon width={14} height={10} fill="none" padding="auto" />
-              </Flex>
-            </Flex>
-          </ContentBox>
-          <ContentBox>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+            </ContentBox>
+            <ContentBox>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex
+                    width={50}
+                    height={50}
+                    borderRadius="100%"
+                    background="#1FD26F"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <ContentIcon width="24" height="28" viewBox="0 0 24 28" fill="none" />
+                  </Flex>
+                  <Text fontSize="16px">Follow @KaspaFinance:</Text>
+                </Flex>
+                <Highlight>12h 22m</Highlight>
                 <Flex
-                  width={50}
-                  height={50}
+                  width={28}
+                  height={28}
                   borderRadius="100%"
-                  background="#1FD26F"
+                  background={data?.engagemnet ? '#1FD26F' : '#45434D'}
                   justifyContent="center"
                   alignItems="center"
+                  marginLeft="30px"
                 >
-                  <ContentIcon width="24" height="28" viewBox="0 0 24 28" fill="none" />
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
                 </Flex>
-                <Text fontSize="16px">Follow @KaspaFinance:</Text>
               </Flex>
-              <Highlight>12h 22m</Highlight>
-              <Flex
-                width={28}
-                height={28}
-                borderRadius="100%"
-                background="#1FD26F"
-                justifyContent="center"
-                alignItems="center"
-                marginLeft="30px"
-              >
-                <TickIcon width={14} height={10} fill="none" padding="auto" />
-              </Flex>
-            </Flex>
-          </ContentBox>
-          <ContentBox>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+            </ContentBox>
+            <ContentBox>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex
+                    width={50}
+                    height={50}
+                    borderRadius="100%"
+                    background="#1FD26F"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <MessageIcon width="28" height="26" viewBox="0 0 28 26" fill="none" />
+                  </Flex>
+                  <Text fontSize="16px">Follow @KaspaFinance:</Text>
+                </Flex>
+                <Highlight>12h 22m</Highlight>
                 <Flex
-                  width={50}
-                  height={50}
+                  width={28}
+                  height={28}
                   borderRadius="100%"
-                  background="#1FD26F"
+                  background={data?.orignalContant ? '#1FD26F' : '#45434D'}
                   justifyContent="center"
                   alignItems="center"
+                  marginLeft="30px"
                 >
-                  <MessageIcon width="28" height="26" viewBox="0 0 28 26" fill="none" />
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
                 </Flex>
-                <Text fontSize="16px">Follow @KaspaFinance:</Text>
               </Flex>
-              <Highlight>12h 22m</Highlight>
-              <Flex
-                width={28}
-                height={28}
-                borderRadius="100%"
-                background="#1FD26F"
-                justifyContent="center"
-                alignItems="center"
-                marginLeft="30px"
-              >
-                <TickIcon width={14} height={10} fill="none" padding="auto" />
-              </Flex>
-            </Flex>
-          </ContentBox>
-          <ContentBox>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+            </ContentBox>
+            <ContentBox>
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex
+                    width={50}
+                    height={50}
+                    borderRadius="100%"
+                    background="#1FD26F"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <ViralIcon width="27" height="28" viewBox="0 0 27 28" fill="none" />
+                  </Flex>
+                  <Text fontSize="16px">Follow @KaspaFinance:</Text>
+                </Flex>
+                <Highlight>12h 22m</Highlight>
                 <Flex
-                  width={50}
-                  height={50}
+                  width={28}
+                  height={28}
                   borderRadius="100%"
-                  background="#1FD26F"
+                  background={data?.thread ? '#1FD26F' : '#45434D'}
                   justifyContent="center"
                   alignItems="center"
+                  marginLeft="30px"
                 >
-                  <ViralIcon width="27" height="28" viewBox="0 0 27 28" fill="none" />
+                  <TickIcon width={14} height={10} fill="none" padding="auto" />
                 </Flex>
-                <Text fontSize="16px">Follow @KaspaFinance:</Text>
               </Flex>
-              <Highlight>12h 22m</Highlight>
-              <Flex
-                width={28}
-                height={28}
-                borderRadius="100%"
-                background="#1FD26F"
-                justifyContent="center"
-                alignItems="center"
-                marginLeft="30px"
-              >
-                <TickIcon width={14} height={10} fill="none" padding="auto" />
-              </Flex>
-            </Flex>
-          </ContentBox>
-          <Button marginTop="6px" variant="secondary">
-            Complete Task with Twitter/X
-          </Button>
-        </Box>
-      </Flex>
+            </ContentBox>
+            <Button marginTop="6px" variant="secondary">
+              Complete Task with Twitter/X
+            </Button>
+          </Box>
+        </Flex>
+      </ScreenShortContainer>
     </>
   )
 }

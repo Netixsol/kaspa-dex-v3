@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import Cookies from 'js-cookie'
 
-export const useFarmingStaking = () => {
+export const useGetPermissions = () => {
   const token = Cookies.get('token')
-  const { data, isLoading, error, status } = useQuery({
-    queryKey: ['farming'],
+  useQuery({
+    queryKey: ['get-permissions'],
 
     queryFn: async () =>
-      fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/stakes/rewards`, {
+      fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/user/permission`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -18,9 +18,10 @@ export const useFarmingStaking = () => {
           return res.json()
         })
         .then((res) => {
-          return res?.data !== null ? res?.data : {}
+          Cookies.set('permissions', JSON.stringify(res?.data))
+          //   return res !== null ? res : {}
         }),
   })
 
-  return { data, isLoading, error, status }
+  //   return { data, isLoading, error, status }
 }

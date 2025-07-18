@@ -2,110 +2,53 @@
 
 import { Flex, Text } from '@pancakeswap/uikit'
 import TickIcon from 'views/Dashboard/icons/tick.ico'
+import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import DynamicTable from './Table'
 
-const EarningHistoryTable = () => {
-  const data = [
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-    {
-      activity: 'Completed Profile',
-      points: '50 points',
-      date: '2023-05-15 14:30',
-      user: { name: 'John', avatar: 'url-to-avatar' },
-    },
-  ]
-
+// interface PointHistoryItem {
+//   reward_event: string
+//   points_awarded: string // or number if you prefer
+//   reward_date: string // or Date if you'll convert it
+// }
+const EarningHistoryTable = ({ data }: { data: any }) => {
+  const searchParams = useSearchParams()
+  const { replace } = useRouter()
+  const pathname = usePathname()
+  const handlePagination = (page) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()))
+    if (page) {
+      params.set('page', page)
+    } else {
+      params.delete('page')
+    }
+    replace(`${pathname}?${params.toString()}`)
+  }
   const columns = [
     {
-      key: 'activity',
+      key: 'reward_event',
       header: 'Activity',
       render: (item) => (
         <Flex alignItems="center" height="100%">
-          <Text>{item.activity}</Text>
+          <Text>{item.reward_event}</Text>
         </Flex>
       ),
     },
     {
-      key: 'points',
+      key: 'points_awarded',
       header: 'Earn Points',
       render: (item) => (
         <Flex alignItems="center" height="100%">
-          <Text>{item.points}</Text>
+          <Text>{item.points_awarded}</Text>
         </Flex>
       ),
       cellStyle: { color: '#1FCD6D' },
     },
     {
-      key: 'date',
+      key: 'reward_date',
       header: 'Date/Time',
       render: (item) => (
         <Flex alignItems="center" justifyContent="space-between" width="100%">
-          <Text>{item.date}</Text>
+          <Text>{item.reward_date}</Text>
           <Flex
             width={28}
             height={28}
@@ -121,7 +64,18 @@ const EarningHistoryTable = () => {
     },
   ]
 
-  return <DynamicTable data={data} columns={columns} itemsPerPage={8} />
+  return (
+    <DynamicTable
+      data={data?.historyList}
+      columns={columns}
+      itemsPerPage={8}
+      totalItems={data?.totalRecords}
+      onPageChange={(page) => {
+        handlePagination(page)
+      }}
+      serverSidePagination
+    />
+  )
 }
 
 export default EarningHistoryTable

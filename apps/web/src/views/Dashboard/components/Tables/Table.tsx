@@ -15,14 +15,16 @@ interface TableProps<T> {
   data: T[]
   columns: ColumnConfig<T>[]
   itemsPerPage?: number
+  sepratorColor?: string
+  totalItems?: number // For server-side pagination
+  onPageChange?: (page: number) => void // For server-side pagination
+  serverSidePagination?: boolean // Flag to determine pagination mode
 }
 
-// Styled Components
-const GridTable = styled.div`
+// Styled Components (unchanged)
+const GridTable = styled.div<{ $column: number }>`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  width: 100%;
-  /* max-width: 1200px; */
+  grid-template-columns: repeat(${({ $column }) => $column}, 1fr);
   margin: 0 auto;
 `
 
@@ -33,7 +35,12 @@ const HeaderCell = styled.div<{ $isFirst: boolean; $isLast: boolean }>`
   font-weight: 500;
   padding: 16px 0 16px 33px;
   position: relative;
+  border-bottom: 1px solid #1fcd6d;
+  border-top: 1px solid #1fcd6d;
   border-radius: ${({ $isFirst, $isLast }) => ($isFirst ? '10px 0 0 10px' : $isLast ? '0 10px 10px 0' : '0')};
+
+  border-left: ${({ $isFirst }) => ($isFirst ? '1px solid #1fcd6d' : 'none')};
+  border-right: ${({ $isLast }) => ($isLast ? '1px solid #1fcd6d' : 'none')};
 
   &:not(:first-child)::before {
     content: '';
@@ -47,7 +54,7 @@ const HeaderCell = styled.div<{ $isFirst: boolean; $isLast: boolean }>`
   }
 `
 
-const BodyRow = styled.div`
+const BodyRow = styled.div<{ $bgColor: string }>`
   display: contents;
 
   & > div {
@@ -66,7 +73,7 @@ const BodyRow = styled.div`
       transform: translateY(-50%);
       height: 60%;
       width: 2px;
-      background-color: #120f1f;
+      background-color: ${({ $bgColor }) => $bgColor};
     }
   }
 `
@@ -98,15 +105,40 @@ const PageNumber = styled.button<{ $active: boolean }>`
 `
 
 // Component
-const DynamicTable = <T extends Record<string, any>>({ data, columns, itemsPerPage = 5 }: TableProps<T>) => {
+const DynamicTable = <T extends Record<string, any>>({
+  data,
+  columns,
+  itemsPerPage = 5,
+  sepratorColor,
+  totalItems, // For server-side pagination
+  onPageChange, // Callback for server-side pagination
+  serverSidePagination = false, // Default to client-side
+}: TableProps<T>) => {
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = Math.ceil(data.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage)
+
+  // Calculate pagination values based on mode
+  const totalPages = serverSidePagination
+    ? Math.ceil((totalItems || 0) / itemsPerPage)
+    : Math.ceil((data?.length || 0) / itemsPerPage)
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    if (serverSidePagination && onPageChange) {
+      onPageChange(page)
+    }
+  }
+
+  // For client-side pagination, slice the data
+  const paginatedData = serverSidePagination
+    ? data
+    : data === undefined
+    ? []
+    : data?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   return (
-    <Box height="100%">
-      <GridTable style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}>
+    <Box>
+      <GridTable $column={columns.length}>
         {/* Header */}
         {columns.map((column, index) => (
           <HeaderCell
@@ -120,8 +152,8 @@ const DynamicTable = <T extends Record<string, any>>({ data, columns, itemsPerPa
         ))}
 
         {/* Body */}
-        {paginatedData.map((item) => (
-          <BodyRow key={`row-${item.id}`}>
+        {paginatedData?.map((item) => (
+          <BodyRow key={`row-${item.id}`} $bgColor={sepratorColor || '#120f1f'}>
             {columns.map((column, colIndex) => (
               <div
                 key={`cell-${item.id}-${column.key}`}
@@ -142,7 +174,7 @@ const DynamicTable = <T extends Record<string, any>>({ data, columns, itemsPerPa
       {totalPages > 1 && (
         <PaginationContainer>
           {Array.from({ length: totalPages }, (_, i) => (
-            <PageNumber key={i + 1} $active={currentPage === i + 1} onClick={() => setCurrentPage(i + 1)}>
+            <PageNumber key={i + 1} $active={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
               {i + 1}
             </PageNumber>
           ))}

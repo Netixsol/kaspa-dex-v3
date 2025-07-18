@@ -116,7 +116,7 @@ export const darkColors = {
   dropdown: "#383241",
   dropdownDeep: "#100C18",
   invertedContrast: "#FFFFFF",
-  input: "#120F1F",
+  input: "#372F47",
   inputSecondary: "#262130",
   primaryDark: "#0098A1",
   tertiary: "#353547",

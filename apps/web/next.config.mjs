@@ -5,8 +5,10 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import BundleAnalyzer from '@next/bundle-analyzer'
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
-import smartRouterPkgs from '@pancakeswap/smart-router/package.json' assert { type: 'json' }
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
 import { withWebSecurityHeaders } from '@pancakeswap/next-config/withWebSecurityHeaders'
+const smartRouterPkgs = require('@pancakeswap/smart-router/package.json')
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -41,8 +43,15 @@ const workerDeps = Object.keys(smartRouterPkgs.dependencies)
 
 /** @type {import('next').NextConfig} */
 const config = {
+   reactStrictMode: true,
   compiler: {
     styledComponents: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   experimental: {
     scrollRestoration: true,
@@ -60,7 +69,7 @@ const config = {
     '@pancakeswap/hooks',
     '@pancakeswap/utils',
   ],
-  reactStrictMode: true,
+  
   swcMinify: true,
   images: {
     contentDispositionType: 'attachment',

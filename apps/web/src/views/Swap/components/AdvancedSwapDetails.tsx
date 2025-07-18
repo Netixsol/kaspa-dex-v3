@@ -40,19 +40,28 @@ export const TradeSummary = memo(function TradeSummary({
     <AutoColumn style={{ padding: '0 24px' }}>
       <RowBetween>
         <RowFixed>
-          <Text fontSize="14px" color="textSubtle">
+          <Text fontSize="14px" color="textSubtle" style={{ color: "black" }}>
             {isExactIn ? t('Minimum received') : t('Maximum sold')}
           </Text>
           <QuestionHelper
-            text={t(
-              'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.',
-            )}
+            style={{ color: "black" }}
+            // text={t(
+            //   'Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.',
+            // )}
+            text={
+              <>
+                <Text display="inline-block" style={{ color: "black" }}>
+                  {t('Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.')}
+                </Text>
+              </>
+            }
             ml="4px"
             placement="top"
+            color='black'
           />
         </RowFixed>
         <RowFixed>
-          <Text fontSize="14px">
+          <Text fontSize="14px" style={{ color: "black" }}>
             {isExactIn
               ? `${formatAmount(slippageAdjustedAmounts[Field.OUTPUT], 4)} ${outputAmount.currency.symbol}` ?? '-'
               : `${formatAmount(slippageAdjustedAmounts[Field.INPUT], 4)} ${inputAmount.currency.symbol}` ?? '-'}
@@ -62,20 +71,20 @@ export const TradeSummary = memo(function TradeSummary({
       {priceImpactWithoutFee && (
         <RowBetween style={{ padding: '4px 0 0 0' }}>
           <RowFixed>
-            <Text fontSize="14px" color="textSubtle">
+            <Text fontSize="14px" color="textSubtle" style={{ color: "black" }}>
               {t('Price Impact')}
             </Text>
             <QuestionHelper
               text={
                 <>
-                  <Text>
-                    <Text bold display="inline-block">
+                  <Text style={{ color: "black" }} >
+                    <Text bold display="inline-block" style={{ color: "black" }}>
                       {t('AMM')}
                     </Text>
                     {`: ${t('The difference between the market price and estimated price due to trade size.')}`}
                   </Text>
-                  <Text mt="10px">
-                    <Text bold display="inline-block">
+                  <Text mt="10px" style={{ color: "black" }}>
+                    <Text bold display="inline-block" style={{ color: "black" }}>
                       {t('MM')}
                     </Text>
                     {`: ${t('No slippage against quote from market maker')}`}
@@ -84,24 +93,25 @@ export const TradeSummary = memo(function TradeSummary({
               }
               ml="4px"
               placement="top"
+              color='black'
             />
           </RowFixed>
 
-          {isMM ? <Text color="textSubtle">--</Text> : <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />}
+          {isMM ? <Text color="textSubtle" style={{ color: "black" }}>--</Text> : <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />}
         </RowBetween>
       )}
 
       {realizedLPFee && (
         <RowBetween style={{ padding: '4px 0 0 0' }}>
           <RowFixed>
-            <Text fontSize="14px" color="textSubtle">
+            <Text fontSize="14px" color="textSubtle" style={{ color: "black" }}>
               {t('Trading Fee')}
             </Text>
             <QuestionHelper
               text={
                 <>
-                  <Text mb="12px">
-                    <Text bold display="inline-block">
+                  <Text mb="12px" style={{ color: "black" }}>
+                    <Text bold display="inline-block" style={{ color: "black" }}>
                       {t('AMM')}
                     </Text>
                     :{' '}
@@ -109,7 +119,7 @@ export const TradeSummary = memo(function TradeSummary({
                       'Fee ranging from 0.1% to 0.01% depending on the pool fee tier. You can check the fee tier by clicking the magnifier icon under the “Route” section.',
                     )}
                   </Text>
-                  <Text mt="12px">
+                  <Text mt="12px" style={{ color: "black" }}>
                     <Link
                       style={{ display: 'inline' }}
                       ml="4px"
@@ -119,8 +129,8 @@ export const TradeSummary = memo(function TradeSummary({
                       {t('Fee Breakdown and Tokenomics')}
                     </Link>
                   </Text>
-                  <Text mt="10px">
-                    <Text bold display="inline-block">
+                  <Text mt="10px" style={{ color: "black" }}>
+                    <Text bold display="inline-block" style={{ color: "black" }}>
                       {t('MM')}
                     </Text>
                     :{' '}
@@ -132,9 +142,10 @@ export const TradeSummary = memo(function TradeSummary({
               }
               ml="4px"
               placement="top"
+              color='black'
             />
           </RowFixed>
-          <Text fontSize="14px">{`${formatAmount(realizedLPFee, 4)} ${inputAmount.currency.symbol}`}</Text>
+          <Text fontSize="14px" style={{ color: "black" }}>{`${formatAmount(realizedLPFee, 4)} ${inputAmount.currency.symbol}`}</Text>
         </RowBetween>
       )}
     </AutoColumn>
@@ -190,7 +201,7 @@ export const AdvancedSwapDetails = memo(function AdvancedSwapDetails({
             <>
               <RowBetween style={{ padding: '0 24px' }}>
                 <span style={{ display: 'flex', alignItems: 'center' }}>
-                  <Text fontSize="14px" color="textSubtle">
+                  <Text fontSize="14px" color="textSubtle" style={{ color: "black" }}>
                     {t('Route')}
                   </Text>
                   <QuestionHelper
@@ -204,7 +215,7 @@ export const AdvancedSwapDetails = memo(function AdvancedSwapDetails({
                 <ModalV2 closeOnOverlayClick isOpen={isModalOpen} onDismiss={() => setIsModalOpen(false)}>
                   <Modal
                     title={
-                      <Flex justifyContent="center">
+                      <Flex justifyContent="center" style={{ color: "black" }}>
                         {t('Route')}{' '}
                         <QuestionHelper
                           text={t(

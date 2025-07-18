@@ -157,7 +157,7 @@ export default function PoolListPage() {
                         Farming
                       </Tag>
                     )}
-                    <RangeTag removed={removed} outOfRange={outOfRange} />
+                    <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: "black" }} />
                   </>
                 }
                 subtitle={subtitle}

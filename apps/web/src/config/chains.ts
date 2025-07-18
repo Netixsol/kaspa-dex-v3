@@ -26,7 +26,7 @@ export const CHAIN_QUERY_NAME = {
 } as const // satisfies Record<ChainId, string>
 
 export const kasplexMainnet = {
-  id: 56,
+  id: 167013,
   name: 'Kasplex Mainnet',
   network: 'KasplexMainnet',
   nativeCurrency: {
@@ -100,4 +100,4 @@ const bsc = {
   },
 } satisfies Chain
 
-export const CHAINS = [kasplexTestnet]
+export const CHAINS = [kasplexTestnet, kasplexMainnet]

@@ -4,22 +4,22 @@ import { SmartContractPhases, LIVE, REGISTRATION } from 'config/constants/tradin
 import { useTradingCompetitionContractMoD } from 'hooks/useContract'
 
 export const useCompetitionStatus = () => {
-  const tradingCompetitionContract = useTradingCompetitionContractMoD()
+  // const tradingCompetitionContract = useTradingCompetitionContractMoD()
 
-  const { data: state } = useSWRImmutable('competitionStatus', async () => {
-    const competitionStatus = await tradingCompetitionContract.read.currentStatus()
-    return SmartContractPhases[competitionStatus].state
-  })
+  // const { data: state } = useSWRImmutable('competitionStatus', async () => {
+  //   const competitionStatus = await tradingCompetitionContract.read.currentStatus()
+  //   return SmartContractPhases[competitionStatus].state
+  // })
 
-  return useMemo(() => {
-    if (state === REGISTRATION) {
-      return 'soon'
-    }
+  // return useMemo(() => {
+    // if (state === REGISTRATION) {
+    //   return 'soon'
+    // }
 
-    if (state === LIVE) {
-      return 'live'
-    }
+    // if (state === LIVE) {
+    //   return 'live'
+    // }
 
-    return null
-  }, [state])
+    return "soon"
+  // }, [state])
 }

@@ -40,7 +40,7 @@ const ColoredIconButton = styled(IconButton)`
         ${({ theme }) =>
     `rgba(39,38,44, 0) 0%,
         rgba(39,38,44, 0) 100%`
-      ``}
+      }
       );
     }
   }

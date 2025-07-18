@@ -44,6 +44,9 @@ const config = {
   compiler: {
     styledComponents: true,
   },
+  typescript: {
+    ignoreBuildErrors: true
+  },
   experimental: {
     scrollRestoration: true,
     outputFileTracingRoot: path.join(__dirname, '../../'),

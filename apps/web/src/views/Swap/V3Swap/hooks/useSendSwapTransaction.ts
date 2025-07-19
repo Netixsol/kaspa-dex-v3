@@ -40,7 +40,7 @@ interface FailedCall extends SwapCallEstimate {
   error: Error
 }
 
-export class TransactionRejectedError extends Error {}
+export class TransactionRejectedError extends Error { }
 
 // returns a function that will execute a swap, if the parameters are all valid
 export default function useSendSwapTransaction(
@@ -63,22 +63,19 @@ export default function useSendSwapTransaction(
     }
     return {
       callback: async function onSwap(): Promise<SendTransactionResult> {
-        const isKasplex = chainId === ChainId.KASPLEX_TESTNET
-        // Default gas for Kasplex testnet - reasonable amount
-        const DEFAULT_GAS = 2000000n // 2M gas instead of 25M
         const estimatedCalls: SwapCallEstimate[] = await Promise.all(
           swapCalls.map((call) => {
             const { address, calldata, value } = call
 
-            const tx = {
-              account,
-              to: address,
-              data: calldata,
-              value: hexToBigInt(value),
-            }
-            if (isKasplex) {
-              return Promise.resolve({ call, gasEstimate: DEFAULT_GAS })
-            }
+            const tx =
+              !value || isZero(value)
+                ? { account, to: address, data: calldata, value: 0n }
+                : {
+                  account,
+                  to: address,
+                  data: calldata,
+                  value: hexToBigInt(value),
+                }
 
             return publicClient
               .estimateGas(tx)
@@ -89,19 +86,12 @@ export default function useSendSwapTransaction(
                 }
               })
               .catch((gasError) => {
-                console.log('onSwap - Gas estimation failed for call:', {
-                  address,
-                  calldata: `${calldata.slice(0, 10)}...`,
-                  value,
-                  gasError,
-                })
                 console.debug('Gas estimate failed, trying eth_call to extract error', call)
                 return { call, error: transactionErrorToUserReadableMessage(gasError, t) }
               })
           }),
         )
 
-        console.log('estimatedCalls >>>>', estimatedCalls)
         // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
         let bestCallOption: SuccessfulCall | SwapCallEstimate | undefined = estimatedCalls.find(
           (el, ix, list): el is SuccessfulCall =>
@@ -111,13 +101,7 @@ export default function useSendSwapTransaction(
         // check if any calls errored with a recognizable error
         if (!bestCallOption) {
           const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
-          console.error('onSwap - No best call found, checking for errors:', {
-            errorCallsCount: errorCalls.length,
-          })
-          if (errorCalls.length > 0) {
-            console.error('onSwap - Throwing error from failed call:', errorCalls[errorCalls.length - 1].error)
-            throw errorCalls[errorCalls.length - 1].error
-          }
+          if (errorCalls.length > 0) throw errorCalls[errorCalls.length - 1].error
           const firstNoErrorCall = estimatedCalls.find<SwapCallEstimate>(
             (call): call is SwapCallEstimate => !('error' in call),
           )
@@ -129,20 +113,14 @@ export default function useSendSwapTransaction(
           call: { address, calldata, value },
         } = bestCallOption
 
-        const txParams = {
+        return sendTransactionAsync({
           account,
           chainId,
           to: address,
           data: calldata,
           value: value && !isZero(value) ? hexToBigInt(value) : 0n,
           ...('gasEstimate' in bestCallOption ? { gas: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
-          ...(isKasplex ? { gasPrice: 2n } : {}),
-        }
-        if (isKasplex) {
-          // eslint-disable-next-line no-console
-          console.log('onSwap - Kasplex detected, setting gasPrice to 2 wei')
-        }
-        return sendTransactionAsync(txParams)
+        })
           .then((response) => {
             const inputSymbol = trade.inputAmount.currency.symbol
             const outputSymbol = trade.outputAmount.currency.symbol
@@ -156,11 +134,9 @@ export default function useSendSwapTransaction(
                 ? formatAmount(trade.outputAmount, 3)
                 : formatAmount(SmartRouter.minimumAmountOut(trade, pct), 3)
 
-            const base = `Swap ${
-              trade.tradeType === TradeType.EXACT_OUTPUT ? 'max.' : ''
-            } ${inputAmount} ${inputSymbol} for ${
-              trade.tradeType === TradeType.EXACT_INPUT ? 'min.' : ''
-            } ${outputAmount} ${outputSymbol}`
+            const base = `Swap ${trade.tradeType === TradeType.EXACT_OUTPUT ? 'max.' : ''
+              } ${inputAmount} ${inputSymbol} for ${trade.tradeType === TradeType.EXACT_INPUT ? 'min.' : ''
+              } ${outputAmount} ${outputSymbol}`
 
             const recipientAddressText =
               recipientAddress && isAddress(recipientAddress) ? truncateHash(recipientAddress) : recipientAddress
@@ -173,8 +149,8 @@ export default function useSendSwapTransaction(
                   ? 'Swap max. %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol%'
                   : 'Swap max. %inputAmount% %inputSymbol% for %outputAmount% %outputSymbol% to %recipientAddress%'
                 : recipient === account
-                ? 'Swap %inputAmount% %inputSymbol% for min. %outputAmount% %outputSymbol%'
-                : 'Swap %inputAmount% %inputSymbol% for min. %outputAmount% %outputSymbol% to %recipientAddress%'
+                  ? 'Swap %inputAmount% %inputSymbol% for min. %outputAmount% %outputSymbol%'
+                  : 'Swap %inputAmount% %inputSymbol% for min. %outputAmount% %outputSymbol% to %recipientAddress%'
             addTransaction(response, {
               summary: withRecipient,
               translatableSummary: {
@@ -190,7 +166,10 @@ export default function useSendSwapTransaction(
               type: 'swap',
             })
             logSwap({
+              // @ts-ignore
+              account,
               chainId,
+              hash: response.hash,
               inputAmount,
               outputAmount,
               input: trade.inputAmount.currency,
@@ -201,14 +180,6 @@ export default function useSendSwapTransaction(
             return response
           })
           .catch((error) => {
-            console.error('onSwap - Transaction failed:', {
-              error: error.message,
-              isUserRejected: isUserRejected(error),
-              address,
-              calldata: `${calldata.slice(0, 10)}...`,
-              value,
-            })
-
             // if the user rejected the tx, pass this along
             if (isUserRejected(error)) {
               throw new TransactionRejectedError(t('Transaction rejected'))

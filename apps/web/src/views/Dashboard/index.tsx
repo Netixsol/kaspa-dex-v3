@@ -7,7 +7,7 @@ import EarningHistoryDropdown from './components/DropdownMenu'
 import { useEarningPointHistory } from './hooks/useEarningPointHistory'
 import { useGetPermissions } from './hooks/useGetPermission'
 import { useRewardPoints } from './hooks/useRewardPoints'
-import { useGetToken } from './hooks/useGetToken'
+// import { useGetToken } from './hooks/useGetToken'
 
 
 const Page = styled('div')`
@@ -25,7 +25,7 @@ function formatNumberWithCommas(value) {
 export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const { data, isLoading } = useEarningPointHistory({ page: 1, limit: 8, type: 'ALL' })
   const { data : pointsData } = useRewardPoints();
-  const {} = useGetToken()
+  // const {} = useGetToken()
   useGetPermissions()
   return (
     <>

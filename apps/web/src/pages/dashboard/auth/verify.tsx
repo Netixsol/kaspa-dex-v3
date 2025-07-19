@@ -19,10 +19,10 @@ const AuthVerifyPage = () => {
     mutationFn: async ({ authToken, authVerifier }) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter/verify`, {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        //   'Content-Type': 'application/json',
+        // },
         body: JSON.stringify({
           oAuthToken: authToken,
           oAuthVerifier: authVerifier,

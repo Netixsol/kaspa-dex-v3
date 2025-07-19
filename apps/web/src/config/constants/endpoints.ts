@@ -41,7 +41,7 @@ export const CELER_API = 'https://api.celerscan.com/scan'
 export const INFO_CLIENT_WITH_CHAIN = {
   [ChainId.BSC]: INFO_CLIENT,
   [ChainId.ETHEREUM]: INFO_CLIENT_ETH,
-  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/exchange-v3-kasplexV2',
+  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-v3-dex',
 }
 
 export const BLOCKS_CLIENT_WITH_CHAIN = {
@@ -58,7 +58,7 @@ export const V3_SUBGRAPH_URLS = {
   [ChainId.GOERLI]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-goerli',
   [ChainId.BSC]: `https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc`,
   [ChainId.BSC_TESTNET]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-chapel',
-  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/exchange-v3-kasplexV2',
+  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-v3-dex',
   [ChainId.KASPLEX_MAINNET]: `https://gateway-arbitrum.network.thegraph.com/api/e2d66e372446eaac5ac26924208834a8/subgraphs/id/Hv1GncLY5docZoGtXjo4kwbTvxm3MAhVZqBZE4sUT9eZ`,
   // [ChainId.KASPLEX_MAINNET]: `https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc`,
 } satisfies Record<ChainId, string>

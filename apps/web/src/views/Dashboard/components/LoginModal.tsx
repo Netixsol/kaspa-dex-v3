@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Button, Flex, IconButton, ModalV2, Text } from '@pancakeswap/uikit'
 import { DashBox } from '../style'
 import CrossIcon from '../icons/cross.ico'
-import { useGetToken } from '../hooks/useGetToken'
+// import { useGetToken } from '../hooks/useGetToken'
 
 export const CrossIconBtn = styled(IconButton)`
   background: #120f1f;
@@ -12,7 +12,7 @@ export const CrossIconBtn = styled(IconButton)`
 `
 const LoginModal = () => {
   const [isOpen, setIsOpen] = useState(true)
-  const { data } = useGetToken()
+  // const { data } = useGetToken()
   return (
     <ModalV2 isOpen={isOpen}>
       <Flex alignItems="center" justifyContent="center" maxWidth="522px" zIndex={999}>
@@ -34,7 +34,7 @@ const LoginModal = () => {
               variant="secondary"
               width="100%"
               as="a"
-              href={`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter?token=${data?.token}`}
+              href={`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter`}
             >
               Login Now
             </Button>

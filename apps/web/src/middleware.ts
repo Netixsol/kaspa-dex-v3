@@ -66,14 +66,14 @@ export async function middleware(req: NextRequest) {
 }
 export const config = {
   matcher: [
-    '/',
-    '/swap',
-    '/liquidity',
-    '/farms',
-    '/add',
-    '/remove',
-    '/find',
-    '/info/:path*',
+    // '/',
+    // '/swap',
+    // '/liquidity',
+    // '/farms',
+    // '/add',
+    // '/remove',
+    // '/find',
+    // '/info/:path*',
     '/dashboard',
     '/dashboard/socialmedia-amplification',
     '/dashboard/liquidity-provision',

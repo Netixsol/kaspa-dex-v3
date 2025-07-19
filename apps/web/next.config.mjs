@@ -199,7 +199,107 @@ const config = {
         source: '/images/tokens/:address',
         destination: 'https://tokens.pancakeswap.finance/images/:address',
         permanent: false,
-      }
+      },
+      {
+        source: '/_mp/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/affiliates-program/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/competition/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/ifo/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/liquid-staking/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/nfts/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/pools/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/prediction/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/profile/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/stable/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/teams/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/v2/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/voting/:path*',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/create-profile',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/limit-orders',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/lottery',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/pancake-squad',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/pottery',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/terms-of-service',
+        destination: '/404',
+        permanent: true,
+      },
+      {
+        source: '/trading-reward',
+        destination: '/404',
+        permanent: true,
+      },
     ]
   },
   webpack: (webpackConfig, { webpack, isServer }) => {

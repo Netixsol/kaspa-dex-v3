@@ -35,15 +35,14 @@ const chainName: { [key: number]: string } = {
   [ChainId.BSC]: "",
   [ChainId.ETHEREUM]: "eth",
 };
-
+const ASSETS_CDN = 'https://kaspa-dex-v3-lake.vercel.app'
 export const getCurrencyLogoUrls = memoize(
   (currency?: Currency): string[] => {
     const chainId = currency?.chainId || ChainId.BSC;
     const tokenAddress = getAddress(currency?.wrapped?.address || "");
     const trustWalletLogo = getTokenLogoURL(currency?.wrapped);
-    const logoUrl = `https://tokens.pancakeswap.finance/images/${
-      chainId === ChainId.BSC ? "" : `${chainName[chainId]}/`
-    }${tokenAddress}.png`;
+    const logoUrl = `${ASSETS_CDN}/images/chains/${tokenAddress.toLowerCase()}.png`;
+    console.log({logoUrl})
     return [trustWalletLogo, logoUrl].filter((url) => Boolean(url)) as string[];
   },
   (currency?: Currency) => `logoUrls#${currency?.chainId}#${currency?.wrapped?.address}`

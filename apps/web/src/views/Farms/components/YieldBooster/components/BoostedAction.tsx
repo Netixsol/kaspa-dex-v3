@@ -36,8 +36,8 @@ const BoostedAction: React.FunctionComponent<BoostedActionPropsType> = ({
   const boostMultiplier = userBalanceInFarm.eq(0)
     ? boostMultiplierFromSC
     : userBalanceInFarm.gt(0) && boosterState === YieldBoosterState.ACTIVE
-    ? boostMultiplierFromSC
-    : boostedMultiplierFromFE
+      ? boostMultiplierFromSC
+      : boostedMultiplierFromFE
   const boostMultiplierDisplay = boostMultiplier.toLocaleString(undefined, { maximumFractionDigits: 3 })
   useEffect(() => {
     refreshActivePool() // run once to refresh data from context
@@ -55,7 +55,7 @@ const BoostedAction: React.FunctionComponent<BoostedActionPropsType> = ({
         return (
           <ActionButton
             title={`${t('Up to')} ${boostMultiplierDisplay}x`}
-            description={t('Lock CAKE to activate yield booster')}
+            description={t('Lock KFC to activate yield booster')}
             style={{ whiteSpace: 'nowrap' }}
             button={
               <NextLinkFromReactRouter to="/pools">
@@ -68,7 +68,7 @@ const BoostedAction: React.FunctionComponent<BoostedActionPropsType> = ({
         return (
           <ActionButton
             title={`${t('Up to')} ${boostMultiplierDisplay}x`}
-            description={t('Lock CAKE is ended. Re-lock CAKE to activate yield booster')}
+            description={t('Lock KFC is ended. Re-lock KFC to activate yield booster')}
             style={{ whiteSpace: 'nowrap' }}
             button={
               <NextLinkFromReactRouter to="/pools">

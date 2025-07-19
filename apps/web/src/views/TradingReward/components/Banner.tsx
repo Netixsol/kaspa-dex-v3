@@ -6,7 +6,7 @@ import { floatingStarsLeft, floatingStarsRight } from 'views/Lottery/components/
 import Image from 'next/image'
 import bunnyImage from '../../../../public/images/trading-reward/trading-reward-banner-bunny.png'
 
-const Container = styled(Box)<{ backgroundColor: string }>`
+const Container = styled(Box) <{ backgroundColor: string }>`
   padding: 47px 16px 38px 16px;
   background: ${({ backgroundColor }) => backgroundColor};
 `
@@ -156,7 +156,7 @@ const TradingRewardBanner = () => {
             </Text>
           </Flex>
           <Text bold mb="32px" maxWidth="404px" lineHeight="26.4px" fontSize={['16px', '16px', '16px', '24px']}>
-            {t('Earn CAKE while trading your favorite tokens on Kaspa Finance.')}
+            {t('Earn KFC while trading your favorite tokens on Kaspa Finance.')}
           </Text>
           <Flex>
             <Link href="/swap?showTradingReward=true" external>

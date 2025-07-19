@@ -139,7 +139,8 @@ const PancakeProtectorBanner = () => {
           <StyledSubheading>{isDesktop && t('Exclusive Perks for Kaspa Finance Bunnies and Squads')}</StyledSubheading>
           <Flex alignItems="center" style={{ gap: isMobile ? 4 : 16 }}>
             <Link
-              href="https://blog.pancakeswap.finance/articles/pancake-protectors-is-here-discover-the-power-of-cake-and-perks-for-pancake-squads-and-bunnies"
+              // href="https://blog.pancakeswap.finance/articles/pancake-protectors-is-here-discover-the-power-of-cake-and-perks-for-pancake-squads-and-bunnies"
+              href="/"
               style={{ textDecoration: 'none' }}
               external
             >
@@ -148,7 +149,8 @@ const PancakeProtectorBanner = () => {
               </StyledButton>
             </Link>
             <Devider />
-            <Link href="https://protectors.pancakeswap.finance" external style={{ textDecoration: 'none' }}>
+            {/* <Link href="https://protectors.pancakeswap.finance" external style={{ textDecoration: 'none' }}> */}
+            <Link href="/" external style={{ textDecoration: 'none' }}>
               <StyledButton variant="text" style={{ color: 'white' }} scale={isMobile ? 'sm' : 'md'}>
                 {t('Play Now')}
                 <ArrowForwardIcon color="white" />

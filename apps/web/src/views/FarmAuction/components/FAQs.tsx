@@ -63,7 +63,7 @@ const FAQs = () => {
                 <List>
                   <FaqLi>
                     {t(
-                      'Community Farm qualifiers will be asked to provide the address of the wallet which you’ll use for bidding CAKE in the auction.',
+                      'Community Farm qualifiers will be asked to provide the address of the wallet which you’ll use for bidding KFC in the auction.',
                     )}
                   </FaqLi>
                   <FaqLi>{t('Core Farm/Pool qualifiers will receive further directions separately.')}</FaqLi>
@@ -88,7 +88,7 @@ const FAQs = () => {
               </Text>
               <Text color="textSubtle">
                 {t(
-                  'If your bid was successful, your farm will begin at the specified time. The KFC you bid will not be returned to you and will be added to our weekly CAKE burn.',
+                  'If your bid was successful, your farm will begin at the specified time. The KFC you bid will not be returned to you and will be added to our weekly KFC burn.',
                 )}
               </Text>
               <Text color="textSubtle">

@@ -48,7 +48,7 @@ const RewardBracketDetail: React.FC<React.PropsWithChildren<RewardBracketDetailP
         {isLoading || cakeAmount.isNaN() ? (
           <Skeleton my="4px" mr="10px" height={20} width={110} />
         ) : (
-          <Balance fontSize="20px" bold unit=" CAKE" value={getBalanceNumber(cakeAmount)} decimals={0} />
+          <Balance fontSize="20px" bold unit=" KFC" value={getBalanceNumber(cakeAmount)} decimals={0} />
         )}
         {isLoading || cakeAmount.isNaN() ? (
           <>

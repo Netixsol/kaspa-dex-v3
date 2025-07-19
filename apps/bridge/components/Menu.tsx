@@ -128,7 +128,8 @@ export function Menu() {
   return (
     <Flex height="56px" bg="backgroundAlt" px="16px" alignItems="center" justifyContent="space-between" zIndex={9}>
       <Flex>
-        <Logo href="https://pancakeswap.finance" />
+        {/* <Logo href="https://pancakeswap.finance" /> */}
+        <Logo href="" />
 
         <Flex pl={['10px', null, '50px']}>
           {MenuConfig.map((menu) => (
@@ -148,7 +149,8 @@ export function Menu() {
               )}
             </Flex>
           ))}
-          <a href="https://pancakeswap.finance/swap" target="_blank" rel="noreferrer noopener">
+          <a href="/" target="_blank" rel="noreferrer noopener">
+            {/* <a href="https://pancakeswap.finance/swap" target="_blank" rel="noreferrer noopener"> */}
             <StyledMenuItem>Swap</StyledMenuItem>
           </a>
         </Flex>

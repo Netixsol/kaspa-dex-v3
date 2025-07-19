@@ -26,8 +26,8 @@ const AutoEarningsBreakdown: React.FC<React.PropsWithChildren<AutoEarningsBreakd
     earningTokenPrice,
     pool.vaultKey === VaultKey.CakeVault
       ? (userData as DeserializedLockedVaultUser).currentPerformanceFee
-          .plus((userData as DeserializedLockedVaultUser).currentOverdueFee)
-          .plus((userData as DeserializedLockedVaultUser).userBoostedShare)
+        .plus((userData as DeserializedLockedVaultUser).currentOverdueFee)
+        .plus((userData as DeserializedLockedVaultUser).userBoostedShare)
       : null,
   )
 
@@ -53,7 +53,7 @@ const AutoEarningsBreakdown: React.FC<React.PropsWithChildren<AutoEarningsBreakd
         <Box mt="12px">
           <Text>{t('Hourly Average')}:</Text>
           <Text bold>
-            {earnedCakePerHour < 0.01 ? '<0.01' : earnedCakePerHour.toFixed(2)} CAKE
+            {earnedCakePerHour < 0.01 ? '<0.01' : earnedCakePerHour.toFixed(2)} KFC
             <Text display="inline-block" ml="5px">
               ({earnedUsdPerHour < 0.01 ? '<0.01' : `~${earnedUsdPerHour.toFixed(2)}`} USD)
             </Text>

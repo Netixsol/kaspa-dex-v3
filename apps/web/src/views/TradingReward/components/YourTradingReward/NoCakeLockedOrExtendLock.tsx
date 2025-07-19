@@ -109,11 +109,11 @@ const NoCakeLockedOrExtendLock: React.FC<React.PropsWithChildren<NoCakeLockedOrE
         {!isOnlyNeedExtendLock ? (
           <>
             <Text textAlign={['left', 'left', 'left', 'center']} color="secondary" bold mb="8px">
-              {t('You have no CAKE locked.')}
+              {t('You have no KFC locked.')}
             </Text>
             <Text textAlign={['left', 'left', 'left', 'center']} mb="20px">
               <Text textAlign={['left', 'left', 'left', 'center']} as="span">
-                {t('Lock any amount of CAKE for')}
+                {t('Lock any amount of KFC for')}
               </Text>
               <Text textAlign={['left', 'left', 'left', 'center']} as="span" m="0 4px" bold>
                 {formatSecondsToWeeks(minLockWeekInSeconds)}
@@ -152,7 +152,7 @@ const NoCakeLockedOrExtendLock: React.FC<React.PropsWithChildren<NoCakeLockedOrE
               <Flex>
                 <Flex flexDirection="column">
                   <Text fontSize="12px" color="textSubtle" textTransform="uppercase" bold>
-                    {`CAKE ${t('Locked')}`}
+                    {`KFC ${t('Locked')}`}
                   </Text>
                   <Text bold fontSize="20px" lineHeight="110%" color={cakeAsNumberBalance > 0 ? 'text' : 'failure'}>
                     {cakeAsDisplayBalance}

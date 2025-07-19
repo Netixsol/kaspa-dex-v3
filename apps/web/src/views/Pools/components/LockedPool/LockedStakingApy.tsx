@@ -114,7 +114,7 @@ const LockedStakingApy: React.FC<React.PropsWithChildren<LockedStakingApyProps>>
       <Flex justifyContent="space-between" mb="16px">
         <Box>
           <Text color="textSubtle" textTransform="uppercase" bold fontSize="12px">
-            {t('CAKE locked')}
+            {t('KFC locked')}
           </Text>
           <Flex>
             <BalanceWithLoading color="text" bold fontSize="16px" value={currentLockedAmount} decimals={5} />
@@ -181,7 +181,7 @@ const LockedStakingApy: React.FC<React.PropsWithChildren<LockedStakingApyProps>>
         {tagTooltipVisibleOfRecentProfit && tagTooltipOfRecentProfit}
         <TooltipText>
           <Text ref={tagTargetRefOfRecentProfit} color="textSubtle" textTransform="uppercase" bold fontSize="12px">
-            {t('Recent CAKE profit')}
+            {t('Recent KFC profit')}
           </Text>
         </TooltipText>
         <BalanceWithLoading color="text" bold fontSize="16px" value={earningTokenBalance} decimals={5} />

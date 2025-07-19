@@ -171,7 +171,7 @@ const CurrentRewardPool: React.FC<React.PropsWithChildren<CurrentRewardPoolProps
               {formatNumber(rewardInCake, 0, 0)}
             </Text>
             <Text ml="4px" bold color="white" fontSize={['14px', '14px', '14px', '20px']}>
-              {t('in CAKE')}
+              {t('in KFC')}
             </Text>
           </Flex>
         </Flex>

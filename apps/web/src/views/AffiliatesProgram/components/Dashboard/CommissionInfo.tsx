@@ -26,7 +26,7 @@ const CardInner = styled(Flex)`
   }
 `
 
-const StyledCircle = styled(Flex)<{ backgroundColor: string }>`
+const StyledCircle = styled(Flex) <{ backgroundColor: string }>`
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -129,7 +129,7 @@ const CommissionInfo: React.FC<React.PropsWithChildren<CommissionInfoProps>> = (
             </StyledFlex>
             <StyledFlex pl="10%">
               <Text color="secondary" bold fontSize={['12px']} textTransform="uppercase">
-                {t('Total cake earned')}
+                {t('Total KFC earned')}
               </Text>
               <Text fontSize={['32px']} bold>{`~ ${totalCakeEarned}`}</Text>
               <Text color="textSubtle" fontSize="14px">{`$ ${formatNumber(Number(totalEarnFeeUSD))}`}</Text>
@@ -155,7 +155,7 @@ const CommissionInfo: React.FC<React.PropsWithChildren<CommissionInfoProps>> = (
                     {`${chart.percentage}%`}
                   </Text>
                   <Text color="textSubtle" fontSize={['14px']}>
-                    {`~ ${chart.cakeValue} CAKE`}
+                    {`~ ${chart.cakeValue} KFC`}
                   </Text>
                 </Box>
               </Flex>

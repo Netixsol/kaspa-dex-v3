@@ -9,12 +9,12 @@ import ScreenShortContainer from './components/CanvasContainer'
 export const RealTimeUpdate = () => {
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center">
+      {/* <Flex justifyContent="space-between" alignItems="center">
         <Heading scale="xxl">Real-Time Updates</Heading>
         <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius: "100%" }}>
           <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
         </IconButton>
-      </Flex>
+      </Flex> */}
       <ScreenShortContainer title="Real-Time Updates">
         <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
           <LeaderBoard title="Live Campaign Rankings" />

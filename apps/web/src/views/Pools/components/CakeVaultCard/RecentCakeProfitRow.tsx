@@ -21,8 +21,8 @@ const RecentCakeProfitCountdownRow = ({ pool }: { pool: Pool.DeserializedPool<To
     cakePriceBusd.toNumber(),
     pool.vaultKey === VaultKey.CakeVault
       ? (userData as DeserializedLockedVaultUser).currentPerformanceFee.plus(
-          (userData as DeserializedLockedVaultUser).currentOverdueFee,
-        )
+        (userData as DeserializedLockedVaultUser).currentOverdueFee,
+      )
       : null,
   )
 
@@ -32,7 +32,7 @@ const RecentCakeProfitCountdownRow = ({ pool }: { pool: Pool.DeserializedPool<To
 
   return (
     <Flex alignItems="center" justifyContent="space-between">
-      <Text fontSize="14px">{`${t('Recent CAKE profit')}:`}</Text>
+      <Text fontSize="14px">{`${t('Recent KFC profit')}:`}</Text>
       {hasAutoEarnings && <RecentCakeProfitBalance cakeToDisplay={autoCakeToDisplay} pool={pool} account={account} />}
     </Flex>
   )

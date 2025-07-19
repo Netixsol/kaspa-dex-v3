@@ -63,7 +63,7 @@ const CakeBenefitsCard: React.FC<React.PropsWithChildren<CakeBenefitsCardProps>>
   } = useTooltip(
     <>
       <Text>
-        {t(`%lockedCake% CAKE (including rewards) are locked in the CAKE Pool until %lockedEndTime%`, {
+        {t(`%lockedCake% KFC (including rewards) are locked in the KFC Pool until %lockedEndTime%`, {
           lockedCake: cakeBenefits?.lockedCake,
           lockedEndTime: cakeBenefits?.lockedEndTime,
         })}

@@ -153,7 +153,7 @@ const TotalPeriod: React.FC<React.PropsWithChildren<TotalPeriodProps>> = ({
                   {t('Your unclaimed trading rewards')}
                 </Text>
                 <Text bold fontSize={['40px']}>{`$${formatNumber(totalUnclaimInUSD)}`}</Text>
-                <Text fontSize={['14px']} color="textSubtle">{`~${formatNumber(totalUnclaimInCake)} CAKE`}</Text>
+                <Text fontSize={['14px']} color="textSubtle">{`~${formatNumber(totalUnclaimInCake)} KFC`}</Text>
               </Box>
               <Button
                 width={['100%', '100%', '100%', 'fit-content']}

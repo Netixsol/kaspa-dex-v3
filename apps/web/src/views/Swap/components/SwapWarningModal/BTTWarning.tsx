@@ -16,7 +16,8 @@ const BTTWarning = () => {
         {t('Trade the new BTT token')}{' '}
         <Link
           style={{ display: 'inline' }}
-          href="https://pancakeswap.finance/swap?outputCurrency=0x352Cb5E19b12FC216548a2677bD0fce83BaE434B"
+          // href="https://pancakeswap.finance/swap?outputCurrency=0x352Cb5E19b12FC216548a2677bD0fce83BaE434B"
+          href='/'
         >
           {t('here')}
         </Link>

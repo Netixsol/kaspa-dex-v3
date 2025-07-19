@@ -106,9 +106,8 @@ const ContributeModal: React.FC<React.PropsWithChildren<Props>> = ({
           {hasLimit && (
             <Flex justifyContent="space-between" mb="16px">
               <Text>{label}:</Text>
-              <Text>{`${formatNumber(getBalanceAmount(maximumTokenEntry, currency.decimals).toNumber(), 3, 3)} ${
-                ifo.currency.symbol
-              }`}</Text>
+              <Text>{`${formatNumber(getBalanceAmount(maximumTokenEntry, currency.decimals).toNumber(), 3, 3)} ${ifo.currency.symbol
+                }`}</Text>
             </Flex>
           )}
           <Flex justifyContent="space-between" mb="8px">
@@ -149,7 +148,7 @@ const ContributeModal: React.FC<React.PropsWithChildren<Props>> = ({
             >
               {valueWithTokenDecimals.isGreaterThan(userCurrencyBalance)
                 ? t('Insufficient Balance')
-                : t('Exceeded max CAKE entry')}
+                : t('Exceeded max KFC entry')}
             </Text>
           )}
           <Text color="textSubtle" textAlign="right" fontSize="12px" mb="16px">
@@ -180,12 +179,14 @@ const ContributeModal: React.FC<React.PropsWithChildren<Props>> = ({
           {(vestingInformation?.percentage ?? 0) > 0 && <IfoHasVestingNotice url={articleUrl} />}
           <Text color="textSubtle" fontSize="12px" mb="24px">
             {t(
-              'If you don’t commit enough CAKE, you may not receive a meaningful amount of IFO tokens, or you may not receive any IFO tokens at all.',
+              'If you don’t commit enough KFC, you may not receive a meaningful amount of IFO tokens, or you may not receive any IFO tokens at all.',
             )}
             <Link
               fontSize="12px"
               display="inline"
-              href="https://docs.pancakeswap.finance/products/ifo-initial-farm-offering"
+              href="/#"
+              // href="https://docs.pancakeswap.finance/products/ifo-initial-farm-offering"
+
               external
             >
               {t('Read more')}

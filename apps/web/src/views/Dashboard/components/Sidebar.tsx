@@ -150,7 +150,7 @@ const SideBar = () => {
   // Safely get permissions with fallback
 
   let permissions = {}
-  console.log(JSON.parse(Cookies.get('permissions')), 'JSON.parse(Cookies.get())')
+  // console.log(JSON.parse(Cookies.get('permissions')), 'JSON.parse(Cookies.get())')
   try {
     permissions = JSON.parse(Cookies.get('permissions'))
   } catch (error) {

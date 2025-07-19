@@ -21,7 +21,7 @@ export const V3_SUBGRAPH_CLIENTS = {
   [ChainId.BSC_TESTNET]: new GraphQLClient('https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-chapel', {
     fetch,
   }),
-  [ChainId.KASPLEX_TESTNET]: new GraphQLClient('https://graph.kaspafinance.io/subgraphs/name/kaspa-v3-dex/', {
+  [ChainId.KASPLEX_TESTNET]: new GraphQLClient('https://graph.kaspafinance.io/subgraphs/name/kaspa-v3/', {
     fetch,
   }),
 } satisfies Record<ChainId, GraphQLClient>

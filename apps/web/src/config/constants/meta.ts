@@ -6,7 +6,7 @@ import { ASSET_CDN } from './endpoints'
 export const DEFAULT_META: PageMeta = {
   title: 'Kaspa Finance',
   description:
-    'The most popular AMM on BSC by user count! Earn CAKE through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by Kaspa Finance), NFTs, and more, on a platform you can trust.',
+    'Discover the most used AMM on KASPLEX! Farm KFC tokens, take part in innovative token launches through Initial Farm Offerings by Kaspa Finance, collect unique NFTs, and enjoy a reliable, community-driven platform.',
   image: `${ASSET_CDN}/web/og/hero.jpg`,
 }
 

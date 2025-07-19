@@ -3,24 +3,16 @@ import styled from 'styled-components'
 import { Button, Flex, IconButton, ModalV2, Text } from '@pancakeswap/uikit'
 import { DashBox } from '../style'
 import CrossIcon from '../icons/cross.ico'
+import { useGetToken } from '../hooks/useGetToken'
 
-const CrossIconBtn = styled(IconButton)`
+export const CrossIconBtn = styled(IconButton)`
   background: #120f1f;
   width: 28px;
   height: 28px;
 `
 const LoginModal = () => {
   const [isOpen, setIsOpen] = useState(true)
-
-  // const handleLogin = async () => {
-  //   try {
-  //     const res = await fetch('http://192.168.18.30:3000/auth/twitter/')
-  //     const resUrl = await res.json()
-  //     console.log(resUrl, 'res')
-  //   } catch (error) {
-  //     console.log(error, 'error')
-  //   }
-  // }
+  const { data } = useGetToken()
   return (
     <ModalV2 isOpen={isOpen}>
       <Flex alignItems="center" justifyContent="center" maxWidth="522px" zIndex={999}>
@@ -38,7 +30,12 @@ const LoginModal = () => {
               Sign in with X (Twitter) to unlock full access — no actions can be performed without logging in.
             </Text>
             <img alt="login illustration" src="/images/twitter-login-illustration.png" />
-            <Button variant="secondary" width="100%" as="a" href="http://192.168.18.30:3000/auth/twitter/">
+            <Button
+              variant="secondary"
+              width="100%"
+              as="a"
+              href={`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter?token=${data?.token}`}
+            >
               Login Now
             </Button>
           </Flex>

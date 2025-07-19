@@ -1,27 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
+import Loader from '@pancakeswap/uikit/src/components/LiquidityChartRangeInput/Loader'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Button } from '@pancakeswap/uikit'
 import ArrowIcon from '../icons/arrowUp.ico'
 
-interface EarningItem {
-  id: string
-  message: string
-  points: number
-  date: string
-}
-
-const EarningHistoryDropdown: React.FC = () => {
+const EarningHistoryDropdown: React.FC<{ earnings: any; isLoading: boolean }> = ({ earnings, isLoading }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-
-  const earnings: EarningItem[] = [
-    { id: '1', message: 'Completed daily challenge', points: 50, date: 'Today 6:39 PM' },
-    { id: '2', message: 'Referred a friend', points: 100, date: 'Yesterday 4:52 PM' },
-    { id: '3', message: 'Weekly bonus', points: 75, date: '7/1/25 | 8:19 AM' },
-  ]
-
-  // Close when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -36,24 +22,28 @@ const EarningHistoryDropdown: React.FC = () => {
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownHeader onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
-        Earning History
+        Earning Historydate
         <DropdownArrow $isOpen={isOpen}>
           <ArrowIcon width="13" height="9" viewBox="0 0 13 9" fill="none" color={isOpen ? '#120F1F' : '#ffffff'} />
         </DropdownArrow>
       </DropdownHeader>
 
       <DropdownContent $isOpen={isOpen}>
-        {earnings.map((item) => (
-          <DropdownItem key={item.id}>
-            <ItemMessage>{item.message}</ItemMessage>
-            <ItemPoints>
-              <Points>+{item.points} Point</Points>
-              <PointsDate>{item.date}</PointsDate>
-            </ItemPoints>
-          </DropdownItem>
-        ))}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          earnings?.map((item) => (
+            <DropdownItem key={item.id}>
+              <ItemMessage>{item.reward_event}</ItemMessage>
+              <ItemPoints>
+                <Points>+{item.points_awarded} Point</Points>
+                <PointsDate>{item.reward_date}</PointsDate>
+              </ItemPoints>
+            </DropdownItem>
+          ))
+        )}
         <Link href="/dashboard/earning-history" passHref>
-          <Button variant="secondary" width="100%">
+          <Button variant="secondary" width="100%" marginTop="20px">
             See All
           </Button>
         </Link>
@@ -117,7 +107,7 @@ const DropdownContent = styled.div<{ $isOpen: boolean }>`
   opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
   transition: all 0.3s ease;
   z-index: 999;
-  max-height: 400px;
+  max-height: 700px;
   overflow-y: auto;
   padding-inline: 20px;
   padding-top: 13px;

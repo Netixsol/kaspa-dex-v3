@@ -157,7 +157,7 @@ export default function PoolListPage() {
                         Farming
                       </Tag>
                     )}
-                    <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: "black" }} />
+                    <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: 'black' }} />
                   </>
                 }
                 subtitle={subtitle}
@@ -256,7 +256,7 @@ export default function PoolListPage() {
             </Button>
           </NextLink>
         </CardFooter>
-        <V3SubgraphHealthIndicator />
+        {/* <V3SubgraphHealthIndicator /> */}
       </AppBody>
     </Page>
   )

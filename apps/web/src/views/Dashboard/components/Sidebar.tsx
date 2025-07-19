@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 import { Box, Flex as UiKitFlex } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { usePathname } from 'next/navigation'
@@ -12,6 +13,8 @@ import { MultipliersIcon } from '../icons/multipliers.ico'
 import { PreLaunch } from '../icons/launch.ico'
 import { LaunchWeek } from '../icons/launchweek.ico'
 import { EngagmentIcons } from '../icons/engagments.ico'
+import { routePermissions } from '../types/enums'
+import { LockedIcon } from '../icons/lock.ico'
 
 interface MenuWrapperProps {
   isBorder?: boolean
@@ -43,15 +46,18 @@ const MenuItemsWrapper = styled.div<MenuWrapperProps>`
   padding: 19px 0px;
   border-bottom: ${({ isBorder, theme }) => (isBorder ? `1px solid ${theme.colors.background}` : 'none')};
 `
-const MenuItem = styled.a<MenuItemProps>`
+const MenuItem = styled.button<MenuItemProps>`
   display: flex;
   align-items: center;
   padding: 10px 8px;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+  border: none;
   border-radius: 10px;
-  background: ${({ isActive, theme }) => isActive && theme.colors.background};
+  background: ${({ isActive, theme }) => (isActive ? theme.colors.background : 'none')};
   color: ${({ isActive, theme }) => isActive && theme.colors.primary}; /* Green color on hover */
   svg path {
     fill: ${({ isActive, theme }) => isActive && theme.colors.primary}; /* Change SVG color on hover */
@@ -64,11 +70,18 @@ const MenuItem = styled.a<MenuItemProps>`
     svg path {
       fill: ${({ theme }) => theme.colors.primary}; /* Change SVG color on hover */
     }
+    &:disabled {
+      color: ${({ theme }) => theme.colors.textDisabled}; /* Green color on hover */
+      svg path {
+        fill: ${({ theme }) => theme.colors.textDisabled};
+      } /* Change SVG color on hover */
+    }
   }
 `
 
 const MenuText = styled.span`
   font-size: 14px;
+  overflow-wrap: break-word;
 `
 const MenuIcon = styled.div`
   margin-right: 10px;
@@ -93,7 +106,7 @@ const menuItems = [
     href: '/dashboard/liquidity-provision',
     text: 'Liquidity Provision',
   },
-  { icon: <TradingIcon style={{ rotate: '90deg' }} />, href: 'trading-swap', text: 'Trading & Swaps' },
+  { icon: <TradingIcon style={{ rotate: '90deg' }} />, href: '/dashboard/trading-swap', text: 'Trading & Swaps' },
   {
     icon: <FarmingIcon width="20" height="20" viewBox="0 0 20 20" fill="none" />,
     href: '/dashboard/farming-staking',
@@ -105,22 +118,36 @@ const menuItems = [
     href: '/dashboard/milestone-rewards',
     text: 'Bonus Quests & Milestone Rewards',
   },
-  { icon: <UpdateIcon width="20" height="20" viewBox="0 0 20 20" fill="none" />, href: '', text: 'Real-Time Updates' },
+  {
+    icon: <UpdateIcon width="20" height="20" viewBox="0 0 20 20" fill="none" />,
+    href: '/dashboard/realtime-update',
+    text: 'Real-Time Updates',
+  },
   {
     icon: <MultipliersIcon width="20" height="20" viewBox="0 0 20 20" fill="none" />,
     href: '/dashboard/multipliers-bounses',
     text: 'Multipliers & Bonuses',
   },
-  { icon: <PreLaunch width="14" height="20" viewBox="0 0 14 20" fill="none" />, href: '', text: 'Pre-Launch' },
-  { icon: <LaunchWeek width="20" height="20" viewBox="0 0 20 20" fill="none" />, href: '', text: 'Launch Week' },
+  {
+    icon: <PreLaunch width="14" height="20" viewBox="0 0 14 20" fill="none" />,
+    href: '/dashboard/pre-launch',
+    text: 'Pre-Launch',
+  },
+  {
+    icon: <LaunchWeek width="20" height="20" viewBox="0 0 20 20" fill="none" />,
+    href: '/dashboard/launch-week',
+    text: 'Launch Week',
+  },
   {
     icon: <EngagmentIcons width="20" height="20" viewBox="0 0 20 20" fill="none" />,
-    href: '',
+    href: '/dashboard/ongoing-engagments',
     text: 'Ongoing Engagement',
   },
 ]
 const SideBar = () => {
   const pathname = usePathname()
+  const permissions = JSON.parse(Cookies.get('permissions') || "{}");
+  const defaultRoute = '/dashboard/socialmedia-amplification'
   return (
     <SideBarWrapper>
       <Box padding="34px">
@@ -129,9 +156,20 @@ const SideBar = () => {
             {menuItems.map((item, index) => (
               <MenuItemsWrapper isBorder={index !== menuItems.length - 1}>
                 <Link href={item.href} passHref>
-                  <MenuItem key={item?.text} isActive={pathname === item.href}>
+                  <MenuItem
+                    key={item?.text}
+                    disabled={!(permissions[routePermissions[item.href]] || item.href === defaultRoute)}
+                    isActive={pathname === item.href}
+                  >
                     <MenuIcon>{item?.icon}</MenuIcon>
                     <MenuText>{item?.text}</MenuText>
+                    {permissions[routePermissions[item.href]] || item.href === defaultRoute ? (
+                      ''
+                    ) : (
+                      <MenuIcon style={{ marginLeft: 'auto' }}>
+                        <LockedIcon width="18" height="21" viewBox="0 0 18 21" fill="none" />
+                      </MenuIcon>
+                    )}
                   </MenuItem>
                 </Link>
               </MenuItemsWrapper>

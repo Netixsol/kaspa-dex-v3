@@ -4,28 +4,30 @@ import styled from 'styled-components'
 import SideBar from './components/Sidebar'
 import FireIcon from './icons/fire.ico'
 import EarningHistoryDropdown from './components/DropdownMenu'
+import { useEarningPointHistory } from './hooks/useEarningPointHistory'
+import { useGetPermissions } from './hooks/useGetPermission'
 
-const Page = styled('div')`
+const Page = styled("div")`
   background: transparent;
   padding: 55px 64px;
   width: 100%;
 `
-
 export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
+  const { data, isLoading } = useEarningPointHistory({ page: 1, limit: 8, type: 'ALL' })
+  useGetPermissions()
   return (
     <>
       <Flex width="100%" height="100%">
         <SideBar />
         <Page>
-          <Flex justifyContent="space-between" marginBottom="54px" style={{ gap: '33px' }} flexWrap="wrap">
+          <Flex justifyContent="space-between" marginBottom="54px" style={{ gap: '32px' }} flexWrap="wrap">
             <Flex
               background="#252136"
               paddingX="10px"
               borderRadius="10px"
-              width="66%"
               justifyContent="space-between"
               paddingY="8px"
-              flexGrow={1}
+              flex="1 1 calc(66.66% - 32px)"
             >
               <Flex alignItems="center" style={{ gap: '10px' }}>
                 <Box width="38px" height="38px" borderRadius="100%" overflow="hidden">
@@ -52,7 +54,9 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                 </Flex>
               </Flex>
             </Flex>
-            <EarningHistoryDropdown />
+            <Flex flex="1 1 calc(33.33% - 32px)">
+              <EarningHistoryDropdown earnings={data?.historyList} isLoading={isLoading} />
+            </Flex>
           </Flex>
           {children}
         </Page>

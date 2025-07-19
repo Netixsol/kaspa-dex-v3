@@ -18,6 +18,8 @@ export async function middleware(req: NextRequest) {
     '/dashboard/launch-week',
     '/dashboard/ongoing-engagments',
     '/dashboard/earning-history',
+    '/dashboard/report-bug',
+    '/dashboard/daily-spin',
   ]
   const publicRoutes = ['/dashboard']
 
@@ -87,6 +89,8 @@ export const config = {
     '/dashboard/launch-week',
     '/dashboard/ongoing-engagments',
     '/dashboard/earning-history',
+    '/dashboard/report-bug',
+    '/dashboard/daily-spin',
     // '/farms',
     // '/stake',
     // '/ifo',

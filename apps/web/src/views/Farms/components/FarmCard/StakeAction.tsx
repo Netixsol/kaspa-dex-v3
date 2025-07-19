@@ -85,9 +85,9 @@ const StakeAction: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
 
   const crossChainWarningText = useMemo(() => {
     return isFirstTime
-      ? t('A small amount of %nativeToken% is required for the first-time setup of cross-chain CAKE farming.', {
-          nativeToken: native.symbol,
-        })
+      ? t('A small amount of %nativeToken% is required for the first-time setup of cross-chain KFC farming.', {
+        nativeToken: native.symbol,
+      })
       : t('For safety, cross-chain transactions will take around 30 minutes to confirm.')
   }, [isFirstTime, native, t])
 

@@ -6,15 +6,25 @@ import FireIcon from './icons/fire.ico'
 import EarningHistoryDropdown from './components/DropdownMenu'
 import { useEarningPointHistory } from './hooks/useEarningPointHistory'
 import { useGetPermissions } from './hooks/useGetPermission'
+import { useRewardPoints } from './hooks/useRewardPoints'
 import { useGetToken } from './hooks/useGetToken'
+
 
 const Page = styled('div')`
   background: transparent;
   padding: 55px 64px;
   width: 100%;
 `
+
+function formatNumberWithCommas(value) {
+  const num = Number(value);
+  if (isNaN(num)) return "0";
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const { data, isLoading } = useEarningPointHistory({ page: 1, limit: 8, type: 'ALL' })
+  const { data : pointsData } = useRewardPoints();
   const {} = useGetToken()
   useGetPermissions()
   return (
@@ -35,11 +45,11 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                 <Box width="38px" height="38px" borderRadius="100%" overflow="hidden">
                   <img alt="user avatar" src="/images/nfts/baller-lg.png" width="100%" style={{ objectFit: 'cover' }} />
                 </Box>
-                <Text color="#1FD26F">@annajons</Text>
+                <Text color="#1FD26F">@{pointsData ? pointsData?.data?.userName : 'Twitter User Name'}</Text>
               </Flex>
               <Flex alignItems="center" style={{ gap: '10px' }}>
                 <Text color="#1FD26F" fontSize="24px" fontWeight={500}>
-                  1250 Total Points
+                  {pointsData ? formatNumberWithCommas(pointsData?.data?.points) : "0"} Total Points
                 </Text>
                 <Flex
                   borderRadius="20px"
@@ -51,7 +61,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                 >
                   <FireIcon width="22" height="31" viewBox="0 0 22 31" fill="none" color="#1FD26F" />
                   <Text fontSize="24px" fontWeight={500}>
-                    7 Streak
+                    {pointsData ? pointsData?.data?.streak : 0} Streak
                   </Text>
                 </Flex>
               </Flex>

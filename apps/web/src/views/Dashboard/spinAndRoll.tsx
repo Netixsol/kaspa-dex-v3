@@ -13,6 +13,8 @@ import moment from 'moment'
 import getCountdownFromNow from 'utils/getCountdownFromNow'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import { useRewardPoints } from './hooks/useRewardPoints'
+
 
 const SpinAndRoll = () => {
   const [disableButton, setdisableButton] = useState<boolean>(false)
@@ -31,6 +33,7 @@ const SpinAndRoll = () => {
   } = useSpin()
   const { data, mutate, error } = useSpinHistory()
   const { mutateAsync, isLoading, isError } = useMadeSpinReward()
+  const { mutate:mutateRewardPoints } = useRewardPoints();
 
   const historyData = data?.data?.history
   const latestSpin = historyData?.[0]
@@ -65,7 +68,8 @@ const SpinAndRoll = () => {
 
   useEffect(() => {
     if (fetchSpinHistory) {
-      mutate()
+      mutate();
+      mutateRewardPoints();
       setFetchSpinHistory(false)
     }
   }, [fetchSpinHistory, mutate])

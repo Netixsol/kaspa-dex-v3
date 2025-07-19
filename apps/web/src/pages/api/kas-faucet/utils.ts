@@ -48,7 +48,8 @@ export const FAUCET_CONFIG = {
 const kasChain = kasplexTestnet
 
 // Data file path
-const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'kas-faucet.json')
+// const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'kas-faucet.json')
+const DATA_FILE_PATH = path.join('/tmp', 'kas-faucet.json')
 
 // Initialize data file if it doesn't exist
 export async function initializeDataFile(): Promise<void> {

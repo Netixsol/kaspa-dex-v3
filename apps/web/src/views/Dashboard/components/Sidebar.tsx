@@ -146,34 +146,46 @@ const menuItems = [
 ]
 const SideBar = () => {
   const pathname = usePathname()
-  const permissions = JSON.parse(Cookies.get('permissions') || "{}");
+
+  // Safely get permissions with fallback
+
+  let permissions = {}
+  console.log(JSON.parse(Cookies.get('permissions')), 'JSON.parse(Cookies.get())')
+  try {
+    permissions = JSON.parse(Cookies.get('permissions'))
+  } catch (error) {
+    console.error('Error parsing permissions:', error)
+  }
+
   const defaultRoute = '/dashboard/socialmedia-amplification'
   return (
     <SideBarWrapper>
       <Box padding="34px">
         <Flex width="100%" flexDirection="column">
           <MenuContainer>
-            {menuItems.map((item, index) => (
-              <MenuItemsWrapper isBorder={index !== menuItems.length - 1}>
-                <Link href={item.href} passHref>
-                  <MenuItem
-                    key={item?.text}
-                    disabled={!(permissions[routePermissions[item.href]] || item.href === defaultRoute)}
-                    isActive={pathname === item.href}
-                  >
-                    <MenuIcon>{item?.icon}</MenuIcon>
-                    <MenuText>{item?.text}</MenuText>
-                    {permissions[routePermissions[item.href]] || item.href === defaultRoute ? (
-                      ''
-                    ) : (
-                      <MenuIcon style={{ marginLeft: 'auto' }}>
-                        <LockedIcon width="18" height="21" viewBox="0 0 18 21" fill="none" />
-                      </MenuIcon>
-                    )}
-                  </MenuItem>
-                </Link>
-              </MenuItemsWrapper>
-            ))}
+            {menuItems.map((item, index) => {
+              const requiredPermission = routePermissions[item.href as keyof typeof routePermissions]
+              console.log(requiredPermission, 'requiredPermission', permissions)
+              const hasPermission =
+                (requiredPermission !== undefined && permissions !== undefined && permissions !== null
+                  ? permissions[requiredPermission]
+                  : false) || item.href === defaultRoute
+              return (
+                <MenuItemsWrapper isBorder={index !== menuItems.length - 1}>
+                  <Link href={item.href} passHref>
+                    <MenuItem key={item?.text} disabled={!hasPermission} isActive={pathname === item.href}>
+                      <MenuIcon>{item?.icon}</MenuIcon>
+                      <MenuText>{item?.text}</MenuText>
+                      {!hasPermission && (
+                        <MenuIcon style={{ marginLeft: 'auto' }}>
+                          <LockedIcon width="18" height="21" viewBox="0 0 18 21" fill="none" />
+                        </MenuIcon>
+                      )}
+                    </MenuItem>
+                  </Link>
+                </MenuItemsWrapper>
+              )
+            })}
           </MenuContainer>
         </Flex>
       </Box>

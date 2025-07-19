@@ -22,7 +22,7 @@ export function tryParsePrice(baseToken?: Token, quoteToken?: Token, value?: str
     return undefined;
   }
 
-  const [whole, fraction] = value.split(".");
+  const [whole, fraction] = value?.split(".");
 
   const decimals = fraction?.length ?? 0;
   const withoutDecimals = BigInt((whole ?? "") + (fraction ?? ""));

@@ -40,7 +40,8 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18",
+    "pnpm": ">=8"
   },
   "devDependencies": {
     "@types/node": "^18.16.2",

@@ -309,8 +309,8 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                             props.details.userData.stakedBalance.plus(props.details.userData.tokenBalance).gt(0)
                               ? props.details.userData.stakedBalance.plus(props.details.userData.tokenBalance)
                               : props.details.userData.proxy.stakedBalance.plus(
-                                  props.details.userData.proxy.tokenBalance,
-                                )
+                                props.details.userData.proxy.tokenBalance,
+                              )
                           }
                         />
                       ) : null}
@@ -333,7 +333,8 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
             {props.type === 'v3' ? (
               <ActionPanelV3 {...props} expanded={actionPanelExpanded} alignLinksToRight={isMobile} />
             ) : (
-              <ActionPanelV2 {...props} expanded={actionPanelExpanded} alignLinksToRight={isMobile} />
+              // <ActionPanelV2 {...props} expanded={actionPanelExpanded} alignLinksToRight={isMobile} />
+              <></>
             )}
           </td>
         </tr>

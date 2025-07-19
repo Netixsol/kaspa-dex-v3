@@ -16,6 +16,7 @@ const PANCAKE_MULTICALL_ADDRESSES = {
   [ChainId.ETHEREUM]: '0xac1cE734566f390A94b00eb9bf561c2625BF44ea',
   [ChainId.GOERLI]: '0x3D00CdB4785F0ef20C903A13596e0b9B2c652227',
   [ChainId.BSC]: '0xac1cE734566f390A94b00eb9bf561c2625BF44ea',
+  [ChainId.KASPLEX_MAINNET]: '0xac1cE734566f390A94b00eb9bf561c2625BF44ea',
   [ChainId.BSC_TESTNET]: '0x3D00CdB4785F0ef20C903A13596e0b9B2c652227',
   // [ChainId.KASPLEX_TESTNET]: '0x25e9e36205b29c7792b478A903f306615b83cba8', // TODO might have to change this
   [ChainId.KASPLEX_TESTNET]: '0x7860b7Cc9a8dc750ded2700Fc2cCb5FaE9a02205', // TODO might have to change this
@@ -50,7 +51,7 @@ export class PancakeMulticallProvider extends IMulticallProvider<PancakeMultical
     const multicallAddress = PANCAKE_MULTICALL_ADDRESSES[this.chainId]
 
     if (!multicallAddress) {
-      throw new Error(`No address for Pancakeswap Multicall Contract on chain id: ${chainId}`)
+      throw new Error(`No address for moonbase Multicall Contract on chain id: ${chainId}`)
     }
 
     this.provider = provider

@@ -276,7 +276,7 @@
   "Search Farms": "Пошук ферм",
   "Collect as": "Забрати як",
   "You will also collect fees earned from this position.": "Ви також отримаєте комісії з цієї позиції.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "Ця позиція ліквідності зараз у стейкінгу ферми. Якщо ліквідність додати або вилучити, у ваш гаманець також буде зібрано всі неотримані CAKE.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "Ця позиція ліквідності зараз у стейкінгу ферми. Якщо ліквідність додати або вилучити, у ваш гаманець також буде зібрано всі неотримані CAKE.",
   "To Top": "Угору",
   "Total value of the funds in this farm’s liquidity pair": "Загальна вартість коштів у парі ліквідності цієї ферми",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "Множник позначає пропорційну частку нагород у CAKE, яку отримує кожна ферма, як частку CAKE, вироблену з кожним блоком.",

@@ -71,8 +71,8 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
   const boostMultiplier = userBalanceInFarm.eq(0)
     ? boostMultiplierFromSC
     : userBalanceInFarm.gt(0) && boosterState === YieldBoosterState.ACTIVE
-    ? boostMultiplierFromSC
-    : boosterMultiplierFromFE
+      ? boostMultiplierFromSC
+      : boosterMultiplierFromFE
   const boostMultiplierDisplay = boostMultiplier.toLocaleString(undefined, { maximumFractionDigits: 3 })
   const [onPresentApyModal] = useModal(
     <RoiCalculatorModal
@@ -116,28 +116,28 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>
-      <Text>
+      <Text style={{ color: 'black' }}>
         {t('Combined APR')}:{' '}
         <Text style={{ display: 'inline-block' }} color={strikethrough && 'secondary'} bold>
           {strikethrough ? `${(apr * boostMultiplier + lpRewardsApr).toFixed(2)}%` : `${displayApr}%`}
         </Text>
       </Text>
       <ul>
-        <li>
+        <li style={{ color: 'black' }}>
           {t('Farm APR')}:{' '}
-          <Text style={{ display: 'inline-block' }} color={strikethrough ? 'secondary' : 'normal'} bold>
+          <Text style={{ display: 'inline-block', color: 'black' }} color={strikethrough ? 'secondary' : 'normal'} bold>
             {strikethrough ? `${(apr * boostMultiplier).toFixed(2)}%` : `${apr.toFixed(2)}%`}
           </Text>
         </li>
         <li>
           {t('LP Fee APR')}:{' '}
-          <Text style={{ display: 'inline-block' }} color={strikethrough ? 'secondary' : 'normal'} bold>
+          <Text style={{ display: 'inline-block', color: 'black' }} color={strikethrough ? 'secondary' : 'normal'} bold>
             {lpRewardsApr === 0 ? '-' : lpRewardsApr}%
           </Text>
         </li>
       </ul>
       {strikethrough && (
-        <Text>
+        <Text style={{ color: 'black' }}>
           {t('Available Boosted')}:{' '}
           <Text color="secondary" style={{ display: 'inline-block' }}>
             {t('Up to %boostMultiplier%x', { boostMultiplier: boostMultiplierDisplay })}

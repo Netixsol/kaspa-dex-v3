@@ -38,13 +38,9 @@ const ColoredIconButton = styled(IconButton)`
       background: -webkit-linear-gradient(
         left,
         ${({ theme }) =>
-          theme.isDark
-            ? `rgba(39,38,44, 0) 0%,
+    `rgba(39,38,44, 0) 0%,
         rgba(39,38,44, 0) 100%`
-            : `rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(128, 186, 232, 0) 99%,
-        rgba(125, 185, 232, 0) 100%`}
+  }
       );
     }
   }
@@ -74,7 +70,7 @@ export const V3SwapPromotionIcon: React.FC<{ wrapperStyle?: React.CSSProperties 
     tooltip: campaignTooltip,
     tooltipVisible: campaignTooltipVisible,
     targetRef: campaignTargetRef,
-  } = useTooltip(<Text>{t('Claim $135K CAKE Airdrop & Exclusive NFT')}</Text>, {
+  } = useTooltip(<Text>{t('Claim $135K KFC Airdrop & Exclusive NFT')}</Text>, {
     placement: 'top',
     trigger: 'hover',
     avoidToStopPropagation: true,

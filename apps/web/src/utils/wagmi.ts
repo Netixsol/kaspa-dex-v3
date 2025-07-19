@@ -12,7 +12,9 @@ import { LedgerConnector } from 'wagmi/connectors/ledger'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLegacy'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
-
+import { KastleWalletConnector } from '@pancakeswap/wagmi/connectors/kastleWallet'
+import { KasKeeperConnector } from '@pancakeswap/wagmi/connectors/kasKeeper'
+import { KasWareConnector } from '@pancakeswap/wagmi/connectors/kasWare'
 // get most configs chain nodes length
 const mostNodesConfig = Object.values(PUBLIC_NODES).reduce((prev, cur) => {
   return cur.length > prev ? cur.length : prev
@@ -55,7 +57,7 @@ export const injectedConnector = new InjectedConnector({
 export const coinbaseConnector = new CoinbaseWalletConnector({
   chains,
   options: {
-    appName: 'PancakeSwap',
+    appName: 'Kaspa Finance',
     appLogoUrl: 'https://pancakeswap.com/logo.png',
   },
 })
@@ -94,7 +96,26 @@ const ledgerConnector = new LedgerConnector({
 })
 
 export const bscConnector = new BinanceWalletConnector({ chains })
+export const kastleWalletConnector = new KastleWalletConnector({
+  chains,
+  options: {
+    shimDisconnect: true,
+  },
+})
 
+export const kasKeeperConnector = new KasKeeperConnector({
+  chains,
+  options: {
+    shimDisconnect: true,
+  },
+})
+
+export const kasWareConnector = new KasWareConnector({
+  chains,
+  options: {
+    shimDisconnect: true,
+  },
+})
 export const trustWalletConnector = new TrustWalletConnector({
   chains,
   options: {
@@ -122,6 +143,9 @@ export const wagmiConfig = createConfig({
     coinbaseConnector,
     walletConnectConnector,
     bscConnector,
+    kastleWalletConnector,
+    kasKeeperConnector,
+    kasWareConnector,
     // @ts-ignore FIXME: wagmi
     bloctoConnector,
     ledgerConnector,

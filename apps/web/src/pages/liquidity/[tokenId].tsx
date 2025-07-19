@@ -322,9 +322,8 @@ export default function PoolPage() {
             { hash: response.hash },
             {
               type: 'collect-fee',
-              summary: `Collect fee ${amount0.toExact()} ${
-                currency0ForFeeCollectionPurposes.symbol
-              } and ${amount1.toExact()} ${currency1ForFeeCollectionPurposes.symbol}`,
+              summary: `Collect fee ${amount0.toExact()} ${currency0ForFeeCollectionPurposes.symbol
+                } and ${amount1.toExact()} ${currency1ForFeeCollectionPurposes.symbol}`,
             },
           )
         })
@@ -376,11 +375,11 @@ export default function PoolPage() {
 
   const showCollectAsWeth = Boolean(
     ownsNFT &&
-      (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0)) &&
-      currency0 &&
-      currency1 &&
-      (currency0.isNative || currency1.isNative) &&
-      !collectMigrationHash,
+    (feeValue0?.greaterThan(0) || feeValue1?.greaterThan(0)) &&
+    currency0 &&
+    currency1 &&
+    (currency0.isNative || currency1.isNative) &&
+    !collectMigrationHash,
   )
 
   const modalHeader = () => (
@@ -450,7 +449,7 @@ export default function PoolPage() {
           <Text display="inline" bold mr="0.25em">{`${currencyQuote?.symbol}-${currencyBase?.symbol}`}</Text>
           <Text display="inline">
             {t(
-              'has an active PancakeSwap farm. Stake your position in the farm to start earning with the indicated APR with CAKE farming.',
+              'has an active Kaspa Finance farm. Stake your position in the farm to start earning with the indicated APR with CAKE farming.',
             )}
           </Text>
           <NextLinkFromReactRouter to="/farms">
@@ -487,7 +486,7 @@ export default function PoolPage() {
                             {t('Farming')}
                           </Tag>
                         )}
-                        <RangeTag ml="8px" removed={removed} outOfRange={!inRange} />
+                        <RangeTag ml="8px" removed={removed} outOfRange={!inRange} style={{ color: "black" }} />
                       </>
                     )}
                   </Flex>
@@ -503,7 +502,7 @@ export default function PoolPage() {
                             {t('Farming')}
                           </Tag>
                         )}
-                        <RangeTag removed={removed} outOfRange={!inRange} />
+                        <RangeTag removed={removed} outOfRange={!inRange} style={{ color: "black" }} />
                       </Flex>
                     )}
                   </RowBetween>
@@ -609,8 +608,8 @@ export default function PoolPage() {
                           <Text fontSize="10px" color="textSubtle" mr="4px">
                             {positionValueUpper && priceValueUpper
                               ? `~$${priceValueUpper
-                                  .quote(positionValueUpper?.wrapped)
-                                  .toFixed(2, { groupSeparator: ',' })}`
+                                .quote(positionValueUpper?.wrapped)
+                                .toFixed(2, { groupSeparator: ',' })}`
                               : ''}
                           </Text>
                         </RowBetween>
@@ -631,8 +630,8 @@ export default function PoolPage() {
                           <Text fontSize="10px" color="textSubtle" mr="4px">
                             {positionValueLower && priceValueLower
                               ? `~$${priceValueLower
-                                  .quote(positionValueLower?.wrapped)
-                                  .toFixed(2, { groupSeparator: ',' })}`
+                                .quote(positionValueLower?.wrapped)
+                                .toFixed(2, { groupSeparator: ',' })}`
                               : ''}
                           </Text>
                         </RowBetween>
@@ -664,8 +663,8 @@ export default function PoolPage() {
                         {!!collectMigrationHash && !isCollectPending
                           ? t('Collected')
                           : isCollectPending || collecting
-                          ? t('Collecting...')
-                          : t('Collect')}
+                            ? t('Collecting...')
+                            : t('Collect')}
                       </Button>
                     </AutoRow>
                     <LightGreyCard

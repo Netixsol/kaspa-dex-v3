@@ -31,7 +31,10 @@ router.get('/price/cake', async (_, event) => {
   const cacheResponse = await cache.match(event.request)
   let response
   if (!cacheResponse) {
-    const price = await fetchCakePrice()
+    // const price = await fetchCakePrice()
+    const price = 0.1;
+    console.log("priceeeeeeeeeeeeeeeee dekho", {price});
+    
     response = json(
       { price, updatedAt: new Date().toISOString() },
       {

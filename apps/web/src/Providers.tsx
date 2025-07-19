@@ -16,7 +16,7 @@ const queryClient = new QueryClient()
 const StyledUIKitProvider: React.FC<React.PropsWithChildren> = ({ children, ...props }) => {
   const { resolvedTheme } = useNextTheme()
   return (
-    <UIKitProvider theme={resolvedTheme === 'dark' ? dark : light} {...props}>
+    <UIKitProvider theme={dark} {...props}>
       {children}
     </UIKitProvider>
   )
@@ -30,7 +30,7 @@ const Providers: React.FC<React.PropsWithChildren<{ store: Store; children: Reac
     <QueryClientProvider client={queryClient}>
       <WagmiConfig config={wagmiConfig}>
         <Provider store={store}>
-          <NextThemeProvider>
+          <NextThemeProvider defaultTheme='dark'>
             <StyledUIKitProvider>
               <LanguageProvider>
                 <SWRConfig

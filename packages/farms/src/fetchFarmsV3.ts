@@ -2,7 +2,7 @@ import { ChainId, ERC20Token, Currency } from '@pancakeswap/sdk'
 import { CAKE } from '@pancakeswap/tokens'
 import { tickToPrice } from '@pancakeswap/v3-sdk'
 import { Address, PublicClient } from 'viem'
-import BN from 'bignumber.js'
+import BN, { BigNumber } from 'bignumber.js'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import chunk from 'lodash/chunk'
 import { DEFAULT_COMMON_PRICE, PriceHelper, CHAIN_ID_TO_CHAIN_NAME } from '../constants/common'
@@ -24,12 +24,11 @@ export async function farmV3FetchFarms({
   totalAllocPoint: bigint
   commonPrice: CommonPrice
 }) {
-  const [poolInfos, cakePrice, v3PoolData] = await Promise.all([
+  const [poolInfos, v3PoolData] = await Promise.all([
     fetchPoolInfos(farms, chainId, provider, masterChefAddress),
-    (await fetch('https://farms-api.pancakeswap.com/price/cake')).json(),
     fetchV3Pools(farms, chainId, provider),
   ])
-
+  const cakePrice = new BigNumber(.1)
   const lmPoolInfos = await fetchLmPools(
     v3PoolData.map((v3Pool) => (v3Pool[1] ? v3Pool[1] : null)).filter(Boolean) as Address[],
     chainId,
@@ -190,12 +189,12 @@ const fetchPoolInfos = async (
   try {
     const calls = farms.map(
       (farm) =>
-        ({
-          abi: masterchefV3Abi,
-          address: masterChefAddress,
-          functionName: 'poolInfo',
-          args: [BigInt(farm.pid)] as const,
-        } as const),
+      ({
+        abi: masterchefV3Abi,
+        address: masterChefAddress,
+        functionName: 'poolInfo',
+        args: [BigInt(farm.pid)] as const,
+      } as const),
     )
 
     const masterChefMultiCallResult = await provider({ chainId }).multicall({

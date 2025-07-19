@@ -8,7 +8,7 @@ import BigNumber from 'bignumber.js'
 import { useRouter } from 'next/router'
 import { ReactNode, useCallback, useMemo, useRef } from 'react'
 import styled from 'styled-components'
-import { V2Farm, V2StakeValueAndV3Farm } from 'views/Farms/FarmsV3'
+import { V2Farm, V2StakeValueAndV3Farm, V3Farm } from 'views/Farms/FarmsV3'
 import { getDisplayApr } from '../getDisplayApr'
 
 import ProxyFarmContainer from '../YieldBooster/components/ProxyFarmContainer'
@@ -16,7 +16,7 @@ import Row, { RowProps } from './Row'
 
 export interface ITableProps {
   header?: ReactNode
-  farms: V2StakeValueAndV3Farm[]
+  farms: V3Farm[]
   userDataReady: boolean
   cakePrice: BigNumber
   sortColumn?: string
@@ -149,7 +149,7 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
   const farmV2Multiplier = useFarmV2Multiplier()
 
   const generateRow = useCallback(
-    (farm: V2StakeValueAndV3Farm): RowProps => {
+    (farm: V3Farm): RowProps => {
       const { token, quoteToken } = farm
       const tokenAddress = token.address
       const quoteTokenAddress = quoteToken.address
@@ -157,50 +157,50 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
       const lowercaseQuery = latinise(typeof query?.search === 'string' ? query.search.toLowerCase() : '')
       const initialActivity = latinise(lpLabel?.toLowerCase()) === lowercaseQuery
 
-      if (farm.version === 2) {
-        const row: RowProps = {
-          apr: {
-            value: getDisplayApr(farm.apr, farm.lpRewardsApr),
-            pid: farm.pid,
-            multiplier: farm.multiplier,
-            lpLabel,
-            lpSymbol: farm.lpSymbol,
-            lpTokenPrice: farm.lpTokenPrice,
-            tokenAddress,
-            quoteTokenAddress,
-            cakePrice,
-            lpRewardsApr: farm.lpRewardsApr,
-            originalValue: farm.apr,
-            stableSwapAddress: farm.stableSwapAddress,
-            stableLpFee: farm.stableLpFee,
-          },
-          farm: {
-            version: 2,
-            label: lpLabel,
-            pid: farm.pid,
-            token: farm.token,
-            quoteToken: farm.quoteToken,
-            isReady: farm.multiplier !== undefined,
-            isStaking: farm.userData?.proxy?.stakedBalance.gt(0) || farm.userData?.stakedBalance.gt(0),
-          },
-          earned: {
-            earnings: getV2FarmEarnings(farm),
-            pid: farm.pid,
-          },
-          liquidity: {
-            liquidity: farm?.liquidity,
-          },
-          multiplier: {
-            multiplier: farm.multiplier,
-            farmCakePerSecond: farmV2Multiplier.getFarmCakePerSecond(farm.poolWeight),
-            totalMultipliers: farmV2Multiplier.totalMultipliers,
-          },
-          type: farm.isCommunity ? 'community' : 'v2',
-          details: farm,
-          initialActivity,
-        }
-        return row
-      }
+      // if (farm.version === 2) {
+      //   const row: RowProps = {
+      //     apr: {
+      //       value: getDisplayApr(farm.apr, farm.lpRewardsApr),
+      //       pid: farm.pid,
+      //       multiplier: farm.multiplier,
+      //       lpLabel,
+      //       lpSymbol: farm.lpSymbol,
+      //       lpTokenPrice: farm.lpTokenPrice,
+      //       tokenAddress,
+      //       quoteTokenAddress,
+      //       cakePrice,
+      //       lpRewardsApr: farm.lpRewardsApr,
+      //       originalValue: farm.apr,
+      //       stableSwapAddress: farm.stableSwapAddress,
+      //       stableLpFee: farm.stableLpFee,
+      //     },
+      //     farm: {
+      //       version: 2,
+      //       label: lpLabel,
+      //       pid: farm.pid,
+      //       token: farm.token,
+      //       quoteToken: farm.quoteToken,
+      //       isReady: farm.multiplier !== undefined,
+      //       isStaking: farm.userData?.proxy?.stakedBalance.gt(0) || farm.userData?.stakedBalance.gt(0),
+      //     },
+      //     earned: {
+      //       earnings: getV2FarmEarnings(farm),
+      //       pid: farm.pid,
+      //     },
+      //     liquidity: {
+      //       liquidity: farm?.liquidity,
+      //     },
+      //     multiplier: {
+      //       multiplier: farm.multiplier,
+      //       farmCakePerSecond: farmV2Multiplier.getFarmCakePerSecond(farm.poolWeight),
+      //       totalMultipliers: farmV2Multiplier.totalMultipliers,
+      //     },
+      //     type: farm.isCommunity ? 'community' : 'v2',
+      //     details: farm,
+      //     initialActivity,
+      //   }
+      //   return row
+      // }
 
       return {
         initialActivity,
@@ -255,6 +255,8 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
     return rowData.map(generateSortedRow)
   }, [farms, generateRow])
 
+  // console.log({ sortedRows })
+
   return (
     <Container id="farms-table">
       {header}
@@ -264,9 +266,10 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
             <TableBody>
               {sortedRows.map((row) => {
                 return row.type === 'v2' && row?.details?.boosted ? (
-                  <ProxyFarmContainer key={`table-row-${row.farm.pid}-${row.type}`} farm={row.details}>
-                    <Row {...row} userDataReady={userDataReady} />
-                  </ProxyFarmContainer>
+                  // <ProxyFarmContainer key={`table-row-${row.farm.pid}-${row.type}`} farm={row.details}>
+                  //   <Row {...row} userDataReady={userDataReady} />
+                  // </ProxyFarmContainer>
+                  <></>
                 ) : (
                   <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}-${row.type}`} />
                 )

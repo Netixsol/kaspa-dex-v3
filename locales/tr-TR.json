@@ -276,7 +276,7 @@
   "Search Farms": "Farm ara",
   "Collect as": "Şu şekilde topla:",
   "You will also collect fees earned from this position.": "Ayrıca bu pozisyondan kazanılan ücretleri de tahsil edersiniz.",
-  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed CAKE to your wallet.": "Bu likidite pozisyonu şu anda Farm'da stake ediliyor. Likidite eklemek veya çıkarmak, alınmamış CAKE'leri de cüzdanınıza toplar.",
+  "This liquidity position is currently staking in the Farm. Adding or removing liquidity will also harvest any unclaimed KASPA FINANCE to your wallet.": "Bu likidite pozisyonu şu anda Farm'da stake ediliyor. Likidite eklemek veya çıkarmak, alınmamış CAKE'leri de cüzdanınıza toplar.",
   "To Top": "En Üste",
   "Total value of the funds in this farm’s liquidity pair": "Bu farm'ın likidite çiftindeki toplam fon değeri",
   "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block.": "Çarpan, her blokta üretilen CAKE'e kıyasla her farm'ın aldığı CAKE ödüllerinin oranını temsil eder.",

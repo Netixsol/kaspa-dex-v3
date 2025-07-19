@@ -30,7 +30,7 @@ import getTimePeriods from '@pancakeswap/utils/getTimePeriods'
 import { CHAINS_STARGATE } from './stargate/config'
 import { findChainByStargateId } from './stargate/network'
 
-const StyledMenuItem = styled('div')<{ $isActive?: boolean }>`
+const StyledMenuItem = styled('div') <{ $isActive?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -124,7 +124,7 @@ export function Menu() {
   const theme = useTheme()
   const { setTheme } = useNextTheme()
   const nextRouter = useRouter()
-
+  const isDark = true
   return (
     <Flex height="56px" bg="backgroundAlt" px="16px" alignItems="center" justifyContent="space-between" zIndex={9}>
       <Flex>
@@ -155,7 +155,7 @@ export function Menu() {
       </Flex>
       <Flex alignItems="center">
         <Box mr="16px">
-          <ThemeSwitcher isDark={theme.isDark} toggleTheme={() => setTheme(theme.isDark ? 'light' : 'dark')} />
+          <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme('dark')} />
         </Box>
         {nextRouter.pathname === '/stargate' && <User />}
       </Flex>
@@ -279,9 +279,8 @@ function RecentTransactionsModal({
             key={i}
             href={
               txn?.confirmation
-                ? `${findChainByStargateId(txn?.confirmation?.chainId)?.chain?.blockExplorers?.default?.url}/tx/${
-                    txn?.confirmation?.hash
-                  }`
+                ? `${findChainByStargateId(txn?.confirmation?.chainId)?.chain?.blockExplorers?.default?.url}/tx/${txn?.confirmation?.hash
+                }`
                 : `${txnChain?.chain?.blockExplorers?.default?.url}/tx/${txn?.hash}`
             }
             external

@@ -25,6 +25,7 @@ import { getViemClients } from 'utils/viem'
 import { decodeFunctionResult, encodeFunctionData, Hex } from 'viem'
 import { useAccount } from 'wagmi'
 import fetchWithTimeout from 'utils/fetchWithTimeout'
+import BigNumber from 'bignumber.js'
 
 export const farmV3ApiFetch = (chainId: number): Promise<FarmsV3Response> =>
   fetch(`/api/v3/${chainId}/farms`)
@@ -103,7 +104,8 @@ export const useFarmsV3 = ({ mockApr = false }: UseFarmsOptions = {}) => {
 
   const farmV3 = useFarmsV3Public()
 
-  const cakePrice = useCakePriceAsBN()
+  // const cakePrice = useCakePriceAsBN()
+  const cakePrice = new BigNumber(0.1);
 
   const { data } = useSWR<FarmsV3Response<FarmV3DataWithPriceTVL>>(
     [chainId, 'cake-apr-tvl', farmV3.data],

@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-restricted-imports
 import { useTranslation } from '@pancakeswap/localization'
-import { TradeType } from '@pancakeswap/sdk'
+import { TradeType, validateAndParseAddress } from '@pancakeswap/sdk'
 import { SmartRouterTrade } from '@pancakeswap/smart-router/evm'
 import { FeeOptions } from '@pancakeswap/v3-sdk'
-import { ReactNode, useMemo } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 
 import { useUserSlippage } from '@pancakeswap/utils/user'
 import { INITIAL_ALLOWED_SLIPPAGE } from 'config/constants'
@@ -62,12 +62,10 @@ export function useSwapCallback({
 
   return useMemo(() => {
     if (!trade || !account || !chainId || !callback) {
-      // console.error('[useSwapCallback] INVALID: Missing dependencies')
       return { state: SwapCallbackState.INVALID, error: t('Missing dependencies') }
     }
     if (!recipient) {
       if (recipientAddress !== null) {
-        // console.error('[useSwapCallback] INVALID: Invalid recipient')
         return { state: SwapCallbackState.INVALID, error: t('Invalid recipient') }
       }
       return { state: SwapCallbackState.LOADING }

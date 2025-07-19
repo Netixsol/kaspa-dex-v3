@@ -8,6 +8,7 @@ export const CHAIN_REFRESH_TIME = {
   [ChainId.BSC]: 6_000,
   [ChainId.BSC_TESTNET]: 6_000,
   [ChainId.KASPLEX_TESTNET]: 12_000,
+  [ChainId.KASPLEX_MAINNET]: 6_000,
 } as const satisfies Record<ChainId, number>
 
 export const ROUTER_ADDRESS: ChainMap<string> = {
@@ -15,7 +16,8 @@ export const ROUTER_ADDRESS: ChainMap<string> = {
   [ChainId.GOERLI]: '0xEfF92A263d31888d860bD50809A8D171709b7b1c',
   [ChainId.BSC]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
   [ChainId.BSC_TESTNET]: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
-  [ChainId.KASPLEX_TESTNET]: '0xB1372c63fcA440BE954243B792220D0764EF1575',
+  [ChainId.KASPLEX_TESTNET]: '0x92d4A5FF321F74270B66e52249441E1065906115',
+  [ChainId.KASPLEX_MAINNET]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
 }
 
 // used to construct intermediary pairs for trading
@@ -40,6 +42,15 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     kasplexTokens.fnc,
     kasplexTokens.gem,
     kasplexTokens.stat,
+  ],
+  [ChainId.KASPLEX_MAINNET]: [
+    bscTokens.wbnb,
+    bscTokens.cake,
+    bscTokens.busd,
+    bscTokens.usdt,
+    bscTokens.btcb,
+    bscTokens.eth,
+    bscTokens.usdc,
   ],
 }
 
@@ -80,6 +91,7 @@ export const SUGGESTED_BASES: ChainTokenList = {
     kasplexTokens.gem,
     kasplexTokens.stat,
   ],
+  [ChainId.KASPLEX_MAINNET]: [bscTokens.usdt, bscTokens.cake, bscTokens.btcb],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -97,6 +109,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     kasplexTokens.gem,
     kasplexTokens.stat,
   ],
+  [ChainId.KASPLEX_MAINNET]: [bscTokens.wbnb, bscTokens.dai, bscTokens.busd, bscTokens.usdt, bscTokens.cake],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -111,7 +124,6 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [bscTokens.dai, bscTokens.usdt],
   ],
   [ChainId.KASPLEX_TESTNET]: [[WNATIVE[ChainId.KASPLEX_TESTNET], kasplexTokens.usdt]],
-
 }
 
 export const BIG_INT_ZERO = 0n

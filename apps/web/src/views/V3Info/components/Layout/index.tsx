@@ -14,7 +14,7 @@ export const InfoPageLayout = ({ children }) => {
 
   return (
     <>
-      <SubMenuItems
+      {/* <SubMenuItems
         items={[
           {
             label: t('V3'),
@@ -30,7 +30,7 @@ export const InfoPageLayout = ({ children }) => {
           },
         ]}
         activeItem={isV3 ? `/info/v3${chainPath}` : `/info${chainPath}`}
-      />
+      /> */}
       <InfoNav isStableSwap={false} />
       {children}
     </>

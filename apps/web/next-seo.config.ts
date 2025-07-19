@@ -1,19 +1,19 @@
 import { DefaultSeoProps } from 'next-seo'
 
 export const SEO: DefaultSeoProps = {
-  titleTemplate: '%s | PancakeSwap',
-  defaultTitle: 'PancakeSwap',
+  titleTemplate: '%s | Kaspa Finance',
+  defaultTitle: 'Kaspa Finance',
   description:
-    'Cheaper and faster than Uniswap? Discover PancakeSwap, the leading DEX on BNB Smart Chain (BSC) with the best farms in DeFi and a lottery for CAKE.',
+    'Cheaper and faster than Uniswap? Discover Kaspa Finance, the leading DEX on KASPLEX Chain (KAS).',
   twitter: {
     cardType: 'summary_large_image',
-    handle: '@PancakeSwap',
-    site: '@PancakeSwap',
+    handle: '@Kaspa Finance',
+    site: '@Kaspa Finance',
   },
   openGraph: {
-    title: '🥞 PancakeSwap - A next evolution DeFi exchange on BNB Smart Chain (BSC)',
+    title: '👻 Kaspa Finance - A next evolution DeFi exchange on KASPLEX Chain (KAS)',
     description:
-      'The most popular AMM on BSC by user count! Earn CAKE through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by PancakeSwap), NFTs, and more, on a platform you can trust.',
+      'Discover the most used AMM on KASPLEX! Farm KFC tokens, take part in innovative token launches through Initial Farm Offerings by Kaspa Finance, collect unique NFTs, and enjoy a reliable, community-driven platform.',
     images: [{ url: 'https://assets.pancakeswap.finance/web/og/hero.jpg' }],
   },
 }

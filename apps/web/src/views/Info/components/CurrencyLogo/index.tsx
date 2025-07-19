@@ -1,7 +1,7 @@
 import { Token } from '@pancakeswap/sdk'
 import { TokenLogo } from '@pancakeswap/uikit'
 import { useMemo } from 'react'
-import { multiChainId, MultiChainName } from 'state/info/constant'
+import { multiChainId, MultiChainNameExtend } from 'state/info/constant'
 import styled from 'styled-components'
 import { isAddress } from 'utils'
 import { Address } from 'viem'
@@ -21,17 +21,17 @@ export const CurrencyLogo: React.FC<
     address?: string
     token?: Token
     size?: string
-    chainName?: MultiChainName
+    chainName?: MultiChainNameExtend
   }>
 > = ({ address, size = '24px', chainName = 'BSC', ...rest }) => {
   const src = useMemo(() => {
     return getTokenLogoURL(new Token(multiChainId[chainName], address as Address, 18, ''))
   }, [address, chainName])
 
-  const imagePath = chainName === 'BSC' ? '' : `${chainName?.toLowerCase()}/`
+  const imagePath = chainName === 'KASPLEX_TESTNET' ? '' : `${chainName?.toLowerCase()}/`
   const checkedSumAddress = isAddress(address)
   const srcFromPCS = checkedSumAddress
-    ? `https://tokens.pancakeswap.finance/images/${imagePath}${checkedSumAddress}.png`
+    ? `https://kaspa-dex-v3-lake.vercel.app/images/chains/${checkedSumAddress}.png`
     : ''
   return <StyledLogo size={size} srcs={[srcFromPCS, src]} alt="token logo" useFilledIcon {...rest} />
 }
@@ -48,7 +48,7 @@ interface DoubleCurrencyLogoProps {
   address0?: string
   address1?: string
   size?: number
-  chainName?: 'ETH' | 'BSC'
+  chainName?: MultiChainNameExtend
 }
 
 export const DoubleCurrencyLogo: React.FC<React.PropsWithChildren<DoubleCurrencyLogoProps>> = ({

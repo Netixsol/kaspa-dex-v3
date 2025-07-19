@@ -1,7 +1,21 @@
 import { ChainId } from '@pancakeswap/sdk'
 import memoize from 'lodash/memoize'
 import invert from 'lodash/invert'
-import { bsc as bsc_, bscTestnet, Chain } from 'wagmi/chains'
+import {
+  bsc as bsc_,
+  bscTestnet,
+  // goerli,
+  // mainnet,
+  Chain,
+  // sepolia,
+  // polygonZkEvm,
+  // polygonZkEvmTestnet,
+  // zkSync,
+  // arbitrum,
+  // arbitrumGoerli,
+  // lineaTestnet,
+  // baseGoerli,
+} from 'wagmi/chains'
 
 export const CHAIN_QUERY_NAME = {
   // [ChainId.ETHEREUM]: 'eth',
@@ -10,6 +24,28 @@ export const CHAIN_QUERY_NAME = {
   [ChainId.BSC_TESTNET]: 'bscTestnet',
   [ChainId.KASPLEX_TESTNET]: 'kasplexTestnet',
 } as const // satisfies Record<ChainId, string>
+
+export const kasplexMainnet = {
+  id: 167013,
+  name: 'Kasplex Mainnet',
+  network: 'KasplexMainnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'BNB',
+    symbol: 'BNB',
+  },
+  rpcUrls: {
+    ...bsc_.rpcUrls,
+    public: {
+      ...bsc_.rpcUrls,
+      http: ['https://bsc-dataseed.bnbchain.org/'],
+    },
+    default: {
+      ...bsc_.rpcUrls.default,
+      http: ['https://bsc-dataseed.bnbchain.org/'],
+    },
+  },
+} satisfies Chain
 
 export const kasplexTestnet = {
   id: 167012,
@@ -64,4 +100,4 @@ const bsc = {
   },
 } satisfies Chain
 
-export const CHAINS = [bsc, bscTestnet, kasplexTestnet]
+export const CHAINS = [kasplexTestnet, kasplexMainnet]

@@ -140,7 +140,7 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
           )}
         </Flex>
         <Button
-          variant="danger"
+          variant="primary"
           disabled={!confirmed}
           onClick={() => {
             tokens.forEach((token) => {

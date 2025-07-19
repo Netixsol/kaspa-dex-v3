@@ -27,7 +27,7 @@ export const QuestionHelper: React.FC<React.PropsWithChildren<Props>> = ({
   const { targetRef, tooltip, tooltipVisible } = useTooltip(text, { placement });
 
   return (
-    <Flex alignItems="center" {...props} ref={targetRef}>
+    <Flex alignItems="center" {...props} ref={targetRef} style={{ color: "black" }}>
       {tooltipVisible && tooltip}
       <QuestionWrapper as={Flex} alignItems="center">
         <HelpIcon color={color || "textSubtle"} width={size} />

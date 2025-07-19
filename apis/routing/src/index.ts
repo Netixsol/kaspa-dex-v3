@@ -24,7 +24,7 @@ const V3_SUBGRAPH_URLS = {
   [ChainId.GOERLI]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-goerli',
   [ChainId.BSC]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc',
   [ChainId.BSC_TESTNET]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-chapel',
-  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/exchange-v3-kasplexV2',
+  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-v3',
 }
 
 const onChainQuoteProvider = SmartRouter.createQuoteProvider({ onChainProvider: viemProviders })

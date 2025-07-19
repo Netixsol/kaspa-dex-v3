@@ -14,7 +14,6 @@ const LoginModal = () => {
   // const { data } = useGetToken()
   // const [isOpen, setIsOpen] = useState(true)
   const isOpen = true
-
   return (
     <ModalV2 isOpen={isOpen}>
       <Flex alignItems="center" justifyContent="center" maxWidth="522px" zIndex={999}>

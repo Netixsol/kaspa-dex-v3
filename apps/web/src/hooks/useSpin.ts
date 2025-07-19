@@ -6,7 +6,7 @@ const useSpin = () => {
   const [isFinished, setIsFinished] = useState(true)
   const [fetchSpinHistory, setFetchSpinHistory] = useState(false)
   const [selectedItem, setSelectedItem] = useState<string>()
-  const items = ['500', '800', '1000', '1500', '2000', '2500']
+  const items = ['500', '800', '1000', '1200', '1800', '2000']
   const spinTime = 8000
 
 const spinNow = (): string => {

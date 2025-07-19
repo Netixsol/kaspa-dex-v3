@@ -23,41 +23,38 @@ export async function middleware(req: NextRequest) {
 
   // Safely get cookie values
   const token = req.cookies.get('token')?.value
-  const isTwitterLogin = req.cookies.get('isTwitterLogin')?.value === 'true' // Convert to boolean
+  const isTwitterLogin = req.cookies.get('isTwitterLogin')?.value === 'true'
   let permissions = {}
 
   try {
     const permissionsCookie = req.cookies.get('permissions')?.value
     permissions = permissionsCookie ? JSON.parse(permissionsCookie) : {}
   } catch (error) {
-    console.error('Failed to parse permissions cookie:', error)
     permissions = {}
   }
 
   const isPublicRoute = publicRoutes.includes(path) || !privateRoutes.includes(path)
   const isPrivateRoute = privateRoutes.includes(path)
 
-  // Authentication checks
   if (isPublicRoute && isTwitterLogin && token) {
     return NextResponse.redirect(new URL('/dashboard/socialmedia-amplification', req.url))
   }
 
-  if (isPrivateRoute && !isTwitterLogin && !token) {
+  if (isPrivateRoute && !isTwitterLogin) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
 
-  // Authorization check with proper safety checks
-  const currentRoutePermission = routePermissions?.[path] // Make sure routePermissions is defined
+  const currentRoutePermission = routePermissions?.[path]
 
   if (
-    currentRoutePermission && // Check if permission is required for this route
-    !permissions[currentRoutePermission] && // Check if user has the permission
+    currentRoutePermission &&
+    !permissions[currentRoutePermission] &&
     !isPublicRoute &&
     path !== '/dashboard/socialmedia-amplification'
   ) {
-    return NextResponse.redirect(new URL('/403', req.url))
+    return NextResponse.redirect(new URL('/dashboard/403', req.url))
   }
-  // Skip geo-blocking for API proxy routes
+
   if (req.nextUrl.pathname.startsWith('/api/proxy/')) {
     return res
   }

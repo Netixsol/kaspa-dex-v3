@@ -15,6 +15,7 @@ import { LaunchWeek } from '../icons/launchweek.ico'
 import { EngagmentIcons } from '../icons/engagments.ico'
 import { routePermissions } from '../types/enums'
 import { LockedIcon } from '../icons/lock.ico'
+import { useEffect, useState } from 'react'
 
 interface MenuWrapperProps {
   isBorder?: boolean
@@ -146,16 +147,18 @@ const menuItems = [
 ]
 const SideBar = () => {
   const pathname = usePathname()
+  const [permissions, setPermissions] = useState([])
+  const permissionCookie = Cookies.get('permissions')
+  const isTwitterLogin = Cookies.get('isTwitterLogin') === 'true'
 
   // Safely get permissions with fallback
+  
+  useEffect(() => {
+    if (permissionCookie) {
+      setPermissions(JSON.parse(permissionCookie))
+    }
+  }, [permissionCookie])
 
-  let permissions = {}
-  // console.log(JSON.parse(Cookies.get('permissions')), 'JSON.parse(Cookies.get())')
-  try {
-    permissions = JSON.parse(Cookies.get('permissions'))
-  } catch (error) {
-    console.error('Error parsing permissions:', error)
-  }
 
   const defaultRoute = '/dashboard/socialmedia-amplification'
   return (
@@ -165,11 +168,10 @@ const SideBar = () => {
           <MenuContainer>
             {menuItems.map((item, index) => {
               const requiredPermission = routePermissions[item.href as keyof typeof routePermissions]
-              console.log(requiredPermission, 'requiredPermission', permissions)
               const hasPermission =
-                (requiredPermission !== undefined && permissions !== undefined && permissions !== null
+                requiredPermission !== undefined && permissions !== undefined && permissions !== null && isTwitterLogin
                   ? permissions[requiredPermission]
-                  : false) || item.href === defaultRoute
+                  : false
               return (
                 <MenuItemsWrapper isBorder={index !== menuItems.length - 1}>
                   <Link href={item.href} passHref>

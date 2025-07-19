@@ -39,7 +39,7 @@ const StyledNav = styled.nav`
 
 const FixedContainer = styled("div").withConfig({
   shouldForwardProp: (props) => !["showMenu"].includes(props),
-}) <{ showMenu: boolean; height: number }>`
+})<{ showMenu: boolean; height: number }>`
   position: fixed;
   top: ${({ showMenu, height }) => (showMenu ? 0 : `-${height}px`)};
   left: 0;
@@ -117,9 +117,6 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
         if (currentOffset < refPrevOffset.current || currentOffset <= totalTopMenuHeight) {
           // Has scroll up
           setShowMenu(true);
-        } else {
-          // Has scroll down
-          setShowMenu(false);
         }
       }
       refPrevOffset.current = currentOffset;

@@ -40,7 +40,7 @@ const SocialAmplification = () => {
       <ScreenShortContainer title="Social Media Amplification">
         <Flex alignItems="center" justifyContent="center" marginTop="36px">
           <Box>
-            <Text fontSize="24px" textAlign="center" marginBottom="6px">
+            <Text fontSize="26px" textAlign="center" marginBottom="6px">
               Twitter/X Actions
             </Text>
             <ContentBox>
@@ -188,7 +188,7 @@ const SocialAmplification = () => {
                 </Flex>
               </Flex>
             </ContentBox>
-            <Button marginTop="6px" variant="secondary">
+            <Button marginTop="6px" variant="secondary" style={{ borderRadius: '30px' }}>
               Complete Task with Twitter/X
             </Button>
           </Box>

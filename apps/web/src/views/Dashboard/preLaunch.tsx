@@ -37,7 +37,9 @@ export const PreLaunch = () => {
                     onComplete={() => console.log('Timer finished!')}
                   />
                 </ContentBox>
-                <Button variant="secondary">Check Twitter/X</Button>
+                <Button variant="secondary" style={{ borderRadius: '30px' }}>
+                  Check Twitter/X
+                </Button>
               </Flex>
             </DashBox>
             <DashBox style={{ width: '100%' }}>
@@ -80,7 +82,9 @@ export const PreLaunch = () => {
                     </Flex>
                   </Flex>
                 </ContentBox>
-                <Button variant="secondary">Join the Challenge </Button>
+                <Button variant="secondary" style={{ borderRadius: '30px' }}>
+                  Join the Challenge{' '}
+                </Button>
               </Flex>
             </DashBox>
           </Flex>

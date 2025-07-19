@@ -37,7 +37,7 @@ export const LaunchWeek = () => {
                   </Text>
                 </ContentBox>
                 <Link href="/dashboard/report-bug" passHref>
-                  <Button as="a" variant="secondary" marginTop="auto" width="100%">
+                  <Button as="a" variant="secondary" marginTop="auto" width="100%" style={{ borderRadius: '30px' }}>
                     Check Twitter/X
                   </Button>
                 </Link>
@@ -63,7 +63,7 @@ export const LaunchWeek = () => {
                   </Flex>
                 </ContentBox>
                 <Link href="/dashboard/report-bug" passHref>
-                  <Button as="a" variant="secondary" marginTop="auto" width="100%">
+                  <Button as="a" variant="secondary" marginTop="auto" width="100%" style={{ borderRadius: '30px' }}>
                     Check Twitter/X
                   </Button>
                 </Link>

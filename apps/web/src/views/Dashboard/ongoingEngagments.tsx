@@ -9,12 +9,6 @@ import ScreenShortContainer from './components/CanvasContainer'
 export const OngoingEngagments = () => {
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Ongoing Engagement</Heading>
-        <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius: '100%' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Ongoing Engagement">
         <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
           <Flex flex="1 1 calc(33.33% - 32px)" minWidth="280px" alignSelf="start">

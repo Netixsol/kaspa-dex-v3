@@ -100,7 +100,9 @@ const LiquidityProvision = () => {
                   progress={(overallLiquidity?.rewardLiquidityPoints / overallLiquidity?.liquidityTotalPoints) * 100}
                 />
               </Box>
-              <Button variant="secondary">Add Liquidity</Button>
+              <Button variant="secondary" style={{ borderRadius: '30px' }}>
+                Add Liquidity
+              </Button>
             </Flex>
           </DashBox>
           <DashBox>
@@ -286,7 +288,11 @@ const LiquidityProvision = () => {
           </DashBox>
         </Flex>
         <Flex justifyContent="center" flexGrow={10} width="100%" marginTop="35px">
-          <Button variant="secondary" paddingX="auto" style={{ flexGrow: 1, maxWidth: '450px', width: '33%' }}>
+          <Button
+            variant="secondary"
+            paddingX="auto"
+            style={{ flexGrow: 1, maxWidth: '450px', width: '33%', borderRadius: '30px' }}
+          >
             Add Liquidity
           </Button>
         </Flex>

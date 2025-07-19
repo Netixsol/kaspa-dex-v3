@@ -42,9 +42,9 @@ const MigrateTokens = () => {
           </Flex>
         </Box>
         <Flex
-          width={46}
-          height={46}
-          borderRadius="100%"
+          width={86}
+          height={36}
+          borderRadius="50%"
           background="#1FD26F"
           justifyContent="center"
           alignItems="center"
@@ -66,7 +66,7 @@ const MigrateTokens = () => {
               <TickIcon width={14} height={10} fill="none" padding="auto" />
             </Flex>
           </Flex>
-          <Button variant="secondary" marginTop="auto">
+          <Button variant="secondary" marginTop="auto" style={{ borderRadius: '30px' }}>
             Migrate
           </Button>
         </Box>

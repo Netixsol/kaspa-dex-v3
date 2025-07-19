@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { usePopper } from "react-popper";
-import  styled from "styled-components";
+import styled from "styled-components";
 import { Box, Flex } from "../../../../components/Box";
 import { ChevronDownIcon } from "../../../../components/Svg";
 import MenuIcon from "./MenuIcon";
@@ -9,7 +9,7 @@ import { UserMenuProps, variants } from "./types";
 
 export const StyledUserMenu = styled(Flex)`
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.secondary10};
+  background-color: ${({ theme }) => theme.colors.cardBorder};
   border-radius: 16px;
   box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;

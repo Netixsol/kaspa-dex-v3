@@ -98,7 +98,7 @@ const FarmingStaking = () => {
                   <Highlight>300 Points</Highlight>
                 </Flex>
               </ContentBox>
-              <Button marginTop="auto" variant="secondary">
+              <Button marginTop="auto" variant="secondary" style={{ borderRadius: '30px' }}>
                 Check Stake
               </Button>
             </Flex>

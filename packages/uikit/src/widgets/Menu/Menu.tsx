@@ -148,7 +148,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
             {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
             <StyledNav id="nav">
-              <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/home"} />}</Flex>
+              <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/"} />}</Flex>
               <Flex alignItems="center" height="100%">
                 <AtomBox display={{ xs: "none", lg: "block" }}>
                   <MenuItems

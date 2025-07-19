@@ -158,7 +158,11 @@ const MultipliersBounsesPage = () => {
           </DashBox>
         </Flex>
         <Flex justifyContent="center" flexGrow={10} width="100%" marginTop="35px">
-          <Button variant="secondary" paddingX="auto" style={{ flexGrow: 1, maxWidth: '450px', width: '33%' }}>
+          <Button
+            variant="secondary"
+            paddingX="auto"
+            style={{ flexGrow: 1, maxWidth: '450px', width: '33%', borderRadius: '30px' }}
+          >
             View my Bonuses
           </Button>
         </Flex>

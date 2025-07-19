@@ -6,6 +6,7 @@ import { useCreateBugReport } from './hooks/useCreateBugReport'
 import SpinnerLoader from './components/shared/SpinnerLoader'
 import toast from 'react-hot-toast'
 import { ShareIcon } from './icons/share.ico'
+import ScreenShortContainer from './components/CanvasContainer'
 
 const MAX_DESCRIPTION_LENGTH = 5000
 
@@ -50,92 +51,85 @@ const ReportBug = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex style={{ flexDirection: 'column', gap: '28px' }}>
-        <Flex style={{ flexDirection: 'column', gap: '16px' }}>
-          <Flex style={{ justifyContent: 'space-between' }}>
-            <ResponsiveHeading scale="xxl">Submit Bug Report</ResponsiveHeading>
-            <Flex>
-              <IconButton type='button' width="48px" height="48px" style={{ padding: '12px', borderRadius: "100%" }}>
-                <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-              </IconButton>
-            </Flex>
-          </Flex>
-
-          <Text fontSize={16}>Describe the bug in detail. Valid bug reports earn 500–2,000 points.</Text>
-
-          <TextareaWrapper>
-            <textarea
-              {...register('description', {
-                required: 'Bug description is required',
-                maxLength: {
-                  value: MAX_DESCRIPTION_LENGTH,
-                  message: `Maximum ${MAX_DESCRIPTION_LENGTH} characters allowed`,
-                },
-              })}
-              maxLength={MAX_DESCRIPTION_LENGTH}
-              placeholder="Type here........"
-              style={{
-                flex: 1,
-                width: '100%',
-                fontSize: '14px',
-                padding: 0,
-                margin: 0,
-                background: 'transparent',
-                color: 'white',
-                border: 'none',
-                outline: 'none',
-                resize: 'none',
-                overflowY: 'auto',
-              }}
-            />
-            <CharacterCount>{`${description.length}/${MAX_DESCRIPTION_LENGTH}`}</CharacterCount>
-          </TextareaWrapper>
-
-          {errors.description && (
-            <Text color="red" fontSize={12}>
-              {errors.description.message}
-            </Text>
-          )}
-        </Flex>
-
+      <ScreenShortContainer title="Submit Bug Report">
         <Flex style={{ flexDirection: 'column', gap: '28px' }}>
-          <Heading scale="xxl">Upload Bug Report</Heading>
-          <Controller
-            name="file"
-            control={control}
-            rules={{
-              required: 'A file is required',
-              validate: {
-                fileType: (file) =>
-                  (file && ['image/png', 'image/jpeg', 'application/pdf'].includes(file.type)) ||
-                  'Only PNG, JPG, or PDF files are allowed.',
-                fileSize: (file) => (file && file.size <= 5 * 1024 * 1024) || 'File must be under 5MB.',
-              },
-            }}
-            render={({ field }) => (
-              <FileUploader
-                onFileSelect={(file) => field.onChange(file)}
-                error={errors.file as import('react-hook-form').FieldError | undefined}
-                fileName={field.value?.name || ''}
-              />
-            )}
-          />
-        </Flex>
+          <Flex style={{ flexDirection: 'column', gap: '16px' }}>
+            <Text fontSize={16}>Describe the bug in detail. Valid bug reports earn 500–2,000 points.</Text>
 
-        <Flex style={{ justifyContent: 'center', paddingTop: '15px' }}>
-          <Button variant="secondary" style={{ width: '332px', height: '40px' }} type="submit" disabled={isLoading}>
-            {isLoading ? (
-              <Flex alignItems="center" justifyContent="center" width="100%">
-                <SpinnerLoader size={24} color="#1FD26F" bg="#eee" />
-              </Flex>
-            ) : (
-              <Text fontSize={16} style={{ whiteSpace: 'nowrap' }}>
-                Submit
+            <TextareaWrapper>
+              <textarea
+                {...register('description', {
+                  required: 'Bug description is required',
+                  maxLength: {
+                    value: MAX_DESCRIPTION_LENGTH,
+                    message: `Maximum ${MAX_DESCRIPTION_LENGTH} characters allowed`,
+                  },
+                })}
+                maxLength={MAX_DESCRIPTION_LENGTH}
+                placeholder="Type here........"
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  fontSize: '14px',
+                  padding: 0,
+                  margin: 0,
+                  background: 'transparent',
+                  color: 'white',
+                  border: 'none',
+                  outline: 'none',
+                  resize: 'none',
+                  overflowY: 'auto',
+                }}
+              />
+              <CharacterCount>{`${description.length}/${MAX_DESCRIPTION_LENGTH}`}</CharacterCount>
+            </TextareaWrapper>
+
+            {errors.description && (
+              <Text color="red" fontSize={12}>
+                {errors.description.message}
               </Text>
             )}
-          </Button>
+          </Flex>
+
+          <Flex style={{ flexDirection: 'column', gap: '28px' }}>
+            <Heading scale="xxl">Upload Bug Report</Heading>
+            <Controller
+              name="file"
+              control={control}
+              rules={{
+                required: 'A file is required',
+                validate: {
+                  fileType: (file) =>
+                    (file && ['image/png', 'image/jpeg', 'application/pdf'].includes(file.type)) ||
+                    'Only PNG, JPG, or PDF files are allowed.',
+                  fileSize: (file) => (file && file.size <= 5 * 1024 * 1024) || 'File must be under 5MB.',
+                },
+              }}
+              render={({ field }) => (
+                <FileUploader
+                  onFileSelect={(file) => field.onChange(file)}
+                  error={errors.file as import('react-hook-form').FieldError | undefined}
+                  fileName={field.value?.name || ''}
+                />
+              )}
+            />
+          </Flex>
+
+          <Flex style={{ justifyContent: 'center', paddingTop: '15px' }}>
+            <Button variant="secondary" style={{ width: '332px', height: '40px' }} type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <Flex alignItems="center" justifyContent="center" width="100%">
+                  <SpinnerLoader size={24} color="#1FD26F" bg="#eee" />
+                </Flex>
+              ) : (
+                <Text fontSize={16} style={{ whiteSpace: 'nowrap' }}>
+                  Submit
+                </Text>
+              )}
+            </Button>
+          </Flex>
         </Flex>
-      </Flex>
+      </ScreenShortContainer>
     </form>
   )
 }

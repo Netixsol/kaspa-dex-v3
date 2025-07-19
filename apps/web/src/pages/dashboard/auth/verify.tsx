@@ -40,7 +40,7 @@ const AuthVerifyPage = () => {
         setIsOpen(false)
         setIsLoading(false)
         if (res?.data?.isUserTwitterLoggedIn) {
-          Cookies.set('isTwitterLogin ', res?.data?.isUserTwitterLoggedIn)
+          Cookies.set('isTwitterLogin', res?.data?.isUserTwitterLoggedIn)
         }
         toastSuccess(res?.message)
         router.push('/dashboard/socialmedia-amplification')

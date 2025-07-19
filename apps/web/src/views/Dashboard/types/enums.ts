@@ -1,4 +1,5 @@
 export enum routePermissions {
+  '/dashboard/socialmedia-amplification' = 'social_media_amplification',
   '/dashboard/liquidity-provision' = 'liquidity_provision',
   '/dashboard/trading-swap' = 'trading_swaps',
   '/dashboard/farming-staking' = 'farming_staking',

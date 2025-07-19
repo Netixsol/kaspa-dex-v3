@@ -19,7 +19,7 @@ export const useGetPermissions = () => {
         })
         .then((res) => {
           Cookies.set('permissions', JSON.stringify(res?.data))
-          //   return res !== null ? res : {}
+          return res !== null ? res?.data : {}
         }),
   })
 

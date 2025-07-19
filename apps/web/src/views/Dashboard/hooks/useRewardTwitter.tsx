@@ -7,7 +7,7 @@ export const useRewardTwitter = () => {
     queryKey: ['reward-twitter'],
 
     queryFn: async () =>
-      fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/ rewards/twitter`, {
+      fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/rewards/twitter`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

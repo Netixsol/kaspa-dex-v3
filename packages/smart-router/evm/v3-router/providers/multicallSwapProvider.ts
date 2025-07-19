@@ -51,7 +51,7 @@ export class PancakeMulticallProvider extends IMulticallProvider<PancakeMultical
     const multicallAddress = PANCAKE_MULTICALL_ADDRESSES[this.chainId]
 
     if (!multicallAddress) {
-      throw new Error(`No address for Pancakeswap Multicall Contract on chain id: ${chainId}`)
+      throw new Error(`No address for moonbase Multicall Contract on chain id: ${chainId}`)
     }
 
     this.provider = provider

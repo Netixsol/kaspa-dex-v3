@@ -14,6 +14,6 @@ export const SEO: DefaultSeoProps = {
     title: '👻 Kaspa Finance - A next evolution DeFi exchange on KASPLEX Chain (KAS)',
     description:
       'Discover the most used AMM on KASPLEX! Farm KFC tokens, take part in innovative token launches through Initial Farm Offerings by Kaspa Finance, collect unique NFTs, and enjoy a reliable, community-driven platform.',
-    images: [{ url: 'https://assets.pancakeswap.finance/web/og/hero.jpg' }],
+    images: [{ url: 'https://cdn.shopify.com/s/files/1/0644/1566/2164/files/meta_icon_6edb7aaf-4504-43fc-8c16-4c87bfebe241.png' }],
   },
 }

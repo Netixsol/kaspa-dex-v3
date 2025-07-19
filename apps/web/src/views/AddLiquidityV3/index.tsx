@@ -285,7 +285,7 @@ export function UniversalAddLiquidity({
             <DynamicSection disabled={!baseCurrency || !currencyB}>
               {!isV2 &&
                 stableConfig.stableSwapConfig &&
-                [SELECTOR_TYPE.STABLE, SELECTOR_TYPE.V3].includes(selectorType) && (
+                [SELECTOR_TYPE.V3].includes(selectorType) && (
                   <StableV3Selector
                     currencyA={baseCurrency ?? undefined}
                     currencyB={quoteCurrency ?? undefined}
@@ -295,7 +295,7 @@ export function UniversalAddLiquidity({
                   />
                 )}
 
-              {((isV2 && selectorType !== SELECTOR_TYPE.V3) || selectorType === SELECTOR_TYPE.V2) && (
+              {/* {((isV2 && selectorType !== SELECTOR_TYPE.V3) || selectorType === SELECTOR_TYPE.V2) && (
                 <V2Selector
                   isStable={Boolean(stableConfig.stableSwapConfig)}
                   selectorType={selectorType}
@@ -304,9 +304,9 @@ export function UniversalAddLiquidity({
                     handleFeePoolSelect({ type })
                   }}
                 />
-              )}
+              )} */}
 
-              {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
+              {/* {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
                 <FeeSelector
                   currencyA={baseCurrency ?? undefined}
                   currencyB={quoteCurrency ?? undefined}
@@ -314,16 +314,16 @@ export function UniversalAddLiquidity({
                   feeAmount={feeAmount}
                   handleSelectV2={() => setSelectorType(SELECTOR_TYPE.V2)}
                 />
-              )}
+              )} */}
             </DynamicSection>
           </AutoColumn>
-          {selectorType === SELECTOR_TYPE.STABLE && (
+          {/* {selectorType === SELECTOR_TYPE.STABLE && (
             <StableConfigContext.Provider value={stableConfig}>
               <AddStableLiquidity currencyA={baseCurrency} currencyB={quoteCurrency}>
                 {(props) => <StableFormView {...props} stableLpFee={stableConfig?.stableSwapConfig?.stableLpFee} />}
               </AddStableLiquidity>
             </StableConfigContext.Provider>
-          )}
+          )} */}
           {selectorType === SELECTOR_TYPE.V3 && (
             <V3FormView
               feeAmount={feeAmount}
@@ -333,11 +333,11 @@ export function UniversalAddLiquidity({
               currencyIdB={currencyIdB}
             />
           )}
-          {selectorType === SELECTOR_TYPE.V2 && (
+          {/* {selectorType === SELECTOR_TYPE.V2 && (
             <AddLiquidity currencyA={baseCurrency} currencyB={quoteCurrency}>
               {(props) => <V2FormView {...props} />}
             </AddLiquidity>
-          )}
+          )} */}
         </ResponsiveTwoColumns>
       </CardBody>
     </>

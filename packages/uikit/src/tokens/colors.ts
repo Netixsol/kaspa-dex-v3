@@ -123,7 +123,7 @@ export const darkColors = {
   tertiary20: "#E2EDEE",
   tertiaryPale20: "#44445B",
   text: "#fff",
-  text99: "#120f1fb3",
+  text99: "#f4eeff99",
   textDisabled: "#666171",
   textSubtle: "#fff",
   disabled: "#524B63",

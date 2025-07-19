@@ -27,7 +27,7 @@ const TokenLogo: React.FC<React.PropsWithChildren<TokenLogoProps>> = ({ srcs, us
           if (src) BAD_SRCS[src] = true;
            const tokenAddress = src.match(/0x[a-fA-F0-9]{40}/)?.[0];
           if (tokenAddress && !src.includes("/images/tokens/")) {
-            console.log({tokenAddress})
+            // console.log({tokenAddress})
             const fallbackSrcs = [
               `/images/chains/${tokenAddress.toLowerCase()}.png`,
               `/images/chains/${tokenAddress.toUpperCase()}.png`,

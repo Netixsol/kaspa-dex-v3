@@ -255,7 +255,7 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
     return rowData.map(generateSortedRow)
   }, [farms, generateRow])
 
-  console.log({ sortedRows })
+  // console.log({ sortedRows })
 
   return (
     <Container id="farms-table">

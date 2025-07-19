@@ -306,7 +306,7 @@ export function UniversalAddLiquidity({
                 />
               )} */}
 
-              {/* {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
+              {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
                 <FeeSelector
                   currencyA={baseCurrency ?? undefined}
                   currencyB={quoteCurrency ?? undefined}
@@ -314,7 +314,7 @@ export function UniversalAddLiquidity({
                   feeAmount={feeAmount}
                   handleSelectV2={() => setSelectorType(SELECTOR_TYPE.V2)}
                 />
-              )} */}
+              )}
             </DynamicSection>
           </AutoColumn>
           {/* {selectorType === SELECTOR_TYPE.STABLE && (

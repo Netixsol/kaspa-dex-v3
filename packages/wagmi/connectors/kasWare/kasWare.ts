@@ -43,6 +43,7 @@ interface KasWareProvider {
     removeListener: (event: string, handler: (...args: any[]) => void) => void
     sendAsync: (request: any, callback: (error: any, response: any) => void) => void
     send: (request: any, callback?: (error: any, response: any) => void) => any
+    _isConnected: boolean
   }
 }
 

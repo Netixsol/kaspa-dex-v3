@@ -449,7 +449,7 @@ export default function PoolPage() {
           <Text display="inline" bold mr="0.25em">{`${currencyQuote?.symbol}-${currencyBase?.symbol}`}</Text>
           <Text display="inline">
             {t(
-              'has an active Kaspa Finance farm. Stake your position in the farm to start earning with the indicated APR with CAKE farming.',
+              'has an active Kaspa Finance farm. Stake your position in the farm to start earning with the indicated APR with KFC farming.',
             )}
           </Text>
           <NextLinkFromReactRouter to="/farms">

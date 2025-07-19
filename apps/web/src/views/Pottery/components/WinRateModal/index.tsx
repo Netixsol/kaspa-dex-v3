@@ -96,7 +96,7 @@ const WinRateModal: React.FC<React.PropsWithChildren<WinRateModalProps>> = ({
         <Flex flexDirection="column" mb="8px">
           <Box>
             <Text color="secondary" bold fontSize="12px" textTransform="uppercase" as="span">
-              Cake
+              KFC
             </Text>
             <Text color="textSubtle" ml="4px" bold fontSize="12px" textTransform="uppercase" as="span">
               {t('Deposit')}

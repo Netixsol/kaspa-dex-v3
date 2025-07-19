@@ -6,7 +6,7 @@ import AddAmountModal from '../Modals/AddAmountModal'
 import { AddButtonProps } from '../types'
 import NotEnoughTokensModal from '../../Modals/NotEnoughTokensModal'
 
-interface AddButtonPropsType extends AddButtonProps, ButtonProps {}
+interface AddButtonPropsType extends AddButtonProps, ButtonProps { }
 
 const AddCakeButton: React.FC<React.PropsWithChildren<AddButtonPropsType>> = ({
   currentBalance,
@@ -52,7 +52,7 @@ const AddCakeButton: React.FC<React.PropsWithChildren<AddButtonPropsType>> = ({
       style={{ whiteSpace: 'nowrap', paddingLeft: 0, paddingRight: 0 }}
       {...props}
     >
-      {t('Add CAKE')}
+      {t('Add KFC')}
     </Button>
   ) : (
     <Skeleton height={48} />

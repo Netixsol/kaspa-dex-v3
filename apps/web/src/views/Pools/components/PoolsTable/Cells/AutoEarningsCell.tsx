@@ -41,12 +41,12 @@ const AutoEarningsCell: React.FC<React.PropsWithChildren<AutoEarningsCellProps>>
     earningTokenPrice,
     vaultKey === VaultKey.CakeVault
       ? (vaultData as Pool.DeserializedPoolLockedVault<Token>).userData.currentPerformanceFee
-          .plus((vaultData as Pool.DeserializedPoolLockedVault<Token>).userData.currentOverdueFee)
-          .plus((vaultData as Pool.DeserializedPoolLockedVault<Token>).userData.userBoostedShare)
+        .plus((vaultData as Pool.DeserializedPoolLockedVault<Token>).userData.currentOverdueFee)
+        .plus((vaultData as Pool.DeserializedPoolLockedVault<Token>).userData.userBoostedShare)
       : null,
   )
 
-  const labelText = t('Recent CAKE profit')
+  const labelText = t('Recent KFC profit')
   const earningTokenBalance = autoCakeToDisplay
   const hasEarnings = hasAutoEarnings
   const earningTokenDollarBalance = autoUsdToDisplay

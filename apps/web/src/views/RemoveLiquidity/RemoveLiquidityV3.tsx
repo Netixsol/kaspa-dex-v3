@@ -327,11 +327,11 @@ function Remove({ tokenId }: { tokenId: bigint }) {
 
   const showCollectAsWeth = Boolean(
     liquidityValue0?.currency &&
-      liquidityValue1?.currency &&
-      (liquidityValue0.currency.isNative ||
-        liquidityValue1.currency.isNative ||
-        WNATIVE[liquidityValue0.currency.chainId]?.equals(liquidityValue0.currency.wrapped) ||
-        WNATIVE[liquidityValue1.currency.chainId]?.equals(liquidityValue1.currency.wrapped)),
+    liquidityValue1?.currency &&
+    (liquidityValue0.currency.isNative ||
+      liquidityValue1.currency.isNative ||
+      WNATIVE[liquidityValue0.currency.chainId]?.equals(liquidityValue0.currency.wrapped) ||
+      WNATIVE[liquidityValue1.currency.chainId]?.equals(liquidityValue1.currency.wrapped)),
   )
 
   return (
@@ -367,7 +367,7 @@ function Remove({ tokenId }: { tokenId: bigint }) {
                   {t('Farming')}
                 </Tag>
               )}
-              <RangeTag removed={removed} outOfRange={outOfRange} />
+              <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: 'black' }} />
             </Flex>
           </AutoRow>
           <Text fontSize="12px" color="secondary" bold textTransform="uppercase" mb="4px">

@@ -38,11 +38,11 @@ export const kasplexMainnet = {
     ...bsc_.rpcUrls,
     public: {
       ...bsc_.rpcUrls,
-      http: ['https://bsc-dataseed.bnbchain.org/'],
+      http: ['https://bsc-dataseed.bnbchain.org'],
     },
     default: {
       ...bsc_.rpcUrls.default,
-      http: ['https://bsc-dataseed.bnbchain.org/'],
+      http: ['https://bsc-dataseed.bnbchain.org'],
     },
   },
 } satisfies Chain
@@ -58,16 +58,16 @@ export const kasplexTestnet = {
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.kasplextest.xyz/'],
+      http: ['https://rpc.kasplextest.xyz'],
     },
     public: {
-      http: ['https://rpc.kasplextest.xyz/'],
+      http: ['https://rpc.kasplextest.xyz'],
     },
   },
   blockExplorers: {
     default: {
       name: 'Kasplex Explorer',
-      url: 'https://frontend.kasplextest.xyz/',
+      url: 'https://frontend.kasplextest.xyz',
     },
   },
   contracts: {

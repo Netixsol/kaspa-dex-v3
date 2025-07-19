@@ -55,11 +55,9 @@ const ReportBug = () => {
           <Flex style={{ justifyContent: 'space-between' }}>
             <ResponsiveHeading scale="xxl">Submit Bug Report</ResponsiveHeading>
             <Flex>
-              <Button type='button' variant="secondary" height={38}>
-                <ResponsiveText fontSize={10} py={1} px={3}>
-                  Share Now
-                </ResponsiveText>
-              </Button>
+              <IconButton type='button' width="48px" height="48px" style={{ padding: '12px', borderRadius: "100%" }}>
+                <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
+              </IconButton>
             </Flex>
           </Flex>
 

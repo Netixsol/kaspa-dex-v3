@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
+import Cookies from 'js-cookie'
 
 export const useMadeSpinReward = () => {
-  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+const token = Cookies.get('token')
   
   const mutation = useMutation({
     mutationFn: async ({

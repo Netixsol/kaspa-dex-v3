@@ -58,7 +58,7 @@ export const coinbaseConnector = new CoinbaseWalletConnector({
   chains,
   options: {
     appName: 'Kaspa Finance',
-    appLogoUrl: 'https://pancakeswap.com/logo.png',
+    appLogoUrl: 'https://kaspa-dex-v3-lake.vercel.app/kaspaLogo1.svg',
   },
 })
 

@@ -152,13 +152,13 @@ const SideBar = () => {
   const isTwitterLogin = Cookies.get('isTwitterLogin') === 'true'
 
   // Safely get permissions with fallback
-
-  // let permissions = {}
+  
   useEffect(() => {
     if (permissionCookie) {
       setPermissions(JSON.parse(permissionCookie))
     }
   }, [permissionCookie])
+
 
   const defaultRoute = '/dashboard/socialmedia-amplification'
   return (

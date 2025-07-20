@@ -109,7 +109,7 @@ export default function Home() {
     return formatDollarAmount(liquidityHover, 2, true)
   }, [liquidityHover])
 
-  console.log("protocolData:::::", protocolData);
+  console.log("protocolData:::::", formattedTvlData);
 
   return (
     <Page>

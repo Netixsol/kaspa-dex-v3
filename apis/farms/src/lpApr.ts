@@ -31,7 +31,7 @@ const INFO_CLIENT_WITH_CHAIN = {
   [ChainId.BSC]: 'https://proxy-worker.pancake-swap.workers.dev/bsc-exchange',
   [ChainId.ETHEREUM]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exhange-eth',
   [ChainId.BSC_TESTNET]: '',
-  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-v3',
+  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-exchange-v3',
   [ChainId.GOERLI]: '',
 }
 

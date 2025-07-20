@@ -60,7 +60,7 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
 
   return (
     <AutoColumn gap="lg">
-      <Message variant="warning">
+      {/* <Message variant="warning">
         <Text>
           {t(
             'Anyone can create a token with any name, including creating fake versions of existing tokens or ones that claim to represent projects without tokens.',
@@ -76,7 +76,7 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
           <br />
           <b>{t('Please be extra careful during this period as altcoin trading volumes are on the surge recently.')}</b>
         </Text>
-      </Message>
+      </Message> */}
 
       {tokens.map((token) => {
         const list = token.chainId && inactiveTokenList?.[token.chainId]?.[token.address]?.list

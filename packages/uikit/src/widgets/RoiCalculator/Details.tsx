@@ -110,36 +110,37 @@ export const Details = memo(function Details({
           </Text>
         </Grid>
       )}
-      <BulletList>
-        <li>
-          <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
-            {t(
-              "Yields and rewards are calculated at the current rates and subject to change based on various external variables."
-            )}
-          </Text>
-        </li>
-        <li>
-          <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
-            {t(
-              "LP Fee Rewards: 0.01% ~ 1% per trade according to the specific fee tier of the trading pair, claimed and compounded manually."
-            )}
-          </Text>
-        </li>
-        <li>
-          <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
-            {t(
-              "LP Fee APR figures are calculated using Subgraph and may subject to indexing delays. For more accurate LP Fee APR, please visit the Info Page."
-            )}
-          </Text>
-        </li>
-        <li>
-          <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
-            {t(
-              "All figures are estimates provided for your convenience only, and by no means represent guaranteed returns."
-            )}
-          </Text>
-        </li>
-      </BulletList>
+    <BulletList>
+  <li>
+    <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
+      {t(
+        "Yields and rewards are based on current rates and may fluctuate due to external factors."
+      )}
+    </Text>
+  </li>
+  <li>
+    <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
+      {t(
+        "LP Fee Rewards range from 0.01% to 1% per trade, depending on the trading pair's fee tier. These must be manually claimed and compounded."
+      )}
+    </Text>
+  </li>
+  <li>
+    <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
+      {t(
+        "LP Fee APR values are derived via Subgraph data, which may have indexing delays. For the most accurate APR details, refer to the Info Page."
+      )}
+    </Text>
+  </li>
+  <li>
+    <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline" lineHeight={1.1}>
+      {t(
+        "All values shown are estimates provided for informational purposes and do not represent guaranteed earnings."
+      )}
+    </Text>
+  </li>
+</BulletList>
+
       {externalLink && (
         <Flex justifyContent="center" mt="24px">
           {externalLink}

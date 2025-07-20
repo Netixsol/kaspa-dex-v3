@@ -432,7 +432,7 @@ const KASFaucetCard: React.FC = () => {
 
                 <ClaimButton type="submit" disabled={!canClaim || (isRecaptchaEnabled && !captchaToken)} width="100%">
                   <Flex alignItems="center" justifyContent="center">
-                    <Text mr="8px">🪙</Text>
+                    {/* <Text mr="8px">🪙</Text> */}
                     <Text color="#ffffff" fontWeight="bold">
                       {isLoading ? t('Processing...') : t('Claim 50 KAS')}
                     </Text>

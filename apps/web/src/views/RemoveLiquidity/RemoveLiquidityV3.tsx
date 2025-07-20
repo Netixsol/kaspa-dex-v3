@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { CurrencyAmount, WNATIVE } from '@pancakeswap/sdk'
+import { CurrencyAmount, WNATIVE, Token, Price } from '@pancakeswap/sdk'
 import {
   AutoRow,
   CardBody,
@@ -28,6 +28,7 @@ import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import { useDerivedV3BurnInfo } from 'hooks/v3/useDerivedV3BurnInfo'
 import { useV3PositionFromTokenId, useV3TokenIdsByAccount } from 'hooks/v3/useV3Positions'
 import { useStablecoinPrice } from 'hooks/useBUSDPrice'
+import { useFarm } from 'hooks/useFarm'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo, useState } from 'react'
 import { useTransactionAdder } from 'state/transactions/hooks'
@@ -221,6 +222,13 @@ function Remove({ tokenId }: { tokenId: bigint }) {
   ])
 
   const removed = position?.liquidity === 0n
+
+  // Get farm data for better price information
+  const { data: farmDetail } = useFarm({
+    currencyA: liquidityValue0?.currency?.wrapped,
+    currencyB: liquidityValue1?.currency?.wrapped,
+    feeAmount: position?.fee
+  })
 
   const price0 = useStablecoinPrice(liquidityValue0?.currency?.wrapped ?? undefined, { enabled: !!feeValue0 })
   const price1 = useStablecoinPrice(liquidityValue1?.currency?.wrapped ?? undefined, { enabled: !!feeValue1 })

@@ -456,7 +456,7 @@ export function RoiCalculator({
   return (
     <>
       <ScrollableContainer>
-        {warningMessage}
+        {/* {warningMessage} */}
         {content}
         <ImpermanentLossCalculator
           lpReward={lpReward}

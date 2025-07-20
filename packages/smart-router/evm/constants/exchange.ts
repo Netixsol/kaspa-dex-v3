@@ -9,7 +9,7 @@ export const SWAP_ROUTER_ADDRESSES = {
   [ChainId.BSC]: '0x13f4EA83D0bd40E75C8222255bc855a974568Dd4',
   [ChainId.BSC_TESTNET]: '0x9a489505a00cE272eAa5e07Dba6491314CaE3796',
   [ChainId.KASPLEX_TESTNET]: '0x73B0387D73305182b2b3C2566280050a8ACb1c92',
-  [ChainId.KASPLEX_MAINNET]: '0x13f4EA83D0bd40E75C8222255bc855a974568Dd4',
+  [ChainId.KASPLEX_MAINNET]: '0x13f4EA83D0bd40E75C8222255bc855a974568Dd4',// Todo Mainnet Addresss
 } as const satisfies Record<ChainId, string>
 
 export const ROUTER_ADDRESS: ChainMap<string> = {
@@ -127,7 +127,7 @@ export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.BSC]: [bscTokens.busd, bscTokens.cake, bscTokens.btcb],
   [ChainId.KASPLEX_MAINNET]: [bscTokens.busd, bscTokens.cake, bscTokens.btcb],
   [ChainId.BSC_TESTNET]: [bscTestnetTokens.wbnb, bscTestnetTokens.cake, bscTestnetTokens.busd],
-   [ChainId.KASPLEX_TESTNET]: [
+  [ChainId.KASPLEX_TESTNET]: [
     kasplexTokens.usdt,
     kasplexTokens.ksp,
     kasplexTokens.blk,
@@ -150,7 +150,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.BSC]: [bscTokens.wbnb, bscTokens.dai, bscTokens.busd, bscTokens.usdt, bscTokens.cake],
   [ChainId.KASPLEX_MAINNET]: [bscTokens.wbnb, bscTokens.dai, bscTokens.busd, bscTokens.usdt, bscTokens.cake],
   [ChainId.BSC_TESTNET]: [bscTestnetTokens.wbnb, bscTestnetTokens.cake, bscTestnetTokens.busd],
-   [ChainId.KASPLEX_TESTNET]: [
+  [ChainId.KASPLEX_TESTNET]: [
     kasplexTokens.usdt,
     kasplexTokens.ksp,
     kasplexTokens.blk,

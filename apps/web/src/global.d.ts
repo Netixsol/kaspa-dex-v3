@@ -50,7 +50,9 @@ declare global {
       _isConnected?: boolean
     }
     kasware?: {
-      ethereum?: ExtendEthereum
+      ethereum?: ExtendEthereum & {
+        _isConnected?: boolean
+      }
       requestAccounts: () => Promise<string[]>
       getAccounts: () => Promise<string[]>
       getVersion: () => Promise<string>

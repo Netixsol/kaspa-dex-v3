@@ -72,11 +72,27 @@ export function AprCalculator({
   tokenAmount0,
   tokenAmount1,
 }: Props) {
+  console.log('=== AprCalculator Debug ===')
+  console.log('Props:', {
+    baseCurrency: baseCurrency?.symbol,
+    quoteCurrency: quoteCurrency?.symbol,
+    feeAmount,
+    showTitle,
+    showQuestion,
+    allowApply,
+    positionDetails: !!positionDetails,
+    defaultDepositUsd,
+    tokenAmount0: tokenAmount0?.toExact(),
+    tokenAmount1: tokenAmount1?.toExact(),
+  })
+
   const { t } = useTranslation()
   const [isOpen, setOpen] = useState(false)
   const [priceSpan, setPriceSpan] = useState(0)
   const { data: farm } = useFarm({ currencyA: baseCurrency, currencyB: quoteCurrency, feeAmount })
   const cakePrice = useCakePriceAsBN()
+
+  console.log('Initial state:', { isOpen, priceSpan, farm: !!farm, cakePrice: cakePrice?.toFixed() })
 
   const formState = useV3FormState()
 
@@ -89,8 +105,27 @@ export function AprCalculator({
     existingPosition,
     formState,
   )
+
+  console.log('V3 Derived Info:', {
+    pool: !!pool,
+    poolAddress: pool ? Pool.getAddress(pool.token0, pool.token1, pool.fee) : null,
+    ticks,
+    price: price?.toSignificant(6),
+    pricesAtTicks,
+    parsedAmounts: {
+      amountA: parsedAmounts[Field.CURRENCY_A]?.toExact(),
+      amountB: parsedAmounts[Field.CURRENCY_B]?.toExact(),
+    },
+    currencyBalances: {
+      balanceA: currencyBalances[Field.CURRENCY_A]?.toExact(),
+      balanceB: currencyBalances[Field.CURRENCY_B]?.toExact(),
+    },
+  })
+
   const router = useRouter()
   const poolAddress = useMemo(() => pool && Pool.getAddress(pool.token0, pool.token1, pool.fee), [pool])
+
+  console.log('Pool address:', poolAddress)
 
   const prices = usePairTokensPrice(poolAddress, priceSpan, baseCurrency?.chainId)
   const { ticks: data } = useAllV3Ticks(baseCurrency, quoteCurrency, feeAmount)
@@ -98,15 +133,38 @@ export function AprCalculator({
     address: poolAddress,
     chainId: pool?.token0.chainId,
   })
+
+  console.log('Market data:', {
+    prices: !!prices,
+    ticksData: data?.length,
+    volume24H: volume24H?.toFixed(),
+  })
+
   const sqrtRatioX96 = price && encodeSqrtRatioX96(price.numerator, price.denominator)
   const { [Bound.LOWER]: tickLower, [Bound.UPPER]: tickUpper } = ticks
   const { [Bound.LOWER]: priceLower, [Bound.UPPER]: priceUpper } = pricesAtTicks
   const { [Field.CURRENCY_A]: amountA, [Field.CURRENCY_B]: amountB } = parsedAmounts
 
+  console.log('Price calculations:', {
+    sqrtRatioX96: sqrtRatioX96?.toString(),
+    tickLower,
+    tickUpper,
+    priceLower: priceLower?.toSignificant(6),
+    priceUpper: priceUpper?.toSignificant(6),
+    amountA: amountA?.toExact(),
+    amountB: amountB?.toExact(),
+  })
+
   const tokenA = (baseCurrency ?? undefined)?.wrapped
   const tokenB = (quoteCurrency ?? undefined)?.wrapped
 
   const inverted = Boolean(tokenA && tokenB && tokenA?.address !== tokenB?.address && tokenB.sortsBefore(tokenA))
+
+  console.log('Token info:', {
+    tokenA: tokenA?.symbol,
+    tokenB: tokenB?.symbol,
+    inverted,
+  })
 
   const baseUSDPrice = useStablecoinPrice(baseCurrency)
   const quoteUSDPrice = useStablecoinPrice(quoteCurrency)
@@ -118,6 +176,13 @@ export function AprCalculator({
     (deriveUSDPrice(baseUSDPrice, price?.baseCurrency.equals(baseCurrency?.wrapped) ? price : price?.invert()) ||
       parseFloat(formatPrice(quoteUSDPrice, 6) || '0'))
 
+  console.log('USD Prices:', {
+    baseUSDPrice: baseUSDPrice?.toSignificant(6),
+    quoteUSDPrice: quoteUSDPrice?.toSignificant(6),
+    currencyAUsdPrice,
+    currencyBUsdPrice,
+  })
+
   const depositUsd = useMemo(
     () =>
       amountA &&
@@ -128,17 +193,29 @@ export function AprCalculator({
     [amountA, amountB, currencyAUsdPrice, currencyBUsdPrice],
   )
 
+  console.log('Deposit USD:', depositUsd)
+
   // For now the protocol fee is the same on both tokens so here we just use the fee on token0
   const [protocolFee] = useMemo(
     () => (pool?.feeProtocol && parseProtocolFees(pool.feeProtocol)) || [],
     [pool?.feeProtocol],
   )
 
+  console.log('Protocol fee:', protocolFee)
+
   const applyProtocolFee = defaultDepositUsd ? undefined : protocolFee
 
   const validAmountA = amountA || (inverted ? tokenAmount1 : tokenAmount0)
   const validAmountB = amountB || (inverted ? tokenAmount0 : tokenAmount1)
   const [amount0, amount1] = inverted ? [validAmountB, validAmountA] : [validAmountA, validAmountB]
+
+  console.log('Valid amounts:', {
+    validAmountA: validAmountA?.toExact(),
+    validAmountB: validAmountB?.toExact(),
+    amount0: amount0?.toExact(),
+    amount1: amount1?.toExact(),
+  })
+
   const { apr } = useRoi({
     tickLower,
     tickUpper,
@@ -151,6 +228,20 @@ export function AprCalculator({
     currencyAUsdPrice,
     currencyBUsdPrice,
     volume24H,
+    protocolFee: applyProtocolFee,
+  })
+  console.log('ROI calculation:', {
+    apr: apr?.toSignificant(6),
+    tickLower,
+    tickUpper,
+    sqrtRatioX96: sqrtRatioX96?.toString(),
+    fee: feeAmount,
+    mostActiveLiquidity: pool?.liquidity?.toString(),
+    amountA: validAmountA?.toExact(),
+    amountB: validAmountB?.toExact(),
+    currencyAUsdPrice,
+    currencyBUsdPrice,
+    volume24H: volume24H?.toFixed(),
     protocolFee: applyProtocolFee,
   })
 
@@ -171,8 +262,21 @@ export function AprCalculator({
         })),
     [existingPosition, validAmountA, validAmountB, tickUpper, tickLower, sqrtRatioX96],
   )
+
+  console.log('Position liquidity:', {
+    existingPositionLiquidity: existingPosition?.liquidity?.toString(),
+    calculatedLiquidity: positionLiquidity?.toString(),
+  })
+
   const { positionFarmApr, positionFarmAprFactor } = useMemo(() => {
     if (!farm || !cakePrice || !positionLiquidity || !amount0 || !amount1) {
+      console.log('Farm APR calculation skipped - missing data:', {
+        hasFarm: !!farm,
+        hasCakePrice: !!cakePrice,
+        hasPositionLiquidity: !!positionLiquidity,
+        hasAmount0: !!amount0,
+        hasAmount1: !!amount1,
+      })
       return {
         positionFarmApr: '0',
         positionFarmAprFactor: new BigNumber(0),
@@ -184,7 +288,19 @@ export function AprCalculator({
       ? [tokenPriceBusd, quoteTokenPriceBusd]
       : [quoteTokenPriceBusd, tokenPriceBusd]
     const positionTvlUsd = +amount0.toExact() * +token0Price + +amount1.toExact() * +token1Price
-    return {
+
+    console.log('Farm calculation inputs:', {
+      poolWeight,
+      token0Price,
+      token1Price,
+      positionTvlUsd,
+      cakePriceUsd: cakePrice.toFixed(),
+      liquidity: positionLiquidity.toString(),
+      cakePerSecond,
+      totalStakedLiquidity: lmPoolLiquidity,
+    })
+
+    const result = {
       positionFarmApr: getPositionFarmApr({
         poolWeight,
         positionTvlUsd,
@@ -201,6 +317,9 @@ export function AprCalculator({
         totalStakedLiquidity: lmPoolLiquidity,
       }),
     }
+
+    console.log('Farm APR result:', result)
+    return result
   }, [farm, cakePrice, positionLiquidity, amount0, amount1])
 
   // NOTE: Assume no liquidity when opening modal
@@ -209,6 +328,14 @@ export function AprCalculator({
   const closeModal = useCallback(() => setOpen(false), [])
   const onApply = useCallback(
     (position: RoiCalculatorPositionInfo) => {
+      console.log('Applying position:', {
+        amountA: position.amountA?.toExact(),
+        amountB: position.amountB?.toExact(),
+        priceLower: position.priceLower?.toSignificant(6),
+        priceUpper: position.priceUpper?.toSignificant(6),
+        fullRange: position.fullRange,
+      })
+
       batch(() => {
         const isToken0Price =
           position.amountA?.wrapped?.currency &&
@@ -248,6 +375,7 @@ export function AprCalculator({
   )
 
   if (!data || !data.length) {
+    console.log('No tick data available, returning null')
     return null
   }
 
@@ -257,6 +385,15 @@ export function AprCalculator({
     maximumFractionDigits: 2,
     minimumFractionDigits: 0,
   })
+
+  console.log('Final APR calculation:', {
+    hasFarmApr,
+    baseApr: apr.toSignificant(6),
+    farmApr: positionFarmApr,
+    combinedApr,
+    aprDisplay,
+  })
+
   const farmAprTips = hasFarmApr ? (
     <>
       <Text bold>{t('This position must be staking in farm to apply the combined APR with farming rewards.')}</Text>
@@ -264,6 +401,8 @@ export function AprCalculator({
     </>
   ) : null
   const AprText = hasFarmApr ? TooltipText : Text
+
+  console.log('=== End AprCalculator Debug ===')
 
   return (
     <>

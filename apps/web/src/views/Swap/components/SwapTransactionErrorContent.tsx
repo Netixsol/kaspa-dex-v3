@@ -29,7 +29,9 @@ export const SwapTransactionErrorContent = ({ onDismiss, message, openSettingMod
             </Text>
           </Text>
           <LinkExternal
-            href="https://docs.pancakeswap.finance/products/pancakeswap-exchange/trade-guide"
+            // href="https://docs.pancakeswap.finance/products/pancakeswap-exchange/trade-guide"
+            href="#"
+            
             style={{ width: '100%', justifyContent: 'center' }}
           >
             {t('What are the potential issues with the token?')}

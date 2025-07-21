@@ -27,6 +27,7 @@ import { usePairContract } from './useContract'
 import { PairState, useV2Pairs } from './usePairs'
 import { useActiveChainId } from './useActiveChainId'
 import { useBestAMMTrade } from './useBestAMMTrade'
+import { useKaspaTokenPrice } from './useKaspaTokenPrice'
 
 type UseStablecoinPriceConfig = {
   enabled?: boolean
@@ -44,7 +45,7 @@ export function useStablecoinPrice(
   const { chainId: currentChainId } = useActiveChainId()
   const chainId = currency?.chainId
   const { enabled, hideIfPriceImpactTooHigh } = { ...DEFAULT_CONFIG, ...config }
-
+  const isKasplex = chainId === ChainId.KASPLEX_TESTNET || chainId === ChainId.KASPLEX_MAINNET
   const cakePrice = useCakePriceAsBN()
   const stableCoin = chainId in ChainId ? STABLE_COIN[chainId as ChainId] : undefined
   const isCake = currency?.wrapped.equals(CAKE[chainId])
@@ -53,13 +54,16 @@ export function useStablecoinPrice(
 
   const shouldEnabled = currency && stableCoin && enabled && currentChainId === chainId && !isCake && !isStableCoin
 
-  const enableLlama = currency?.chainId === ChainId.ETHEREUM && shouldEnabled
+  const enableLlama = currency?.chainId !== ChainId.KASPLEX_TESTNET && shouldEnabled
+
+  // Use Kaspa token price hook for Kaspa tokens
+  const kaspaTokenPrice = useKaspaTokenPrice(currency, { enabled: isKasplex && enabled })
 
   // we don't have too many AMM pools on ethereum yet, try to get it from api
   const { data: priceFromLlama, isLoading } = useSWRImmutable<string>(
     enableLlama && ['fiat-price-ethereum', currency],
     async () => {
-      const address = currency.isToken ? currency.address : WETH9[ChainId.ETHEREUM].address
+      const address = currency.isToken ? currency.address : WETH9[ChainId.KASPLEX_TESTNET].address
       return fetch(`https://coins.llama.fi/prices/current/ethereum:${address}`) // <3 llama
         .then((res) => res.json())
         .then(
@@ -93,6 +97,23 @@ export function useStablecoinPrice(
       return undefined
     }
 
+    // Handle Kaspa tokens with custom price fetching
+    if (isKasplex && kaspaTokenPrice) {
+      try {
+        const kaspaPriceValue = parseFloat(kaspaTokenPrice.toExact())
+        // console.log('kaspaPcriceValue', kaspaPriceValue)
+        return new Price(
+          currency,
+          stableCoin,
+          1 * 10 ** currency.decimals,
+          getFullDecimalMultiplier(stableCoin.decimals)
+            .times(kaspaPriceValue.toFixed(stableCoin.decimals))
+            .toString(),
+        )
+      } catch (error) {
+        console.error('Error creating Kaspa price:', error)
+      }
+    }
     if (isCake && cakePrice) {
       return new Price(
         currency,
@@ -145,6 +166,8 @@ export function useStablecoinPrice(
     enableLlama,
     trade,
     hideIfPriceImpactTooHigh,
+    isKasplex,
+    kaspaTokenPrice,
   ])
 
   return price

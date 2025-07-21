@@ -25,7 +25,7 @@ export const CHAIN_QUERY_NAME = {
   [ChainId.KASPLEX_TESTNET]: 'kasplexTestnet',
 } as const // satisfies Record<ChainId, string>
 
-export const kasplexMainnet = {
+export const kasplexMainnet = {   // Todo Mainnet Addresss
   id: 167013,
   name: 'Kasplex Mainnet',
   network: 'KasplexMainnet',
@@ -72,7 +72,7 @@ export const kasplexTestnet = {
   },
   contracts: {
     multicall3: {
-      address: '0x1Df5fF99ce9C75510f8Fa3D8D507879128825e3D',
+      address: '0x1Df5fF99ce9C75510f8Fa3D8D507879128825e3D', // Todo Mainnet Addresss
     },
   },
   testnet: true,

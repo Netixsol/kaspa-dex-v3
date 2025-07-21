@@ -94,23 +94,23 @@ const Chart = ({
             </defs>
             <XAxis
               dataKey="time"
-              axisLine={false}
-              tickLine={false}
-              tickFormatter={(time) => dayjs(time).format('DD')}
-              minTickGap={10}
+              tickFormatter={(time) => dayjs(time).format('DD')} // ✅ will now work
             />
+
             <Tooltip
               cursor={{ stroke: theme.colors.backgroundAlt2 }}
               contentStyle={{ display: 'none' }}
-              formatter={(tooltipValue, name, props) => {
-                if (setValue && parsedValue !== props.payload.value) {
-                  setValue(props.payload.value)
-                }
-                const formattedTime = dayjs(props.payload.time).format('MMM D, YYYY')
-                if (setLabel && label !== formattedTime) setLabel(formattedTime)
+              formatter={(_, __, props) => {
+                const hoveredValue = props?.payload?.value ?? 0
+                const hoveredTime = props?.payload?.time
+
+                if (setValue) setValue(hoveredValue)
+                if (setLabel) setLabel(dayjs(hoveredTime).format('MMM D, YYYY'))
+
                 return null
               }}
             />
+
             <Area dataKey="value" type="monotone" stroke={color} fill="url(#gradient)" strokeWidth={2} />
           </AreaChart>
         </ResponsiveContainer>

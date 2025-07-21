@@ -7,11 +7,11 @@ import 'swiper/css/autoplay'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 import { Autoplay } from 'swiper'
-
+export const ASSET_CDN = 'https://kaspa-dex-v3-lake.vercel.app'
 const IntroSteps = [
   {
     title: <Trans>Your first step in the DeFi world</Trans>,
-    icon: 'https://cdn.pancakeswap.com/wallets/wallet_intro.png',
+    icon: `${ASSET_CDN}/images/chains/svg/connect_wallet_1.svg`,
     description: (
       <Trans>
         A Web3 Wallet allows you to send and receive crypto assets like bitcoin, BNB, ETH, NFTs and much more.
@@ -20,7 +20,7 @@ const IntroSteps = [
   },
   {
     title: <Trans>Login using a wallet connection</Trans>,
-    icon: 'https://cdn.pancakeswap.com/wallets/world_lock.png',
+    icon: `${ASSET_CDN}/images/chains/svg/connect_wallet_2.svg`,
     description: (
       <Trans>
         Instead of setting up new accounts and passwords for every website, simply set up your wallet in one go, and

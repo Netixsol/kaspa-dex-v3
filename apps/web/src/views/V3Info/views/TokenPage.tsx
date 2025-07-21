@@ -341,8 +341,8 @@ const TokenPage: React.FC<{ address: string }> = ({ address }) => {
             </ContentLayout>
             <Heading>{t('Pairs')}</Heading>
             <PoolTable poolDatas={formatPoolData} />
-            <Heading>{t('Transactions')}</Heading>
-            {transactions ? <TransactionTable transactions={transactions} /> : <LocalLoader fill={false} />}
+            {/* <Heading>{t('Transactions')}</Heading>
+            {transactions ? <TransactionTable transactions={transactions} /> : <LocalLoader fill={false} />} */}
           </AutoColumn>
         )
       ) : (

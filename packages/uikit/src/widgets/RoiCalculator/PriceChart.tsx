@@ -110,7 +110,7 @@ function PriceDisplay({ title, value, ...rest }: { title?: string; value?: strin
       <Text color="secondary" textTransform="uppercase" small>
         {title}
       </Text>
-      <Text small>{value}</Text>
+      <Text small>{Number(value) || 0}</Text>
     </PriceDisplayContainer>
   );
 }

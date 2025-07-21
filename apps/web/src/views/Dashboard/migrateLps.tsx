@@ -47,12 +47,12 @@ const MigrateLps = () => {
           <DashBox style={{ flexGrow: 5 }}>
             <MigrateTokens />
           </DashBox>
-          <DashBox>
+          {/* <DashBox>
             <Text fontSize="24px" fontWeight={500} marginBottom="22px">
               Progress
             </Text>
             <VerticalStepProgress steps={steps} activeStep="step3" />
-          </DashBox>
+          </DashBox> */}
           <DashBox>
             <Text fontSize="24px" fontWeight={500}>
               Points & Rewards

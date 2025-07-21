@@ -65,7 +65,7 @@ const isKasWareInstalled = () => {
     return false
   }
 
-  return Boolean(window?.kasware?.ethereum?.isKasWare) || Boolean(window?.kasware)
+  return Boolean(window?.kasware?.ethereum?._isConnected) || Boolean(window?.kasware)
 }
 
 const walletsConfig = ({
@@ -271,15 +271,15 @@ export const createWallets = (chainId: number, connect: any) => {
   return hasInjected && config.some((c) => c.installed && c.connectorId === ConnectorNames.Injected)
     ? config // add injected icon if none of injected type wallets installed
     : [
-      ...config,
-      {
-        id: 'injected',
-        title: 'Injected',
-        icon: WalletFilledIcon,
-        connectorId: ConnectorNames.Injected,
-        installed: typeof window !== 'undefined' && Boolean(window.ethereum),
-      },
-    ]
+        ...config,
+        {
+          id: 'injected',
+          title: 'Injected',
+          icon: WalletFilledIcon,
+          connectorId: ConnectorNames.Injected,
+          installed: typeof window !== 'undefined' && Boolean(window.ethereum),
+        },
+      ]
 }
 
 const docLangCodeMapping: Record<string, string> = {

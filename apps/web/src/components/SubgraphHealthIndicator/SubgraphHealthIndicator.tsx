@@ -157,11 +157,11 @@ export const SubgraphHealthIndicator: React.FC<SubgraphHealthIndicatorProps> = (
     >
       {tooltipVisible && tooltip}
       <StyledCard>
-        <IndicatorWrapper alignItems="center" p="10px">
+        {/* <IndicatorWrapper alignItems="center" p="10px">
           <Dot $color={current.color} />
           <Text>{current.label}</Text>
           <InfoIcon />
-        </IndicatorWrapper>
+        </IndicatorWrapper> */}
       </StyledCard>
     </Box>
   )

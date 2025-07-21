@@ -81,8 +81,8 @@ export default function Swap() {
   // )
 
   return (
-    <Page removePadding={false} hideFooterOnDesktop={false}>
-      <Flex width="800px" height="100%" justifyContent="center" position="relative" alignItems="flex-start">
+    <Page removePadding={false} hideFooterOnDesktop={false} style={{ background: "#120F1F" }}>
+      <Flex width="800px" height="100%" justifyContent="center" position="relative" alignItems="flex-start" >
         {/* {isDesktop && isChartSupported && (
           <PriceChartContainer
             inputCurrencyId={inputCurrencyId}

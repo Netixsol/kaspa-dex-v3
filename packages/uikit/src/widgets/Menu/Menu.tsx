@@ -39,7 +39,7 @@ const StyledNav = styled.nav`
 
 const FixedContainer = styled("div").withConfig({
   shouldForwardProp: (props) => !["showMenu"].includes(props),
-})<{ showMenu: boolean; height: number }>`
+}) <{ showMenu: boolean; height: number }>`
   position: fixed;
   top: ${({ showMenu, height }) => (showMenu ? 0 : `-${height}px`)};
   left: 0;
@@ -148,7 +148,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
             {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
             <StyledNav id="nav">
-              <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/home"} />}</Flex>
+              <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/swap"} />}</Flex>
               <Flex alignItems="center" height="100%">
                 <AtomBox display={{ xs: "none", lg: "block" }}>
                   <MenuItems

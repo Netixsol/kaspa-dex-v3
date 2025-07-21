@@ -711,10 +711,10 @@ export default function PoolPage() {
                     </Text>
                     <AutoRow justifyContent="space-between" mb="8px">
                       <Text fontSize="24px" fontWeight={600}>
-                        {totalFeeValue0 && totalFeeValue1 ? ((totalFeeValue0 + totalFeeValue1) / 1e18).toFixed(2) : 0}
-                        {/* {fiatValueOfFees?.greaterThan(new Fraction(1, 100))
+                        {/* {totalFeeValue0 && totalFeeValue1 ? ((totalFeeValue0 + totalFeeValue1) / 1e18).toFixed(2) : 0} */}
+                        {fiatValueOfFees?.greaterThan(new Fraction(1, 100))
                           ? fiatValueOfFees.toFixed(2, { groupSeparator: ',' })
-                          : '-'} */}
+                          : '-'}
                       </Text>
 
                       <Button

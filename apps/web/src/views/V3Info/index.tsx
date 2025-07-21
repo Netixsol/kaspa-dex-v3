@@ -93,7 +93,7 @@ export default function Home() {
       return Object.values(topTokensData)
         .map((d) => d)
         .filter(notEmpty)
-    // .filter((d) => d.tvlUSD > 0)
+        .filter((d) => d.tvlUSD > 0)
     return []
   }, [topTokensData])
 
@@ -102,6 +102,8 @@ export default function Home() {
       return Object.values(topPoolsData)
         .map((p) => p)
         .filter(notEmpty)
+        .filter((p) => p.tvlUSD > 0)
+
     return []
   }, [topPoolsData])
 

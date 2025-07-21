@@ -133,7 +133,8 @@ const FarmV3MigrationBanner = () => {
             </NextLinkFromReactRouter>
             <NextLinkFromReactRouter
               target="_blank"
-              to="https://docs.pancakeswap.finance/code/v3-migration/how-to-migrate"
+              to=""
+              // to="https://docs.pancakeswap.finance/code/v3-migration/how-to-migrate"
               rel='"noopener noreferrer'
             >
               <StyledButtonRight scale={isMobile ? 'sm' : 'md'}>

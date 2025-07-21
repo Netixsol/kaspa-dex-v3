@@ -68,13 +68,13 @@ export default function useWarningImport() {
       setSwapWarningCurrency(null)
     }
   }, [])
-
-  useEffect(() => {
-    if (importTokensNotInDefault.length > 0) {
-      onPresentImportTokenWarningModal()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [importTokensNotInDefault.length])
+  // disabling import token modal
+  // useEffect(() => {
+  //   if (importTokensNotInDefault.length > 0) {
+  //     onPresentImportTokenWarningModal()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [importTokensNotInDefault.length])
 
   return swapWarningHandler
 }

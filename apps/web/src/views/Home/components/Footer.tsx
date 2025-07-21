@@ -113,7 +113,8 @@ const Footer = () => {
           {t('No registration needed.')}
         </Text>
 
-        <Link external href="https://docs.pancakeswap.finance/">
+        {/* <Link external href="https://docs.pancakeswap.finance/"> */}
+        <Link external href="#">
           {t('Learn how to start')}
           <OpenNewIcon color="primary" ml="4px" />
         </Link>

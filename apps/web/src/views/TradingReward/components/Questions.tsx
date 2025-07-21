@@ -60,7 +60,8 @@ const Questions = () => {
                 <Link
                   style={{ display: 'inline-block' }}
                   external
-                  href="https://docs.pancakeswap.finance/products/pancakeswap-exchange/fees-and-routes#check-the-fee-rate-and-fee-amount-that-is-currently-applied"
+                  // href="https://docs.pancakeswap.finance/products/pancakeswap-exchange/fees-and-routes#check-the-fee-rate-and-fee-amount-that-is-currently-applied" 
+                  href="#"
                 >
                   <Text color="primary" ml="4px" as="span">
                     {t('this tutorial')}

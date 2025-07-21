@@ -194,7 +194,8 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     userDataLoaded: v3UserDataLoaded,
     cakePerSecond
   } = useFarmsV3WithPositions({ mockApr })
-
+  // console.log(cakePerSecond, "cakeperSecond");
+  // console.log(farmsV3, "farmsV3")
   // console.log({ farmsV3 })
   const farmsLP: V2AndV3Farms = useMemo(() => {
     return [
@@ -294,7 +295,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               return total + Number(amount.toString())
             }, 0)
             : 0
-
+            // console.log(liquidityUSD, "liquidityUSD")
           // Improved APR calculation
           const calculatedApr =
             farm.cakeApr ||
@@ -303,7 +304,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
               // Better approach: Use farm's reward rate if available
               if (cakePerSecond) {
-                const blocksPerYear = (60 / 3) * 60 * 24 * 365 // Assuming 3s block time
+                const blocksPerYear = (60 / 1) * 60 * 24 * 365 // Assuming 1s block time
                 const yearlyRewards = new BigNumber(cakePerSecond).times(blocksPerYear)
                 const apr = yearlyRewards.times(cakePrice).div(liquidityUSD).times(100)
                 return apr.toNumber()
@@ -409,6 +410,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     v3FarmOnly,
     // v2FarmOnly,
   ])
+  // console.log('chosenFarms', chosenFarms)
 
   const chosenFarmsMemoized = useMemo(() => {
     const sortFarms = (farms: V2StakeValueAndV3Farm[]): V2StakeValueAndV3Farm[] => {

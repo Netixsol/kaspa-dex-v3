@@ -31,12 +31,6 @@ const SocialAmplification = () => {
   const [canvas, setCanvas] = useState(null)
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Social Media Amplification</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Social Media Amplification">
         <Flex alignItems="center" justifyContent="center" marginTop="36px">
           <Box>

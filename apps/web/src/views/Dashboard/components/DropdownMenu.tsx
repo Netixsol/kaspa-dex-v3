@@ -22,7 +22,7 @@ const EarningHistoryDropdown: React.FC<{ earnings: any; isLoading: boolean }> = 
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownHeader onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
-        Earning Historydate
+        Earning History Date
         <DropdownArrow $isOpen={isOpen}>
           <ArrowIcon width="13" height="9" viewBox="0 0 13 9" fill="none" color={isOpen ? '#120F1F' : '#ffffff'} />
         </DropdownArrow>
@@ -61,6 +61,10 @@ const DropdownContainer = styled.div`
   background: #252136;
   border-radius: 10px;
   flex-grow: 1;
+
+  @media(max-width: 450px){
+    min-width: 280px;
+  }
 `
 
 const DropdownHeader = styled.div<{ $isOpen: boolean }>`
@@ -79,6 +83,10 @@ const DropdownHeader = styled.div<{ $isOpen: boolean }>`
   border-bottom-right-radius: ${({ $isOpen }) => ($isOpen ? '0px' : '10px')};
   border-bottom-left-radius: ${({ $isOpen }) => ($isOpen ? '0px' : '10px')};
   position: relative;
+
+  @media(max-width: 400px){
+    font-size: 21px;
+  }
 `
 
 const DropdownArrow = styled.span<{ $isOpen: boolean }>`

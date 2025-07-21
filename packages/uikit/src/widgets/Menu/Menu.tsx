@@ -17,11 +17,20 @@ import { MENU_HEIGHT, MOBILE_MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_M
 import { MenuContext } from "./context";
 import { NavProps } from "./types";
 
+const HTMLWrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
+  flex: 1;
+  overflow: hidden;
 `;
 
 const StyledNav = styled.nav`
@@ -60,6 +69,7 @@ const BodyWrapper = styled(Box)`
   position: relative;
   display: flex;
   max-width: 100vw;
+  overflow: hidden;
 `;
 
 const Inner = styled.div`
@@ -137,13 +147,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   const providerValue = useMemo(() => ({ linkComponent }), [linkComponent]);
   return (
     <MenuContext.Provider value={providerValue}>
-      <AtomBox
-        asChild
-        minHeight={{
-          xs: "auto",
-          md: "100vh",
-        }}
-      >
+      <HTMLWrapper>
         <Wrapper>
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
             {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
@@ -202,24 +206,24 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             <Inner>{children}</Inner>
           </BodyWrapper>
         </Wrapper>
-      </AtomBox>
-      <Footer
-        chainId={chainId}
-        items={footerLinks}
-        isDark={isDark}
-        toggleTheme={toggleTheme}
-        langs={langs}
-        setLang={setLang}
-        currentLang={currentLang}
-        cakePriceUsd={cakePriceUsd}
-        buyCakeLabel={buyCakeLabel}
-        buyCakeLink={buyCakeLink}
-        showLangSelector={showLangSelector}
-        showCakePrice={showCakePrice}
-      />
-      <AtomBox display={{ xs: "block", lg: "none" }}>
-        <BottomNav items={links} activeItem={activeItem} activeSubItem={activeSubItem} />
-      </AtomBox>
+        <Footer
+          chainId={chainId}
+          items={footerLinks}
+          isDark={isDark}
+          toggleTheme={toggleTheme}
+          langs={langs}
+          setLang={setLang}
+          currentLang={currentLang}
+          cakePriceUsd={cakePriceUsd}
+          buyCakeLabel={buyCakeLabel}
+          buyCakeLink={buyCakeLink}
+          showLangSelector={showLangSelector}
+          showCakePrice={showCakePrice}
+        />
+        <AtomBox display={{ xs: "block", lg: "none" }}>
+          <BottomNav items={links} activeItem={activeItem} activeSubItem={activeSubItem} />
+        </AtomBox>
+      </HTMLWrapper>
     </MenuContext.Provider>
   );
 };

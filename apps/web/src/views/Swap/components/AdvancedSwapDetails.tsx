@@ -122,7 +122,8 @@ export const TradeSummary = memo(function TradeSummary({
                       style={{ display: 'inline' }}
                       ml="4px"
                       external
-                      href="https://docs.pancakeswap.finance/products/pancakeswap-exchange/faq#what-will-be-the-trading-fee-breakdown-for-v3-exchange"
+                      // href="https://docs.pancakeswap.finance/products/pancakeswap-exchange/faq#what-will-be-the-trading-fee-breakdown-for-v3-exchange"
+                      href="#"
                     >
                       {t('Fee Breakdown and Tokenomics')}
                     </Link>

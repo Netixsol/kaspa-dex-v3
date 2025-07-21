@@ -5,7 +5,7 @@ export const useLeaderBoard = (params: any = {}) => {
   const token = Cookies.get('token')
   const { data, isLoading, error, status } = useQuery({
     queryKey: ['leader-board', params],
-
+    enabled: !!token,
     queryFn: async () => {
       const url = new URL(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/leaderboeard/users`)
 

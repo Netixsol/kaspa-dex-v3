@@ -5,7 +5,7 @@ export const useLiquidityProvision = () => {
   const token = Cookies.get('token')
   const { data, isLoading, error, status } = useQuery({
     queryKey: ['rewards'],
-
+    enabled: !!token,
     queryFn: async () =>
       fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/liquidity/rewards`, {
         method: 'GET',

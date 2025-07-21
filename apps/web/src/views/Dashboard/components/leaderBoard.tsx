@@ -5,7 +5,6 @@ import { ShareIcon } from '../icons/share.ico'
 import { CrownIcon } from '../icons/crown.ico'
 import { ContentBox } from '../liquidityProvision'
 import { useLeaderBoard } from '../hooks/useLeaderBoard'
-import leaderBoard from 'pages/api/affiliates-program/leader-board'
 
 const IconButton = styled(UiKitIconButton)`
   background: transparent;

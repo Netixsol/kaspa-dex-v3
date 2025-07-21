@@ -11,7 +11,7 @@ export const useEarningPointHistory = (params: PointHistoryParams = {}) => {
   const token = Cookies.get('token')
   const { data, isLoading, error, status } = useQuery({
     queryKey: ['points-history', params],
-
+    enabled: !!token,
     queryFn: async () => {
       const url = new URL(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/points/history`)
 

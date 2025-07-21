@@ -5,7 +5,7 @@ export const useRewardTwitter = () => {
   const token = Cookies.get('token')
   const { data, isLoading, error, status } = useQuery({
     queryKey: ['reward-twitter'],
-
+    enabled: !!token,
     queryFn: async () =>
       fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/rewards/twitter`, {
         method: 'GET',

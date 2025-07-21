@@ -5,7 +5,7 @@ export const useFarmingStaking = () => {
   const token = Cookies.get('token')
   const { data, isLoading, error, status } = useQuery({
     queryKey: ['farming'],
-
+    enabled: !!token,
     queryFn: async () =>
       fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/stakes/rewards`, {
         method: 'GET',

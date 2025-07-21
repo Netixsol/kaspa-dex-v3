@@ -5,7 +5,7 @@ export const useTradingSwap = () => {
   const token = Cookies.get('token')
   const { data, isLoading, error, status } = useQuery({
     queryKey: ['trading-swap'],
-
+    enabled: !!token,
     queryFn: async () =>
       fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/swap/rewards`, {
         method: 'GET',

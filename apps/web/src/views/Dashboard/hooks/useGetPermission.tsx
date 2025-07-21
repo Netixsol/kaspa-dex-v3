@@ -3,9 +3,9 @@ import Cookies from 'js-cookie'
 
 export const useGetPermissions = () => {
   const token = Cookies.get('token')
-  useQuery({
-    queryKey: ['get-permissions'],
-
+  const { data, isLoading, error, status } = useQuery({
+    queryKey: ['get-permissions', token],
+    enabled: !!token,
     queryFn: async () =>
       fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/user/permission`, {
         method: 'GET',
@@ -23,5 +23,5 @@ export const useGetPermissions = () => {
         }),
   })
 
-  //   return { data, isLoading, error, status }
+  return { data, isLoading, error, status }
 }

@@ -65,7 +65,8 @@ const EthBanner = () => {
           <Button
             minHeight="48px"
             onClick={() =>
-              window?.open('https://docs.pancakeswap.finance/ethereum-expansion', '_blank', 'noopener noreferrer')
+              // window?.open('https://docs.pancakeswap.finance/ethereum-expansion', '_blank', 'noopener noreferrer')
+              window?.open('#', '_blank', 'noopener noreferrer')
             }
           >
             <Text color="invertedContrast" bold fontSize="16px" mr="4px">

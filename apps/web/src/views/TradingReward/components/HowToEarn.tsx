@@ -97,7 +97,8 @@ const HowToEarn = () => {
       </Box>
       <LinkExternal
         external
-        href="https://docs.pancakeswap.finance/products/trading-reward/how-to-participate"
+        // href="https://docs.pancakeswap.finance/products/trading-reward/how-to-participate"
+        href="#"
         margin={['auto', 'auto', 'auto', '42px auto 0 auto']}
       >
         {t('Learn More')}

@@ -93,7 +93,7 @@ export default function Home() {
       return Object.values(topTokensData)
         .map((d) => d)
         .filter(notEmpty)
-        // .filter((d) => d.tvlUSD > 0)
+    // .filter((d) => d.tvlUSD > 0)
     return []
   }, [topTokensData])
 
@@ -109,7 +109,8 @@ export default function Home() {
     return formatDollarAmount(liquidityHover, 2, true)
   }, [liquidityHover])
 
-  console.log("protocolData:::::", formattedTvlData);
+  console.log('protocolData:::::', formattedTvlData)
+  const latestLiquidityValue = formattedTvlData.at(-1)?.value ?? 0
 
   return (
     <Page>
@@ -122,7 +123,6 @@ export default function Home() {
             data={formattedTvlData}
             height={220}
             minHeight={332}
-            // color={theme.colors.primary}
             value={liquidityHover}
             label={leftLabel}
             setValue={setLiquidityHover}
@@ -131,7 +131,11 @@ export default function Home() {
               <AutoColumn gap="4px">
                 <Text fontSize="16px">{t('TVL')}</Text>
                 <Text fontSize="32px">
-                  <MonoSpace>{tvlValue}</MonoSpace>
+                  <MonoSpace>
+                    {formatDollarAmount(
+                      liquidityHover !== undefined ? liquidityHover : formattedTvlData.at(-1)?.value ?? 0,
+                    )}
+                  </MonoSpace>
                 </Text>
                 <Text fontSize="12px" height="14px">
                   <MonoSpace>{leftLabel ?? now.format('MMM D, YYYY')} (UTC)</MonoSpace>
@@ -140,6 +144,7 @@ export default function Home() {
             }
           />
         </Card>
+
         <Card>
           <BarChart
             height={200}

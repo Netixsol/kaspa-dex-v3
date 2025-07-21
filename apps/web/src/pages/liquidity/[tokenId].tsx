@@ -553,7 +553,7 @@ export default function PoolPage() {
                             {t('Farming')}
                           </Tag>
                         )}
-                        <RangeTag ml="8px" removed={removed} outOfRange={!inRange} style={{ color: "black" }} />
+                        <RangeTag ml="8px" removed={removed} outOfRange={!inRange} style={{ color: "white" }} />
                       </>
                     )}
                   </Flex>

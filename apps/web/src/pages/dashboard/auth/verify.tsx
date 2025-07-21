@@ -22,11 +22,12 @@ const AuthVerifyPage = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const { toastSuccess, toastError } = useToast()
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
   const { login } = useAuth()
   const { connectAsync, connectors } = useConnect()
   const { chainId } = useActiveChainId()
   const { signMessageAsync } = useSignMessage()
+  const isAnyWalletAvailable = connectors.some((c) => c.ready)
   const {
     t,
     currentLanguage: { code },
@@ -160,7 +161,7 @@ const AuthVerifyPage = () => {
       console.log(res, 'res')
     },
     onError: (error) => {
-      console.log(error)
+      console.log
     },
     onSettled: () => {
       setIsLoading(false)

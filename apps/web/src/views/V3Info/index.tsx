@@ -102,6 +102,8 @@ export default function Home() {
       return Object.values(topPoolsData)
         .map((p) => p)
         .filter(notEmpty)
+        .filter((p) => p.tvlUSD > 0)
+
     return []
   }, [topPoolsData])
 

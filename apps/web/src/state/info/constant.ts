@@ -67,6 +67,8 @@ export const multiChainQueryEndPoint = {
 export const multiChainScan = {
   BSC: 'BscScan',
   ETH: 'EtherScan',
+  KASPLEX_TESTNET: 'Explorer',
+  KASPLEX_MAINNET: 'Explorer',
 }
 
 export const multiChainTokenBlackList = {

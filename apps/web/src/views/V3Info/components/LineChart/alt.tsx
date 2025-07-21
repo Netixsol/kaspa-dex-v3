@@ -104,8 +104,8 @@ const Chart = ({
                 const hoveredValue = props?.payload?.value ?? 0
                 const hoveredTime = props?.payload?.time
 
-                if (setValue) setValue(hoveredValue)
-                if (setLabel) setLabel(dayjs(hoveredTime).format('MMM D, YYYY'))
+                if (setValue && parsedValue) setValue(hoveredValue)
+                if (setLabel && parsedValue) setLabel(dayjs(hoveredTime).format('MMM D, YYYY'))
 
                 return null
               }}

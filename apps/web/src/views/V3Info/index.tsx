@@ -57,6 +57,7 @@ export default function Home() {
   useEffect(() => {
     if (liquidityHover === undefined && protocolData) {
       setLiquidityHover(protocolData.tvlUSD)
+      setVolumeHover(protocolData.volumeUSD)
     }
   }, [liquidityHover, protocolData])
 
@@ -111,8 +112,7 @@ export default function Home() {
     return formatDollarAmount(liquidityHover, 2, true)
   }, [liquidityHover])
 
-  console.log('protocolData:::::', formattedTvlData)
-  const latestLiquidityValue = formattedTvlData.at(-1)?.value ?? 0
+  console.log('protocolData:::::', liquidityHover)
 
   return (
     <Page>
@@ -134,9 +134,7 @@ export default function Home() {
                 <Text fontSize="16px">{t('TVL')}</Text>
                 <Text fontSize="32px">
                   <MonoSpace>
-                    {formatDollarAmount(
-                      liquidityHover !== undefined ? liquidityHover : formattedTvlData.at(-1)?.value ?? 0,
-                    )}
+                    {tvlValue}
                   </MonoSpace>
                 </Text>
                 <Text fontSize="12px" height="14px">

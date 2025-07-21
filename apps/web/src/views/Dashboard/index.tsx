@@ -16,6 +16,10 @@ const Page = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
 
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     padding: 55px 30px;
   }

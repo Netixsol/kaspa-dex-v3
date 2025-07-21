@@ -27,7 +27,7 @@ const ScreenShortContainer = ({ children, title }: any) => {
 
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center">
+      <Flex justifyContent="space-between" alignItems="center" style={{gap: "10px"}} flexWrap={["wrap", null, "nowrap"]}>
         <Heading scale="xxl">{title}</Heading>
         <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius:"100%" }} onClick={handleCapture}>
           <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />

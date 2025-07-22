@@ -94,14 +94,7 @@ export const inputContainerVariants = recipe({
   base: style([
     atoms({
       borderRadius: "default",
-      backgroundColor: "input",
-    }),
-    style({
-      selectors: {
-        "&:focus-within": {
-          boxShadow: vars.shadows.focus,
-        },
-      },
+      backgroundColor: "background",
     }),
   ]),
   variants: {

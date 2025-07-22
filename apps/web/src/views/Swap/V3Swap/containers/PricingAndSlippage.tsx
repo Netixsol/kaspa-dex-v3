@@ -29,10 +29,10 @@ export const PricingAndSlippage = memo(function PricingAndSlippage({
   }
 
   const priceNode = price ? (
-    <>
+    <div style={{ paddingLeft: "10px", paddingRight: "10px", display: "flex", justifyContent: "space-between", width: "100%" }}>
       <SwapUI.InfoLabel>{t('Price')}</SwapUI.InfoLabel>
       <SwapUI.TradePrice price={price} loading={priceLoading} />
-    </>
+    </div>
   ) : null
 
   return (

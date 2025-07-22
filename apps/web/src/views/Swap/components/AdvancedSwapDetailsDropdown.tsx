@@ -8,7 +8,7 @@ export const AdvancedDetailsFooter = styled.div<{ show: boolean }>`
   max-width: 400px;
   margin: auto;
   border-radius: 20px;
-  background-color: transparent;
+  background-color: #120F1F;
 
   transform: ${({ show }) => (show ? 'translateY(0%)' : 'translateY(-100%)')};
   transition: transform 300ms ease-in-out;

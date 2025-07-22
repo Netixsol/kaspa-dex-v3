@@ -89,7 +89,7 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = memo(
     }, [mobileTooltipClickOutside])
 
     const titleContent = (
-      <Flex width="100%" alignItems="center" justifyContent="space-between" flexDirection="column" >
+      <Flex width="100%" alignItems="center" justifyContent="space-between" flexDirection="column" height='10px' >
         {/* <Flex justifyContent="start" width="100%" height="17px" alignItems="center" mb="14px">
           <Swap.CurrencyInputHeaderSubTitle>{subtitle}</Swap.CurrencyInputHeaderSubTitle>
           </Flex> */}

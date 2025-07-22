@@ -276,7 +276,8 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                 {maxAmount?.greaterThan(0) &&
                   showQuickInputButton &&
                   onPercentInput &&
-                  [25, 50, 75].map((percent) => {
+                  /* [25, 50, 75].map((percent) => { */
+                  [].map((percent) => {
                     const isAtClickedPercent = currentClickedPercent === percent.toString()
                     const isAtCurrentPercent =
                       (maxAmount && value !== '0' && value === percentAmount[percent]) ||

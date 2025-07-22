@@ -46,6 +46,7 @@ export function CurrencyInputPanel({
             showBridgeWarning: !!showBridgeWarning,
             error,
           })}
+        // style={{ height: "90px" }}
         >
           <AtomBox
             display="flex"

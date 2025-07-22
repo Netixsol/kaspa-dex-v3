@@ -7,21 +7,22 @@ import DigitalTimer from './components/timer'
 import Accordion from './components/Accrodian'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import styled from 'styled-components'
+
+const ResponsiveFlex = styled(Flex)`
+  @media (max-width: 450px) {
+    min-width: 280px;
+  }
+`
 
 export const PreLaunch = () => {
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Pre-Launch</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Pre-Launch">
         <Flex width="100%" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px" flexBasis="content">
-          <Flex
+          <ResponsiveFlex
             flex="1 1 calc(33.33% - 32px)"
-            minWidth="280px"
+            minWidth="390px"
             flexDirection="column"
             alignItems="stretch"
             style={{ gap: '32px' }}
@@ -87,16 +88,16 @@ export const PreLaunch = () => {
                 </Button>
               </Flex>
             </DashBox>
-          </Flex>
-          <Flex flex="1 1 calc(33.33% - 32px)" minWidth="280px" alignSelf="start">
+          </ResponsiveFlex>
+          <ResponsiveFlex flex="1 1 calc(33.33% - 32px)" minWidth="390px" alignSelf="start">
             <DashBox>
               <Text fontSize="24px" marginBottom="38px" fontWeight={500}>
                 Influencer Partnerships
               </Text>
               <InfulencerPartnershipTable />
             </DashBox>
-          </Flex>
-          <Flex flex="1 1 calc(33.33% - 32px)" minWidth="280px" alignSelf="start">
+          </ResponsiveFlex>
+          <ResponsiveFlex flex="1 1 calc(33.33% - 32px)" minWidth="390px" alignSelf="start">
             <DashBox>
               <Text fontSize="24px" marginBottom="38px" fontWeight={500}>
                 Kasplex & Layer 2 Benefits Explained
@@ -128,7 +129,7 @@ export const PreLaunch = () => {
                 </Accordion>
               </Flex>
             </DashBox>
-          </Flex>
+          </ResponsiveFlex>
         </Flex>
       </ScreenShortContainer>
     </>

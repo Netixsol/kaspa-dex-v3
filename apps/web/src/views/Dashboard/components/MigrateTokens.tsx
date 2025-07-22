@@ -18,11 +18,25 @@ const Box = styled(UiKitBox)`
   width: 100%;
 `
 
+const ResponsiveFlexCover = styled(Flex)`
+  @media (max-width: 575px) {
+    flex-direction: column;
+  }
+`
+
+const ResponsiveFlexArrowIcon = styled(Flex)`
+  @media (max-width: 575px) {
+    transform: rotate(90deg);
+    width: 35px;
+    height: 84px;
+  }
+`
+
 const MigrateTokens = () => {
   return (
     <>
-      <Flex alignItems="center" height="100%">
-        <Box marginRight="-10px">
+      <ResponsiveFlexCover alignItems="center" height="100%">
+        <Box marginRight={['0px', null, '-10px']} marginBottom={['-10px', null, '0px']}>
           <Heading scale="xxl" color="#1FD26F">
             $1,000
           </Heading>
@@ -41,7 +55,7 @@ const MigrateTokens = () => {
             <Text marginLeft="5px">In Progress</Text>
           </Flex>
         </Box>
-        <Flex
+        <ResponsiveFlexArrowIcon
           width={86}
           height={36}
           borderRadius="50%"
@@ -51,8 +65,8 @@ const MigrateTokens = () => {
           zIndex="999"
         >
           <ArrowIcon width="21" height="16" viewBox="0 0 21 16" fill="none" />
-        </Flex>
-        <Box marginLeft="-10px">
+        </ResponsiveFlexArrowIcon>
+        <Box marginLeft={['0px', null, '-10px']} marginTop={['-10px', null, '0px']}>
           <Flex alignItems="center" justifyContent="space-between">
             <Text fontSize="18px">Kaspa Finance V3</Text>
             <Flex
@@ -70,7 +84,7 @@ const MigrateTokens = () => {
             Migrate
           </Button>
         </Box>
-      </Flex>
+      </ResponsiveFlexCover>
     </>
   )
 }

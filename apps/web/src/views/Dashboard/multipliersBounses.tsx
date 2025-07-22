@@ -9,12 +9,6 @@ import ScreenShortContainer from './components/CanvasContainer'
 const MultipliersBounsesPage = () => {
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Multipliers & Bonuses</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Multipliers & Bonuses">
         <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
           <DashBox>

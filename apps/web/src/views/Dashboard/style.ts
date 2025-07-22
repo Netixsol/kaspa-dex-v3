@@ -27,6 +27,14 @@ export const DashBox = styled(Box)`
   &::-webkit-scrollbar-button {
     display: none;
   }
+
+  @media (max-width: 450px) {
+    min-width: 280px;
+  }
+    
+  @media (max-width: 375px) {
+    padding: 30px 13px;
+  }
 `
 // Styled Components (using transient props with $ prefix)
 export const AvatarContainer = styled.div<{ $size: number }>`

@@ -13,12 +13,6 @@ const ContentBox = styled(OldContentBox)`
 const MilstoneRewards = () => {
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Bonus Quests & Milestone Rewards</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Bonus Quests & Milestone Rewards">
         <Flex
           width="100%"

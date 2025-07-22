@@ -5,22 +5,23 @@ import { DashBox } from './style'
 import { ContentBox, Highlight } from './liquidityProvision'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import styled from 'styled-components'
+
+const ResponsiveFlex = styled(Flex)`
+  @media (max-width: 450px) {
+    min-width: 280px;
+  }
+`
 
 export const LaunchWeek = () => {
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Launch Week</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Launch Week">
         <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
-          <Flex flex="1 1 calc(33.33% - 32px)" minWidth="280px" alignSelf="start">
+          <ResponsiveFlex flex="1 1 calc(33.33% - 32px)" minWidth="390px" alignSelf="start">
             <LeaderBoard title="Leaderboard" />
-          </Flex>
-          <Flex flex="1 1 calc(33.33% - 32px)" minWidth="280px" alignSelf="start">
+          </ResponsiveFlex>
+          <ResponsiveFlex flex="1 1 calc(33.33% - 32px)" minWidth="390px" alignSelf="start">
             <DashBox display="flex" style={{ flexDirection: 'column' }}>
               <Text fontSize="24px" marginBottom="38px" fontWeight={500}>
                 Daily Twitter Spaces
@@ -43,8 +44,8 @@ export const LaunchWeek = () => {
                 </Link>
               </Flex>
             </DashBox>
-          </Flex>
-          <Flex flex="1 1 calc(33.33% - 32px)" minWidth="280px" alignSelf="start">
+          </ResponsiveFlex>
+          <ResponsiveFlex flex="1 1 calc(33.33% - 32px)" minWidth="390px" alignSelf="start">
             <DashBox display="flex" style={{ flexDirection: 'column' }}>
               <Text fontSize="24px" marginBottom="38px" fontWeight={500}>
                 Live Campaign Updates
@@ -69,7 +70,7 @@ export const LaunchWeek = () => {
                 </Link>
               </Flex>
             </DashBox>
-          </Flex>
+          </ResponsiveFlex>
         </Flex>
       </ScreenShortContainer>
     </>

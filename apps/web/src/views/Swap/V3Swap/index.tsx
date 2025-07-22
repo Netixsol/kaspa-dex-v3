@@ -28,7 +28,7 @@ export function V3SwapForm() {
   const price = useMemo(() => trade && SmartRouter.getExecutionPrice(trade), [trade])
 
   return (
-    <>
+    <div style={{ background: "#252136" }}>
       <FormHeader onRefresh={throttledHandleRefresh} refreshDisabled={!tradeLoaded || syncing || !isStale} />
       <FormMain
         tradeLoading={mm.isMMBetter ? false : !tradeLoaded}
@@ -54,6 +54,6 @@ export function V3SwapForm() {
           <MMLiquidityWarning />
         </Box>
       )}
-    </>
+    </div>
   )
 }

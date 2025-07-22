@@ -36,7 +36,7 @@ const InputRow = styled.div<{ selected: boolean }>`
   justify-content: flex-end;
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
-const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })<{ zapStyle?: ZapStyle }>`
+const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' }) <{ zapStyle?: ZapStyle }>`
   padding: 0px;
 
   ${({ zapStyle, theme }) =>
@@ -205,9 +205,9 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                   <Text id="pair" bold>
                     {(currency && currency.symbol && currency.symbol.length > 10
                       ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
-                          currency.symbol.length - 5,
-                          currency.symbol.length,
-                        )}`
+                        currency.symbol.length - 5,
+                        currency.symbol.length,
+                      )}`
                       : currency?.symbol) || t('Select a currency')}
                   </Text>
                 )}
@@ -308,7 +308,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                     }}
                     scale="xs"
                     variant={isAtPercentMax ? 'primary' : 'secondary'}
-                    style={{ textTransform: 'uppercase' }}
+                    style={{ textTransform: 'uppercase', }}
                   >
                     {t('Max')}
                   </Button>

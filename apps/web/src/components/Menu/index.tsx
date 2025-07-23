@@ -1,12 +1,12 @@
 import { languageList, useTranslation } from '@pancakeswap/localization'
-import { footerLinks, Menu as UikitMenu, NextLinkFromReactRouter, useModal } from '@pancakeswap/uikit'
+import { footerLinks, Menu as UikitMenu, NextLinkFromReactRouter, useModal, Box, Flex } from '@pancakeswap/uikit'
 import USCitizenConfirmModal from 'components/Modal/USCitizenConfirmModal'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
 // import PhishingWarningBanner from 'components/PhishingWarningBanner'
 import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
 import useTheme from 'hooks/useTheme'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 // import { usePhishingBanner } from '@pancakeswap/utils/user'
 import GlobalSettings from './GlobalSettings'
@@ -20,6 +20,7 @@ const LinkComponent = (linkProps) => {
 }
 
 const Menu = (props) => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
   const { chainId } = useActiveChainId()
   const { isDark, setTheme } = useTheme()
   const cakePriceUsd = useCakeBusdPrice({ forceMainnet: true })
@@ -41,6 +42,18 @@ const Menu = (props) => {
     return footerLinks(t)
   }, [t])
 
+  useEffect(() => {
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth < 1024)
+  }
+
+  handleResize()
+  window.addEventListener('resize', handleResize)
+  return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+const shouldHideNetworkSwitcher = pathname.includes('/dashboard') && isSmallScreen
+
   return (
     <>
       <UikitMenu
@@ -48,7 +61,9 @@ const Menu = (props) => {
         rightSide={
           <>
             {/* <GlobalSettings mode={SettingsMode.GLOBAL} /> */}
-            <NetworkSwitcher />
+            {!shouldHideNetworkSwitcher && (
+                <NetworkSwitcher />
+            )}
             <UserMenu />
           </>
         }
@@ -67,6 +82,7 @@ const Menu = (props) => {
         activeSubItem={activeSubMenuItem?.href}
         buyCakeLabel={t('Buy KFC')}
         buyCakeLink=""
+        shouldHideNetworkSwitcher={shouldHideNetworkSwitcher}
         // buyCakeLabel={t('Buy CAKE')}
         // buyCakeLink="https://pancakeswap.finance/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82&chainId=56"
         {...props}

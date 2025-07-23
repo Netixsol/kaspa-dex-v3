@@ -18,7 +18,6 @@ import { routePermissions } from '../types/enums'
 import { LockedIcon } from '../icons/lock.ico'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
 import { getSidebarOpen, subscribeToSidebar } from '@pancakeswap/uikit/src/hooks/useSideBarOpenForDashBoard'
-import { Console } from 'console'
 
 interface MenuWrapperProps {
   isBorder?: boolean

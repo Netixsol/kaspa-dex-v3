@@ -13,19 +13,23 @@ function MigratePage() {
   const router = useRouter()
 
   const address = isAddress(router.query.address)
+console.log("address:::", address);
 
   return (
     <LiquidityFormProvider>
       <Page>
         <BodyWrapper style={{ maxWidth: '858px' }}>
           <AppHeader title="Migrate Liquidity" />
-          {address && <Migrate v2PairAddress={address} />}
+          {address && 
+          <Migrate v2PairAddress={address} />
+          }
         </BodyWrapper>
       </Page>
     </LiquidityFormProvider>
+    // <p>hi</p>
   )
 }
+MigratePage.chains = CHAIN_IDS
 
 export default MigratePage
 
-MigratePage.chains = CHAIN_IDS

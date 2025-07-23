@@ -97,6 +97,8 @@ export const fetchFarmUserEarnings = async (
 ) => {
   const isBscNetwork = verifyBscNetwork(chainId)
   const multiCallChainId = farmFetcher.isTestnet(chainId) ? ChainId.KASPLEX_TESTNET : ChainId.BSC
+  console.log("multiCallChainId::",multiCallChainId)
+  
   const userAddress = isBscNetwork ? account : await fetchCProxyAddress(account, multiCallChainId)
   const masterChefAddress = getMasterChefV2Address(multiCallChainId)
 
@@ -121,7 +123,9 @@ export const fetchFarmUserEarnings = async (
 export const fetchCProxyAddress = async (address: Address, chainId: number) => {
   try {
     const crossFarmingAddress = getCrossFarmingReceiverContract(null, chainId)
-    const cProxyAddress = await crossFarmingAddress.read.cProxy([address])
+    // const cProxyAddress = await crossFarmingAddress.read.cProxy([address])
+    const cProxyAddress = '0x6D74Ce5D190bE73a12F8e80477192BF1Ee09FFB0'
+
     return cProxyAddress
   } catch (error) {
     console.error('Failed Fetch CProxy Address', error)

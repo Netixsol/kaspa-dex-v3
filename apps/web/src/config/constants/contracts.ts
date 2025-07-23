@@ -6,9 +6,11 @@ import { ChainId } from '@pancakeswap/sdk'
 export default {
   masterChef: {
     97: '0xB4A466911556e39210a6bB2FaECBB59E4eB7E43d',
+    [ChainId.KASPLEX_MAINNET]: '0x65b0552Be5c62d60EC4a3daCC72894c8F96C619a', // Todo Mainnet Address
     [ChainId.KASPLEX_TESTNET]: '0x26DB261E6B9A5cE37eCC7cC7B6388a8E430FC0cD',
-    [ChainId.KASPLEX_MAINNET]: '0x26DB261E6B9A5cE37eCC7cC7B6388a8E430FC0cD', // Todo Mainnet Address
-    56: '0xa5f8C5Dbd5F286960b9d90548680aE5ebFf07652',
+    // [ChainId.KASPLEX_TESTNET]: '0x65b0552Be5c62d60EC4a3daCC72894c8F96C619a', //zealous masterchef contract
+    // 56: '0xa5f8C5Dbd5F286960b9d90548680aE5ebFf07652', 
+    56: '0x65b0552Be5c62d60EC4a3daCC72894c8F96C619a', 
   },
   masterChefV3: masterChefV3Addresses,
   masterChefV1: {

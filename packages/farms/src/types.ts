@@ -169,7 +169,8 @@ export interface SerializedFarmsState {
   loadingKeys: Record<string, boolean>
   poolLength?: number
   regularCakePerBlock?: number
-  totalRegularAllocPoint: string
+  totalRegularAllocPoint: string,
+  poolInfo:any
 }
 
 export interface DeserializedFarmConfig extends FarmConfigBaseProps {
@@ -215,7 +216,7 @@ export interface DeserializedFarmsState {
   userDataLoaded: boolean
   poolLength: number
   regularCakePerBlock: number
-  totalRegularAllocPoint: string
+  // totalRegularAllocPoint: string
   cakePerBlock?: string
 }
 

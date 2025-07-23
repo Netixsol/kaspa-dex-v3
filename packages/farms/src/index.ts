@@ -26,6 +26,7 @@ export function createFarmFetcher(provider: ({ chainId }: { chainId: number }) =
   ) => {
     const { isTestnet, farms, chainId } = params
     const masterChefAddress = isTestnet ? masterChefAddresses[ChainId.KASPLEX_TESTNET] : masterChefAddresses[ChainId.BSC]
+    console.log("masterched_address::",masterChefAddress)
     const { poolLength, totalRegularAllocPoint, totalSpecialAllocPoint, cakePerBlock } = await fetchMasterChefV2Data({
       isTestnet,
       provider,

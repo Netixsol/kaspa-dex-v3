@@ -29,7 +29,9 @@ export interface ITableProps {
   sortColumn?: string
 }
 
-const MigrationFarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({
+const MigrationFarmTable
+// : React.FC<React.PropsWithChildren<ITableProps>>
+ = ({
   title,
   noStakedFarmText,
   account,
@@ -38,7 +40,7 @@ const MigrationFarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({
   userDataReady,
 }) => {
   const { t } = useTranslation()
-
+console.log("farms:::",farms)
   const rowData = farms.map((farm) => {
     const lpLabel = farm.lpSymbol && farm.lpSymbol.replace(/pancake/gi, '')
 

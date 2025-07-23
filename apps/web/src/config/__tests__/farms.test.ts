@@ -62,6 +62,8 @@ describe.concurrent(
     // BSC
     const START_PID = 2
     const FACTORY_ADDRESS = '0xca143ce32fe78f1f7019d7d551a6402fc5350c73'
+    // const FACTORY_ADDRESS = '0x1f1959fE8E23C84b0147505C0303bd65eaE2680C'
+
     const newFarmsToTest = farmsToTest.filter((farmSet) => farmSet[0] >= START_PID)
 
     it.each(newFarmsToTest)('farm %d is using correct factory address', async (pid, farm) => {

@@ -38,11 +38,11 @@ const masterChefFarmCalls = (farm: SerializedFarm) => {
           functionName: 'poolInfo',
           args: [masterChefPid],
         },
-        {
-          abi: masterChefV2ABI,
-          address: masterChefAddress,
-          functionName: 'totalRegularAllocPoint',
-        },
+        // {
+        //   abi: masterChefV2ABI,
+        //   address: masterChefAddress,
+        //   functionName: 'totalRegularAllocPoint',
+        // },
       ] as const)
     : ([null, null] as const)
 }
@@ -50,32 +50,60 @@ const masterChefFarmCalls = (farm: SerializedFarm) => {
 export type PoolInfo = ContractFunctionResult<typeof masterChefV2ABI, 'poolInfo'>
 export type TotalRegularAllocPoint = ContractFunctionResult<typeof masterChefV2ABI, 'totalRegularAllocPoint'>
 
+
+// export const fetchMasterChefData = async (
+//   farms: SerializedFarmConfig[],
+//   chainId: number,
+// ): Promise<[PoolInfo | null, TotalRegularAllocPoint | null][]> => {
+//   const masterChefCalls = farms.map((farm) => masterChefFarmCalls(farm))
+//   const chunkSize = masterChefCalls.flat().length / farms.length
+//   const masterChefAggregatedCalls = masterChefCalls
+//     .filter((masterChefCall) => masterChefCall[0] !== null && masterChefCall[1] !== null)
+//     .flat()
+
+//   const multiCallChainId = farmFetcher.isTestnet(chainId) ? ChainId.BSC_TESTNET : ChainId.BSC
+//   const client = publicClient({ chainId: multiCallChainId })
+//   const masterChefMultiCallResult = await client.multicall({
+//     contracts: masterChefAggregatedCalls,
+//     allowFailure: false,
+//   })
+
+//   const masterChefChunkedResultRaw = chunk(masterChefMultiCallResult, chunkSize)
+
+//   let masterChefChunkedResultCounter = 0
+//   return masterChefCalls.map((masterChefCall) => {
+//     if (masterChefCall[0] === null && masterChefCall[1] === null) {
+//       return [null, null]
+//     }
+//     const data = masterChefChunkedResultRaw[masterChefChunkedResultCounter] as [PoolInfo, TotalRegularAllocPoint]
+//     masterChefChunkedResultCounter++
+//     return data
+//   })
+// }
+
+// with static totelRegularAllocPoints
+const STATIC_ALLOC_POINT = 11.6
+
 export const fetchMasterChefData = async (
   farms: SerializedFarmConfig[],
   chainId: number,
 ): Promise<[PoolInfo | null, TotalRegularAllocPoint | null][]> => {
   const masterChefCalls = farms.map((farm) => masterChefFarmCalls(farm))
-  const chunkSize = masterChefCalls.flat().length / farms.length
-  const masterChefAggregatedCalls = masterChefCalls
-    .filter((masterChefCall) => masterChefCall[0] !== null && masterChefCall[1] !== null)
-    .flat()
+  const poolInfoCalls = masterChefCalls
+    .map(([poolInfo, _]) => poolInfo)
+    .filter((call) => call !== null)
 
-  const multiCallChainId = farmFetcher.isTestnet(chainId) ? ChainId.BSC_TESTNET : ChainId.BSC
-  const client = publicClient({ chainId: multiCallChainId })
-  const masterChefMultiCallResult = await client.multicall({
-    contracts: masterChefAggregatedCalls,
+  const client = publicClient({ chainId })
+  const poolInfoResults = await client.multicall({
+    contracts: poolInfoCalls as any,
     allowFailure: false,
   })
 
-  const masterChefChunkedResultRaw = chunk(masterChefMultiCallResult, chunkSize)
-
-  let masterChefChunkedResultCounter = 0
-  return masterChefCalls.map((masterChefCall) => {
-    if (masterChefCall[0] === null && masterChefCall[1] === null) {
-      return [null, null]
-    }
-    const data = masterChefChunkedResultRaw[masterChefChunkedResultCounter] as [PoolInfo, TotalRegularAllocPoint]
-    masterChefChunkedResultCounter++
-    return data
+  let resultIndex = 0
+  return farms.map((farm) => {
+    const hasValidCall = masterChefFarmCalls(farm)[0] !== null
+    if (!hasValidCall) return [null, null]
+    const poolInfo = poolInfoResults[resultIndex++] as PoolInfo
+    return [poolInfo, STATIC_ALLOC_POINT as unknown as TotalRegularAllocPoint]
   })
 }

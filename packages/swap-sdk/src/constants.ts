@@ -25,6 +25,7 @@ export const FACTORY_ADDRESS_MAP: Record<number, Address> = {
   [ChainId.BSC_TESTNET]: '0x6725f303b657a9451d8ba641348b6761a6cc7a17',
   [ChainId.KASPLEX_TESTNET]: '0x71a6A2cbf1b7bAEaa53643E4456A90F4Cbf6C216',
   [ChainId.KASPLEX_MAINNET]: FACTORY_ADDRESS,  // Todo Mainnet Address
+  // [ChainId.KASPLEX_TESTNET]: '0x1f1959fE8E23C84b0147505C0303bd65eaE2680C', //zealouse factory address
 }
 export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
 

@@ -64,8 +64,10 @@ export const farmSelector = (chainId: number) =>
   createSelector(
     (state: State) => state.farms,
     (farms) => {
+      console.log("chaind::",farms)
       const deserializedFarmsData = farms.data.map(deserializeFarm).filter((farm) => farm.token.chainId === chainId)
-      const { loadArchivedFarmsData, userDataLoaded, poolLength, regularCakePerBlock, totalRegularAllocPoint } = farms
+      const { loadArchivedFarmsData, userDataLoaded, poolLength, regularCakePerBlock, totalRegularAllocPoint, poolInfo } = farms
+      console.log('Farms data loaded:', loadArchivedFarmsData, userDataLoaded, poolLength, regularCakePerBlock, totalRegularAllocPoint, poolInfo)
 
       return {
         loadArchivedFarmsData,
@@ -74,6 +76,7 @@ export const farmSelector = (chainId: number) =>
         poolLength,
         regularCakePerBlock,
         totalRegularAllocPoint,
+        poolInfo
       }
     },
   )

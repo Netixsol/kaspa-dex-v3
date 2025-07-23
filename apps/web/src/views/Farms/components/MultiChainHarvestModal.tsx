@@ -65,7 +65,6 @@ const MultiChainHarvestModal: React.FC<MultiChainHarvestModalProp> = ({
   const { cProxyAddress } = useFarmCProxyAddress(account, chainId)
   const { onReward } = useNonBscHarvestFarm(pid, cProxyAddress)
   const { fetchWithCatchTxError, loading: isPending } = useCatchTxError()
-
   const earnings = getBalanceAmount(earningsBigNumber)
   const displayBalance = earnings.toFixed(5, BigNumber.ROUND_DOWN)
 

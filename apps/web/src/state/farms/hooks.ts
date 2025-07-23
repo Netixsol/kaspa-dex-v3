@@ -112,6 +112,8 @@ export const usePollCoreFarmData = () => {
 
 export const useFarms = (): DeserializedFarmsState => {
   const { chainId } = useActiveChainId()
+  console.log("useFarms return data::::",useSelector(useMemo(() => farmSelector(chainId), [chainId])))
+
   return useSelector(useMemo(() => farmSelector(chainId), [chainId]))
 }
 

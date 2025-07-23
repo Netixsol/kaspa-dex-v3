@@ -66,7 +66,7 @@ export async function farmV2FetchFarms({
     fetchMasterChefData(farms, isTestnet, provider, masterChefAddress),
     fetchPublicFarmsData(farms, chainId, provider, masterChefAddress),
   ])
-
+console.log("fetchPool::", poolInfos)
   const stableFarmsData = (stableFarmsResults as StableLpData[]).map(formatStableFarm)
 
   const stableFarmsDataMap = stableFarms.reduce<Record<number, FormatStableFarmResponse>>((map, farm, index) => {
@@ -230,7 +230,9 @@ export const fetchMasterChefV2Data = async ({
 }) => {
   try {
     const chainId = isTestnet ? ChainId.KASPLEX_TESTNET : ChainId.BSC
-    const [poolLength, totalRegularAllocPoint, totalSpecialAllocPoint, cakePerBlock] = await provider({
+    const [poolLength,
+      // totalRegularAllocPoint,
+      totalSpecialAllocPoint, cakePerBlock,poolInfo] = await provider({
       chainId,
     }).multicall({
       contracts: [
@@ -239,11 +241,11 @@ export const fetchMasterChefV2Data = async ({
           address: masterChefAddress,
           functionName: 'poolLength',
         },
-        {
-          abi: masterChefV2Abi,
-          address: masterChefAddress,
-          functionName: 'totalRegularAllocPoint',
-        },
+        // {
+        //   abi: masterChefV2Abi,
+        //   address: masterChefAddress,
+        //   functionName: 'totalRegularAllocPoint',
+        // },
         {
           abi: masterChefV2Abi,
           address: masterChefAddress,
@@ -255,15 +257,22 @@ export const fetchMasterChefV2Data = async ({
           functionName: 'cakePerBlock',
           args: [true],
         },
+        {
+          abi: masterChefV2Abi,
+          address: masterChefAddress,
+          functionName: 'poolInfo',
+          args: [BigInt(0)],
+        },
       ],
       allowFailure: false,
     })
-
+console.log("poolInfo:::",poolInfo)
     return {
       poolLength,
-      totalRegularAllocPoint,
+      totalRegularAllocPoint:11.6,
       totalSpecialAllocPoint,
       cakePerBlock,
+      poolInfo
     }
   } catch (error) {
     console.error('Get MasterChef data error', error)

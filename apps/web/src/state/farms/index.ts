@@ -51,6 +51,7 @@ const initialState: SerializedFarmsState = {
   userDataLoaded: false,
   totalRegularAllocPoint: '0',
   loadingKeys: {},
+  poolInfo: [],
 }
 
 // Async thunks

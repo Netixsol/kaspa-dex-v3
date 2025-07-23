@@ -56,6 +56,7 @@ const PointsDisplaySkeleton = () => {
       paddingX="10px"
       borderRadius="10px"
       justifyContent="space-between"
+      flexDirection={['column', null, 'row']}
       paddingY="8px"
       flex="1 1 calc(66.66% - 32px)"
     >
@@ -93,7 +94,12 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
       <Flex width="100%" height="100%" position="relative">
         <SideBar permissions={permissions} isLoading={isPermissionsLoading} />
         <Page>
-          <Flex justifyContent="space-between" marginBottom="54px" style={{ columnGap: '32px', rowGap: '20px' }} flexWrap="wrap">
+          <Flex
+            justifyContent="space-between"
+            marginBottom="54px"
+            style={{ columnGap: '32px', rowGap: '20px' }}
+            flexWrap="wrap"
+          >
             {isLoading ? (
               <PointsDisplaySkeleton />
             ) : (
@@ -102,6 +108,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                 paddingX="10px"
                 borderRadius="10px"
                 justifyContent="space-between"
+                flexDirection={['column', null, 'row']}
                 paddingY="8px"
                 flex="1 1 calc(66.66% - 32px)"
               >
@@ -114,7 +121,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                       style={{ objectFit: 'cover' }}
                     />
                   </Box>
-                  <Text color="#1FD26F">@{pointsData ? pointsData?.data?.userName : 'Twitter User Name'}</Text>
+                  <Text color="#1FD26F">@{pointsData ? pointsData?.data?.userName : 'Twitter_User_Name'}</Text>
                 </Flex>
                 <Flex alignItems="center" style={{ gap: '10px' }}>
                   <Text color="#1FD26F" fontSize={['16px', null, '18px', '24px']} fontWeight={500}>
@@ -122,14 +129,13 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                   </Text>
                   <Flex
                     borderRadius="20px"
-                    height="40px"
-                    paddingX="20px"
+                    height={['32px', null, '40px']}
+                    paddingX={['10px', null, '13px', '20px']}
                     background="#120F1F"
                     alignItems="center"
-                    style={{ gap: '15px' }}
                   >
                     <ResponsiveFireIcon width="22" height="31" viewBox="0 0 22 31" fill="none" color="#1FD26F" />
-                  <Text fontSize={['16px', null, '18px', '24px']} ml={['5px', null, '8px', '15px']} fontWeight={500}>
+                    <Text fontSize={['16px', null, '18px', '24px']} ml={['5px', null, '8px', '15px']} fontWeight={500}>
                       {pointsData ? pointsData?.data?.streak : 0} Streak
                     </Text>
                   </Flex>

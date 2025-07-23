@@ -20,6 +20,7 @@ export const useGetPermissions = () => {
           throw new Error(`Request failed with status ${response.status}`)
         }
         const res = await response.json()
+        Cookies.set('permissions', JSON.stringify(res?.data))
         return res?.data || {}
       } catch (error) {
         console.error('Failed to fetch Twitter rewards:', error)
@@ -28,5 +29,5 @@ export const useGetPermissions = () => {
     },
   })
 
-    return { data, isLoading, error, status }
+  return { data, isLoading, error, status }
 }

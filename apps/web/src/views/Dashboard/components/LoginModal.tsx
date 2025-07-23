@@ -13,7 +13,6 @@ export const CrossIconBtn = styled(IconButton)`
 const LoginModal = () => {
   // const [isOpen, setIsOpen] = useState(true)
   const isOpen = true
-  const { data } = useGetToken()
   return (
     <ModalV2 isOpen={isOpen}>
       <Flex alignItems="center" justifyContent="center" maxWidth="522px" zIndex={999}>
@@ -36,7 +35,7 @@ const LoginModal = () => {
               width="100%"
               as="a"
               style={{ borderRadius: '30px' }}
-              href={`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter?token=${data?.token}`}
+              href={`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter`}
             >
               Login Now
             </Button>

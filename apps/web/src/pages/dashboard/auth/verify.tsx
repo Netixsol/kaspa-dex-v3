@@ -36,7 +36,7 @@ const AuthVerifyPage = () => {
   const generateVerificationMessage = (walletAddress: string, nonce: string) => {
     return new SiweMessage({
       domain: window.location.host,
-      address:walletAddress,
+      address: walletAddress,
       statement: 'Sign in to Kaspa Dashboard',
       uri: window.location.origin,
       version: '1',

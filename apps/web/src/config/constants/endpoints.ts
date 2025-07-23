@@ -18,9 +18,8 @@ export const GRAPH_API_POTTERY = 'https://api.thegraph.com/subgraphs/name/pancak
 export const GRAPH_API_PREDICTION_V1 = 'https://api.thegraph.com/subgraphs/name/pancakeswap/prediction'
 
 export const INFO_CLIENT = 'https://proxy-worker.pancake-swap.workers.dev/bsc-exchange'
-export const V3_BSC_INFO_CLIENT = `https://open-platform.nodereal.io/${
-  process.env.NEXT_PUBLIC_NODE_REAL_API_INFO || process.env.NEXT_PUBLIC_NODE_REAL_API_ETH
-}/pancakeswap-v3/graphql`
+export const V3_BSC_INFO_CLIENT = `https://open-platform.nodereal.io/${process.env.NEXT_PUBLIC_NODE_REAL_API_INFO || process.env.NEXT_PUBLIC_NODE_REAL_API_ETH
+  }/pancakeswap-v3/graphql`
 
 export const INFO_CLIENT_ETH = 'https://api.thegraph.com/subgraphs/name/pancakeswap/exhange-eth'
 export const BLOCKS_CLIENT = 'https://api.thegraph.com/subgraphs/name/pancakeswap/blocks'
@@ -41,7 +40,7 @@ export const CELER_API = 'https://api.celerscan.com/scan'
 export const INFO_CLIENT_WITH_CHAIN = {
   [ChainId.BSC]: INFO_CLIENT,
   [ChainId.ETHEREUM]: INFO_CLIENT_ETH,
-  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-v3',
+  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-exchange-v3',
 }
 
 export const BLOCKS_CLIENT_WITH_CHAIN = {
@@ -58,7 +57,7 @@ export const V3_SUBGRAPH_URLS = {
   [ChainId.GOERLI]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-goerli',
   [ChainId.BSC]: `https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc`,
   [ChainId.BSC_TESTNET]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-chapel',
-  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-v3',
+  [ChainId.KASPLEX_TESTNET]: 'https://graph.kaspafinance.io/subgraphs/name/kaspa-exchange-v3',
   [ChainId.KASPLEX_MAINNET]: `https://gateway-arbitrum.network.thegraph.com/api/e2d66e372446eaac5ac26924208834a8/subgraphs/id/Hv1GncLY5docZoGtXjo4kwbTvxm3MAhVZqBZE4sUT9eZ`,
   // [ChainId.KASPLEX_MAINNET]: `https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-v3-bsc`,
 } satisfies Record<ChainId, string>

@@ -41,7 +41,7 @@ export const LockedIcon = (props) => {
       </g>
       <defs>
         <clipPath id="clip0_582_1777">
-          <rect width="18" height="20.7" fill="white" />
+          <rect width="18" height="27" fill="white" />
         </clipPath>
       </defs>
     </svg>

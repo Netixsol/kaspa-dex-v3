@@ -6,6 +6,7 @@ export const masterChefAddresses = {
   [ChainId.BSC_TESTNET]: '0xB4A466911556e39210a6bB2FaECBB59E4eB7E43d',
   [ChainId.BSC]: '0xa5f8C5Dbd5F286960b9d90548680aE5ebFf07652',
   [ChainId.KASPLEX_TESTNET]: '0x26DB261E6B9A5cE37eCC7cC7B6388a8E430FC0cD',
+  [ChainId.KASPLEX_MAINNET]: '0x26DB261E6B9A5cE37eCC7cC7B6388a8E430FC0cD', // Todo Mainnet Address
 
 } as const
 
@@ -15,6 +16,7 @@ export const masterChefV3Addresses = {
   [ChainId.BSC]: '0x556B9306565093C855AEA9AE92A594704c2Cd59e',
   [ChainId.BSC_TESTNET]: '0x4c650FB471fe4e0f476fD3437C3411B1122c4e3B',
   [ChainId.KASPLEX_TESTNET]: '0x26DB261E6B9A5cE37eCC7cC7B6388a8E430FC0cD',
+  [ChainId.KASPLEX_MAINNET]: '0x26DB261E6B9A5cE37eCC7cC7B6388a8E430FC0cD', // Todo Mainnet Address
 } as const satisfies Record<ChainId, string>
 
 export const nonBSCVaultAddresses = {

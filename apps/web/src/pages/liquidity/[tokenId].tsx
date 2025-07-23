@@ -73,6 +73,7 @@ import dayjs from 'dayjs'
 import useAccountActiveChain from 'hooks/useAccountActiveChain'
 import { hexToBigInt } from 'viem'
 import { getViemClients } from 'utils/viem'
+import BigNumber from 'bignumber.js'
 
 export const BodyWrapper = styled(Card)`
   border-radius: 24px;
@@ -192,7 +193,7 @@ export default function PoolPage() {
     }
     return undefined
   }, [liquidity, pool, tickLower, tickUpper])
-
+  // console.log('liquidity >>', liquidity)
   const tickAtLimit = useIsTickAtLimit(feeAmount, tickLower, tickUpper)
 
   const pricesFromPosition = getPriceOrderingFromPositionForUI(position)
@@ -235,8 +236,61 @@ export default function PoolPage() {
   const price0 = useStablecoinPrice(token0 ?? undefined, { enabled: !!feeValue0 })
   const price1 = useStablecoinPrice(token1 ?? undefined, { enabled: !!feeValue1 })
 
+
+
+  // Use farm prices if available, otherwise fallback to stablecoin prices
+  const effectivePrice0 = useMemo(() => {
+    if (farmDetail?.farm?.tokenPriceBusd && token0) {
+      try {
+        const priceValue = parseFloat(farmDetail.farm.tokenPriceBusd)
+        // Create a price relative to USDT (assuming USDT is the stablecoin)
+        const usdtToken = new Token(
+          token0.chainId,
+          '0xEcff9AabD043e49C450A73808c7a16Aa96e2000F', // USDT address for Kaspa
+          18,
+          'USDT',
+          'Tether USD'
+        )
+        return new Price(
+          token0,
+          usdtToken,
+          1 * 10 ** token0.decimals,
+          Math.floor(priceValue * (10 ** usdtToken.decimals)).toString()
+        )
+      } catch (error) {
+        console.error('Error creating farm price for token0:', error)
+      }
+    }
+    return price0
+  }, [farmDetail?.farm?.tokenPriceBusd, token0, price0])
+
+  const effectivePrice1 = useMemo(() => {
+    if (farmDetail?.farm?.quoteTokenPriceBusd && token1) {
+      try {
+        const priceValue = parseFloat(farmDetail.farm.quoteTokenPriceBusd)
+        // Create a price relative to USDT (assuming USDT is the stablecoin)
+        const usdtToken = new Token(
+          token1.chainId,
+          '0xEcff9AabD043e49C450A73808c7a16Aa96e2000F', // USDT address for Kaspa
+          18,
+          'USDT',
+          'Tether USD'
+        )
+        return new Price(
+          token1,
+          usdtToken,
+          1 * 10 ** token1.decimals,
+          Math.floor(priceValue * (10 ** usdtToken.decimals)).toString()
+        )
+      } catch (error) {
+        console.error('Error creating farm price for token1:', error)
+      }
+    }
+    return price1
+  }, [farmDetail?.farm?.quoteTokenPriceBusd, token1, price1])
+
   const fiatValueOfFees: CurrencyAmount<Currency> | null = useMemo(() => {
-    if (!price0 || !price1 || !feeValue0 || !feeValue1) return null
+    if (!effectivePrice0 || !effectivePrice1 || !feeValue0 || !feeValue1) return null
 
     // we wrap because it doesn't matter, the quote returns a USDC amount
     const feeValue0Wrapped = feeValue0?.wrapped
@@ -244,17 +298,25 @@ export default function PoolPage() {
 
     if (!feeValue0Wrapped || !feeValue1Wrapped) return null
 
-    const amount0 = price0.quote(feeValue0Wrapped)
-    const amount1 = price1.quote(feeValue1Wrapped)
+    const amount0 = effectivePrice0.quote(feeValue0Wrapped)
+    const amount1 = effectivePrice1.quote(feeValue1Wrapped)
+
     return amount0.add(amount1)
-  }, [price0, price1, feeValue0, feeValue1])
+  }, [effectivePrice0, effectivePrice1, feeValue0, feeValue1])
+  // console.log({ fiatValueOfFees, effectivePrice0, effectivePrice1, feeValue0, feeValue1, token0, token1, farmDetail })
 
   const fiatValueOfLiquidity: CurrencyAmount<Currency> | null = useMemo(() => {
     if (!price0 || !price1 || !position) return null
-    const amount0 = price0.quote(position.amount0)
-    const amount1 = price1.quote(position.amount1)
 
-    return amount0.add(amount1)
+    // Calculate the fiat value of the position's liquidity by quoting both token amounts to fiat and summing
+    try {
+      const amount0 = price0.quote(position.amount0)
+      const amount1 = price1.quote(position.amount1)
+      return amount0.add(amount1)
+    } catch (error) {
+      console.error('Error calculating fiat value of liquidity:', error)
+      return null
+    }
   }, [price0, price1, position])
 
   const addTransaction = useTransactionAdder()
@@ -360,10 +422,15 @@ export default function PoolPage() {
   const feeValueUpper = inverted ? feeValue0 : feeValue1
   const feeValueLower = inverted ? feeValue1 : feeValue0
 
+
+  // Calculate total fee amounts in their respective currencies
+  const totalFeeValue0 = feeValue0 ? Number(feeValue0.toExact()) : 0
+  const totalFeeValue1 = feeValue1 ? Number(feeValue1.toExact()) : 0
+
   const positionValueUpper = inverted ? position?.amount0 : position?.amount1
   const positionValueLower = inverted ? position?.amount1 : position?.amount0
-  const priceValueUpper = inverted ? price0 : price1
-  const priceValueLower = inverted ? price1 : price0
+  const priceValueUpper = inverted ? effectivePrice0 : effectivePrice1
+  const priceValueLower = inverted ? effectivePrice1 : effectivePrice0
 
   // check if price is within range
   const below = pool && typeof tickLower === 'number' ? pool.tickCurrent < tickLower : undefined
@@ -449,7 +516,7 @@ export default function PoolPage() {
           <Text display="inline" bold mr="0.25em">{`${currencyQuote?.symbol}-${currencyBase?.symbol}`}</Text>
           <Text display="inline">
             {t(
-              'has an active Kaspa Finance farm. Stake your position in the farm to start earning with the indicated APR with CAKE farming.',
+              'has an active Kaspa Finance farm. Stake your position in the farm to start earning with the indicated APR with KFC farming.',
             )}
           </Text>
           <NextLinkFromReactRouter to="/farms">
@@ -563,7 +630,7 @@ export default function PoolPage() {
                   flexWrap={['wrap', 'wrap', 'nowrap']}
                 >
                   <Box width="100%" mb={['8px', '8px', 0]} position="relative">
-                    <Flex position="absolute" right={0}>
+                    {/* <Flex position="absolute" right={0}>
                       <AprCalculator
                         allowApply={false}
                         showQuestion
@@ -571,20 +638,20 @@ export default function PoolPage() {
                         quoteCurrency={currencyQuote}
                         feeAmount={feeAmount}
                         positionDetails={positionDetails}
-                        defaultDepositUsd={fiatValueOfLiquidity?.toFixed(2)}
+                        defaultDepositUsd={(Number(liquidity) / 1e18)?.toFixed(2)}
                         tokenAmount0={inRange ? position?.amount0 : undefined}
                         tokenAmount1={inRange ? position?.amount1 : undefined}
                       />
-                    </Flex>
+                    </Flex> */}
                     <Text fontSize="12px" color="secondary" bold textTransform="uppercase">
                       {t('Liquidity')}
                     </Text>
 
                     <Text fontSize="24px" fontWeight={600} mb="8px">
-                      $
-                      {fiatValueOfLiquidity?.greaterThan(new Fraction(1, 100))
+                      {(Number(liquidity) / 1e18).toFixed(2)}
+                      {/* {fiatValueOfLiquidity?.greaterThan(new Fraction(1, 100))
                         ? fiatValueOfLiquidity.toFixed(2, { groupSeparator: ',' })
-                        : '-'}
+                        : '-  sasd'} */}
                     </Text>
                     <LightGreyCard
                       mr="4px"
@@ -644,10 +711,10 @@ export default function PoolPage() {
                     </Text>
                     <AutoRow justifyContent="space-between" mb="8px">
                       <Text fontSize="24px" fontWeight={600}>
-                        $
-                        {fiatValueOfFees?.greaterThan(new Fraction(1, 100))
+                        {totalFeeValue0 && totalFeeValue1 ? ((totalFeeValue0 + totalFeeValue1) / 1e18).toFixed(2) : 0}
+                        {/* {fiatValueOfFees?.greaterThan(new Fraction(1, 100))
                           ? fiatValueOfFees.toFixed(2, { groupSeparator: ',' })
-                          : '-'}
+                          : '-'} */}
                       </Text>
 
                       <Button

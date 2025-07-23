@@ -29,7 +29,8 @@ const Menu = () => {
           langs={languageList}
           setLang={setLanguage}
         />
-        <Link external href="https://pancakeswap.finance/">
+        {/* <Link external href="https://pancakeswap.finance/"> */}
+        <Link external href="/">
           <Button scale="sm">{t('Launch App')}</Button>
         </Link>
       </Flex>

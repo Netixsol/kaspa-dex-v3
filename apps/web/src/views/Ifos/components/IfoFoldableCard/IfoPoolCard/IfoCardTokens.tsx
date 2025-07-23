@@ -135,7 +135,7 @@ const IfoCardTokens: React.FC<React.PropsWithChildren<IfoCardTokensProps>> = ({
   const { t } = useTranslation()
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     t(
-      'Sorry, you didn’t contribute enough CAKE to meet the minimum threshold. You didn’t buy anything in this sale, but you can still reclaim your CAKE.',
+      'Sorry, you didn’t contribute enough KFC to meet the minimum threshold. You didn’t buy anything in this sale, but you can still reclaim your KFC.',
     ),
     { placement: 'bottom' },
   )
@@ -268,9 +268,8 @@ const IfoCardTokens: React.FC<React.PropsWithChildren<IfoCardTokensProps>> = ({
         <>
           <TokenSection primaryToken={ifo.token}>
             <Label>{t('On sale')}</Label>
-            <Value>{`${formatNumber(getBalanceNumber(publicIfoData[poolId].offeringAmountPool), 0, 0)} ${
-              token.symbol
-            }`}</Value>
+            <Value>{`${formatNumber(getBalanceNumber(publicIfoData[poolId].offeringAmountPool), 0, 0)} ${token.symbol
+              }`}</Value>
           </TokenSection>
           <Text fontSize="14px" color="textSubtle" pl="48px">
             {t('%ratio%% of total sale', { ratio: distributionRatio })}
@@ -343,7 +342,7 @@ const IfoCardTokens: React.FC<React.PropsWithChildren<IfoCardTokensProps>> = ({
           {ifov31Msg || (
             <>
               <Text textAlign="center" fontSize="14px">
-                {t('To participate in the next IFO, lock some CAKE in the fixed-term staking CAKE pool!')}
+                {t('To participate in the next IFO, lock some KFC in the fixed-term staking KFC pool!')}
               </Text>
               <MessageTextLink href="/ifo#ifo-how-to" textAlign="center">
                 {t('How does it work?')} »

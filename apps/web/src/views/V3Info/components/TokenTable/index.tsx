@@ -79,7 +79,7 @@ const DataRow = ({ tokenData, index, chainPath }: { tokenData: TokenData; index:
   const { isMobile } = useMatchBreakpoints()
 
   return (
-    // <LinkWrapper to={`/${v3InfoPath}${chainPath}/tokens/${tokenData.address}`}>
+    <LinkWrapper to={`/${v3InfoPath}${chainPath}/tokens/${tokenData.address}`}>
       <ResponsiveGrid>
         <Text>{index + 1}</Text>
         <Flex>
@@ -105,7 +105,7 @@ const DataRow = ({ tokenData, index, chainPath }: { tokenData: TokenData; index:
         <Text fontWeight={400}>{formatDollarAmount(tokenData.volumeUSD)}</Text>
         <Text fontWeight={400}>{formatDollarAmount(tokenData.tvlUSD)}</Text>
       </ResponsiveGrid>
-    // </LinkWrapper>
+    </LinkWrapper>
   )
 }
 

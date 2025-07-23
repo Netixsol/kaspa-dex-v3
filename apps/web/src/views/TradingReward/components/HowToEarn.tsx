@@ -16,7 +16,7 @@ const stepList = [
     title: <Trans>Start trading</Trans>,
     subTitle: (
       <Trans>
-        Start trading any eligible pairs to earn rewards in CAKE. The more you trade, the more rewards you will earn
+        Start trading any eligible pairs to earn rewards in KFC. The more you trade, the more rewards you will earn
         from the current reward pool.
       </Trans>
     ),
@@ -97,7 +97,8 @@ const HowToEarn = () => {
       </Box>
       <LinkExternal
         external
-        href="https://docs.pancakeswap.finance/products/trading-reward/how-to-participate"
+        // href="https://docs.pancakeswap.finance/products/trading-reward/how-to-participate"
+        href="#"
         margin={['auto', 'auto', 'auto', '42px auto 0 auto']}
       >
         {t('Learn More')}

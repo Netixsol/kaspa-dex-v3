@@ -7,18 +7,32 @@ import PcIcon from './icons/pc.ico'
 import { useFarmingStaking } from './hooks/useFarmingStaking'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import { GraphContainerSkeleton } from './components/Skeleton/GraphContainerSkeleton'
+import { GainRewardSkeleton } from './components/Skeleton/GainRewardSkeleton'
 
+const FarmingStakingSkeleton = () => {
+  return (
+    <>
+      <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
+        <GraphContainerSkeleton />
+        <GraphContainerSkeleton />
+        <GainRewardSkeleton isButton={true} />
+      </Flex>
+    </>
+  )
+}
 const FarmingStaking = () => {
   const { data, isLoading } = useFarmingStaking()
+  if (isLoading) {
+    return (
+      <ScreenShortContainer title="Farming & Staking" isLoading={isLoading}>
+        <FarmingStakingSkeleton />
+      </ScreenShortContainer>
+    )
+  }
   const { firstStake, longTermFarming, maximumFarming } = !isLoading && data !== undefined ? data : {}
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Farming & Staking</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Farming & Staking">
         <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
           <DashBox>
@@ -98,7 +112,7 @@ const FarmingStaking = () => {
                   <Highlight>300 Points</Highlight>
                 </Flex>
               </ContentBox>
-              <Button marginTop="auto" variant="secondary">
+              <Button marginTop="auto" variant="secondary" style={{ borderRadius: '30px' }}>
                 Check Stake
               </Button>
             </Flex>

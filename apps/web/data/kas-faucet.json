@@ -20,6 +20,13 @@
       "timestamp": 1752839589707,
       "status": "completed",
       "txHash": "0x7d07b773ba1301f1ee75dc52bae4e738c08930eaa4bccd24535f0aa6160adfe4"
+    },
+    {
+      "address": "0x4b498547082d64fdfbcf3af67bd7792da1e7b6dd",
+      "amount": "50",
+      "timestamp": 1752925731585,
+      "status": "completed",
+      "txHash": "0x0f06ffc5f4ac3d89e47498e6f35c2f313d4f5b4b86121927316a634599627f2f"
     }
   ],
   "queue": [],
@@ -32,6 +39,7 @@
   "rateLimits": {
     "0x40Af333b09D912E4EF2F94E9Ac9eddEEF791BCba": [1752839422047],
     "0x774e65b92077E621FDb2F5C8bd17945501B09355": [1752839535741],
-    "0xA5d073469e879EB4Bf847CE4Cc886888414c92f5": [1752839589707]
+    "0xA5d073469e879EB4Bf847CE4Cc886888414c92f5": [1752839589707],
+    "0x4B498547082D64fDFBCf3AF67Bd7792dA1e7b6Dd": [1752925731585]
   }
 }

@@ -211,7 +211,7 @@ export default function V3FormView({
   const [allowedSlippage] = useUserSlippage() // custom from users
 
   const onAdd = useCallback(async () => {
-    if (!chainId || !signer || !account || !nftPositionManagerAddress|| !positionManager || !baseCurrency || !quoteCurrency) return
+    if (!chainId || !signer || !account || !nftPositionManagerAddress || !positionManager || !baseCurrency || !quoteCurrency) return
 
     if (position && account && deadline) {
       const useNative = baseCurrency.isNative ? baseCurrency : quoteCurrency.isNative ? quoteCurrency : undefined
@@ -585,7 +585,7 @@ export default function V3FormView({
                       getSetFullRange()
                     }}
                     scale="md"
-                    variant="danger"
+                    variant="secondary"
                   >
                     {t('I understand')}
                   </Button>

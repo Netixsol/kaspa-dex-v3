@@ -25,7 +25,7 @@ export const CHAIN_QUERY_NAME = {
   [ChainId.KASPLEX_TESTNET]: 'kasplexTestnet',
 } as const // satisfies Record<ChainId, string>
 
-export const kasplexMainnet = {
+export const kasplexMainnet = {   // Todo Mainnet Addresss
   id: 167013,
   name: 'Kasplex Mainnet',
   network: 'KasplexMainnet',
@@ -38,11 +38,11 @@ export const kasplexMainnet = {
     ...bsc_.rpcUrls,
     public: {
       ...bsc_.rpcUrls,
-      http: ['https://bsc-dataseed.bnbchain.org/'],
+      http: ['https://bsc-dataseed.bnbchain.org'],
     },
     default: {
       ...bsc_.rpcUrls.default,
-      http: ['https://bsc-dataseed.bnbchain.org/'],
+      http: ['https://bsc-dataseed.bnbchain.org'],
     },
   },
 } satisfies Chain
@@ -58,21 +58,21 @@ export const kasplexTestnet = {
   },
   rpcUrls: {
     default: {
-      http: ['https://rpc.kasplextest.xyz/'],
+      http: ['https://rpc.kasplextest.xyz'],
     },
     public: {
-      http: ['https://rpc.kasplextest.xyz/'],
+      http: ['https://rpc.kasplextest.xyz'],
     },
   },
   blockExplorers: {
     default: {
       name: 'Kasplex Explorer',
-      url: 'https://frontend.kasplextest.xyz/',
+      url: 'https://frontend.kasplextest.xyz',
     },
   },
   contracts: {
     multicall3: {
-      address: '0x1Df5fF99ce9C75510f8Fa3D8D507879128825e3D',
+      address: '0x1Df5fF99ce9C75510f8Fa3D8D507879128825e3D', // Todo Mainnet Addresss
     },
   },
   testnet: true,

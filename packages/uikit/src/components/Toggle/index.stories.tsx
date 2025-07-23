@@ -27,8 +27,8 @@ export const Default: React.FC<React.PropsWithChildren> = () => {
           checkedColor="textDisabled"
           onChange={toggle}
           scale="md"
-          startIcon={(isActive = false) => <SunIcon color={isActive ? "warning" : "backgroundAlt"} />}
-          endIcon={(isActive = false) => <MoonIcon color={isActive ? "secondary" : "backgroundAlt"} />}
+          // startIcon={(isActive = false) => <SunIcon color={isActive ? "warning" : "backgroundAlt"} />}
+          // endIcon={(isActive = false) => <MoonIcon color={isActive ? "secondary" : "backgroundAlt"} />}
         />
       </div>
       <div>

@@ -59,7 +59,7 @@ const Actions: React.FC<React.PropsWithChildren<ActionsProps>> = ({
           ) : (
             <Box width="100%">
               <Button width="100%" onClick={openPresentLockedStakeModal}>
-                {t('Lock CAKE')}
+                {t('Lock KFC')}
               </Button>
             </Box>
           )}

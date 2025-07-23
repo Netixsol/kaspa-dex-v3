@@ -12,6 +12,9 @@ import { useSpinHistory } from './hooks/useSpinHistory'
 import moment from 'moment'
 import getCountdownFromNow from 'utils/getCountdownFromNow'
 import { ShareIcon } from './icons/share.ico'
+import ScreenShortContainer from './components/CanvasContainer'
+import { useRewardPoints } from './hooks/useRewardPoints'
+
 
 const SpinAndRoll = () => {
   const [disableButton, setdisableButton] = useState<boolean>(false)
@@ -30,6 +33,7 @@ const SpinAndRoll = () => {
   } = useSpin()
   const { data, mutate, error } = useSpinHistory()
   const { mutateAsync, isLoading, isError } = useMadeSpinReward()
+  const { mutate:mutateRewardPoints } = useRewardPoints();
 
   const historyData = data?.data?.history
   const latestSpin = historyData?.[0]
@@ -64,111 +68,113 @@ const SpinAndRoll = () => {
 
   useEffect(() => {
     if (fetchSpinHistory) {
-      mutate()
+      mutate();
+      mutateRewardPoints();
       setFetchSpinHistory(false)
     }
   }, [fetchSpinHistory, mutate])
 
   return (
     <Flex flexDirection="column" style={{ gap: '24px' }} flexWrap="wrap">
-      <Flex style={{ justifyContent: 'space-between' }}>
+      {/* <Flex style={{ justifyContent: 'space-between' }}>
         <Heading scale="xxl">Spin & Roll Your Daily Bonus</Heading>
         <Flex>
           <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius: "100%" }}>
             <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
           </IconButton>
         </Flex>
-      </Flex>
+      </Flex> */}
+      <ScreenShortContainer title="Spin & Roll Your Daily Bonus">
+        <Flex style={{ gap: '20px' }} flexWrap={'wrap'}>
+          <Flex background="#252136" borderRadius="16px" padding="25px" justifyContent="space-between" flexGrow={2}>
+            <Grid>
+              <Box>
+                <DailySpinHeading>Daily Spin</DailySpinHeading>
+                <SpinWheel
+                  selectedItem={selectedItem}
+                  initState={initState}
+                  randIndex={randIndex}
+                  items={items}
+                  spinTime={spinTime}
+                />
+              </Box>
 
-      <Flex style={{ gap: '20px' }} flexWrap={'wrap'}>
-        <Flex background="#252136" borderRadius="16px" padding="25px" justifyContent="space-between" flexGrow={2}>
-          <Grid>
-            <Box>
-              <DailySpinHeading>Daily Spin</DailySpinHeading>
-              <SpinWheel
-                selectedItem={selectedItem}
-                initState={initState}
-                randIndex={randIndex}
-                items={items}
-                spinTime={spinTime}
-              />
-            </Box>
-
-            <Box style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <DailySpinHeading>Points Earned</DailySpinHeading>
-              <ContentBox>
-                <Flex justifyContent="space-between">
-                  <Text fontSize="24px" fontWeight={500} color="#1FD26F">
-                    {isSpinAvailable
-                      ? 0
-                      : selectedItem
-                      ? selectedItem
-                      : latestSpin?.points_awarded
-                      ? latestSpin?.points_awarded
-                      : 0}
-                  </Text>
-                  <Flex justifyContent="center" alignItems="center">
-                    {!isLoading && isFinished && !isSpinAvailable && (
-                      <Flex
-                        width={28}
-                        height={28}
-                        borderRadius="100%"
-                        background="#1FD26F"
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                        <TickIcon width={14} height={10} fill="none" />
-                      </Flex>
-                    )}
+              <Box style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <DailySpinHeading>Points Earned</DailySpinHeading>
+                <ContentBox>
+                  <Flex justifyContent="space-between">
+                    <Text fontSize="24px" fontWeight={500} color="#1FD26F">
+                      {isSpinAvailable
+                        ? 0
+                        : selectedItem
+                        ? selectedItem
+                        : latestSpin?.points_awarded
+                        ? latestSpin?.points_awarded
+                        : 0}
+                    </Text>
+                    <Flex justifyContent="center" alignItems="center">
+                      {!isLoading && isFinished && !isSpinAvailable && (
+                        <Flex
+                          width={28}
+                          height={28}
+                          borderRadius="100%"
+                          background="#1FD26F"
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <TickIcon width={14} height={10} fill="none" />
+                        </Flex>
+                      )}
+                    </Flex>
                   </Flex>
+                </ContentBox>
+
+                <Flex style={{ width: '100%', justifyContent: 'center' }}>
+                  <WinnerIcon />
                 </Flex>
-              </ContentBox>
+                <Flex style={{ width: '100%', justifyContent: 'center', fontSize: '16px' }}>
+                  <Text>
+                    Spin the wheel to win <span style={{ color: '#1FD26F' }}>500 to 2500 Points</span>
+                  </Text>
+                </Flex>
 
-              <Flex style={{ width: '100%', justifyContent: 'center' }}>
-                <WinnerIcon />
-              </Flex>
-              <Flex style={{ width: '100%', justifyContent: 'center', fontSize: '16px' }}>
-                <Text>
-                  Spin the wheel to win <span style={{ color: '#1FD26F' }}>500 to 2500 Points</span>
-                </Text>
-              </Flex>
+                <Flex style={{ width: '100%', justifyContent: 'center', fontSize: '16px' }}>
+                  <Button
+                    onClick={() => {
+                      submitSpin()
+                    }}
+                    type="button"
+                    style={{
+                      border: '1px solid #1FD26F',
+                      background: 'none',
+                      width: '100%',
+                      height: '40px',
+                    }}
+                    disabled={!isFinished || isLoading || disableButton || !isSpinAvailable || isError || error}
+                  >
+                    {isLoading || !isFinished ? (
+                      <SpinnerLoader bg="#fff" color="#1FD26F" size={26} borderWidth={4} />
+                    ) : (
+                      'Spin Now'
+                    )}
+                  </Button>
+                </Flex>
 
-              <Flex style={{ width: '100%', justifyContent: 'center', fontSize: '16px' }}>
-                <Button
-                  onClick={() => {
-                    submitSpin()
-                  }}
-                  type="button"
-                  style={{
-                    border: '1px solid #1FD26F',
-                    background: 'none',
-                    width: '100%',
-                    height: '40px',
-                  }}
-                  disabled={!isFinished || isLoading || disableButton || !isSpinAvailable || isError || error}
-                >
-                  {isLoading || !isFinished ? (
-                    <SpinnerLoader bg="#fff" color="#1FD26F" size={26} borderWidth={4} />
-                  ) : (
-                    'Spin Now'
-                  )}
-                </Button>
-              </Flex>
+                <Flex style={{ width: '100%', justifyContent: 'center', fontSize: '14px' }}>
+                  <Text style={{ width: '270px' }}>
+                    Next Free Spin:{' '}
+                    <span style={{ color: '#1FD26F', padding: '0px 5px' }}>{countdown ? countdown : '00-00-00'}</span>
+                  </Text>
+                </Flex>
+              </Box>
+            </Grid>
+          </Flex>
 
-              <Flex style={{ width: '100%', justifyContent: 'center', fontSize: '14px' }}>
-                <Text style={{ width: '270px' }}>
-                  Next Free Spin:{' '}
-                  <span style={{ color: '#1FD26F', padding: '0px 5px' }}>{countdown ? countdown : '00-00-00'}</span>
-                </Text>
-              </Flex>
-            </Box>
-          </Grid>
+          <Flex style={{ flex: '1' }}>
+            <SpinHistory data={data} />
+          </Flex>
         </Flex>
-
-        <Flex style={{ flex: '1' }}>
-          <SpinHistory data={data} />
-        </Flex>
-      </Flex>
+      </ScreenShortContainer>
     </Flex>
   )
 }

@@ -27,7 +27,7 @@ export const footerLinks: (t: ContextApi["t"]) => FooterLinkType[] = (t) => [
     label: "Business",
     items: [
       {
-        label: t("CAKE Incentives"),
+        label: t("KFC Incentives"),
         href: "https://docs.pancakeswap.finance/ecosystem-and-partnerships/business-partnerships/syrup-pools-and-farms",
       },
       {

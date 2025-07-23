@@ -121,7 +121,7 @@ const FarmV3MigrationBanner = () => {
             {isMobile && <LogoIcon mr={['auto', '8px']} width={24} height={24} />}
             <Title>{isMobile ? t('PCS v3 Migration') : t('Kaspa Finance v3 Migration')}</Title>
           </Flex>
-          <StyledBox>{t('Migrate to continue farming CAKE rewards and earning trading fees.')}</StyledBox>
+          <StyledBox>{t('Migrate to continue farming KFC rewards and earning trading fees.')}</StyledBox>
           <Flex style={{ gap: 8 }} flexWrap={isMobile ? 'wrap' : 'nowrap'}>
             <NextLinkFromReactRouter to="/migration">
               <StyledButtonLeft scale={isMobile ? 'sm' : 'md'}>
@@ -133,7 +133,8 @@ const FarmV3MigrationBanner = () => {
             </NextLinkFromReactRouter>
             <NextLinkFromReactRouter
               target="_blank"
-              to="https://docs.pancakeswap.finance/code/v3-migration/how-to-migrate"
+              to=""
+              // to="https://docs.pancakeswap.finance/code/v3-migration/how-to-migrate"
               rel='"noopener noreferrer'
             >
               <StyledButtonRight scale={isMobile ? 'sm' : 'md'}>

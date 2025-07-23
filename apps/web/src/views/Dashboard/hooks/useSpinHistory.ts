@@ -1,7 +1,7 @@
 import useSWR from 'swr'
+import Cookies from 'js-cookie'
 
-const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
-
+const token = Cookies.get('token')
 const fetcher = (url: string) =>
   fetch(url, {
     headers: {

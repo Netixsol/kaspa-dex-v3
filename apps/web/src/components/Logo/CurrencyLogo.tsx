@@ -7,7 +7,7 @@ import { ASSET_CDN } from 'config/constants/endpoints'
 import { useHttpLocations } from '@pancakeswap/hooks'
 import getTokenLogoURL from '../../utils/getTokenLogoURL'
 
-const StyledLogo = styled(TokenLogo)<{ size: string }>`
+const StyledLogo = styled(TokenLogo) <{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   border-radius: 50%;
@@ -34,7 +34,7 @@ export default function CurrencyLogo({
         if (!tokenLogoURL) return [...uriLocations]
         return [...uriLocations, tokenLogoURL]
       }
-      if (!tokenLogoURL) return []
+      if (!tokenLogoURL) return [] 
       return [tokenLogoURL]
     }
     return []

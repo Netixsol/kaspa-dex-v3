@@ -209,7 +209,7 @@ const SingleFarmV3Card: React.FunctionComponent<
                           <>
                             {t('Inactive positions will')}
                             <b> {t('NOT')} </b>
-                            {t('earn CAKE rewards from farm.')}
+                            {t('earn KFC rewards from farm.')}
                           </>
                         ) : (
                           t('You may add or remove liquidity on the position detail page without unstake')

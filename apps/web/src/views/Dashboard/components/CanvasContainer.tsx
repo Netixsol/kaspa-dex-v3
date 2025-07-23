@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, IconButton, Image, ModalV2 } from '@pancakeswap/uikit'
+import { Box, Button, Flex, Heading, IconButton, Image, ModalV2, Skeleton } from '@pancakeswap/uikit'
 import { TwitterShareButton } from 'react-share'
 import html2canvas from 'html2canvas'
 import { useRef, useState } from 'react'
@@ -7,7 +7,7 @@ import { DashBox } from '../style'
 import CrossIcon from '../icons/cross.ico'
 import { CrossIconBtn } from './LoginModal'
 
-const ScreenShortContainer = ({ children, title }: any) => {
+const ScreenShortContainer = ({ children, title, isLoading }: any) => {
   const screenShortRef = useRef<any>()
   const [isOpen, setIsOpen] = useState(false)
   const [screenShort, setScreenShort] = useState(null)
@@ -28,10 +28,24 @@ const ScreenShortContainer = ({ children, title }: any) => {
   return (
     <>
       <Flex justifyContent="space-between" alignItems="center" style={{gap: "10px"}} flexWrap={["wrap", null, "nowrap"]}>
-        <Heading scale="xxl">{title}</Heading>
-        <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius:"100%" }} onClick={handleCapture}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
+        {isLoading ? (
+          <>
+            <Skeleton width="40%" height={70} /> {/* Simulates the heading */}
+            <Skeleton width={48} height={48} variant="circle" /> {/* Simulates the circular button */}
+          </>
+        ) : (
+          <>
+            <Heading scale="xxl">{title}</Heading>
+            <IconButton
+              width="48px"
+              height="48px"
+              style={{ padding: '12px', borderRadius: '100%' }}
+              onClick={handleCapture}
+            >
+              <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
+            </IconButton>
+          </>
+        )}
       </Flex>
       <Box ref={screenShortRef}>
         <ModalV2 isOpen={isOpen}>
@@ -45,6 +59,7 @@ const ScreenShortContainer = ({ children, title }: any) => {
               <Image src={screenShort} width={600} height={300} />
               <Flex justifyContent="center">
                 <Button scale="md" width="60%" variant="secondary" marginTop="20px">
+                  {screenShort && 
                   <TwitterShareButton
                     url={encodeURIComponent(screenShort)}
                     title={title}
@@ -53,6 +68,7 @@ const ScreenShortContainer = ({ children, title }: any) => {
                   >
                     Share Now
                   </TwitterShareButton>
+                  }
                 </Button>
               </Flex>
             </DashBox>

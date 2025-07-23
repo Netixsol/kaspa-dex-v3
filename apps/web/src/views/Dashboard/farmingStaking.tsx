@@ -7,9 +7,29 @@ import PcIcon from './icons/pc.ico'
 import { useFarmingStaking } from './hooks/useFarmingStaking'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import { GraphContainerSkeleton } from './components/Skeleton/GraphContainerSkeleton'
+import { GainRewardSkeleton } from './components/Skeleton/GainRewardSkeleton'
 
+const FarmingStakingSkeleton = () => {
+  return (
+    <>
+      <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
+        <GraphContainerSkeleton />
+        <GraphContainerSkeleton />
+        <GainRewardSkeleton isButton={true} />
+      </Flex>
+    </>
+  )
+}
 const FarmingStaking = () => {
   const { data, isLoading } = useFarmingStaking()
+  if (isLoading) {
+    return (
+      <ScreenShortContainer title="Farming & Staking" isLoading={isLoading}>
+        <FarmingStakingSkeleton />
+      </ScreenShortContainer>
+    )
+  }
   const { firstStake, longTermFarming, maximumFarming } = !isLoading && data !== undefined ? data : {}
   return (
     <>

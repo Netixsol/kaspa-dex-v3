@@ -1,77 +1,193 @@
+import { useTranslation } from '@pancakeswap/localization'
+import { WalletModalV2 } from '@pancakeswap/ui-wallets'
 import { Box, CircleLoader, ModalV2, useToast } from '@pancakeswap/uikit'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createWallets, getDocLink } from 'config/wallet'
+import { useActiveChainId } from 'hooks/useActiveChainId'
+import useAuth from 'hooks/useAuth'
 import Cookies from 'js-cookie'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { DashboardPageLayout } from 'views/Dashboard'
+import { Address, useAccount, useConnect, useSignMessage } from 'wagmi'
+import { SiweMessage } from 'siwe'
+import { SignMessageResult } from 'wagmi/dist/actions'
 
 const AuthVerifyPage = () => {
+  const queryClient = useQueryClient()
   const [isOpen, setIsOpen] = useState(true)
-  const token = Cookies.get('token')
   const searchParams = useSearchParams()
   const oauthToken = searchParams.get('oauth_token')
   const oauthVerifier = searchParams.get('oauth_verifier')
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(true)
-  const { toastSuccess, toastError } = useToast()
-
-  const { mutate, data, isSuccess } = useMutation<any, Error, { authToken: string; authVerifier: string }>({
-    mutationFn: async ({ authToken, authVerifier }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const { toastError } = useToast()
+  const { address } = useAccount()
+  const { login } = useAuth()
+  const { connectAsync, connectors } = useConnect()
+  const { chainId } = useActiveChainId()
+  const { signMessageAsync } = useSignMessage()
+  const {
+    t,
+    currentLanguage: { code },
+  } = useTranslation()
+  const docLink = useMemo(() => getDocLink(code), [code])
+  const wallets = useMemo(() => createWallets(chainId, connectAsync), [chainId, connectAsync])
+  const generateVerificationMessage = (walletAddress: string, nonce: string) => {
+    return new SiweMessage({
+      domain: window.location.host,
+      address:walletAddress,
+      statement: 'Sign in to Kaspa Dashboard',
+      uri: window.location.origin,
+      version: '1',
+      chainId: chainId,
+      nonce,
+    }).prepareMessage()
+  }
+  const handleSignatureRequest = async () => {
+    if (!address) return
+    try {
+      setIsLoading(true)
+      // 1. Get nonce from backend
+      const nonceRes = await fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/genrate-nonce`)
+      const { nonce } = await nonceRes.json()
+      // 2. Generate and sign SIWE message
+      const message = generateVerificationMessage(address, nonce)
+      const signature = await signMessageAsync({ message })
+      // 3. Submit signature to backend
+      return storeSignature({ signature, walletAddress: address })
+    } catch (error) {
+      toastError(t('Wallet verification failed'))
+      console.error('Signature error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  const { mutate: verifyTwitter, isLoading: isVerifyingTwitter } = useMutation({
+    mutationFn: async ({
+      authToken,
+      authVerifier,
+      walletAddress,
+      signature,
+      nonce,
+    }: {
+      authToken: string
+      authVerifier: string
+      walletAddress: string
+      signature?: string
+      nonce?: string
+    }) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/twitter/verify`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           oAuthToken: authToken,
           oAuthVerifier: authVerifier,
+          walletAddress: walletAddress,
+          signature,
+          nonce,
         }),
       })
-
       if (!response.ok) {
         throw new Error('Verification failed')
       }
-
       return response.json()
     },
     onSuccess: (res) => {
       if (res.status === 200) {
-        setIsOpen(false)
-        setIsLoading(false)
-        if (res?.data?.isUserTwitterLoggedIn) {
-          Cookies.set('isTwitterLogin', res?.data?.isUserTwitterLoggedIn)
+        if (res.data?.signature === null) {
+          // Signature is required - request one
+          handleSignatureRequest()
+        } else {
+          // Proceed with normal success flow
+          Cookies.set('isTwitterLogin', 'true', { secure: true, sameSite: 'strict' })
+          Cookies.set('token', res.data.token, { secure: true, sameSite: 'strict' })
+          queryClient.invalidateQueries(['get-permissions'])
+          router.push('/dashboard/socialmedia-amplification')
+          setIsOpen(false)
         }
-        toastSuccess(res?.message)
-        router.push('/dashboard/socialmedia-amplification')
       }
     },
     onError: (error) => {
+      console.error('Verification error:', error)
+      toastError(t('Unable to complete verification, please try again'))
       setIsOpen(false)
+    },
+    onSettled: () => {
       setIsLoading(false)
-      toastError('Unable to login, try again!')
-      router.push('/dashboard')
     },
   })
-
+  const { mutate: storeSignature } = useMutation({
+    mutationFn: async ({ signature, walletAddress }: { signature: SignMessageResult; walletAddress: Address }) => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/auth/signature`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          walletAddress: walletAddress,
+          signature,
+        }),
+      })
+      if (!response.ok) {
+        throw new Error('Verification failed')
+      }
+      return response.json()
+    },
+    onSuccess: (res) => {
+      if (res.status === 200) {
+        // Proceed with normal success flow
+        Cookies.set('isTwitterLogin', res?.data?.isUserTwitterLoggedIn, { secure: true, sameSite: 'strict' })
+        Cookies.set('token', res.data.token, { secure: true, sameSite: 'strict' })
+        queryClient.invalidateQueries(['get-permissions'])
+        router.push('/dashboard/socialmedia-amplification')
+        setIsOpen(false)
+      }
+      console.log(res, 'res')
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+    onSettled: () => {
+      setIsLoading(false)
+    },
+  })
   useEffect(() => {
-    if (oauthToken && oauthVerifier) {
-      mutate({ authToken: oauthToken, authVerifier: oauthVerifier })
+    if (oauthToken && oauthVerifier && address) {
+      setIsLoading(true)
+      // First attempt without signature
+      verifyTwitter({
+        authToken: oauthToken,
+        authVerifier: oauthVerifier,
+        walletAddress: address,
+      })
     }
-  }, [oauthToken, oauthVerifier, mutate])
+  }, [oauthToken, oauthVerifier, address, verifyTwitter])
+  if (!address) {
+    return (
+      <WalletModalV2
+        docText={t('Learn How to Connect')}
+        docLink={docLink}
+        isOpen={!address}
+        wallets={wallets}
+        login={login}
+      />
+    )
+  }
   return (
     <>
       <ModalV2 isOpen={isOpen}>
         {isLoading && (
           <Box zIndex={1000} width="100%" maxWidth="200px">
             <CircleLoader size="100" />
+            <p>{t('Verifying your credentials...')}</p>
           </Box>
         )}
       </ModalV2>
     </>
   )
 }
-
 AuthVerifyPage.Layout = DashboardPageLayout
-
 export default AuthVerifyPage

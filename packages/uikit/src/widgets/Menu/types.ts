@@ -33,5 +33,4 @@ export interface NavProps {
   chainId: number;
   setLang: (lang: Language) => void;
   logoComponent?: ReactNode;
-  shouldHideNetworkSwitcher?: boolean;
 }

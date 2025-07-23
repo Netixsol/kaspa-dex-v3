@@ -130,7 +130,6 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   children,
   chainId,
   logoComponent,
-  shouldHideNetworkSwitcher,
 }) => {
   const { isMobile } = useMatchBreakpoints();
   const isMounted = useIsMounted();
@@ -189,7 +188,6 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             <StyledNav id="nav">
               <Flex alignItems="center" height="100%" justifyContent="space-between" paddingX="15px" style={{ gap: "15px" }}>
                 {/* Hamburger Icon */}
-                {shouldHideNetworkSwitcher && (
                   <Hamburger onClick={() => setSidebarOpen(!open)}>
                     {open ? (
                       <HamburgerCloseIcon style={{ transform: "scale(1.31)" }} />
@@ -197,7 +195,6 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
                       <HamburgerIcon style={{ transform: "scale(1.31)" }} />
                     )}
                   </Hamburger>
-                )}
                 <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/"} />}</Flex>
               </Flex>
               <Flex alignItems="center" height="100%">

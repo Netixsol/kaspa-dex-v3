@@ -16,8 +16,7 @@ import { LaunchWeek } from '../icons/launchweek.ico'
 import { EngagmentIcons } from '../icons/engagments.ico'
 import { routePermissions } from '../types/enums'
 import { LockedIcon } from '../icons/lock.ico'
-import { NetworkSwitcher } from 'components/NetworkSwitcher'
-import { getSidebarOpen, subscribeToSidebar } from '@pancakeswap/uikit/src/hooks/useSideBarOpenForDashBoard'
+import { getSidebarOpen, subscribeToSidebar, setSidebarOpen } from '@pancakeswap/uikit/src/hooks/useSideBarOpenForDashBoard'
 
 interface MenuWrapperProps {
   isBorder?: boolean
@@ -261,14 +260,13 @@ const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
   return (
     <>
       {/* Overlay for mobile */}
-      {open && <Overlay onClick={() => setOpen(false)} />}
+      {open && <Overlay onClick={() => setSidebarOpen(!open)} />}
 
       {/* Sidebar */}
       <SideBarWrapper open={open}>
         <ResponsiveBox>
           <Flex width="100%" flexDirection="column">
             <MenuContainer>
-              {open && <NetworkSwitcher />}
               {menuItems.map((item, index) => {
                 const requiredPermission = routePermissions[item.href as keyof typeof routePermissions]
                 const hasPermission =

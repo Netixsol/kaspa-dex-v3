@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
-import { Box, HamburgerCloseIcon, HamburgerIcon,Skeleton, Flex as UiKitFlex } from '@pancakeswap/uikit'
+import { Box, HamburgerCloseIcon, HamburgerIcon, Skeleton, Flex as UiKitFlex } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { usePathname } from 'next/navigation'
 import TradingIcon from '../icons/trading.ico'
@@ -18,6 +18,7 @@ import { routePermissions } from '../types/enums'
 import { LockedIcon } from '../icons/lock.ico'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
 import { getSidebarOpen, subscribeToSidebar } from '@pancakeswap/uikit/src/hooks/useSideBarOpenForDashBoard'
+import { Console } from 'console'
 
 interface MenuWrapperProps {
   isBorder?: boolean
@@ -63,7 +64,7 @@ const MenuItem = styled.button<MenuItemProps>`
     fill: ${({ isActive, theme }) => isActive && theme.colors.primary}; /* Change SVG color on hover */
   }
   &:disabled {
-  color: ${({ theme }) => theme.colors.textDisabled};
+    color: ${({ theme }) => theme.colors.textDisabled};
     .mainIcon svg path {
       fill: ${({ theme }) => theme.colors.textDisabled}; /* Change SVG color on hover */
     }
@@ -113,7 +114,7 @@ const SideBarWrapper = styled(Box)<{ open?: boolean }>`
   overflow-y: auto;
 
   &::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
 
   @media (max-width: 1280px) {
@@ -123,7 +124,7 @@ const SideBarWrapper = styled(Box)<{ open?: boolean }>`
   @media (max-width: 1024px) {
     position: absolute;
     max-width: 300px;
-    height: 100%;  
+    height: 100%;
     transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
   }
 `
@@ -144,7 +145,7 @@ const Overlay = styled.div`
 
 const ResponsiveBox = styled(Box)`
   /* padding: 25px 34px; */
-padding: 5px 11px;
+  padding: 5px 11px;
   @media (max-width: 1280px) {
     padding: 5px 11px;
     /* padding: 25px 15px; */
@@ -207,24 +208,28 @@ interface SideBarProps {
 }
 const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
   const pathname = usePathname()
-    const [permissions, setPermissions] = useState(data)
+  const [permissions, setPermissions] = useState(data)
   const permissionCookie = Cookies.get('permissions')
   const isTwitterLogin = Cookies.get('isTwitterLogin') === 'true'
 
-  const [open, setOpen] = useState(getSidebarOpen());
-  // Safely get permissions with fallback
+  const [open, setOpen] = useState(getSidebarOpen())
 
   useEffect(() => {
     if (permissionCookie) {
-      setPermissions(JSON.parse(permissionCookie))
+      try {
+        const parsedPermissions = JSON.parse(permissionCookie)
+        setPermissions(parsedPermissions)
+      } catch (error) {
+        console.error('Failed to parse permissionCookie:', error)
+        setPermissions([])
+      }
     }
-  }, [permissionCookie]) 
+  }, [permissionCookie])
 
   useEffect(() => {
-    const unsub = subscribeToSidebar(setOpen);
-    return unsub;
-  }, []);
-
+    const unsub = subscribeToSidebar(setOpen)
+    return unsub
+  }, [])
 
   if (isLoading) {
     return (
@@ -278,7 +283,7 @@ const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
                   <MenuItemsWrapper isBorder={index !== menuItems.length - 1}>
                     <Link href={item.href} passHref>
                       <MenuItem key={item?.text} disabled={!hasPermission} isActive={pathname === item.href}>
-                        <MenuIcon className='mainIcon'>{item?.icon}</MenuIcon>
+                        <MenuIcon className="mainIcon">{item?.icon}</MenuIcon>
                         <MenuText>{item?.text}</MenuText>
                         {!hasPermission && (
                           <MenuIcon style={{ marginLeft: 'auto' }}>
@@ -297,6 +302,5 @@ const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
     </>
   )
 }
-
 
 export default SideBar

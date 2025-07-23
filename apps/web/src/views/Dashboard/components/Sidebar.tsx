@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
-import { Box, HamburgerCloseIcon, HamburgerIcon, Flex as UiKitFlex } from '@pancakeswap/uikit'
+import { Box, HamburgerCloseIcon, HamburgerIcon,Skeleton, Flex as UiKitFlex } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { usePathname } from 'next/navigation'
 import TradingIcon from '../icons/trading.ico'
@@ -15,7 +16,6 @@ import { LaunchWeek } from '../icons/launchweek.ico'
 import { EngagmentIcons } from '../icons/engagments.ico'
 import { routePermissions } from '../types/enums'
 import { LockedIcon } from '../icons/lock.ico'
-import { useEffect, useState } from 'react'
 
 interface MenuWrapperProps {
   isBorder?: boolean
@@ -208,9 +208,14 @@ const menuItems = [
     text: 'Ongoing Engagement',
   },
 ]
-const SideBar = () => {
+
+interface SideBarProps {
+  permissions: any
+  isLoading?: boolean
+}
+const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
   const pathname = usePathname()
-  const [permissions, setPermissions] = useState([])
+    const [permissions, setPermissions] = useState(data)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const permissionCookie = Cookies.get('permissions')
   const isTwitterLogin = Cookies.get('isTwitterLogin') === 'true'
@@ -223,7 +228,34 @@ const SideBar = () => {
     }
   }, [permissionCookie])
 
-  const defaultRoute = '/dashboard/socialmedia-amplification'
+  if (isLoading) {
+    return (
+      <SideBarWrapper>
+        <Box padding="34px">
+          <Flex width="100%" flexDirection="column">
+            <MenuContainer>
+              {Array.from({ length: 9 }).map((_, index) => (
+                <MenuItemsWrapper key={`skeleton-${index}`} isBorder={index !== menuItems.length - 1}>
+                  <MenuItem as="div">
+                    <MenuIcon>
+                      <Skeleton width={28} height={28} variant="circle" />
+                    </MenuIcon>
+                    <Skeleton width="60%" height={16} />
+                    {index % 1 === 0 && ( // Show lock on some items
+                      <MenuIcon style={{ marginLeft: 'auto' }}>
+                        <Skeleton width={18} height={21} />
+                      </MenuIcon>
+                    )}
+                  </MenuItem>
+                </MenuItemsWrapper>
+              ))}
+            </MenuContainer>
+          </Flex>
+        </Box>
+      </SideBarWrapper>
+    )
+  }
+
   return (
     <>
       {/* Hamburger Icon */}

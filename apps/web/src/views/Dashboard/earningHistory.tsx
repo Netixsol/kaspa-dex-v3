@@ -2,11 +2,16 @@ import { useSearchParams } from 'next/navigation'
 import EarningHistoryTable from './components/Tables/EarningHistoryTable'
 import { useEarningPointHistory } from './hooks/useEarningPointHistory'
 import ScreenShortContainer from './components/CanvasContainer'
+import { EarningHistoryTableSkeleton } from './components/Skeleton/TableSkeleton'
+import { Flex, Text, Box } from '@pancakeswap/uikit'
 
 const EarningHistory = () => {
   const searchParams = useSearchParams()
   const page = searchParams.get('page')
-  const { data } = useEarningPointHistory({ page: page ? parseInt(page) : 1, limit: 8, type: 'ALL' })
+  const { data, isLoading } = useEarningPointHistory({ page: page ? parseInt(page) : 1, limit: 8, type: 'ALL' })
+  if (isLoading) {
+    return <EarningHistoryTableSkeleton />
+  }
   return (
     <>
       {/* <Flex justifyContent="space-between" alignItems="center" marginBottom="32px">
@@ -16,7 +21,14 @@ const EarningHistory = () => {
         </IconButton>
       </Flex> */}
       <ScreenShortContainer title="Earning History">
-        <EarningHistoryTable data={data} />
+        <Box marginTop="32px">
+          <EarningHistoryTable data={data} />
+          {data?.historyList.length <= 0 && !isLoading && (
+            <Flex width="100%" justifyContent="center" marginTop="30px">
+              <Text fontSize="24px">No Data Available in Table</Text>
+            </Flex>
+          )}
+        </Box>
       </ScreenShortContainer>
     </>
   )

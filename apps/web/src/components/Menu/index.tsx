@@ -20,7 +20,6 @@ const LinkComponent = (linkProps) => {
 }
 
 const Menu = (props) => {
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
   const { chainId } = useActiveChainId()
   const { isDark, setTheme } = useTheme()
   const cakePriceUsd = useCakeBusdPrice({ forceMainnet: true })
@@ -42,18 +41,6 @@ const Menu = (props) => {
     return footerLinks(t)
   }, [t])
 
-  useEffect(() => {
-  const handleResize = () => {
-    setIsSmallScreen(window.innerWidth < 1024)
-  }
-
-  handleResize()
-  window.addEventListener('resize', handleResize)
-  return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-const shouldHideNetworkSwitcher = pathname.includes('/dashboard') && isSmallScreen
-
   return (
     <>
       <UikitMenu
@@ -61,9 +48,7 @@ const shouldHideNetworkSwitcher = pathname.includes('/dashboard') && isSmallScre
         rightSide={
           <>
             {/* <GlobalSettings mode={SettingsMode.GLOBAL} /> */}
-            {!shouldHideNetworkSwitcher && (
-                <NetworkSwitcher />
-            )}
+            <NetworkSwitcher />
             <UserMenu />
           </>
         }
@@ -82,7 +67,6 @@ const shouldHideNetworkSwitcher = pathname.includes('/dashboard') && isSmallScre
         activeSubItem={activeSubMenuItem?.href}
         buyCakeLabel={t('Buy KFC')}
         buyCakeLink=""
-        shouldHideNetworkSwitcher={shouldHideNetworkSwitcher}
         // buyCakeLabel={t('Buy CAKE')}
         // buyCakeLink="https://pancakeswap.finance/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82&chainId=56"
         {...props}

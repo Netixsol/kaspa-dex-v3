@@ -57,7 +57,7 @@ const MigrateLps = () => {
             <Text fontSize="24px" fontWeight={500}>
               Points & Rewards
             </Text>
-            <Flex flexDirection="column" marginTop="20px" style={{ gap: '10px' }}>
+            <Flex flexDirection="column" marginTop="20px" style={{ gap: '20px' }}>
               <ContentBox>
                 <Flex justifyContent="space-between">
                   <Text fontSize="24px" fontWeight={500} color="#1FD26F">

@@ -169,7 +169,6 @@ const AuthVerifyPage = () => {
   })
   useEffect(() => {
     if (oauthToken && oauthVerifier && address) {
-      debugger
       setIsLoading(true)
       // First attempt without signature
       verifyTwitter({

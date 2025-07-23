@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Cookies from 'js-cookie'
-import { Box, Flex as UiKitFlex } from '@pancakeswap/uikit'
+import { Box, Skeleton, Flex as UiKitFlex } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { usePathname } from 'next/navigation'
 import TradingIcon from '../icons/trading.ico'
@@ -145,22 +145,53 @@ const menuItems = [
     text: 'Ongoing Engagement',
   },
 ]
-const SideBar = () => {
+
+interface SideBarProps {
+  permissions: any
+  isLoading?: boolean
+}
+const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
   const pathname = usePathname()
-  const [permissions, setPermissions] = useState([])
+  const [permissions, setPermissions] = useState(data)
   const permissionCookie = Cookies.get('permissions')
   const isTwitterLogin = Cookies.get('isTwitterLogin') === 'true'
 
   // Safely get permissions with fallback
-  
+
   useEffect(() => {
     if (permissionCookie) {
       setPermissions(JSON.parse(permissionCookie))
     }
   }, [permissionCookie])
 
+  if (isLoading) {
+    return (
+      <SideBarWrapper>
+        <Box padding="34px">
+          <Flex width="100%" flexDirection="column">
+            <MenuContainer>
+              {Array.from({ length: 9 }).map((_, index) => (
+                <MenuItemsWrapper key={`skeleton-${index}`} isBorder={index !== menuItems.length - 1}>
+                  <MenuItem as="div">
+                    <MenuIcon>
+                      <Skeleton width={28} height={28} variant="circle" />
+                    </MenuIcon>
+                    <Skeleton width="60%" height={16} />
+                    {index % 1 === 0 && ( // Show lock on some items
+                      <MenuIcon style={{ marginLeft: 'auto' }}>
+                        <Skeleton width={18} height={21} />
+                      </MenuIcon>
+                    )}
+                  </MenuItem>
+                </MenuItemsWrapper>
+              ))}
+            </MenuContainer>
+          </Flex>
+        </Box>
+      </SideBarWrapper>
+    )
+  }
 
-  const defaultRoute = '/dashboard/socialmedia-amplification'
   return (
     <SideBarWrapper>
       <Box padding="34px">

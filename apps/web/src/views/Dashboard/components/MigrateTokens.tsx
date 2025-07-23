@@ -42,7 +42,7 @@ const MigrateTokens = () => {
           </Flex>
         </Box>
         <Flex
-          width={46}
+          width={100}
           height={46}
           borderRadius="100%"
           background="#1FD26F"

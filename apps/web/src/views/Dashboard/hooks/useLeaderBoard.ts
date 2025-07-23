@@ -7,26 +7,30 @@ export const useLeaderBoard = (params: any = {}) => {
     queryKey: ['leader-board', params],
     enabled: !!token,
     queryFn: async () => {
-      const url = new URL(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/leaderboeard/users`)
+      try {
+        const url = new URL(`${process.env.NEXT_PUBLIC_DASHBOARD_API}/leaderboeard/users`)
 
-      // Type-safe parameter handling
-      if (params.page) url.searchParams.append('page', params.page.toString())
-      if (params.limit) url.searchParams.append('limit', params.limit.toString())
-      if (params.type) url.searchParams.append('type', params.type)
+        // Type-safe parameter handling
+        if (params.page) url.searchParams.append('page', params.page.toString())
+        if (params.limit) url.searchParams.append('limit', params.limit.toString())
+        if (params.type) url.searchParams.append('type', params.type)
 
-      return fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((res) => {
-          return res.json()
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
         })
-        .then((res) => {
-          return res?.data !== null ? res?.data : {}
-        })
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`)
+        }
+        const res = await response.json()
+        return res?.data || {}
+      } catch (error) {
+        console.error('Failed to fetch Twitter rewards:', error)
+        return {}
+      }
     },
   })
 

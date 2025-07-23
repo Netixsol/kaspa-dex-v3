@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex, Heading, Text, Box, Button, IconButton } from '@pancakeswap/uikit'
+import { Flex, Heading, Text, Box, Button, IconButton, Skeleton } from '@pancakeswap/uikit'
 import { DashBox } from './style'
 import ProgressBar from './components/ProgressBar'
 import HorizontalProgressBar from './components/HorizontalProgressBar'
@@ -7,6 +7,10 @@ import TickIcon from './icons/tick.ico'
 import { useLiquidityProvision } from './hooks/useLiquidityProvision'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import { ProgressBarSkeleton } from './components/Skeleton/ProgressBar'
+import { GraphContainerSkeleton } from './components/Skeleton/GraphContainerSkeleton'
+import { GainRewardSkeleton } from './components/Skeleton/GainRewardSkeleton'
+import { ButtonSkeleton } from './components/Skeleton/ButtonSkeleton'
 
 export const ContentBox = styled(Box)`
   background: ${({ theme }) => theme.colors.background};
@@ -20,9 +24,55 @@ export const ContentBox = styled(Box)`
 export const Highlight = styled.span`
   color: ${({ theme }) => theme.colors.primary};
 `
+const LiquidityProvisionSkelton = () => {
+  return (
+    <>
+      {/* 7-Day Liquidity Skeleton */}
+      <GraphContainerSkeleton />
+
+      {/* 30-Day Liquidity Skeleton */}
+      <GraphContainerSkeleton />
+
+      {/* Wallet Liquidity Skeleton */}
+      <DashBox>
+        <Flex flexDirection="column" height="100%">
+          <Skeleton width={200} height={32} marginBottom="20px" />
+          <Flex flexDirection="column" style={{ gap: '40px' }} marginTop="40px" height="100%">
+            <Skeleton width="100%" height={60} borderRadius="8px" />
+            <Box>
+              <Flex justifyContent="space-between" marginBottom="10px">
+                <Skeleton width={150} height={20} />
+                <Skeleton width={100} height={20} />
+              </Flex>
+              <Skeleton width="100%" height={8} borderRadius="4px" />
+            </Box>
+            <Skeleton width="100%" height={48} borderRadius="16px" marginTop="auto" />
+          </Flex>
+        </Flex>
+      </DashBox>
+
+      {/* Initial Liquidity Skeleton */}
+      <GainRewardSkeleton />
+      <GainRewardSkeleton />
+      <GainRewardSkeleton />
+    </>
+  )
+}
 const LiquidityProvision = () => {
   const { data, isLoading } = useLiquidityProvision()
-  const { maintain7DayLiquidity, maintain30DayLiquidity, overallLiquidity, rewards } = !isLoading && data ? data : {}
+  if (isLoading) {
+    return (
+      <ScreenShortContainer title="Liquidity Provision" isLoading={isLoading}>
+        <Flex width="100%" justifyContent="space-between" flexWrap="wrap" style={{ gap: '32px' }} marginTop="32px">
+          <LiquidityProvisionSkelton />
+        </Flex>
+        <Flex justifyContent="center" flexGrow={10} width="100%" marginTop="35px">
+          <ButtonSkeleton maxWidth="450px" width="33%" />
+        </Flex>
+      </ScreenShortContainer>
+    )
+  }
+  const { maintain7DayLiquidity, maintain30DayLiquidity, overallLiquidity, rewards } = data
   return (
     <>
       {/* <Flex justifyContent="space-between" alignItems="center">

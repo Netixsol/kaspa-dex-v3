@@ -7,7 +7,6 @@ import EarningHistoryDropdown, { EarningHistoryDropdownSkeleton } from './compon
 import { useEarningPointHistory } from './hooks/useEarningPointHistory'
 import { useGetPermissions } from './hooks/useGetPermission'
 import { useRewardPoints } from './hooks/useRewardPoints'
-import { useGetToken } from './hooks/useGetToken'
 
 const Page = styled.div`
   background: transparent;
@@ -104,7 +103,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                   <Text color="#1FD26F">@{pointsData ? pointsData?.data?.userName : 'Twitter User Name'}</Text>
                 </Flex>
                 <Flex alignItems="center" style={{ gap: '10px' }}>
-                  <Text color="#1FD26F" fontSize={['16px', null, '18px', '24px']} fontWeight={500}>
+                  <Text color="#1FD26F" fontSize={['16px', null, '18px', '20px']} fontWeight={500}>
                     {pointsData ? formatNumberWithCommas(pointsData?.data?.points) : '0'} Total Points
                   </Text>
                   <Flex
@@ -116,7 +115,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                     style={{ gap: '15px' }}
                   >
                     <ResponsiveFireIcon width="22" height="31" viewBox="0 0 22 31" fill="none" color="#1FD26F" />
-                  <Text fontSize={['16px', null, '18px', '24px']} ml={['5px', null, '8px', '15px']} fontWeight={500}>
+                  <Text fontSize={['16px', null, '18px', '20px']} ml={['5px', null, '8px', '15px']} fontWeight={500}>
                       {pointsData ? pointsData?.data?.streak : 0} Streak
                     </Text>
                   </Flex>

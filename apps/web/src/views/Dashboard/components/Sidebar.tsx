@@ -16,6 +16,8 @@ import { LaunchWeek } from '../icons/launchweek.ico'
 import { EngagmentIcons } from '../icons/engagments.ico'
 import { routePermissions } from '../types/enums'
 import { LockedIcon } from '../icons/lock.ico'
+import { NetworkSwitcher } from 'components/NetworkSwitcher'
+import { getSidebarOpen, subscribeToSidebar } from '@pancakeswap/uikit/src/hooks/useSideBarOpenForDashBoard'
 
 interface MenuWrapperProps {
   isBorder?: boolean
@@ -37,8 +39,12 @@ const MenuContainer = styled.div`
   border-radius: 5px;
 `
 const MenuItemsWrapper = styled.div<MenuWrapperProps>`
-  padding: 19px 0px;
+  padding: 12px 0px;
   border-bottom: ${({ isBorder, theme }) => (isBorder ? `1px solid ${theme.colors.background}` : 'none')};
+
+  @media (max-width: 1024px) {
+    padding: 14px 0px;
+  }
 `
 const MenuItem = styled.button<MenuItemProps>`
   display: flex;
@@ -56,6 +62,12 @@ const MenuItem = styled.button<MenuItemProps>`
   svg path {
     fill: ${({ isActive, theme }) => isActive && theme.colors.primary}; /* Change SVG color on hover */
   }
+  &:disabled {
+  color: ${({ theme }) => theme.colors.textDisabled};
+    .mainIcon svg path {
+      fill: ${({ theme }) => theme.colors.textDisabled}; /* Change SVG color on hover */
+    }
+  }
 
   &:hover {
     border-radius: 10px;
@@ -65,7 +77,7 @@ const MenuItem = styled.button<MenuItemProps>`
       fill: ${({ theme }) => theme.colors.primary}; /* Change SVG color on hover */
     }
     &:disabled {
-      color: ${({ theme }) => theme.colors.textDisabled}; /* Green color on hover */
+      color: ${({ theme }) => theme.colors.textDisabled};
       svg path {
         fill: ${({ theme }) => theme.colors.textDisabled};
       } /* Change SVG color on hover */
@@ -87,27 +99,6 @@ const MenuIcon = styled.div`
   svg {
     width: 100%;
     height: 100%;
-  }
-`
-
-// Responsiveness For The Sidebar:
-const Hamburger = styled.div`
-  display: none;
-  background: ${({ theme }) => theme.nav.background};
-  position: absolute;
-  z-index: 9999;
-  top: 5px;
-  right: 9px;
-  width: 35px;
-  height: 35px;
-  border-radius: 3px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  @media (max-width: 1024px) {
-    display: flex;
   }
 `
 
@@ -152,10 +143,11 @@ const Overlay = styled.div`
 `
 
 const ResponsiveBox = styled(Box)`
-  padding: 25px 34px;
-
+  /* padding: 25px 34px; */
+padding: 5px 11px;
   @media (max-width: 1280px) {
-    padding: 25px 15px;
+    padding: 5px 11px;
+    /* padding: 25px 15px; */
   }
 `
 
@@ -216,17 +208,23 @@ interface SideBarProps {
 const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
   const pathname = usePathname()
     const [permissions, setPermissions] = useState(data)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   const permissionCookie = Cookies.get('permissions')
   const isTwitterLogin = Cookies.get('isTwitterLogin') === 'true'
 
+  const [open, setOpen] = useState(getSidebarOpen());
   // Safely get permissions with fallback
 
   useEffect(() => {
     if (permissionCookie) {
       setPermissions(JSON.parse(permissionCookie))
     }
-  }, [permissionCookie])
+  }, [permissionCookie]) 
+
+  useEffect(() => {
+    const unsub = subscribeToSidebar(setOpen);
+    return unsub;
+  }, []);
+
 
   if (isLoading) {
     return (
@@ -258,23 +256,15 @@ const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
 
   return (
     <>
-      {/* Hamburger Icon */}
-      <Hamburger onClick={() => setSidebarOpen(!sidebarOpen)}>
-        {sidebarOpen ? (
-          <HamburgerCloseIcon style={{ transform: 'scale(1.31)'}} />
-        ) : (
-          <HamburgerIcon style={{ transform: 'scale(1.31)'}} />
-        )}
-      </Hamburger>
-
       {/* Overlay for mobile */}
-      {sidebarOpen && <Overlay onClick={() => setSidebarOpen(false)} />}
+      {open && <Overlay onClick={() => setOpen(false)} />}
 
       {/* Sidebar */}
-      <SideBarWrapper open={sidebarOpen}>
+      <SideBarWrapper open={open}>
         <ResponsiveBox>
           <Flex width="100%" flexDirection="column">
             <MenuContainer>
+              {open && <NetworkSwitcher />}
               {menuItems.map((item, index) => {
                 const requiredPermission = routePermissions[item.href as keyof typeof routePermissions]
                 const hasPermission =
@@ -288,7 +278,7 @@ const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
                   <MenuItemsWrapper isBorder={index !== menuItems.length - 1}>
                     <Link href={item.href} passHref>
                       <MenuItem key={item?.text} disabled={!hasPermission} isActive={pathname === item.href}>
-                        <MenuIcon>{item?.icon}</MenuIcon>
+                        <MenuIcon className='mainIcon'>{item?.icon}</MenuIcon>
                         <MenuText>{item?.text}</MenuText>
                         {!hasPermission && (
                           <MenuIcon style={{ marginLeft: 'auto' }}>
@@ -307,5 +297,6 @@ const SideBar = ({ permissions: data, isLoading = true }: SideBarProps) => {
     </>
   )
 }
+
 
 export default SideBar

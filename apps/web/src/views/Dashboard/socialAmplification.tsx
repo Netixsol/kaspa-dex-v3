@@ -79,7 +79,20 @@ const SocialAmplification = () => {
             </Text>
             <ContentBox>
               <Flex justifyContent="space-between" alignItems="center">
-                <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex marginRight="auto" alignItems="center" style={{ gap: 22 }}>
+                  <Flex
+                    width={50}
+                    height={50}
+                    borderRadius="100%"
+                    background="#1FD26F"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <RetweetIcon width="30" height="20" viewBox="0 0 30 20" fill="none" />
+                  </Flex>
+                  <Text fontSize="16px">Retweet launch announcement:</Text>
+                </Flex>
+                <Highlight>100 Points</Highlight>
                   <Flex
                     width={28}
                     height={28}
@@ -91,7 +104,6 @@ const SocialAmplification = () => {
                   >
                     <TickIcon width={14} height={10} fill="none" padding="auto" />
                   </Flex>
-                </Flex>
               </Flex>
             </ContentBox>
             <ContentBox>

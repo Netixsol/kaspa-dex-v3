@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { Button, Flex, Skeleton, Text } from '@pancakeswap/uikit'
 import ArrowIcon from '../icons/arrowUp.ico'
+import { border, paddingTop } from 'styled-system'
 
 export const EarningHistoryDropdownSkeleton = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -63,7 +64,7 @@ const EarningHistoryDropdown: React.FC<{ earnings: any }> = ({ earnings }) => {
       <DropdownHeader onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
         Earning History
         <DropdownArrow $isOpen={isOpen}>
-          <ArrowIcon width="13" height="9" viewBox="0 0 13 9" fill="none" color={isOpen ? '#120F1F' : '#ffffff'} />
+          <ArrowIcon width="13" height="9" viewBox="0 0 13 9" fill="none" color={isOpen ? '#120F1F' : '#ffffff'} style={{ transition: 'transform 0.2s ease' }} />
         </DropdownArrow>
       </DropdownHeader>
 

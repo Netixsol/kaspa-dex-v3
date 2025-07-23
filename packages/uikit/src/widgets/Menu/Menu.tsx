@@ -16,6 +16,8 @@ import Logo from "./components/Logo";
 import { MENU_HEIGHT, MOBILE_MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
 import { MenuContext } from "./context";
 import { NavProps } from "./types";
+import { HamburgerCloseIcon, HamburgerIcon } from "../../components";
+import { getSidebarOpen, setSidebarOpen, subscribeToSidebar } from "../../hooks/useSideBarOpenForDashBoard";
 
 const HTMLWrapper = styled.div`
   position: fixed;
@@ -42,8 +44,13 @@ const StyledNav = styled.nav`
   background-color: ${({ theme }) => theme.nav.background};
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   transform: translate3d(0, 0, 0);
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  @media (min-width: 768px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 `;
 
 const FixedContainer = styled("div").withConfig({
@@ -79,6 +86,26 @@ const Inner = styled.div`
   max-width: 100%;
 `;
 
+const Hamburger = styled.div`
+  display: none;
+  background: ${({ theme }) => theme.nav.background};
+  /* position: absolute; */
+  z-index: 9999;
+  top: 5px;
+  right: 9px;
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+`;
+
 const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   linkComponent = "a",
   banner,
@@ -103,11 +130,13 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   children,
   chainId,
   logoComponent,
+  shouldHideNetworkSwitcher,
 }) => {
   const { isMobile } = useMatchBreakpoints();
   const isMounted = useIsMounted();
   const [showMenu, setShowMenu] = useState(true);
   const refPrevOffset = useRef(typeof window === "undefined" ? 0 : window.pageYOffset);
+  const [open, setOpen] = useState(getSidebarOpen());
 
   const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
 
@@ -145,6 +174,12 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   const subLinksWithoutMobile = useMemo(() => subLinks?.filter((subLink) => !subLink.isMobileOnly), [subLinks]);
   const subLinksMobileOnly = useMemo(() => subLinks?.filter((subLink) => subLink.isMobileOnly), [subLinks]);
   const providerValue = useMemo(() => ({ linkComponent }), [linkComponent]);
+
+  useEffect(() => {
+    const unsub = subscribeToSidebar(setOpen);
+    return unsub;
+  }, []);
+
   return (
     <MenuContext.Provider value={providerValue}>
       <HTMLWrapper>
@@ -152,7 +187,19 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
             {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
             <StyledNav id="nav">
-              <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/"} />}</Flex>
+              <Flex alignItems="center" height="100%" justifyContent="space-between" paddingX="15px" style={{ gap: "15px" }}>
+                {/* Hamburger Icon */}
+                {shouldHideNetworkSwitcher && (
+                  <Hamburger onClick={() => setSidebarOpen(!open)}>
+                    {open ? (
+                      <HamburgerCloseIcon style={{ transform: "scale(1.31)" }} />
+                    ) : (
+                      <HamburgerIcon style={{ transform: "scale(1.31)" }} />
+                    )}
+                  </Hamburger>
+                )}
+                <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/"} />}</Flex>
+              </Flex>
               <Flex alignItems="center" height="100%">
                 <AtomBox display={{ xs: "none", lg: "block" }}>
                   <MenuItems

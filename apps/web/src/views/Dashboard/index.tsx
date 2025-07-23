@@ -7,39 +7,16 @@ import EarningHistoryDropdown, { EarningHistoryDropdownSkeleton } from './compon
 import { useEarningPointHistory } from './hooks/useEarningPointHistory'
 import { useGetPermissions } from './hooks/useGetPermission'
 import { useRewardPoints } from './hooks/useRewardPoints'
-import { useGetToken } from './hooks/useGetToken'
 
 const Page = styled.div`
   background: transparent;
-  padding: 55px 64px;
+  padding: 20px;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 
-  &::-webkit-scrollbar-track {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    padding: 55px 30px;
-  }
-
-  @media (max-width: 575px) {
-    padding: 55px 20px;
-  }
-
-  @media (max-width: 400px) {
-    padding: 55px 11px;
-  }
-`
-
-const ResponsiveFireIcon = styled(FireIcon)`
-  @media (max-width: 851px) {
-    transform: scale(0.7);
-  }
-
-  @media (max-width: 575px) {
-    transform: scale(0.6);
+  @media (min-width: 768px) {
+    padding: 43px 64px;
   }
 `
 
@@ -48,6 +25,15 @@ function formatNumberWithCommas(value) {
   if (isNaN(num)) return '0'
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+
+const ResponsiveFireIcon = styled(FireIcon)`
+  @media (max-width: 851px) {
+    transform: scale(0.7);
+  }
+  @media (max-width: 575px) {
+    transform: scale(0.6);
+  }
+`
 
 const PointsDisplaySkeleton = () => {
   return (
@@ -124,7 +110,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                   <Text color="#1FD26F">@{pointsData ? pointsData?.data?.userName : 'Twitter_User_Name'}</Text>
                 </Flex>
                 <Flex alignItems="center" style={{ gap: '10px' }}>
-                  <Text color="#1FD26F" fontSize={['16px', null, '18px', '24px']} fontWeight={500}>
+                  <Text color="#1FD26F" fontSize={['16px', null, '18px', '20px']} fontWeight={500}>
                     {pointsData ? formatNumberWithCommas(pointsData?.data?.points) : '0'} Total Points
                   </Text>
                   <Flex
@@ -135,7 +121,7 @@ export const DashboardPageLayout: FC<React.PropsWithChildren<unknown>> = ({ chil
                     alignItems="center"
                   >
                     <ResponsiveFireIcon width="22" height="31" viewBox="0 0 22 31" fill="none" color="#1FD26F" />
-                    <Text fontSize={['16px', null, '18px', '24px']} ml={['5px', null, '8px', '15px']} fontWeight={500}>
+                    <Text fontSize={['16px', null, '18px', '20px']} ml={['5px', null, '8px', '15px']} fontWeight={500}>
                       {pointsData ? pointsData?.data?.streak : 0} Streak
                     </Text>
                   </Flex>

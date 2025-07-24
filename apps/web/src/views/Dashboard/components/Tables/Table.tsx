@@ -103,7 +103,11 @@ const PageNumber = styled.button<{ $active: boolean }>`
     background: ${({ $active }) => ($active ? '#1FCD6D' : '#3a3655')};
   }
 `
-
+const ResponsiveTableBox = styled(Box)`
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 10px;
+`
 // Component
 const DynamicTable = <T extends Record<string, any>>({
   data,
@@ -137,7 +141,7 @@ const DynamicTable = <T extends Record<string, any>>({
     : data?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   return (
-    <Box>
+    <ResponsiveTableBox>
       <GridTable $column={columns.length}>
         {/* Header */}
         {columns.map((column, index) => (
@@ -180,7 +184,7 @@ const DynamicTable = <T extends Record<string, any>>({
           ))}
         </PaginationContainer>
       )}
-    </Box>
+    </ResponsiveTableBox>
   )
 }
 

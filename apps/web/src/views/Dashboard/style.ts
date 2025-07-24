@@ -27,6 +27,14 @@ export const DashBox = styled(Box)`
   &::-webkit-scrollbar-button {
     display: none;
   }
+
+  @media (max-width: 450px) {
+    min-width: 280px;
+  }
+    
+  @media (max-width: 375px) {
+    padding: 30px 13px;
+  }
 `
 // Styled Components (using transient props with $ prefix)
 export const AvatarContainer = styled.div<{ $size: number }>`
@@ -50,7 +58,7 @@ export const CrownBadge = styled.div<{
   $crownSize: number
 }>`
   position: absolute;
-  top: ${({ $crownSize }) => -0.7 * $crownSize}px;
+  top: ${({ $crownSize }) => -0.99 * $crownSize}px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;

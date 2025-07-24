@@ -6,22 +6,73 @@ import { LeaderBoard } from './components/leaderBoard'
 import TickIcon from './icons/tick.ico'
 import { useTradingSwap } from './hooks/useTradingSwap'
 import ScreenShortContainer from './components/CanvasContainer'
+import styled from 'styled-components'
+import { GraphContainerSkeleton } from './components/Skeleton/GraphContainerSkeleton'
+import { GainRewardSkeleton } from './components/Skeleton/GainRewardSkeleton'
+import LeaderBoardSkeleton from './components/Skeleton/LeaderBoardSkeleton'
+
+const TradingSwapSkeleton = () => {
+  return (
+    <Flex width="100%" flexWrap="wrap" justifyContent="space-between" style={{ gap: '32px' }} marginTop="32px">
+      <Flex
+        flex="1 1 calc(33.33% - 32px)"
+        minWidth="280px"
+        flexDirection="column"
+        alignItems="stretch"
+        style={{ gap: '32px' }}
+      >
+        <GraphContainerSkeleton />
+        <GainRewardSkeleton numberOfRewards={1} isPoints={false} />
+        <GainRewardSkeleton numberOfRewards={1} isPoints={false} />
+      </Flex>
+      <Flex
+        flex="1 1 calc(33.33% - 32px)"
+        minWidth="280px"
+        flexDirection="column"
+        alignItems="stretch"
+        style={{ gap: '32px' }}
+      >
+        <GraphContainerSkeleton />
+        <GainRewardSkeleton numberOfRewards={1} isPoints={false} />
+        <GainRewardSkeleton numberOfRewards={1} isPoints={false} />
+      </Flex>
+      <Flex
+        flex="1 1 calc(33.33% - 32px)"
+        minWidth="280px"
+        flexDirection="column"
+        alignItems="stretch"
+        style={{ gap: '32px' }}
+      >
+        <LeaderBoardSkeleton />
+      </Flex>
+    </Flex>
+  )
+}
+
+const ResponsiveFlex = styled(Flex)`
+  @media (max-width: 450px) {
+    min-width: 280px;
+  }
+`
 
 export const TradingSwap = () => {
-  const { data } = useTradingSwap()
+  const { data, isLoading } = useTradingSwap()
+  if (isLoading) {
+    return (
+      <ScreenShortContainer isLoading={isLoading}>
+        <Flex width="100%" flexWrap="wrap" justifyContent="space-between" style={{ gap: '32px' }} marginTop="32px">
+          <TradingSwapSkeleton />
+        </Flex>
+      </ScreenShortContainer>
+    )
+  }
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Trading & Swaps</Heading>
-        <IconButton width="48px" height="48px" style={{ padding: '12px', borderRadius: '100%' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Trading & Swaps">
         <Flex width="100%" flexWrap="wrap" justifyContent="space-between" style={{ gap: '32px' }} marginTop="32px">
-          <Flex
+          <ResponsiveFlex
             flex="1 1 calc(33.33% - 32px)"
-            minWidth="280px"
+            minWidth="390px"
             flexDirection="column"
             alignItems="stretch"
             style={{ gap: '32px' }}
@@ -86,10 +137,10 @@ export const TradingSwap = () => {
                 </Flex>
               </ContentBox>
             </DashBox>
-          </Flex>
-          <Flex
+          </ResponsiveFlex>
+          <ResponsiveFlex
             flex="1 1 calc(33.33% - 32px)"
-            minWidth="280px"
+            minWidth="390px"
             flexDirection="column"
             alignItems="stretch"
             style={{ gap: '32px' }}
@@ -144,16 +195,16 @@ export const TradingSwap = () => {
                 </Flex>
               </ContentBox>
             </DashBox>
-          </Flex>
-          <Flex
+          </ResponsiveFlex>
+          <ResponsiveFlex
             flex="1 1 calc(33.33% - 32px)"
-            minWidth="280px"
+            minWidth="390px"
             flexDirection="column"
             alignItems="stretch"
             style={{ gap: '32px' }}
           >
             <LeaderBoard title="Leaderboard" />
-          </Flex>
+          </ResponsiveFlex>
         </Flex>
       </ScreenShortContainer>
     </>

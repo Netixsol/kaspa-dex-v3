@@ -92,7 +92,7 @@ Accordion.Content = AccordionContent
 // Styled components
 const AccordionContainer = styled.div`
   width: 100%;
-  max-width: 600px;
+  max-width: 100%;
   border-radius: 10px;
   overflow: hidden;
 `

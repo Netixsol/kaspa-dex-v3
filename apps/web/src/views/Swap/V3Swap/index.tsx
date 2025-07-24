@@ -28,32 +28,39 @@ export function V3SwapForm() {
   const price = useMemo(() => trade && SmartRouter.getExecutionPrice(trade), [trade])
 
   return (
-    <>
+    <div style={{ background: "#252136" }}>
       <FormHeader onRefresh={throttledHandleRefresh} refreshDisabled={!tradeLoaded || syncing || !isStale} />
       <FormMain
         tradeLoading={mm.isMMBetter ? false : !tradeLoaded}
-        pricingAndSlippage={<PricingAndSlippage priceLoading={isLoading} price={price} showSlippage={!mm.isMMBetter} />}
+        // pricingAndSlippage={<PricingAndSlippage priceLoading={isLoading} price={price} showSlippage={!mm.isMMBetter} />}
         inputAmount={finalTrade?.inputAmount}
         outputAmount={finalTrade?.outputAmount}
         swapCommitButton={
           mm?.isMMBetter ? (
             <MMCommitButton {...mm} />
           ) : (
-            <SwapCommitButton trade={trade} tradeError={error} tradeLoading={!tradeLoaded} />
+            <>
+              {mm.isMMBetter ? (
+                <MMTradeDetail loaded={!mm.mmOrderBookTrade.isLoading} mmTrade={mm.mmTradeInfo} />
+              ) : (
+                <div style={{ background: "#120F1F", borderRadius: "16px", paddingBottom: "4px" }}>
+                  <TradeDetails loaded={tradeLoaded} trade={trade}
+                  />
+                  <PricingAndSlippage priceLoading={isLoading} price={price} showSlippage={!mm.isMMBetter} />
+                </div>
+              )}
+              <SwapCommitButton trade={trade} tradeError={error} tradeLoading={!tradeLoaded} />
+            </>
           )
         }
       />
 
-      {mm.isMMBetter ? (
-        <MMTradeDetail loaded={!mm.mmOrderBookTrade.isLoading} mmTrade={mm.mmTradeInfo} />
-      ) : (
-        <TradeDetails loaded={tradeLoaded} trade={trade} />
-      )}
+
       {(shouldShowMMLiquidityError(mm?.mmOrderBookTrade?.inputError) || mm?.mmRFQTrade?.error) && !trade && (
         <Box mt="5px">
           <MMLiquidityWarning />
         </Box>
       )}
-    </>
+    </div>
   )
 }

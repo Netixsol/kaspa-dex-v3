@@ -11,11 +11,11 @@ export function RangeTag({
   const { t } = useTranslation()
 
   return removed ? (
-    <Tag variant="textSubtle" {...props}>
+    <Tag variant="textDisabled" {...props}>
       {children || t('Closed')}
     </Tag>
   ) : outOfRange ? (
-    <Tag variant="failure" {...props}>
+    <Tag variant="warning" {...props}>
       {children || (
         <Flex alignItems="center">
           {t('Inactive')}{' '}

@@ -94,7 +94,10 @@ const Chart = ({
             </defs>
             <XAxis
               dataKey="time"
+               axisLine={false}
+              tickLine={false}
               tickFormatter={(time) => dayjs(time).format('DD')} // ✅ will now work
+              minTickGap={10}
             />
 
             <Tooltip

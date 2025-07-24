@@ -55,7 +55,7 @@ const StyledNav = styled.nav`
 
 const FixedContainer = styled("div").withConfig({
   shouldForwardProp: (props) => !["showMenu"].includes(props),
-})<{ showMenu: boolean; height: number }>`
+}) <{ showMenu: boolean; height: number }>`
   position: fixed;
   top: ${({ showMenu, height }) => (showMenu ? 0 : `-${height}px`)};
   left: 0;
@@ -147,7 +147,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
       const isBottomOfPage = window.document.body.clientHeight === currentOffset + window.innerHeight;
       const isTopOfPage = currentOffset === 0;
       // Always show the menu when user reach the top
-      if (isTopOfPage) {
+      if (isTopOfPage) {  
         setShowMenu(true);
       }
       // Avoid triggering anything at the bottom because of layout shift

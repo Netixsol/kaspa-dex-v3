@@ -43,45 +43,65 @@ const config: (
   chainId?: number,
 ) => ConfigMenuItemsType[] = (t, isDark = true, languageCode, chainId = 167012) =>
     [
+      // {
+      //   label: t('Trade'),
+      //   icon: SwapIcon,
+      //   fillIcon: SwapFillIcon,
+      //   href: '/swap',
+      //   showItemsOnMobile: false,
+      //   items: [
+      //     {
+      //       label: t('Swap'),
+      //       href: '/swap',
+      //     },
+
+      //     {
+      //       label: t('Liquidity'),
+      //       href: '/liquidity',
+      //     },
+      //   ].map((item) => addMenuItemSupported(item, chainId)),
+      // },
+
       {
-        label: t('Trade'),
+        label: t('Swap'),
         icon: SwapIcon,
         fillIcon: SwapFillIcon,
         href: '/swap',
         showItemsOnMobile: false,
         items: [
-          {
-            label: t('Swap'),
-            href: '/swap',
-          },
+          // {
+          //   label: t('Swap'),
+          //   href: '/swap',
+          // },
 
-          {
-            label: t('Liquidity'),
-            href: '/liquidity',
-          },
           // {
-          //   label: t('Perpetual'),
-          //   href: getPerpetualUrl({
-          //     chainId,
-          //     languageCode,
-          //     isDark,
-          //   }),
-          //   confirmModalId: 'usCitizenConfirmModal',
-          //   type: DropdownMenuItemType.EXTERNAL_LINK,
-          // },
-          // {
-          //   label: t('Bridge'),
-          //   href: 'https://bridge.pancakeswap.finance/',
-          //   type: DropdownMenuItemType.EXTERNAL_LINK,
-          // },
-          // {
-          //   label: `${t('Limit')} (V2)`,
-          //   href: '/limit-orders',
-          //   supportChainIds: SUPPORT_ONLY_BSC,
-          //   image: '/images/decorations/3d-coin.png',
+          //   label: t('Liquidity'),
+          //   href: '/liquidity',
           // },
         ].map((item) => addMenuItemSupported(item, chainId)),
       },
+
+
+      {
+        label: t('Liquidity'),
+        icon: SwapIcon,
+        fillIcon: SwapFillIcon,
+        href: '/liquidity',
+        showItemsOnMobile: false,
+        items: [
+          // {
+          //   label: t('Swap'),
+          //   href: '/swap',
+          // },
+
+          // {
+          //   label: t('Liquidity'),
+          //   href: '/liquidity',
+          // },
+        ].map((item) => addMenuItemSupported(item, chainId)),
+      },
+
+
       {
         label: t('Earn'),
         href: '/farms',
@@ -109,6 +129,7 @@ const config: (
           // },
         ].map((item) => addMenuItemSupported(item, chainId)),
       },
+
       {
         label: t('Faucet'),
         href: '/faucets',

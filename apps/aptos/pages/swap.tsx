@@ -85,8 +85,8 @@ function useWarningImport(currencies: (Currency | undefined)[]) {
   const importTokensNotInDefault = useMemo(() => {
     return !isWrongNetwork && urlLoadedTokens && isLoaded
       ? urlLoadedTokens.filter((token) => {
-          return !(token.address in defaultTokens) && token.chainId === chainId
-        })
+        return !(token.address in defaultTokens) && token.chainId === chainId
+      })
       : []
   }, [chainId, defaultTokens, isLoaded, isWrongNetwork, urlLoadedTokens])
 
@@ -211,11 +211,9 @@ const SwapPage = () => {
               ? trade.outputAmount.toSignificant(3)
               : trade.minimumAmountOut(pct).toSignificant(3)
 
-          const summary = `Swap ${
-            trade.tradeType === TradeType.EXACT_OUTPUT ? 'max.' : ''
-          } ${inputAmount} ${inputSymbol} for ${
-            trade.tradeType === TradeType.EXACT_INPUT ? 'min.' : ''
-          } ${outputAmount} ${outputSymbol}`
+          const summary = `Swap ${trade.tradeType === TradeType.EXACT_OUTPUT ? 'max.' : ''
+            } ${inputAmount} ${inputSymbol} for ${trade.tradeType === TradeType.EXACT_INPUT ? 'min.' : ''
+            } ${outputAmount} ${outputSymbol}`
 
           const text =
             trade.tradeType === TradeType.EXACT_OUTPUT
@@ -529,8 +527,8 @@ const SwapPage = () => {
                 (priceImpactSeverity > 3 && !isExpertMode
                   ? t('Price Impact High')
                   : priceImpactSeverity > 2
-                  ? t('Swap Anyway')
-                  : t('Swap'))}
+                    ? t('Swap Anyway')
+                    : t('Swap'))}
             </CommitButton>
           </AtomBox>
         </AutoColumn>

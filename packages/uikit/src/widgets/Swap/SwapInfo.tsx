@@ -22,7 +22,7 @@ export const SwapInfo = ({ allowedSlippage, price, onSlippageClick, allowedSlipp
     <AutoColumn gap="sm" py="0px" px="16px">
       <RowBetween alignItems="center">{price}</RowBetween>
       {typeof allowedSlippage === "number" && (
-        <RowBetween alignItems="center">
+        <RowBetween alignItems="center" style={{ paddingLeft: "10px", paddingRight: "10px" }} >
           <SwapInfoLabel>
             {t("Slippage Tolerance")}
             {onSlippageClick ? (

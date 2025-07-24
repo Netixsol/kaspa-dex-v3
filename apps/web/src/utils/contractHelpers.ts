@@ -83,7 +83,7 @@ import { tradingRewardABI } from 'config/abi/tradingReward'
 export const getContract = <TAbi extends Abi | unknown[], TWalletClient extends WalletClient>({
   abi,
   address,
-  chainId = ChainId.BSC,
+  chainId = ChainId.KASPLEX_TESTNET,
   publicClient,
   signer,
 }: {
@@ -129,7 +129,7 @@ export const getPointCenterIfoContract = (signer?: WalletClient) => {
 export const getCakeContract = (chainId?: number) => {
   return getContract({
     abi: erc20ABI,
-    address: chainId ? CAKE[chainId]?.address : CAKE[ChainId.BSC].address,
+    address: '0xD6411bc52c8CbD192477233F2DB211cB96bc3504', // chainId ? CAKE[chainId]?.address : CAKE[ChainId.KASPLEX_TESTNET].address,
     chainId,
   })
 }
@@ -145,7 +145,7 @@ export const getLotteryV2Contract = (signer?: WalletClient) => {
   return getContract({ abi: lotteryV2ABI, address: getLotteryV2Address(), signer })
 }
 export const getMasterchefV1Contract = (signer?: WalletClient) => {
-  return getContract({ abi: masterChefV1ABI, address: getMasterChefV1Address(), signer })
+  return getContract({ abi: masterChefV1ABI, address: getMasterChefV1Address(ChainId.KASPLEX_TESTNET), signer })
 }
 
 export const getTradingCompetitionContractEaster = (signer?: WalletClient) => {

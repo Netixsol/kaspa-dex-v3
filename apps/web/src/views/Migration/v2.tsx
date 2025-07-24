@@ -6,14 +6,14 @@ import { Trans, useTranslation } from '@pancakeswap/localization'
 import { VaultKey } from 'state/types'
 import Page from 'components/Layout/Page'
 import { Token } from '@pancakeswap/sdk'
+import { usePollFarmsV1WithUserData } from 'state/farmsV1/hooks'
 import { Step, MigrationProgressSteps } from './components/ProgressSteps'
 import MigrationSticky from './components/MigrationSticky'
-import { usePollFarmsV1WithUserData } from 'state/farmsV1/hooks'
 import { useFetchUserPools } from './hook/V1/Pool/useFetchUserPools'
 import { useFetchPublicPoolsData } from './hook/V1/Pool/useFetchPublicPoolsData'
-import OldPool from './components/MigrationStep1/OldPool'
+// import OldPool from './components/MigrationStep1/OldPool'
 import OldFarmStep1 from './components/MigrationStep1/OldFarm'
-import NewPool from './components/MigrationStep2/NewPool'
+// import NewPool from './components/MigrationStep2/NewPool'
 import NewFarmStep2 from './components/MigrationStep2/NewFarm'
 
 const steps: Step[] = [
@@ -39,16 +39,16 @@ const MigrationPage: React.FC<React.PropsWithChildren> = () => {
   usePollFarmsV1WithUserData()
 
   // v1 Pools
-  useFetchPublicPoolsData()
+  // useFetchPublicPoolsData()
   const { data: cakePool, userDataLoaded } = useFetchUserPools(account)
 
-  const v1Pools = useMemo(() => {
-    const ifoPoolVault = { ...cakePool, vaultKey: VaultKey.IfoPool }
-    const cakeAutoVault = { ...cakePool, vaultKey: VaultKey.CakeVaultV1 }
+  // const v1Pools = useMemo(() => {
+  //   const ifoPoolVault = { ...cakePool, vaultKey: VaultKey.IfoPool }
+  //   const cakeAutoVault = { ...cakePool, vaultKey: VaultKey.CakeVaultV1 }
 
-    return [ifoPoolVault, cakeAutoVault, cakePool]
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cakePool]) as Pool.DeserializedPool<Token>[]
+  //   return [ifoPoolVault, cakeAutoVault, cakePool]
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [cakePool]) as Pool.DeserializedPool<Token>[]
 
   const scrollToTop = (): void => {
     window.scrollTo({
@@ -97,12 +97,12 @@ const MigrationPage: React.FC<React.PropsWithChildren> = () => {
         />
         {step === 0 ? (
           <>
-            <OldPool pools={v1Pools} account={account} userDataLoaded={userDataLoaded} />
+            {/* <OldPool pools={v1Pools} account={account} userDataLoaded={userDataLoaded} /> */}
             <OldFarmStep1 />
           </>
         ) : (
           <>
-            <NewPool />
+            {/* <NewPool /> */}
             <NewFarmStep2 />
           </>
         )}

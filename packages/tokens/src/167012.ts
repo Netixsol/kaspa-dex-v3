@@ -24,6 +24,34 @@ export const kasplexTokens = {
   stat: new ERC20Token(ChainId.KASPLEX_TESTNET, '0x4fECeb643DeDF73c4BC17aB743De7C349470be3f', 18, 'STAT', 'StatBreak'),
   usdc: new ERC20Token(ChainId.KASPLEX_TESTNET, '0x593Cd4124ffE9D11B3114259fbC170a5759E0f54', 18, 'USDC', 'USD Coin'),
   kas: new ERC20Token(ChainId.KASPLEX_TESTNET, '0x0000000000000000000000000000000000000000', 18, 'KAS', 'Kaspa'),
+  wkas: new ERC20Token(
+    ChainId.KASPLEX_TESTNET,
+    '0xf40178040278E16c8813dB20a84119A605812FB3',
+    18,
+    'WKAS',
+    'Wrapped Kaspa',
+  ),
+  tnacho: new ERC20Token(
+    ChainId.KASPLEX_TESTNET,
+    '0xfa458995688c73fc48E7D833483a7206Bed75C27',
+    18,
+    'tNACHO',
+    'test NACHO',
+  ),
+  tkango: new ERC20Token(
+    ChainId.KASPLEX_TESTNET,
+    '0x46B4B1A6c462609957D17D5d8eEA12037E44ef3F',
+    18,
+    'tKANGO',
+    'test KANGO',
+  ),
+  tzeal: new ERC20Token(
+    ChainId.KASPLEX_TESTNET,
+    '0xD6411bc52c8CbD192477233F2DB211cB96bc3504',
+    18,
+    'tZEAL',
+    'test ZEAL',
+  ),
 }
 
 export const kasplexTokensListForUI = {

@@ -2,10 +2,11 @@ import { useCallback, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useFastRefreshEffect } from 'hooks/useRefreshEffect'
 import { SerializedPool } from 'state/types'
+import { useWalletClient } from 'wagmi'
 import { transformPool } from 'state/pools/helpers'
 import { getCakeContract } from 'utils/contractHelpers'
 import { PoolCategory } from 'config/constants/types'
-import { bscTokens } from '@pancakeswap/tokens'
+import { bscTokens, kasplexTokens } from '@pancakeswap/tokens'
 import { ChainId } from '@pancakeswap/sdk'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { fetchUserPendingRewards, fetchUserStakeBalances } from './fetchPoolsUser'
@@ -45,20 +46,35 @@ const initialData = {
     },
     userDataLoaded: false,
   },
+  [ChainId.KASPLEX_TESTNET]: {
+    data: {
+      sousId: 0,
+      stakingToken: kasplexTokens.tzeal,
+      earningToken: kasplexTokens.wkas,
+      contractAddress: '0xd2f622db6b6d67EFac968758905a0649dBA4ce3D',
+      poolCategory: PoolCategory.CORE,
+      tokenPerBlock: '10',
+      isFinished: false,
+      totalStaked: '0',
+    },
+    userDataLoaded: false,
+  },
 }
 
 export const useFetchUserPools = (account) => {
   const { chainId } = useActiveChainId()
-  const [userPoolsData, setPoolsUserData] = useState<PoolsState>(initialData[chainId || ChainId.BSC])
-
+  const [userPoolsData, setPoolsUserData] = useState<PoolsState>(initialData[chainId || ChainId.KASPLEX_TESTNET])
+  const { data: signer } = useWalletClient()
   const fetchUserPoolsData = useCallback(() => {
     if (account) {
       const fetchPoolsUserDataAsync = async () => {
         try {
+          console.log('useFetchUserPools', account, chainId)
+          console.log('cakeContract', cakeContract)
           const [stakedBalances, pendingRewards, totalStaking] = await Promise.all([
-            fetchUserStakeBalances(account),
-            fetchUserPendingRewards(account),
-            cakeContract.balanceOf(initialData[chainId].data.contractAddress),
+            fetchUserStakeBalances(account, signer),
+            fetchUserPendingRewards(account, signer),
+            cakeContract.read.balanceOf([account]),
           ])
 
           const userData = {
@@ -85,7 +101,7 @@ export const useFetchUserPools = (account) => {
       fetchPoolsUserDataAsync()
     }
   }, [account, chainId])
-
+  console.log('useFetchUserPools', userPoolsData)
   useFastRefreshEffect(() => {
     fetchUserPoolsData()
   }, [fetchUserPoolsData])

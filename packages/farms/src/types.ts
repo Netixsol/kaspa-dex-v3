@@ -66,6 +66,7 @@ export interface SerializedStableFarmConfig extends FarmConfigBaseProps {
   stableSwapAddress: Address
   infoStableSwapAddress: Address
   stableLpFee?: number
+  v1pid?: number
 }
 
 export interface SerializedClassicFarmConfig extends FarmConfigBaseProps {

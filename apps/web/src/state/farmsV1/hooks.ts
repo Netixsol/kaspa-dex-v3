@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux'
+import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
+import { useMemo } from 'react'
 import { useAccount } from 'wagmi'
 import { ChainId } from '@pancakeswap/sdk'
 import BigNumber from 'bignumber.js'
@@ -7,11 +10,8 @@ import { useAppDispatch } from 'state'
 import { deserializeToken } from '@pancakeswap/token-lists'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { DeserializedFarm, DeserializedFarmsState, DeserializedFarmUserData, SerializedFarm } from '@pancakeswap/farms'
-import { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync } from '.'
 import { State } from '../types'
-import { useSelector } from 'react-redux'
-import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
-import { useMemo } from 'react'
+import { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync } from '.'
 
 const deserializeFarmUserData = (farm: SerializedFarm): DeserializedFarmUserData => {
   return {
@@ -50,7 +50,7 @@ export const usePollFarmsV1WithUserData = () => {
   const { address: account } = useAccount()
 
   useSlowRefreshEffect(() => {
-    getFarmConfig(ChainId.BSC).then((farmsConfig) => {
+    getFarmConfig(ChainId.KASPLEX_TESTNET).then((farmsConfig) => {
       const pids = farmsConfig.filter((farmToFetch) => farmToFetch.v1pid).map((farmToFetch) => farmToFetch.v1pid)
 
       dispatch(fetchFarmsPublicDataAsync(pids))
@@ -62,7 +62,7 @@ export const usePollFarmsV1WithUserData = () => {
   }, [dispatch, account])
 }
 
-//code added for v2/migration.tsx
+// code added for v2/migration.tsx
 export const useFarmsV1 = (): DeserializedFarmsState => {
   const farms = useSelector((state: State) => state.farmsV1)
   const deserializedFarmsData = farms.data.map(deserializeFarm)
@@ -72,6 +72,11 @@ export const useFarmsV1 = (): DeserializedFarmsState => {
     userDataLoaded,
     data: deserializedFarmsData,
     poolLength,
+    regularCakePerBlock: 0.001,
+    totalRegularAllocPoint: '100',
+    // regularCakePerBlock: farms.regularCakePerBlock
+    //   ? new BigNumber(farms.regularCakePerBlock)
+    //   : BIG_ZERO,
   }
 }
 
@@ -82,4 +87,3 @@ export const usePriceCakeBusd = (): BigNumber => {
   const price = useCakeBusdPrice()
   return useMemo(() => (price ? new BigNumber(price.toSignificant(6)) : BIG_ZERO), [price])
 }
-

@@ -122,6 +122,14 @@ export const CAKE = {
     'PancakeSwap Token',
     'https://pancakeswap.finance/',
   ),
+  [ChainId.KASPLEX_TESTNET]: new ERC20Token(
+    ChainId.KASPLEX_TESTNET,
+    '0xf87e587AB945F7B111329a6ace6dc497D34f098B',
+    18,
+    'KFC',
+    'Kaspa Finance Token',
+    'https://app.kaspafinance.io/',
+  ),
   [ChainId.GOERLI]: new ERC20Token(
     ChainId.GOERLI,
     '0xc2C3eAbE0368a2Ea97f485b03D1098cdD7d0c081',

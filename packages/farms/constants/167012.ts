@@ -51,32 +51,33 @@ export const farmsV3 = defineFarmV3Configs([
 ])
 
 const farms: SerializedFarmConfig[] = [
+  /**
+   * These 3 farms (PID 0, 2, 3) should always be at the top of the file.
+   */
+  {
+    pid: 0,
+    v1pid: 0,
+    lpSymbol: 'TZEAL-WKAS LP',
+    lpAddress: '0xd2f622db6b6d67EFac968758905a0649dBA4ce3D',
+    token: kasplexTokens.tzeal,
+    quoteToken: kasplexTokens.wkas,
+  },
   {
     pid: 1,
-    lpSymbol: 'USDT-BLK LP',
-    lpAddress: '0xce11ce746c9ddf6946a57fcd52add7c6337a6bf9',
-    token: kasplexTokens.blk,
-    quoteToken: kasplexTokens.usdt,
+    v1pid: 1,
+    lpSymbol: 'TKANGO-WKAS LP',
+    lpAddress: '0xD9737e464Df3625e08a7F3Df61aABFBf523DBCfC',
+    token: kasplexTokens.tkango,
+    quoteToken: kasplexTokens.wkas,
   },
   {
     pid: 2,
-    lpSymbol: 'BLK-USDT LP',
-    lpAddress: '0xecc577a8657bc4771c5232fb9824b88e3f98eae3',
-    token: kasplexTokens.blk,
-    quoteToken: kasplexTokens.usdt,
+    v1pid: 2,
+    lpSymbol: 'WKAS-TNACHO LP',
+    lpAddress: '0xC4278FE8b7009a7DCc445024Cb864f26c1F81073',
+    token: kasplexTokens.wkas,
+    quoteToken: kasplexTokens.tnacho,
   },
-  {
-    pid: 3,
-    lpSymbol: 'BLK-KFC LP',
-    lpAddress: '0xea7dd193e6484dc1b574a0386d66b845cd319bf7',
-    token: kasplexTokens.blk,
-    quoteToken: kasplexTokens.kfc,
-  },
-].map((p) => ({
-  ...p,
-  token: p.token.serialize,
-  quoteToken: p.quoteToken.serialize,
-  lpAddress: getAddress(p.lpAddress),
-}))
+].map((p) => ({ ...p, token: p.token.serialize, quoteToken: p.quoteToken.serialize }))
 
 export default farms

@@ -42,6 +42,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
       }),
     [tokens],
   )
+  console.log('pairAddresses', pairAddresses)
   const results = useMultipleContractSingleData({
     addresses: pairAddresses,
     abi: pancakePairV2ABI,

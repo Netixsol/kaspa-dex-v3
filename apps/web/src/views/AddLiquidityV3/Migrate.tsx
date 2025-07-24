@@ -78,12 +78,15 @@ export function Migrate({ v2PairAddress }: { v2PairAddress: Address }) {
   const totalSupply = useTotalSupply(pair?.liquidityToken)
 
   if (!token0Address || !token1Address || !pair || !totalSupply)
+  {
+
     console.log("data::: ",token0Address, token1Address, pair,totalSupply)
     return (
       <AtomBox width="100%" justifyContent="center" alignItems="center" display="flex" minHeight="screenMd">
         <Spinner />
       </AtomBox>
     )
+  }
 
   return (
     <V2PairMigrate

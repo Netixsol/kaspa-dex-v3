@@ -1,9 +1,13 @@
-import { CurrencyAmount, Pair, Currency, pancakePairV2ABI } from '@pancakeswap/sdk'
+import { CurrencyAmount, Pair, Currency } from '@pancakeswap/sdk'
 import { useMemo } from 'react'
+import IPancakePairABI from 'config/abi/IPancakePair.json'
+import { Interface } from '@ethersproject/abi'
 
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 import { useActiveChainId } from './useActiveChainId'
+
+const PAIR_INTERFACE = new Interface(IPancakePairABI)
 
 export enum PairState {
   LOADING,
@@ -24,30 +28,29 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
     [chainId, currencies],
   )
 
-  const pairAddresses = useMemo(
-    () =>
-      tokens.map(([tokenA, tokenB]) => {
-        try {
-          return tokenA && tokenB && !tokenA.equals(tokenB) ? Pair.getAddress(tokenA, tokenB) : undefined
-        } catch (error: any) {
-          // Debug Invariant failed related to this line
-          console.error(
-            error.msg,
-            `- pairAddresses: ${tokenA?.address}-${tokenB?.address}`,
-            `chainId: ${tokenA?.chainId}`,
-          )
+  // const pairAddresses = useMemo(
+  //   () =>
+  //     tokens.map(([tokenA, tokenB]) => {
+  //       try {
+  //         return tokenA && tokenB && !tokenA.equals(tokenB) ? Pair.getAddress(tokenA, tokenB) : undefined
+  //       } catch (error: any) {
+  //         // Debug Invariant failed related to this line
+  //         console.error(
+  //           error.msg,
+  //           `- pairAddresses: ${tokenA?.address}-${tokenB?.address}`,
+  //           `chainId: ${tokenA?.chainId}`,
+  //         )
 
-          return undefined
-        }
-      }),
-    [tokens],
-  )
-  const results = useMultipleContractSingleData({
-    addresses: pairAddresses,
-    abi: pancakePairV2ABI,
-    functionName: 'getReserves',
-  })
-console.log("results:::",results)
+  //         return undefined
+  //       }
+  //     }),
+  //   [tokens],
+  // )
+const pairAddresses = [ '0xd2f622db6b6d67EFac968758905a0649dBA4ce3D' ]
+console.log("pairAddresses",pairAddresses)
+
+  const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
+console.log("results::",results)
   return useMemo(() => {
     return results.map((result, i) => {
       const { result: reserves, loading } = result
@@ -57,7 +60,7 @@ console.log("results:::",results)
       if (loading) return [PairState.LOADING, null]
       if (!tokenA || !tokenB || tokenA.equals(tokenB)) return [PairState.INVALID, null]
       if (!reserves) return [PairState.NOT_EXISTS, null]
-      const [reserve0, reserve1] = reserves
+      const { reserve0, reserve1 } = reserves
       const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
       return [
         PairState.EXISTS,
@@ -72,7 +75,5 @@ console.log("results:::",results)
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
   const pairCurrencies = useMemo<[Currency, Currency][]>(() => [[tokenA, tokenB]], [tokenA, tokenB])
-  console.log("pairCurrencies::",pairCurrencies)
-  console.log("useV2Pairs(pairCurrencies)[0]::",useV2Pairs(pairCurrencies)[0])
   return useV2Pairs(pairCurrencies)[0]
 }

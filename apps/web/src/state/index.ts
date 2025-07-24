@@ -12,6 +12,8 @@ import user from './user/reducer'
 import potteryReducer from './pottery'
 import globalReducer from './global/reducer'
 
+import multicallReducer from './multicall/reducer'
+
 const PERSISTED_KEYS: string[] = ['user', 'transactions']
 
 const persistConfig = {
@@ -34,6 +36,7 @@ const persistedReducer = persistReducer(
     // Exchange
     user,
     transactions,
+    multicall:multicallReducer,
   }),
 )
 

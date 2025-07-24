@@ -7,7 +7,7 @@ export interface Addresses {
 }
 
 export const getAddressFromMap = (address: Addresses, chainId?: number): `0x${string}` => {
-  return address[chainId] ? address[chainId] : address[ChainId.BSC]
+  return address[chainId] ? address[chainId] : address[ChainId.KASPLEX_TESTNET]
 }
 
 export const getMasterChefV2Address = (chainId?: number) => {

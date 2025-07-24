@@ -33,6 +33,7 @@
     "pnpm": ">=8"
   },
   "dependencies": {
+    "@ethersproject/abi": "^5.8.0",
     "@gelatonetwork/limit-orders-lib": "^4.1.0",
     "@gnosis.pm/safe-apps-wagmi": "^1.2.0",
     "@next/bundle-analyzer": "13.0.7",

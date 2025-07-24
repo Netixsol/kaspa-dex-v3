@@ -1,8 +1,6 @@
 import { Abi, AbiStateMutability, Narrow } from 'abitype'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import { useAtom } from 'jotai'
 import { useEffect, useMemo } from 'react'
-import { multicallReducerAtom } from 'state/multicall/reducer'
 import {
   // eslint-disable-next-line camelcase
   unstable_serialize,
@@ -29,6 +27,27 @@ import {
   toCallKey,
 } from './actions'
 
+//new imports
+import { Interface } from '@ethersproject/abi'
+import { BigNumber } from '@ethersproject/bignumber'
+import { AppState, useAppDispatch } from '../index'
+import { useSelector } from 'react-redux'
+
+type MethodArg = string | number | BigNumber
+type MethodArgs = Array<MethodArg | MethodArg[]>
+type OptionalMethodInputs = Array<MethodArg | MethodArg[] | undefined> | undefined
+
+function isMethodArg(x: unknown): x is MethodArg {
+  return ['string', 'number'].indexOf(typeof x) !== -1
+}
+function isValidMethodArgs(x: unknown): x is MethodArgs | undefined {
+  return (
+    x === undefined ||
+    (Array.isArray(x) && x.every((xi) => isMethodArg(xi) || (Array.isArray(xi) && xi.every(isMethodArg))))
+  )
+}
+
+
 interface CallResult {
   readonly valid: boolean
   readonly data: Hex | undefined
@@ -45,7 +64,11 @@ export const NEVER_RELOAD: ListenerOptions = {
 // the lowest level call for subscribing to contract data
 function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): CallResult[] {
   const { chainId } = useActiveChainId()
-  const [{ callResults }, dispatch] = useAtom(multicallReducerAtom)
+  const callResults = useSelector<AppState, AppState['multicall']['callResults']>(
+    (state) => state.multicall.callResults,
+  )
+  console.log("callResult up::",callResults)
+  const dispatch = useAppDispatch()
 
   const serializedCallKeys: string = useMemo(
     () =>
@@ -82,20 +105,21 @@ function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): C
       )
     }
   }, [chainId, dispatch, options, serializedCallKeys])
-
+console.log("calls in hooks::",calls)
   return useMemo(
     () =>
       calls.map<CallResult>((call) => {
         if (!chainId || !call) return INVALID_RESULT
-
+console.log("chainId:::",chainId, "call::", call)
         const result = callResults[chainId]?.[toCallKey(call)]
+        console.log("result in calldata:::",result)
         let data
         if (result?.data && result?.data !== '0x') {
           // eslint-disable-next-line prefer-destructuring
           data = result.data
         }
 
-        return { valid: true, data, blockNumber: result?.blockNumber }
+        return { valid: true, data:call.callData, blockNumber: chainId }
       }),
     [callResults, calls, chainId],
   )
@@ -276,29 +300,25 @@ export type MultipleSameDataCallParameters<
   options?: ListenerOptionsWithGas
 } & GetFunctionArgs<TAbi, TFunctionName>
 
-export function useMultipleContractSingleData<TAbi extends Abi | readonly unknown[], TFunctionName extends string>({
-  abi,
-  addresses,
-  functionName,
-  args,
-  options,
-}: MultipleSameDataCallParameters<TAbi, TFunctionName>): CallState<ContractFunctionResult<TAbi, TFunctionName>>[] {
-  const { enabled, blocksPerFetch } = options ?? { enabled: true }
-  const callData: Hex | undefined = useMemo(
+export function useMultipleContractSingleData(
+  addresses: (string | undefined)[],
+  contractInterface: Interface,
+  methodName: string,
+  callInputs?: OptionalMethodInputs,
+  options?: ListenerOptions,
+): CallState[] {
+  const fragment = useMemo(() => contractInterface.getFunction(methodName), [contractInterface, methodName])
+  const callData: string | undefined = useMemo(
     () =>
-      abi && enabled
-        ? encodeFunctionData({
-            abi,
-            functionName,
-            args,
-          } as unknown as EncodeFunctionDataParameters)
+      fragment && isValidMethodArgs(callInputs)
+        ? contractInterface.encodeFunctionData(fragment, callInputs)
         : undefined,
-    [abi, args, enabled, functionName],
+    [callInputs, contractInterface, fragment],
   )
 
   const calls = useMemo(
     () =>
-      addresses && addresses.length > 0 && callData
+      fragment && addresses && addresses.length > 0 && callData
         ? addresses.map<Call | undefined>((address) => {
             return address && callData
               ? {
@@ -308,18 +328,20 @@ export function useMultipleContractSingleData<TAbi extends Abi | readonly unknow
               : undefined
           })
         : [],
-    [addresses, callData],
+    [addresses, callData, fragment],
   )
-
-  const results = useCallsData(calls, options?.blocksPerFetch ? { blocksPerFetch } : DEFAULT_OPTIONS)
+// console.log("calls down::",calls)
+console.log("options",options)
+  const results = useCallsData(calls, options)
+  console.log("results hooks::",results)
   const { chainId } = useActiveChainId()
 
   const { cache } = useSWRConfig()
 
   return useMemo(() => {
     const currentBlockNumber = cache.get(unstable_serialize(['blockNumber', chainId]))?.data
-    return results.map((result) => toCallState(result, abi, functionName, currentBlockNumber))
-  }, [cache, chainId, results, abi, functionName])
+    return results.map((result) => toCallState(result, contractInterface, fragment, currentBlockNumber))
+  }, [cache, chainId, results, contractInterface, fragment])
 }
 
 export type SingleCallParameters<

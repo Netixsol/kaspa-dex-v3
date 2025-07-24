@@ -1,11 +1,12 @@
 import { useDebounce } from '@pancakeswap/hooks'
-import { useActiveChainId } from 'hooks/useActiveChainId'
-import { useAtom } from 'jotai'
+// import { Multicall } from 'config/abi/types'
+// import { ResultStructOutput } from 'config/abi/types/Multicall'
 import { useEffect, useMemo, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { useCurrentBlock } from 'state/block/hooks'
-import { multicallReducerAtom, MulticallState } from 'state/multicall/reducer'
-import { worker2 } from 'utils/worker'
+import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useMulticallContract } from '../../hooks/useContract'
+import { AppState, useAppDispatch } from '../index'
 import {
   Call,
   errorFetchingMulticallResults,
@@ -14,10 +15,70 @@ import {
   updateMulticallResults,
 } from './actions'
 import chunkArray from './chunkArray'
-import { CancelledError, retry } from './retry'
+import { CancelledError, retry, RetryableError } from './retry'
 
 // chunk calls so we do not exceed the gas limit
 const CALL_CHUNK_SIZE = 500
+
+/**
+ * Fetches a chunk of calls, enforcing a minimum block number constraint
+ * @param multicallContract multicall contract to fetch against
+ * @param chunk chunk of calls to make
+ * @param minBlockNumber minimum block number of the result set
+ */
+async function fetchChunk(
+  multicallContract: any,
+  chunk: Call[],
+  minBlockNumber: number,
+): Promise<{ results: any; blockNumber: number }> {
+  console.debug('Fetching chunk', multicallContract, chunk, minBlockNumber)
+  let resultsBlockNumber
+  let returnData
+  try {
+    // prettier-ignore
+    [resultsBlockNumber, , returnData] = await multicallContract.callStatic.tryBlockAndAggregate(
+      false,
+      chunk.map((obj) => ({
+        callData: obj.callData,
+        target: obj.address,
+      })),
+      {
+        blockTag: minBlockNumber,
+      }
+    )
+  } catch (err) {
+    const error = err as any
+    if (
+      error.code === -32000 ||
+      (error?.data?.message && error?.data?.message?.indexOf('header not found') !== -1) ||
+      error.message?.indexOf('header not found') !== -1
+    ) {
+      throw new RetryableError(`header not found for block number ${minBlockNumber}`)
+    } else if (error.code === -32603 || error.message?.indexOf('execution ran out of gas') !== -1) {
+      if (chunk.length > 1) {
+        if (process.env.NODE_ENV === 'development') {
+          console.debug('Splitting a chunk in 2', chunk)
+        }
+        const half = Math.floor(chunk.length / 2)
+        const [c0, c1] = await Promise.all([
+          fetchChunk(multicallContract, chunk.slice(0, half), minBlockNumber),
+          fetchChunk(multicallContract, chunk.slice(half, chunk.length), minBlockNumber),
+        ])
+        return {
+          results: c0.results.concat(c1.results),
+          blockNumber: c1.blockNumber,
+        }
+      }
+    }
+    console.debug('Failed to fetch chunk inside retry', error)
+    throw error
+  }
+  if (resultsBlockNumber?.toNumber() < minBlockNumber) {
+    console.debug(`Fetched results for old block number: ${resultsBlockNumber.toString()} vs. ${minBlockNumber}`)
+  }
+
+  return { results: returnData, blockNumber: resultsBlockNumber?.toNumber() }
+}
 
 /**
  * From the current all listeners state, return each call key mapped to the
@@ -26,7 +87,7 @@ const CALL_CHUNK_SIZE = 500
  * @param chainId the current chain id
  */
 export function activeListeningKeys(
-  allListeners: MulticallState['callListeners'],
+  allListeners: AppState['multicall']['callListeners'],
   chainId?: number,
 ): { [callKey: string]: number } {
   if (!allListeners || !chainId) return {}
@@ -57,7 +118,7 @@ export function activeListeningKeys(
  * @param currentBlock the latest block number
  */
 export function outdatedListeningKeys(
-  callResults: MulticallState['callResults'],
+  callResults: AppState['multicall']['callResults'],
   listeningKeys: { [callKey: string]: number },
   chainId: number | undefined,
   currentBlock: number | undefined,
@@ -84,7 +145,8 @@ export function outdatedListeningKeys(
 }
 
 export default function Updater(): null {
-  const [state, dispatch] = useAtom(multicallReducerAtom)
+  const dispatch = useAppDispatch()
+  const state = useSelector<AppState, AppState['multicall']>((s) => s.multicall)
   // wait for listeners to settle before triggering updates
   const debouncedListeners = useDebounce(state.callListeners, 100)
   const currentBlock = useCurrentBlock()
@@ -129,19 +191,11 @@ export default function Updater(): null {
     cancellations.current = {
       blockNumber: currentBlock,
       cancellations: chunkedCalls.map((chunk, index) => {
-        const { cancel, promise } = retry(
-          () =>
-            worker2.fetchChunk({
-              chainId,
-              chunk,
-              minBlockNumber: currentBlock,
-            }),
-          {
-            n: Infinity,
-            minWait: 2500,
-            maxWait: 3500,
-          },
-        )
+        const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, currentBlock), {
+          n: Infinity,
+          minWait: 2500,
+          maxWait: 3500,
+        })
         promise
           .then(({ results: returnData, blockNumber: fetchBlockNumber }) => {
             cancellations.current = { cancellations: [], blockNumber: currentBlock }

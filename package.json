@@ -44,9 +44,11 @@
     "pnpm": ">=8"
   },
   "devDependencies": {
-    "@types/node": "^18.16.2",
     "@changesets/cli": "^2.25.0",
+    "@pancakeswap/eslint-config-pancake": "workspace:*",
+    "@pancakeswap/tsconfig": "workspace:*",
     "@stylelint/postcss-css-in-js": "^0.37.2",
+    "@types/node": "^18.16.2",
     "eslint-plugin-lodash": "^7.4.0",
     "eslint-plugin-strict-null-checks": "0.0.21",
     "husky": "^7.0.0",
@@ -62,16 +64,16 @@
     "stylelint-config-styled-components": "^0.1.1",
     "tilg": "^0.1.1",
     "tsx": "^3.12.6",
-    "@pancakeswap/tsconfig": "workspace:*",
-    "@pancakeswap/eslint-config-pancake": "workspace:*",
-    "typescript": "^5.0.4",
     "turbo": "1.9.9",
+    "typescript": "^5.0.4",
     "vitest": "^0.27.2"
   },
   "volta": {
     "node": "18.16.0"
   },
   "dependencies": {
+    "@ethersproject/abi": "^5.8.0",
+    "@ethersproject/bignumber": "^5.7.0",
     "encoding": "^0.1.13",
     "ws": "^8.13.0"
   }

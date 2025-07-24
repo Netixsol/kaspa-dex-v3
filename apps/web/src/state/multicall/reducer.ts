@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { atomWithReducer } from 'jotai/utils'
 import {
   addMulticallListeners,
   errorFetchingMulticallResults,
@@ -36,7 +35,7 @@ const initialState: MulticallState = {
   callResults: {},
 }
 
-export const multicallReducer = createReducer(initialState, (builder) =>
+export default createReducer(initialState, (builder) =>
   builder
     .addCase(addMulticallListeners, (state, { payload: { calls, chainId, options: { blocksPerFetch = 1 } = {} } }) => {
       const listeners: MulticallState['callListeners'] = state.callListeners
@@ -110,5 +109,3 @@ export const multicallReducer = createReducer(initialState, (builder) =>
       })
     }),
 )
-
-export const multicallReducerAtom = atomWithReducer(initialState, multicallReducer)

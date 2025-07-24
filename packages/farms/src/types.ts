@@ -214,8 +214,8 @@ export interface DeserializedFarmsState {
   loadArchivedFarmsData: boolean
   userDataLoaded: boolean
   poolLength: number
-  regularCakePerBlock: number
-  totalRegularAllocPoint: string
+  regularCakePerBlock?: number
+  totalRegularAllocPoint?: string
   cakePerBlock?: string
 }
 

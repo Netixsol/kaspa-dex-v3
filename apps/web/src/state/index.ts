@@ -12,28 +12,6 @@ import user from './user/reducer'
 import potteryReducer from './pottery'
 import globalReducer from './global/reducer'
 
-
-import { ChainId } from '@pancakeswap/sdk'
-import type {
-  UnknownAsyncThunkFulfilledAction,
-  UnknownAsyncThunkPendingAction,
-  UnknownAsyncThunkRejectedAction,
-  // eslint-disable-next-line import/no-unresolved
-} from '@reduxjs/toolkit/dist/matchers'
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import stringify from 'fast-json-stable-stringify'
-import { getFarmConfig } from '@pancakeswap/farms/constants'
-
-import {
-  fetchFarmUserEarnings,
-  fetchFarmUserAllowances,
-  fetchFarmUserTokenBalances,
-  fetchFarmUserStakedBalances,
-} from './fetchFarmUser'
-import { fetchMasterChefFarmPoolLength } from './fetchMasterChefData'
-
-
-
 const PERSISTED_KEYS: string[] = ['user', 'transactions']
 
 const persistConfig = {
@@ -119,61 +97,4 @@ export const persistor = persistStore(store, undefined, () => {
 
 export function useStore(initialState) {
   return useMemo(() => initializeStore(initialState), [initialState])
-}
-
-//code added for v2/migration.tsx
-export const fetchFarmUserDataAsync = createAsyncThunk<
-  FarmUserDataResponse[],
-  { account: string; pids: number[] },
-  {
-    state: AppState
-  }
->(
-  'farmsV1/fetchFarmUserDataAsync',
-  async ({ account, pids }) => {
-    const farmsConfig = await getFarmConfig(ChainId.BSC)
-    const poolLength = await fetchMasterChefFarmPoolLength()
-    const farmsToFetch = farmsConfig.filter((farmConfig) => pids.includes(farmConfig.v1pid))
-    const farmsCanFetch = farmsToFetch.filter((f) => poolLength.gt(f.v1pid))
-    const userFarmAllowances = await fetchFarmUserAllowances(account, farmsCanFetch)
-    const userFarmTokenBalances = await fetchFarmUserTokenBalances(account, farmsCanFetch)
-    const userStakedBalances = await fetchFarmUserStakedBalances(account, farmsCanFetch)
-    const userFarmEarnings = await fetchFarmUserEarnings(account, farmsCanFetch)
-
-    return userFarmAllowances.map((farmAllowance, index) => {
-      return {
-        pid: farmsCanFetch[index].v1pid,
-        allowance: userFarmAllowances[index],
-        tokenBalance: userFarmTokenBalances[index],
-        stakedBalance: userStakedBalances[index],
-        earnings: userFarmEarnings[index],
-      }
-    })
-  },
-  {
-    condition: (arg, { getState }) => {
-      const { farmsV1 } = getState()
-      if (farmsV1.loadingKeys[stringify({ type: fetchFarmUserDataAsync.typePrefix, arg })]) {
-        console.debug('farms user action is fetching, skipping here')
-        return false
-      }
-      return true
-    },
-  },
-)
-
-type UnknownAsyncThunkFulfilledOrPendingAction =
-  | UnknownAsyncThunkFulfilledAction
-  | UnknownAsyncThunkPendingAction
-  | UnknownAsyncThunkRejectedAction
-
-const serializeLoadingKey = (
-  action: UnknownAsyncThunkFulfilledOrPendingAction,
-  suffix: UnknownAsyncThunkFulfilledOrPendingAction['meta']['requestStatus'],
-) => {
-  const type = action.type.split(`/${suffix}`)[0]
-  return stringify({
-    arg: action.meta.arg,
-    type,
-  })
 }

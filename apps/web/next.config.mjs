@@ -260,11 +260,11 @@ const config = {
         destination: '/404',
         permanent: true,
       },
-      {
-        source: '/v2/:path*',
-        destination: '/404',
-        permanent: true,
-      },
+      // {
+      //   source: '/v2/:path*',
+      //   destination: '/404',
+      //   permanent: true,
+      // },
       {
         source: '/voting/:path*',
         destination: '/404',

@@ -47,7 +47,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
     abi: pancakePairV2ABI,
     functionName: 'getReserves',
   })
-
+console.log("results:::",results)
   return useMemo(() => {
     return results.map((result, i) => {
       const { result: reserves, loading } = result
@@ -72,5 +72,7 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
   const pairCurrencies = useMemo<[Currency, Currency][]>(() => [[tokenA, tokenB]], [tokenA, tokenB])
+  console.log("pairCurrencies::",pairCurrencies)
+  console.log("useV2Pairs(pairCurrencies)[0]::",useV2Pairs(pairCurrencies)[0])
   return useV2Pairs(pairCurrencies)[0]
 }

@@ -204,7 +204,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
                     <HamburgerIcon style={{ transform: "scale(1.31)" }} />
                   )}
                 </Hamburger>
-                <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/"} />}</Flex>
+                <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/swap"} />}</Flex>
               </Flex>
               <Flex alignItems="center" height="100%">
                 <AtomBox display={{ xs: "none", lg: "block" }}>

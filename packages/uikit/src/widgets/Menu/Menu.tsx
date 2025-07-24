@@ -186,16 +186,22 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
             {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
             <StyledNav id="nav">
-              <Flex alignItems="center" height="100%" justifyContent="space-between" paddingX="15px" style={{ gap: "15px" }}>
+              <Flex
+                alignItems="center"
+                height="100%"
+                justifyContent="space-between"
+                paddingX="15px"
+                style={{ gap: "15px" }}
+              >
                 {/* Hamburger Icon */}
-                  <Hamburger onClick={() => setSidebarOpen(!open)}>
-                    {open ? (
-                      <HamburgerCloseIcon style={{ transform: "scale(1.31)" }} />
-                    ) : (
-                      <HamburgerIcon style={{ transform: "scale(1.31)" }} />
-                    )}
-                  </Hamburger>
-                <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/"} />}</Flex>
+                <Hamburger onClick={() => setSidebarOpen(!open)}>
+                  {open ? (
+                    <HamburgerCloseIcon style={{ transform: "scale(1.31)" }} />
+                  ) : (
+                    <HamburgerIcon style={{ transform: "scale(1.31)" }} />
+                  )}
+                </Hamburger>
+                <Flex>{logoComponent ?? <Logo href={homeLink_ ?? homeLink?.href ?? "/swap"} />}</Flex>
               </Flex>
               <Flex alignItems="center" height="100%">
                 <AtomBox display={{ xs: "none", lg: "block" }}>

@@ -34,10 +34,14 @@ const AppHeaderContainer = styled(Flex)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
+// const FilterSection = styled(AutoRow)`
+//   padding-top: 16px;
+//   margin-top: 16px;
+//   border-top: 1px solid ${({ theme }) => theme.colors.cardBorder};
+// `
 const FilterSection = styled(AutoRow)`
   padding-top: 16px;
   margin-top: 16px;
-  border-top: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
 const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({

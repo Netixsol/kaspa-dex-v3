@@ -355,8 +355,8 @@ const PoolPage: React.FC<{ address: string }> = ({ address }) => {
               </Box>
             </Card>
           </ContentLayout>
-          <Heading>{t('Transactions')}</Heading>
-          {transactions ? <TransactionTable transactions={transactions} /> : <LocalLoader fill={false} />}
+          {/* <Heading>{t('Transactions')}</Heading>
+          {transactions ? <TransactionTable transactions={transactions} /> : <LocalLoader fill={false} />} */}
         </AutoColumn>
       ) : (
         <Flex mt="80px" justifyContent="center">

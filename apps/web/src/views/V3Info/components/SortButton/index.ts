@@ -20,24 +20,24 @@ export const SortButton = styled(Button)`
   border-color: ${({ theme }) => theme.colors.cardBorder};
   background: ${({ theme }) => (theme.isDark ? theme.colors.backgroundDisabled : theme.colors.input)};
   path {
-    fill: ${({ theme }) => (theme.isDark ? 'rgba(255, 255, 255, 0.2)' : '#B4ACCF')};
+    fill: ${({ theme }) => (theme.isDark ? 'rgba(255, 255, 255, 0.40)' : '#B4ACCF')};
   }
   &.is-asc {
-    background: ${({ theme }) => (theme.isDark ? theme.colors.input : theme.colors.textSubtle)};
+    // background: ${({ theme }) => (theme.isDark ? theme.colors.input : theme.colors.textSubtle)};
     path:first-child {
-      fill: rgba(255, 255, 255, 1);
+      fill: white;
     }
-    path:last-child {
-      fill: rgba(255, 255, 255, 0.3);
-    }
+    // path:last-child {
+    //   fill: rgba(255, 255, 255, 0.3);
+    // }
   }
   &.is-desc {
-    background: ${({ theme }) => (theme.isDark ? theme.colors.input : theme.colors.textSubtle)};
-    path:first-child {
-      fill: rgba(255, 255, 255, 0.3);
-    }
+    // background: ${({ theme }) => (theme.isDark ? theme.colors.input : theme.colors.textSubtle)};
+    // path:first-child {
+    //   fill: rgba(255, 255, 255, 0.3);
+    // }
     path:last-child {
-      fill: rgba(255, 255, 255, 1);
+      fill: white;
     }
   }
 `

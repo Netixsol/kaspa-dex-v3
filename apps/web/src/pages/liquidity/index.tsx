@@ -198,12 +198,13 @@ export default function PoolListPage() {
 
   return (
     <Page>
-      <Flex m="24px 0" maxWidth="854px">
+      {/* <Flex m="24px 0" maxWidth="554px"> */}
+      <Flex m="0px 0" maxWidth="554px">
         {/* <FarmV3MigrationBanner /> */}
       </Flex>
       <AppBody
         style={{
-          maxWidth: '854px',
+          maxWidth: '554px',
         }}
       >
         <AppHeader
@@ -230,17 +231,17 @@ export default function PoolListPage() {
                 </Text>
               </Flex>
 
-              <ButtonMenu
+              {/* <ButtonMenu
                 scale="sm"
                 activeIndex={selectedTypeIndex}
                 onItemClick={(index) => setSelectedTypeIndex(index)}
                 variant="subtle"
               >
-                {/* <ButtonMenuItem>{t('All')}</ButtonMenuItem> */}
+                <ButtonMenuItem>{t('All')}</ButtonMenuItem>
                 <ButtonMenuItem>V3</ButtonMenuItem>
-                {/* <ButtonMenuItem>{t('StableSwap')}</ButtonMenuItem>
-                <ButtonMenuItem>V2</ButtonMenuItem> */}
-              </ButtonMenu>
+                <ButtonMenuItem>{t('StableSwap')}</ButtonMenuItem>/
+                <ButtonMenuItem>V2</ButtonMenuItem>
+              </ButtonMenu> */}
             </>
           }
         />

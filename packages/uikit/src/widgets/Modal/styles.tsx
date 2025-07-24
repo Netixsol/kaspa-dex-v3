@@ -8,10 +8,20 @@ import { ModalProps } from "./types";
 
 export const mobileFooterHeight = 73;
 
+// export const ModalHeader = styled.div<{ background?: string }>`
+//   align-items: center;
+//   background: transparent;
+//   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+//   display: flex;
+//   padding: 12px 24px;
+
+//   ${({ theme }) => theme.mediaQueries.md} {
+//     background: ${({ background }) => background || "transparent"};
+//   }
+// `;
 export const ModalHeader = styled.div<{ background?: string }>`
   align-items: center;
   background: transparent;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   display: flex;
   padding: 12px 24px;
 
@@ -73,7 +83,7 @@ export const ModalContainer = styled(MotionBox)`
   position: absolute;
   bottom: 0;
   max-width: none !important;
-  min-height: 300px;
+  min-height: 100px;
 
   ${({ theme }) => theme.mediaQueries.md} {
     width: auto;

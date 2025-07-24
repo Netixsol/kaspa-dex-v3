@@ -51,7 +51,7 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   hideCloseButton = false,
   bodyPadding = "24px",
   headerBackground = "transparent",
-  minWidth = "320px",
+  minWidth = "340px",
   headerRightSlot,
   bodyAlignItems,
   ...props

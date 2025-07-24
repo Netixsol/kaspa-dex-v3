@@ -31,7 +31,8 @@ interface Props {
   swapCommitButton?: ReactNode
 }
 
-export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeLoading, swapCommitButton }: Props) {
+// export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeLoading, swapCommitButton }: Props) {
+export function FormMain({ inputAmount, outputAmount, tradeLoading, swapCommitButton }: Props) {
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const warningSwapHandler = useWarningImport()
@@ -145,7 +146,7 @@ export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeL
       />
       <RiskCheck currency={outputCurrency} />
       <Recipient />
-      {pricingAndSlippage}
+      {/* {pricingAndSlippage} */}
       {swapCommitButton}
     </FormContainer>
   )

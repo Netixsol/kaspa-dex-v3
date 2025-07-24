@@ -11,6 +11,7 @@ import {
   Skeleton,
   Swap as SwapUI,
   ArrowDropDownIcon,
+  WalletFilledIcon,
 } from '@pancakeswap/uikit'
 import styled, { css } from 'styled-components'
 import { isAddress } from 'utils'
@@ -36,7 +37,7 @@ const InputRow = styled.div<{ selected: boolean }>`
   justify-content: flex-end;
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
-const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })<{ zapStyle?: ZapStyle }>`
+const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' }) <{ zapStyle?: ZapStyle }>`
   padding: 0px;
 
   ${({ zapStyle, theme }) =>
@@ -205,9 +206,9 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                   <Text id="pair" bold>
                     {(currency && currency.symbol && currency.symbol.length > 10
                       ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
-                          currency.symbol.length - 5,
-                          currency.symbol.length,
-                        )}`
+                        currency.symbol.length - 5,
+                        currency.symbol.length,
+                      )}`
                       : currency?.symbol) || t('Select a currency')}
                   </Text>
                 )}
@@ -235,7 +236,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
               </Flex>
             ) : null}
           </Flex>
-          {account && (
+          {/* {account && (
             <Text
               onClick={!disabled && onMax}
               color="textSubtle"
@@ -250,7 +251,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                   : t('Balance: %balance%', { balance: balance ?? t('Loading') })
                 : ' -'}
             </Text>
-          )}
+          )} */}
         </>
       }
       bottom={
@@ -272,47 +273,70 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
           )}
           <InputRow selected={disableCurrencySelect}>
             {account && currency && selectedCurrencyBalance?.greaterThan(0) && !disabled && label !== 'To' && (
-              <Flex alignItems="right" justifyContent="right">
-                {maxAmount?.greaterThan(0) &&
-                  showQuickInputButton &&
-                  onPercentInput &&
-                  [25, 50, 75].map((percent) => {
-                    const isAtClickedPercent = currentClickedPercent === percent.toString()
-                    const isAtCurrentPercent =
-                      (maxAmount && value !== '0' && value === percentAmount[percent]) ||
-                      (lpPercent && lpPercent === percent.toString())
+              <Flex alignItems="right" justifyContent="right" style={{ width: '100%', display: "flex", alignItems: "cetner", justifyContent: "space-between" }}>
+                <div style={{ borderRadius: "16px", paddingLeft: '8px', backgroundColor: "#252136", paddingRight: '8px', display: "flex", alignItems: "center", gap: "4px" }}>
 
-                    return (
-                      <Button
-                        key={`btn_quickCurrency${percent}`}
-                        onClick={() => {
-                          onPercentInput(percent)
-                          setCurrentClickedPercent(percent.toString())
-                        }}
-                        scale="xs"
-                        mr="5px"
-                        variant={isAtClickedPercent || isAtCurrentPercent ? 'primary' : 'secondary'}
-                        style={{ textTransform: 'uppercase' }}
-                      >
-                        {percent}%
-                      </Button>
-                    )
-                  })}
-                {maxAmount?.greaterThan(0) && showMaxButton && (
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      e.preventDefault()
-                      onMax?.()
-                      setCurrentClickedPercent('MAX')
-                    }}
-                    scale="xs"
-                    variant={isAtPercentMax ? 'primary' : 'secondary'}
-                    style={{ textTransform: 'uppercase' }}
-                  >
-                    {t('Max')}
-                  </Button>
-                )}
+                  <WalletFilledIcon color='#2EFE87' />
+                  {account && (
+                    <Text
+                      onClick={!disabled && onMax}
+                      color="textSubtle"
+                      fontSize="12px"
+                      ellipsis
+                      title={!hideBalance && !!currency ? t('Balance: %balance%', { balance: balance ?? t('Loading') }) : ' -'}
+                      style={{ display: 'inline', cursor: 'pointer' }}
+                    >
+                      {!hideBalance && !!currency
+                        ? balance?.replace('.', '')?.length > 12
+                          ? balance
+                          : t(' %balance%', { balance: balance ?? t('Loading') })
+                        : ' -'}
+                    </Text>
+                  )}
+                </div>
+                <div>
+                  {maxAmount?.greaterThan(0) &&
+                    showQuickInputButton &&
+                    onPercentInput &&
+                    /* [25, 50, 75].map((percent) => { */
+                    [].map((percent) => {
+                      const isAtClickedPercent = currentClickedPercent === percent.toString()
+                      const isAtCurrentPercent =
+                        (maxAmount && value !== '0' && value === percentAmount[percent]) ||
+                        (lpPercent && lpPercent === percent.toString())
+
+                      return (
+                        <Button
+                          key={`btn_quickCurrency${percent}`}
+                          onClick={() => {
+                            onPercentInput(percent)
+                            setCurrentClickedPercent(percent.toString())
+                          }}
+                          scale="xs"
+                          mr="5px"
+                          variant={isAtClickedPercent || isAtCurrentPercent ? 'primary' : 'secondary'}
+                          style={{ textTransform: 'uppercase' }}
+                        >
+                          {percent}%
+                        </Button>
+                      )
+                    })}
+                  {maxAmount?.greaterThan(0) && showMaxButton && (
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onMax?.()
+                        setCurrentClickedPercent('MAX')
+                      }}
+                      scale="xs"
+                      variant={isAtPercentMax ? 'primary' : 'secondary'}
+                      style={{ textTransform: 'uppercase', }}
+                    >
+                      {t('Max')}
+                    </Button>
+                  )}
+                </div>
               </Flex>
             )}
           </InputRow>

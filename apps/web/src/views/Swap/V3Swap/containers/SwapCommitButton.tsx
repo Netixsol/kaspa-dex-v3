@@ -345,8 +345,8 @@ export const SwapCommitButton = memo(function SwapCommitButton({
             (priceImpactSeverity > 3 && !isExpertMode
               ? t('Price Impact High')
               : priceImpactSeverity > 2
-              ? t('Swap Anyway')
-              : t('Swap'))}
+                ? t('Swap Anyway')
+                : t('Swap'))}
         </CommitButton>
       </RowBetween>
       <Column style={{ marginTop: '1rem' }}>
@@ -357,7 +357,7 @@ export const SwapCommitButton = memo(function SwapCommitButton({
   ) : (
     <>
       <CommitButton
-        variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'danger' : 'primary'}
+        variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'primary' : 'primary'}
         onClick={() => {
           onSwapHandler()
         }}
@@ -374,8 +374,8 @@ export const SwapCommitButton = memo(function SwapCommitButton({
           (priceImpactSeverity > 3 && !isExpertMode
             ? t('Price Impact Too High')
             : priceImpactSeverity > 2
-            ? t('Swap Anyway')
-            : t('Swap'))}
+              ? t('Swap Anyway')
+              : t('Swap'))}
       </CommitButton>
 
       {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}

@@ -17,6 +17,10 @@ import {
   Hex,
   InferFunctionName,
 } from 'viem'
+import { Interface } from '@ethersproject/abi'
+import { BigNumber } from '@ethersproject/bignumber'
+import { useSelector } from 'react-redux'
+
 import {
   addMulticallListeners,
   Call,
@@ -27,11 +31,7 @@ import {
   toCallKey,
 } from './actions'
 
-//new imports
-import { Interface } from '@ethersproject/abi'
-import { BigNumber } from '@ethersproject/bignumber'
 import { AppState, useAppDispatch } from '../index'
-import { useSelector } from 'react-redux'
 
 type MethodArg = string | number | BigNumber
 type MethodArgs = Array<MethodArg | MethodArg[]>
@@ -46,7 +46,6 @@ function isValidMethodArgs(x: unknown): x is MethodArgs | undefined {
     (Array.isArray(x) && x.every((xi) => isMethodArg(xi) || (Array.isArray(xi) && xi.every(isMethodArg))))
   )
 }
-
 
 interface CallResult {
   readonly valid: boolean
@@ -67,7 +66,7 @@ function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): C
   const callResults = useSelector<AppState, AppState['multicall']['callResults']>(
     (state) => state.multicall.callResults,
   )
-  console.log("callResult up::",callResults)
+  console.log('callResult up::', callResults)
   const dispatch = useAppDispatch()
 
   const serializedCallKeys: string = useMemo(
@@ -105,21 +104,18 @@ function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): C
       )
     }
   }, [chainId, dispatch, options, serializedCallKeys])
-console.log("calls in hooks::",calls)
   return useMemo(
     () =>
       calls.map<CallResult>((call) => {
         if (!chainId || !call) return INVALID_RESULT
-console.log("chainId:::",chainId, "call::", call)
         const result = callResults[chainId]?.[toCallKey(call)]
-        console.log("result in calldata:::",result)
         let data
         if (result?.data && result?.data !== '0x') {
           // eslint-disable-next-line prefer-destructuring
           data = result.data
         }
-
-        return { valid: true, data:call.callData, blockNumber: chainId }
+        console.log('dataaaaaaaa', data)
+        return { valid: true, data, blockNumber: result?.blockNumber ?? 0 }
       }),
     [callResults, calls, chainId],
   )
@@ -307,7 +303,16 @@ export function useMultipleContractSingleData(
   callInputs?: OptionalMethodInputs,
   options?: ListenerOptions,
 ): CallState[] {
+  console.log('params', {
+    addresses,
+    contractInterface,
+    methodName,
+    callInputs,
+    options,
+  })
   const fragment = useMemo(() => contractInterface.getFunction(methodName), [contractInterface, methodName])
+  console.log('fragment', fragment)
+  console.log('typeof contractInterface.encodeFunctionData', typeof contractInterface.encodeFunctionData)
   const callData: string | undefined = useMemo(
     () =>
       fragment && isValidMethodArgs(callInputs)
@@ -316,13 +321,14 @@ export function useMultipleContractSingleData(
     [callInputs, contractInterface, fragment],
   )
 
+  console.log('callData', callData)
   const calls = useMemo(
     () =>
       fragment && addresses && addresses.length > 0 && callData
         ? addresses.map<Call | undefined>((address) => {
             return address && callData
               ? {
-                  address,
+                  address: address as Address, 
                   callData,
                 }
               : undefined
@@ -330,10 +336,11 @@ export function useMultipleContractSingleData(
         : [],
     [addresses, callData, fragment],
   )
-// console.log("calls down::",calls)
-console.log("options",options)
+  // console.log("calls down::",calls)
+  console.log('options', options)
+  console.log('calls', calls)
   const results = useCallsData(calls, options)
-  console.log("results hooks::",results)
+  console.log('results hooks::', results)
   const { chainId } = useActiveChainId()
 
   const { cache } = useSWRConfig()

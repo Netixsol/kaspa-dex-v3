@@ -1,17 +1,17 @@
 // import masterchefABIV1 from 'config/abi/masterchefV1.json'
 import chunk from 'lodash/chunk'
 import { SerializedFarm } from '@pancakeswap/farms'
+import { multicallv2 } from 'utils/multicall'
+import { masterChefV1ABI } from 'config/abi/masterchefV1'
 import { SerializedFarmConfig } from '../../config/constants/types'
 import { getMasterChefV1Address } from '../../utils/addressHelpers'
 import { getMasterchefV1Contract } from '../../utils/contractHelpers'
-import { multicallv2 } from 'utils/multicall'
-import { masterChefV1ABI } from 'config/abi/masterchefV1'
 
 const masterChefAddress = getMasterChefV1Address()
 const masterChefContract = getMasterchefV1Contract()
 
 export const fetchMasterChefFarmPoolLength = async () => {
-  const poolLength = await masterChefContract.poolLength()
+  const poolLength = await masterChefContract.read.poolLength()
   return poolLength
 }
 

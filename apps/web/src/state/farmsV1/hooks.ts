@@ -62,7 +62,7 @@ export const usePollFarmsV1WithUserData = () => {
   }, [dispatch, account])
 }
 
-//code added for v2/migration.tsx
+// code added for v2/migration.tsx
 export const useFarmsV1 = (): DeserializedFarmsState => {
   const farms = useSelector((state: State) => state.farmsV1)
   const deserializedFarmsData = farms.data.map(deserializeFarm)

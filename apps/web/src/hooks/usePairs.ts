@@ -46,11 +46,11 @@ export function useV2Pairs(currencies: [Currency | undefined, Currency | undefin
   //     }),
   //   [tokens],
   // )
-const pairAddresses = [ '0xd2f622db6b6d67EFac968758905a0649dBA4ce3D' ]
-console.log("pairAddresses",pairAddresses)
+  const pairAddresses = ['0xd2f622db6b6d67EFac968758905a0649dBA4ce3D']
+  console.log('pairAddresses', pairAddresses)
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
-console.log("results::",results)
+  console.log('results::', results)
   return useMemo(() => {
     return results.map((result, i) => {
       const { result: reserves, loading } = result

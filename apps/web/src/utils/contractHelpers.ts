@@ -83,7 +83,7 @@ import { tradingRewardABI } from 'config/abi/tradingReward'
 export const getContract = <TAbi extends Abi | unknown[], TWalletClient extends WalletClient>({
   abi,
   address,
-  chainId = ChainId.BSC,
+  chainId = ChainId.KASPLEX_TESTNET,
   publicClient,
   signer,
 }: {

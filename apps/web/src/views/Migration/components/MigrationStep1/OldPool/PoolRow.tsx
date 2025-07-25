@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { VaultKey } from 'state/types'
-import { useVaultPoolByKeyV1 } from 'views/Migration/hook/V1/Pool/useFetchIfoPool'
+// import { useVaultPoolByKeyV1 } from 'views/Migration/hook/V1/Pool/useFetchIfoPool'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { getCakeVaultEarnings } from 'views/Pools/helpers'
 import { useMatchBreakpoints, Pool } from '@pancakeswap/uikit'
@@ -58,31 +58,31 @@ const PoolRow: React.FC<React.PropsWithChildren<PoolRowProps>> = ({ pool, accoun
   const shouldRenderActionPanel = useDelayedUnmount(expanded, 300)
   const isCakePool = pool.sousId === 0
 
-  const { vaultPoolData } = useVaultPoolByKeyV1(pool.vaultKey)
-  const { totalCakeInVault, pricePerFullShare } = vaultPoolData
-  const { cakeAtLastUserAction, userShares } = vaultPoolData.userData
+  // const { vaultPoolData } = useVaultPoolByKeyV1(pool.vaultKey)
+  // const { totalCakeInVault, pricePerFullShare } = vaultPoolData
+  // const { cakeAtLastUserAction, userShares } = vaultPoolData.userData
 
-  const vaultPools = {
-    [VaultKey.CakeVaultV1]: useVaultPoolByKeyV1(VaultKey.CakeVaultV1).vaultPoolData,
-    [VaultKey.IfoPool]: useVaultPoolByKeyV1(VaultKey.IfoPool).vaultPoolData,
-  }
-  const cakeInVaults = Object.values(vaultPools).reduce((total, vault) => {
-    return total.plus(vault.totalCakeInVault)
-  }, BIG_ZERO)
+  // const vaultPools = {
+  //   [VaultKey.CakeVaultV1]: useVaultPoolByKeyV1(VaultKey.CakeVaultV1).vaultPoolData,
+  //   [VaultKey.IfoPool]: useVaultPoolByKeyV1(VaultKey.IfoPool).vaultPoolData,
+  // }
+  // const cakeInVaults = Object.values(vaultPools).reduce((total, vault) => {
+  //   return total.plus(vault.totalCakeInVault)
+  // }, BIG_ZERO)
 
   // Auto Earning
-  let earningTokenBalance = 0
-  if (pricePerFullShare) {
-    const { autoCakeToDisplay } = getCakeVaultEarnings(
-      account,
-      cakeAtLastUserAction,
-      userShares,
-      pricePerFullShare,
-      pool.earningTokenPrice,
-    )
-    earningTokenBalance = autoCakeToDisplay
-  }
-  const hasEarnings = account && cakeAtLastUserAction?.gt(0) && userShares?.gt(0)
+  // let earningTokenBalance = 0
+  // if (pricePerFullShare) {
+  //   const { autoCakeToDisplay } = getCakeVaultEarnings(
+  //     account,
+  //     cakeAtLastUserAction,
+  //     userShares,
+  //     pricePerFullShare,
+  //     pool.earningTokenPrice,
+  //   )
+  //   earningTokenBalance = autoCakeToDisplay
+  // }
+  // const hasEarnings = account && cakeAtLastUserAction?.gt(0) && userShares?.gt(0)
 
   const toggleExpanded = () => {
     if (!isLargerScreen) {
@@ -92,11 +92,11 @@ const PoolRow: React.FC<React.PropsWithChildren<PoolRowProps>> = ({ pool, accoun
 
   const EarningComponent = () => {
     if (isLargerScreen || !expanded) {
-      return pool.vaultKey === VaultKey.IfoPool || pool.vaultKey === VaultKey.CakeVaultV1 ? (
-        <AutoEarningsCell hasEarnings={hasEarnings} earningTokenBalance={earningTokenBalance} />
-      ) : (
+      // return pool.vaultKey === VaultKey.IfoPool || pool.vaultKey === VaultKey.CakeVaultV1 ? (
+      //   <AutoEarningsCell hasEarnings={hasEarnings} earningTokenBalance={earningTokenBalance} />
+      // ) : (
         <EarningsCell pool={pool} account={account} />
-      )
+      // )
     }
     return null
   }
@@ -108,9 +108,9 @@ const PoolRow: React.FC<React.PropsWithChildren<PoolRowProps>> = ({ pool, accoun
           <NameCell pool={pool} />
           {isLargerScreen || !expanded ? <StakedCell pool={pool} account={account} /> : null}
           {EarningComponent()}
-          {isLargerScreen && isCakePool && (
+          {/* {isLargerScreen && isCakePool && (
             <TotalStakedCell pool={pool} totalCakeInVault={totalCakeInVault} cakeInVaults={cakeInVaults} />
-          )}
+          )} */}
         </LeftContainer>
         <RightContainer>
           {isLargerScreen || !expanded ? <Unstaked pool={pool} /> : null}

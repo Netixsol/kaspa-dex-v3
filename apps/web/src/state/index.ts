@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import farmsReducer from './farms'
+import farmsV1Reducer from './farmsV1'
 import { updateVersion } from './global/actions'
 import lotteryReducer from './lottery'
 import poolsReducer from './pools'
@@ -29,6 +30,7 @@ const persistedReducer = persistReducer(
   combineReducers({
     global: globalReducer,
     farms: farmsReducer,
+    farmsV1: farmsV1Reducer,
     pools: poolsReducer,
     lottery: lotteryReducer,
     pottery: potteryReducer,
@@ -36,7 +38,7 @@ const persistedReducer = persistReducer(
     // Exchange
     user,
     transactions,
-    multicall:multicallReducer,
+    multicall: multicallReducer,
   }),
 )
 

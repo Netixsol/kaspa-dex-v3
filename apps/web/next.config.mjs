@@ -202,7 +202,7 @@ const config = {
       },
       {
         source: '/home',
-        destination: '/',
+        destination: '/swap',
         permanent: true,
       },
       {

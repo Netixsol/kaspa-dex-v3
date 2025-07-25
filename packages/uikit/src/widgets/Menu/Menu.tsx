@@ -18,11 +18,13 @@ import { MenuContext } from "./context";
 import { NavProps } from "./types";
 import { HamburgerCloseIcon, HamburgerIcon } from "../../components";
 import { getSidebarOpen, setSidebarOpen, subscribeToSidebar } from "../../hooks/useSideBarOpenForDashBoard";
+import { usePathname } from "next/navigation";
 
-const HTMLWrapper = styled.div`
-  position: fixed;
+const HTMLWrapper = styled.div<{ pathname: string }>`
+  position: ${({ pathname }) => (pathname?.includes("dashboard") ? "fixed" : "relative")};
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
@@ -136,6 +138,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   const [showMenu, setShowMenu] = useState(true);
   const refPrevOffset = useRef(typeof window === "undefined" ? 0 : window.pageYOffset);
   const [open, setOpen] = useState(getSidebarOpen());
+  const pathname = usePathname();
 
   const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
 
@@ -181,7 +184,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
 
   return (
     <MenuContext.Provider value={providerValue}>
-      <HTMLWrapper>
+      <HTMLWrapper pathname={pathname}>
         <Wrapper>
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
             {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}

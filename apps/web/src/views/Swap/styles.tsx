@@ -16,15 +16,14 @@ export const StyledSwapContainer = styled(Flex)<{ $isChartExpanded: boolean }>`
 `
 
 export const StyledInputCurrencyWrapper = styled(Box)`
-  ${({ theme }) => theme.mediaQueries.sm} {
-    width: 350px;
-  }
+  width: 100%;
+  position: relative;
+  min-height: 460px;
+  /* border: 1px solid #35ed84; */
+  border-radius: 30px;
 
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: 400px;
-  }
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    width: 500px;
-  }
+  /* @media (min-width: 968px) {
+    margin-left: -45px;
+  } */
+  /* box-shadow: 0px 0px 40px 0px #26ff87; */
 `

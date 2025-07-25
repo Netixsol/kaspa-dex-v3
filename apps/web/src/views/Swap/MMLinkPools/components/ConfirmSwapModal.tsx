@@ -69,6 +69,7 @@ interface ConfirmSwapModalProps {
   customOnDismiss?: () => void
   openSettingModal?: () => void
   isRFQReady: boolean
+  allowedSlippage: number
 }
 
 const ConfirmSwapModal: React.FC<React.PropsWithChildren<InjectedModalProps & ConfirmSwapModalProps>> = ({
@@ -84,6 +85,7 @@ const ConfirmSwapModal: React.FC<React.PropsWithChildren<InjectedModalProps & Co
   attemptingTxn,
   txHash,
   openSettingModal,
+  allowedSlippage,
   isRFQReady,
 }) => {
   const { chainId } = useActiveChainId()

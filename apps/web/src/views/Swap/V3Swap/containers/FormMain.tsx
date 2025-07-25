@@ -1,27 +1,29 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCallback, useMemo, ReactNode } from 'react'
 import { useTranslation } from '@pancakeswap/localization'
-import { useWeb3React } from '@pancakeswap/wagmi'
-import { Currency, CurrencyAmount, Percent } from '@pancakeswap/sdk'
-import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
+import { Currency, CurrencyAmount, Percent, validateAndParseAddress } from '@pancakeswap/sdk'
 import { formatAmount } from '@pancakeswap/utils/formatFractions'
+import replaceBrowserHistory from '@pancakeswap/utils/replaceBrowserHistory'
+import { useWeb3React } from 'hooks/useWeb3React'
+import { ReactNode, useCallback, useMemo } from 'react'
 
-import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
-import { useDefaultsFromURLSearch, useSwapState } from 'state/swap/hooks'
-import { Field } from 'state/swap/actions'
-import { useCurrency } from 'hooks/Tokens'
 import { CommonBasesType } from 'components/SearchModal/types'
+import { useCurrency } from 'hooks/Tokens'
+import { Field } from 'state/swap/actions'
+import { useDefaultsFromURLSearch, useSwapState } from 'state/swap/hooks'
+import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import { useCurrencyBalances } from 'state/wallet/hooks'
-import { maxAmountSpend } from 'utils/maxAmountSpend'
 import { currencyId } from 'utils/currencyId'
+import { maxAmountSpend } from 'utils/maxAmountSpend'
 
-import { FormContainer } from '../components'
+import { Box, FlexGap } from '@pancakeswap/uikit'
+import { ShowOnDesktop, ShowOnMobile } from 'views/Swap/components/SwapForm'
 import useWarningImport from '../../hooks/useWarningImport'
-import { RiskCheck } from './RiskCheck'
+import {} from '../components'
 import { useIsWrapping } from '../hooks'
 import { FlipButton } from './FlipButton'
 import { Recipient } from './Recipient'
+import { RiskCheck } from './RiskCheck'
 
 interface Props {
   inputAmount?: CurrencyAmount<Currency>
@@ -29,9 +31,19 @@ interface Props {
   tradeLoading?: boolean
   pricingAndSlippage?: ReactNode
   swapCommitButton?: ReactNode
+  trade: any
+  deteils?: ReactNode
 }
 
-export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeLoading, swapCommitButton }: Props) {
+export function FormMain({
+  deteils,
+  trade,
+  pricingAndSlippage,
+  inputAmount,
+  outputAmount,
+  tradeLoading,
+  swapCommitButton,
+}: Props) {
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const warningSwapHandler = useWarningImport()
@@ -89,6 +101,7 @@ export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeL
     [handleCurrencySelect, inputCurrencyId, outputCurrencyId],
   )
   const handleOutputSelect = useCallback(
+    // console.log('handleOutputSelect', newCurrency),
     (newCurrency: Currency) => handleCurrencySelect(newCurrency, Field.OUTPUT, inputCurrencyId, outputCurrencyId),
     [handleCurrencySelect, inputCurrencyId, outputCurrencyId],
   )
@@ -106,7 +119,7 @@ export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeL
   const outputLoading = typedValue ? isTypingInput && tradeLoading : false
 
   return (
-    <FormContainer>
+    <FlexGap flexDirection="column">
       <CurrencyInputPanel
         id="swap-currency-input"
         showUSDPrice
@@ -117,7 +130,7 @@ export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeL
         label={!isTypingInput && !isWrapping ? t('From (estimated)') : t('From')}
         value={isWrapping ? typedValue : inputValue}
         maxAmount={maxAmountInput}
-        showQuickInputButton
+        showQuickInputButton={false}
         currency={inputCurrency}
         onUserInput={handleTypeInput}
         onPercentInput={handlePercentInput}
@@ -127,26 +140,34 @@ export function FormMain({ pricingAndSlippage, inputAmount, outputAmount, tradeL
         commonBasesType={CommonBasesType.SWAP_LIMITORDER}
       />
       <RiskCheck currency={inputCurrency} />
-      <FlipButton />
-      <CurrencyInputPanel
-        id="swap-currency-output"
-        showUSDPrice
-        showCommonBases
-        showMaxButton={false}
-        inputLoading={!isWrapping && outputLoading}
-        currencyLoading={!loadedUrlParams}
-        label={isTypingInput && !isWrapping ? t('To (estimated)') : t('To')}
-        value={isWrapping ? typedValue : outputValue}
-        currency={outputCurrency}
-        onUserInput={handleTypeOutput}
-        onCurrencySelect={handleOutputSelect}
-        otherCurrency={outputCurrency}
-        commonBasesType={CommonBasesType.SWAP_LIMITORDER}
-      />
+      <ShowOnDesktop>
+        <ShowOnMobile>
+          <FlipButton />
+        </ShowOnMobile>
+        <CurrencyInputPanel
+          id="swap-currency-output"
+          showUSDPrice
+          showCommonBases
+          showMaxButton={false}
+          inputLoading={!isWrapping && outputLoading}
+          currencyLoading={!loadedUrlParams}
+          label={isTypingInput && !isWrapping ? t('To (estimated)') : t('To')}
+          value={isWrapping ? typedValue : outputValue}
+          currency={outputCurrency}
+          onUserInput={handleTypeOutput}
+          onCurrencySelect={handleOutputSelect}
+          otherCurrency={outputCurrency}
+          commonBasesType={CommonBasesType.SWAP_LIMITORDER}
+        />
+      </ShowOnDesktop>
       <RiskCheck currency={outputCurrency} />
       <Recipient />
+
+      {deteils}
       {pricingAndSlippage}
-      {swapCommitButton}
-    </FormContainer>
+      {/* <AdvancedSwapDetailsDropdown trade={trade} /> */}
+
+      <div className="swap-commit-button">{swapCommitButton}</div>
+    </FlexGap>
   )
 }

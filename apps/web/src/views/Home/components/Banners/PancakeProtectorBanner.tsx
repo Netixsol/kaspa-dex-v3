@@ -14,7 +14,7 @@ const { pancakeProtectorBunny, pancakeProtectorBgMobile, pancakeProtectorBg, pan
 }
 
 const textStyle = css`
-  font-family: 'Kanit';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 800;
   line-height: 98%;

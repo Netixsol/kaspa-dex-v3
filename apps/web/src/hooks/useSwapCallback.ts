@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { SwapParameters, TradeType } from '@pancakeswap/sdk'
+import { Currency, SwapParameters, Trade, TradeType } from '@pancakeswap/sdk'
 import isZero from '@pancakeswap/utils/isZero'
 import truncateHash from '@pancakeswap/utils/truncateHash'
 import { isStableSwap, V2TradeAndStableSwap } from 'config/constants/types'
@@ -15,6 +15,7 @@ import { calculateGasMargin, isAddress } from 'utils'
 import { basisPointsToPercent } from 'utils/exchange'
 import { transactionErrorToUserReadableMessage } from 'utils/transactionErrorToUserReadableMessage'
 import useAccountActiveChain from 'hooks/useAccountActiveChain'
+import useActiveWeb3React from './useActiveWeb3React'
 
 export enum SwapCallbackState {
   INVALID,
@@ -39,16 +40,19 @@ interface SwapCallEstimate {
   call: SwapCall
 }
 
+type ITrade = Trade<Currency, Currency, TradeType> | undefined
+
 // TODO: wagmi should remove?
 // returns a function that will execute a swap, if the parameters are all valid
 // and the user has approved the slippage adjusted input amount for the trade
 export function useSwapCallback(
-  trade: V2TradeAndStableSwap, // trade to execute, required
+  trade: ITrade, // trade to execute, required
   allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE, // in bips
   recipientAddress: string | null, // the address of the recipient of the trade, or null if swap should be returned to sender
   swapCalls: SwapCall[],
+  deadline: bigint,
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
-  const { account, chainId } = useAccountActiveChain()
+  const { account, chainId } = useActiveWeb3React()
   const gasPrice = useGasPrice()
 
   const { t } = useTranslation()
@@ -78,7 +82,7 @@ export function useSwapCallback(
               contract,
             } = call
             const options = !value || isZero(value) ? {} : { value }
-
+            console.log('swapmethod', methodName, args, options)
             return contract.estimateGas[methodName](args, options)
               .then((gasEstimate) => {
                 return {
@@ -185,7 +189,6 @@ export function useSwapCallback(
               outputAmount,
               input: trade.inputAmount.currency,
               output: trade.outputAmount.currency,
-              type: isStableSwap(trade) ? 'StableSwap' : 'V2Swap',
             })
             logTx({ account, chainId, hash: response })
 

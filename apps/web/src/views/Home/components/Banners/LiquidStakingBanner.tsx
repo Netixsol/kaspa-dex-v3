@@ -110,7 +110,7 @@ const RightWrapper = styled.div`
   }
 `
 const Header = styled.div`
-  font-family: 'Kanit';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 800;
   font-size: 16px;
@@ -126,7 +126,7 @@ const Header = styled.div`
 const StyledSubheading = styled.div`
   padding-right: 100px;
   position: relative;
-  font-family: 'Kanit';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 800;
   font-size: 24px;

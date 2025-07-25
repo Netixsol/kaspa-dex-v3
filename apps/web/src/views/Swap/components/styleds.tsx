@@ -5,7 +5,27 @@ export const Wrapper = styled(Flex)`
   position: relative;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  overflow: none;
+
+  /* border: 1px solid #35ed84; */
+  /* #35ED84 set box-shadow */
+
+  /* box-shadow: 0px 0px 0px 0px #35ED84; */
+
+  padding: 20px 21px 20px 21px;
+  width: 100%;
+  // max-width: 453px;
+  border-radius: 30px;
+
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+    // padding: 10px 10px 10px 10px;
+    // width: 350px;
+  }
+  // @media (max-width: 350px) {
+  //   padding: 10px 10px 10px 10px;
+  //   width: 260px;
+  // }
 `
 
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`

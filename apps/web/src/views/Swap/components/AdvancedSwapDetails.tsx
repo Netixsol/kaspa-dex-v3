@@ -62,8 +62,12 @@ export const TradeSummary = memo(function TradeSummary({
         <RowFixed>
           <Text fontSize="14px">
             {isExactIn
-              ? `${formatAmount(slippageAdjustedAmounts[Field.OUTPUT], 4)} ${outputAmount.currency.symbol}` ?? '-'
-              : `${formatAmount(slippageAdjustedAmounts[Field.INPUT], 4)} ${inputAmount.currency.symbol}` ?? '-'}
+              ? slippageAdjustedAmounts[Field.OUTPUT]
+                ? `${formatAmount(slippageAdjustedAmounts[Field.OUTPUT], 4)} ${outputAmount.currency.symbol}`
+                : '-'
+              : slippageAdjustedAmounts[Field.INPUT]
+                ? `${formatAmount(slippageAdjustedAmounts[Field.INPUT], 4)} ${inputAmount.currency.symbol}`
+                : '-'}
           </Text>
         </RowFixed>
       </RowBetween>
@@ -151,6 +155,7 @@ export const TradeSummary = memo(function TradeSummary({
 })
 
 export interface AdvancedSwapDetailsProps {
+  trade?: any
   hasStablePair?: boolean
   pairs?: Pair[]
   path?: Currency[]
@@ -164,6 +169,7 @@ export interface AdvancedSwapDetailsProps {
   outputAmount?: CurrencyAmount<Currency>
   tradeType?: TradeType
   isMM?: boolean
+  priceandslipage?: any
 }
 
 export const AdvancedSwapDetails = memo(function AdvancedSwapDetails({

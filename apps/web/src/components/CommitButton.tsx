@@ -18,6 +18,7 @@ export const CommitButton = (props: ButtonProps) => {
 
   return (
     <Button
+      customGradient
       {...props}
       onClick={(e) => {
         if (isWrongNetwork) {

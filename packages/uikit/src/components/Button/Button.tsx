@@ -11,6 +11,7 @@ const Button = <E extends ElementType = "button">(props: ButtonProps<E>): JSX.El
 
   return (
     <StyledButton
+      customGradient={props.customGradient}
       $isLoading={isLoading}
       className={clsx(className, {
         "pancake-button--loading": isLoading,

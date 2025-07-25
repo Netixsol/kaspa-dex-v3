@@ -678,6 +678,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      lottie-react:
+        specifier: ^2.4.1
+        version: 2.4.1(react-dom@18.2.0)(react@18.2.0)
       moment:
         specifier: ^2.29.1
         version: 2.29.1
@@ -693,6 +696,9 @@ importers:
       next-themes:
         specifier: ^0.2.0
         version: 0.2.0(next@13.4.2)(react-dom@18.2.0)(react@18.2.0)
+      numeral:
+        specifier: ^2.0.6
+        version: 2.0.6
       polished:
         specifier: ^4.2.2
         version: 4.2.2
@@ -19785,6 +19791,17 @@ packages:
     dependencies:
       js-tokens: 4.0.0
 
+  /lottie-react@2.4.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-LQrH7jlkigIIv++wIyrOYFLHSKQpEY4zehPicL9bQsrt1rnoKRYCYgpCUe5maqylNtacy58/sQDZTkwMcTRxZw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    dependencies:
+      lottie-web: 5.11.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /lottie-web@5.11.0:
     resolution: {integrity: sha512-9vSt0AtdOH98GKDXwD5LPfFg9Pcmxt5+1BllAbudKM5iqPxpJnJUfuGaP45OyudDrESCOBgsjnntVUTygBNlzw==}
     dev: false
@@ -20835,6 +20852,10 @@ packages:
       semver: 7.7.2
       validate-npm-package-name: 4.0.0
     dev: true
+
+  /numeral@2.0.6:
+    resolution: {integrity: sha512-qaKRmtYPZ5qdw4jWJD6bxEf1FJEqllJrwxCLIm0sQU/A7v2/czigzOb+C2uSiFsa9lBUzeH7M1oK+Q+OLxL3kA==}
+    dev: false
 
   /nwsapi@2.2.2:
     resolution: {integrity: sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw==}

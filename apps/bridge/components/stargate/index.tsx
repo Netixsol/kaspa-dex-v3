@@ -26,7 +26,7 @@ export const StargateWidget = ({ theme }: { theme: PancakeTheme }) => {
         }
 
         .StgHeader .MuiTypography-subtitle1::after {
-          font-family: ${FontFamily.KANIT};
+          font-family: ${FontFamily.Inter};
           visibility: visible;
           position: absolute;
           content: 'Bridge';

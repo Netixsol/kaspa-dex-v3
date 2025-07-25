@@ -11,17 +11,17 @@ export const logSwap = ({
   inputAmount,
   outputAmount,
   chainId,
-  type,
+  // type,
 }: {
   input: Currency
   output: Currency
   inputAmount: string
   outputAmount: string
   chainId: number
-  type: 'V2Swap' | 'SmartSwap' | 'StableSwap' | 'MarketMakerSwap' | 'V3SmartSwap'
+  // type: 'V2Swap' | 'SmartSwap' | 'StableSwap' | 'MarketMakerSwap' | 'V3SmartSwap'
 }) => {
   try {
-    log.info(type, {
+    log.info('Swap', {
       inputAddress: input.isToken ? input.address.toLowerCase() : input.symbol,
       outputAddress: output.isToken ? output.address.toLowerCase() : output.symbol,
       inputAmount,

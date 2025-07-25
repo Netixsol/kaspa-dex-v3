@@ -27,7 +27,7 @@ const StyledThemeProvider: React.FC<React.PropsWithChildren> = (props) => {
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   html, body {
     height: 100%;

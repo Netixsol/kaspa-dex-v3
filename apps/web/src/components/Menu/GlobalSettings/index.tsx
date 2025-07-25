@@ -1,27 +1,35 @@
-import { Flex, IconButton, CogIcon, useModal } from '@pancakeswap/uikit'
+import dynamic from 'next/dynamic';
+import { FlexGap, useModal } from '@pancakeswap/uikit'
+// import HoverLottie from './HoverLottie'
 import SettingsModal from './SettingsModal'
+import settings from './settings-slider.json'
 
+const HoverLottie = dynamic(() => import('./HoverLottie'), { ssr: false });
 type Props = {
   color?: string
   mr?: string
   mode?: string
 }
 
-const GlobalSettings = ({ color, mr = '8px', mode }: Props) => {
+const GlobalSettings = ({ mode }: Props) => {
   const [onPresentSettingsModal] = useModal(<SettingsModal mode={mode} />)
+  // const [onCopyModel] = useModal(<ShareModel mode={mode} />)
 
   return (
-    <Flex>
-      <IconButton
+    <FlexGap alignItems="center" columnGap="15px">
+      <HoverLottie
         onClick={onPresentSettingsModal}
-        variant="text"
-        scale="sm"
-        mr={mr}
-        id={`open-settings-dialog-button-${mode}`}
-      >
-        <CogIcon height={24} width={24} color={color || 'textSubtle'} />
-      </IconButton>
-    </Flex>
+        animationData={settings}
+        style={{
+          height: '32px',
+          color: '#fff',
+          marginRight: '10px',
+          cursor: 'pointer',
+          transform: 'rotate(90deg)',
+        }}
+      />
+      {/* <IconButton/> */}
+    </FlexGap>
   )
 }
 

@@ -1,3 +1,4 @@
+import { NATIVE, WNATIVE } from '@pancakeswap/sdk'
 import { BNB_ADDRESS } from './constants'
 
 const MIN_VALUE_DISPLAYED = 0.001
@@ -25,13 +26,15 @@ export const getTimeWindowChange = (lineChartData) => {
  *
  * @deprecated not multi chain compatible
  */
-export const getTokenAddress = (tokenAddress: undefined | string) => {
-  if (!tokenAddress) {
+export const getTokenAddress = (chainId: number, tokenAddress: undefined | string) => {
+  if (!tokenAddress || !chainId) {
     return ''
   }
   const lowerCaseAddress = tokenAddress.toLowerCase()
-  if (lowerCaseAddress === 'bnb') {
-    return BNB_ADDRESS
+  const nativeToken = NATIVE[chainId]
+  const nativeSymbol = nativeToken?.symbol?.toLowerCase() || ''
+  if (lowerCaseAddress === nativeSymbol) {
+    return WNATIVE[chainId].address
   }
 
   return lowerCaseAddress

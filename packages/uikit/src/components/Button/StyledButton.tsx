@@ -49,6 +49,8 @@ const StyledButton = styled.button<BaseButtonProps>`
   border: 0;
   border-radius: 22px;
   box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;
+  background: ${({ customGradient }) =>
+    customGradient ? "linear-gradient(271deg, rgba(13,149,137,1) 3%, rgba(45,254,135,1) 95%)" : ""};
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;

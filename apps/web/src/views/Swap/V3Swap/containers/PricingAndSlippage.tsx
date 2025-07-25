@@ -1,9 +1,9 @@
-import { Swap as SwapUI, useModal } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { Price, Currency } from '@pancakeswap/sdk'
-import { useUserSlippage } from '@pancakeswap/utils/user'
 import { memo } from 'react'
 
+import { useUserSlippage } from '@pancakeswap/utils/user'
+import { Box, FlexGap, Info, InfoLabel, Text, TradePrice, useModal } from '@pancakeswap/uikit'
 import SettingsModal from '../../../../components/Menu/GlobalSettings/SettingsModal'
 import { SettingsMode } from '../../../../components/Menu/GlobalSettings/types'
 import { useIsWrapping } from '../hooks'
@@ -29,14 +29,23 @@ export const PricingAndSlippage = memo(function PricingAndSlippage({
   }
 
   const priceNode = price ? (
-    <>
-      <SwapUI.InfoLabel>{t('Price')}</SwapUI.InfoLabel>
-      <SwapUI.TradePrice price={price} loading={priceLoading} />
-    </>
-  ) : null
+    <FlexGap paddingTop="6px" justifyContent="space-between" alignItems="center" width="100%">
+      <InfoLabel>{t('Price')}</InfoLabel>
+      <TradePrice price={price} loading={priceLoading} />
+    </FlexGap>
+  ) : (
+    <FlexGap paddingTop="6px" justifyContent="space-between" alignItems="center" width="100%">
+      <Text color="white" fontSize={14}>
+        {t('Price')}
+      </Text>
+      <Text color="white" fontSize={14}>
+        {t('-')}
+      </Text>
+    </FlexGap>
+  )
 
   return (
-    <SwapUI.Info
+    <Info
       price={priceNode}
       allowedSlippage={showSlippage ? allowedSlippage : undefined}
       onSlippageClick={onPresentSettingsModal}

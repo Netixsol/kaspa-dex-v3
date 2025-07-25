@@ -11,3 +11,4 @@ export * from "./ConfirmationModalContent";
 export * from "./ConfirmationPendingContent";
 export * from "./withCurrencyLogo";
 export * from "./TokenRowButton";
+export * from "./SwapWidget";

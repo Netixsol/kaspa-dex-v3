@@ -24,7 +24,7 @@ const RightWrapper = styled.div`
   }
 `
 const Title = styled.div`
-  font-family: 'Kanit';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 23px;

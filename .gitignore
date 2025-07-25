@@ -48,9 +48,9 @@ debug.log*
 
 # turbo
 .turbo
-.vercel
+
 
 # store for local dev scripts
 scripts/dev/**
 
-.vercel
+

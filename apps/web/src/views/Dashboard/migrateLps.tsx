@@ -6,6 +6,19 @@ import TickIcon from './icons/tick.ico'
 import { ContentBox } from './liquidityProvision'
 import { ShareIcon } from './icons/share.ico'
 import ScreenShortContainer from './components/CanvasContainer'
+import styled from 'styled-components'
+
+const BigDashBox = styled(DashBox)`
+  min-width: 588px;
+
+  @media (max-width: 657px) {
+    min-width: 508px;
+  }
+
+   @media (max-width: 575px) {
+    min-width: 100%;
+  }
+`;
 
 const MigrateLps = () => {
   const steps = [
@@ -36,17 +49,11 @@ const MigrateLps = () => {
   ]
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Migrate LPs from V2 to V3</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Migrate LPs from V2 to V3">
         <Flex justifyContent="space-between" style={{ gap: 33 }} marginTop="32px" flexWrap="wrap">
-          <DashBox style={{ flexGrow: 5 }}>
+          <BigDashBox style={{ flexGrow: 5 }}>
             <MigrateTokens />
-          </DashBox>
+          </BigDashBox>
           {/* <DashBox>
             <Text fontSize="24px" fontWeight={500} marginBottom="22px">
               Progress
@@ -57,7 +64,7 @@ const MigrateLps = () => {
             <Text fontSize="24px" fontWeight={500}>
               Points & Rewards
             </Text>
-            <Flex flexDirection="column" marginTop="20px" style={{ gap: '10px' }}>
+            <Flex flexDirection="column" marginTop="20px" style={{ gap: '20px' }}>
               <ContentBox>
                 <Flex justifyContent="space-between">
                   <Text fontSize="24px" fontWeight={500} color="#1FD26F">

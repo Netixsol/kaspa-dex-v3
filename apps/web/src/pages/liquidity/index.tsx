@@ -205,6 +205,7 @@ export default function PoolListPage() {
       <AppBody
         style={{
           maxWidth: '554px',
+          marginBottom: '50px',
         }}
       >
         <AppHeader

@@ -13,12 +13,6 @@ const ContentBox = styled(OldContentBox)`
 const MilstoneRewards = () => {
   return (
     <>
-      {/* <Flex justifyContent="space-between" alignItems="center">
-        <Heading scale="xxl">Bonus Quests & Milestone Rewards</Heading>
-        <IconButton borderRadius="100%" width="48px" height="48px" style={{ padding: '12px' }}>
-          <ShareIcon color="#120F1F" width="24" height="22" viewBox="0 0 24 22" fill="none" />
-        </IconButton>
-      </Flex> */}
       <ScreenShortContainer title="Bonus Quests & Milestone Rewards">
         <Flex
           width="100%"
@@ -40,7 +34,7 @@ const MilstoneRewards = () => {
                 Today’s Bonus: 1.5x multiplier on <Highlight color="#000000">reward</Highlight>
               </ContentBox>
               <Link href="/dashboard/daily-spin" passHref>
-                <Button as="a" variant="secondary" marginTop="auto" width="100%">
+                <Button as="a" variant="secondary" marginTop="auto" width="100%" style={{ borderRadius: '30px' }}>
                   Spin or Roll
                 </Button>
               </Link>
@@ -58,7 +52,7 @@ const MilstoneRewards = () => {
                 Today’s Bonus: 1.5x multiplier on <Highlight color="#000000">reward</Highlight>
               </ContentBox>
               <Link href="/dashboard/report-bug" passHref>
-                <Button as="a" variant="secondary" marginTop="auto" width="100%">
+                <Button as="a" variant="secondary" marginTop="auto" width="100%" style={{ borderRadius: '30px' }}>
                   Report a Bug
                 </Button>
               </Link>
@@ -105,7 +99,7 @@ const MilstoneRewards = () => {
                 </Flex>
               </ContentBox>
               <Link href="https://x.com/KaspaFinance" passHref target="_blank">
-                <Button as="a" variant="secondary" target="_blank" width="100%">
+                <Button as="a" variant="secondary" target="_blank" width="100%" style={{ borderRadius: '30px' }}>
                   Check Twitter/X
                 </Button>
               </Link>
@@ -129,7 +123,7 @@ const MilstoneRewards = () => {
                 <Highlight color="#000000">2,000 Bonus Points</Highlight>
               </ContentBox>
               <Link href="http://localhost:3000/liquidity?chainId=167012" passHref style={{ marginTop: 'auto' }}>
-                <Button as="a" width="100%" variant="secondary" marginTop="auto">
+                <Button as="a" width="100%" variant="secondary" marginTop="auto" style={{ borderRadius: '30px' }}>
                   Add Liquidity
                 </Button>
               </Link>
@@ -149,7 +143,7 @@ const MilstoneRewards = () => {
                 <Highlight color="#000000">1,000 Bonus Points</Highlight>
               </ContentBox>
               <Link href="http://localhost:3000/swap" passHref style={{ marginTop: 'auto' }}>
-                <Button as="a" width="100%" variant="secondary" marginTop="auto">
+                <Button as="a" width="100%" variant="secondary" marginTop="auto" style={{ borderRadius: '30px' }}>
                   Swap Now
                 </Button>
               </Link>
@@ -175,7 +169,7 @@ const MilstoneRewards = () => {
                 <Highlight color="#000000">5,000 Bonus Points</Highlight>
               </ContentBox>
               <Link href="https://t.me/KaspaFinanceIO" target="_blank" passHref style={{ marginTop: 'auto' }}>
-                <Button as="a" width="100%" variant="secondary">
+                <Button as="a" width="100%" variant="secondary" style={{ borderRadius: '30px' }}>
                   Refer with your Friends
                 </Button>
               </Link>

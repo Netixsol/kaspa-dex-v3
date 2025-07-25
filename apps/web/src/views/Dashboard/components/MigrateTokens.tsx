@@ -18,11 +18,25 @@ const Box = styled(UiKitBox)`
   width: 100%;
 `
 
+const ResponsiveFlexCover = styled(Flex)`
+  @media (max-width: 575px) {
+    flex-direction: column;
+  }
+`
+
+const ResponsiveFlexArrowIcon = styled(Flex)`
+  @media (max-width: 575px) {
+    transform: rotate(90deg);
+    width: 35px;
+    height: 84px;
+  }
+`
+
 const MigrateTokens = () => {
   return (
     <>
-      <Flex alignItems="center" height="100%">
-        <Box marginRight="-10px">
+      <ResponsiveFlexCover alignItems="center" height="100%">
+        <Box marginRight={['0px', null, '-10px']} marginBottom={['-10px', null, '0px']}>
           <Heading scale="xxl" color="#1FD26F">
             $1,000
           </Heading>
@@ -41,18 +55,18 @@ const MigrateTokens = () => {
             <Text marginLeft="5px">In Progress</Text>
           </Flex>
         </Box>
-        <Flex
-          width={46}
-          height={46}
-          borderRadius="100%"
+        <ResponsiveFlexArrowIcon
+          width={86}
+          height={36}
+          borderRadius="50%"
           background="#1FD26F"
           justifyContent="center"
           alignItems="center"
           zIndex="999"
         >
           <ArrowIcon width="21" height="16" viewBox="0 0 21 16" fill="none" />
-        </Flex>
-        <Box marginLeft="-10px">
+        </ResponsiveFlexArrowIcon>
+        <Box marginLeft={['0px', null, '-10px']} marginTop={['-10px', null, '0px']}>
           <Flex alignItems="center" justifyContent="space-between">
             <Text fontSize="18px">Kaspa Finance V3</Text>
             <Flex
@@ -66,11 +80,11 @@ const MigrateTokens = () => {
               <TickIcon width={14} height={10} fill="none" padding="auto" />
             </Flex>
           </Flex>
-          <Button variant="secondary" marginTop="auto">
+          <Button variant="secondary" marginTop="auto" style={{ borderRadius: '30px' }}>
             Migrate
           </Button>
         </Box>
-      </Flex>
+      </ResponsiveFlexCover>
     </>
   )
 }

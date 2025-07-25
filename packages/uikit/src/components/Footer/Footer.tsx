@@ -55,8 +55,14 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
         width={["100%", null, "1200px"]}
       >
         {/* Powered By Text and Logo Start */}
-        <Flex alignItems="center" flexDirection={["column", null, "row"]} justifyContent={["center", null, null, "start"]}>
-          <Text fontSize="15px">Powered By</Text>
+        <Flex
+          alignItems="center"
+          flexDirection={["column", null, "row"]}
+          justifyContent={["center", null, null, "start"]}
+        >
+          <Text fontSize="15px" color="#2EFE87">
+            Powered By
+          </Text>
           <Box borderRight="1px solid #fff" height="100%" mx={["0", null, "20px"]} mt={["8px", null, "0"]} />
           <Box>
             <LogoWithTextIcon width="200px" />

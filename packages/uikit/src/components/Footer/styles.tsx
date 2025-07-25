@@ -6,6 +6,8 @@ import { MOBILE_MENU_HEIGHT } from "../../widgets/Menu/config";
 
 export const StyledFooter = styled(Flex)`
   background: ${darkColors.backgroundAlt};
+
+  // MEDIA QUERIES ---:
   @media screen and (max-width: 968px) {
     margin-bottom: ${MOBILE_MENU_HEIGHT}px;
   }

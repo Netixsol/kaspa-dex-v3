@@ -201,6 +201,11 @@ const config = {
         permanent: false,
       },
       {
+        source: '/home',
+        destination: '/swap',
+        permanent: true,
+      },
+      {
         source: '/_mp/:path*',
         destination: '/404',
         permanent: true,

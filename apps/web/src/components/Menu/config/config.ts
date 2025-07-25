@@ -8,8 +8,11 @@ import {
   FaucetIcon,
   FaucetIconFill,
   BarChartIcon,
+  AirDropFillIcon,
+  AirDropIcon,
 } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
+import AirDrop from 'views/Airdrop';
 // import { SUPPORTED_CHAIN_IDS as POOL_SUPPORTED_CHAINS } from '@pancakeswap/pools'
 // import { nftsBaseUrl } from 'views/Nft/market/constants'
 // import { getPerpetualUrl } from 'utils/getPerpetualUrl'
@@ -157,8 +160,8 @@ const config: (
       {
         label: t('Airdrop'),
         href: '/airdrop',
-        icon: FaucetIcon,
-        fillIcon: FaucetIconFill,
+        icon: AirDropIcon,
+        fillIcon: AirDropFillIcon,
         image: '/images/decorations/pe2.png',
         items: [
           // {

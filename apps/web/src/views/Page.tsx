@@ -19,27 +19,27 @@ const Page: React.FC<
   helpUrl = EXCHANGE_HELP_URLS,
   ...props
 }) => {
-  const { t } = useTranslation()
-  const { chainId } = useActiveChainId()
-  const isBSC = chainId === ChainId.BSC
-  const externalText = isBSC ? t('#') : ''
-  const externalLinkUrl = isBSC ? '#' : ''
+    const { t } = useTranslation()
+    const { chainId } = useActiveChainId()
+    const isBSC = chainId === ChainId.BSC
+    const externalText = isBSC ? t('#') : ''
+    const externalLinkUrl = isBSC ? '#' : ''
 
-  return (
-    <>
-      <Swap.Page
-        removePadding={removePadding}
-        noMinHeight={noMinHeight}
-        hideFooterOnDesktop={hideFooterOnDesktop}
-        helpUrl={helpUrl}
-        externalText={externalText}
-        externalLinkUrl={externalLinkUrl}
-        {...props}
-      >
-        {children}
-      </Swap.Page>
-    </>
-  )
-}
+    return (
+      <>
+        <Swap.Page
+          removePadding={removePadding}
+          noMinHeight={noMinHeight}
+          hideFooterOnDesktop={hideFooterOnDesktop}
+          helpUrl={helpUrl}
+          externalText={externalText}
+          externalLinkUrl={externalLinkUrl}
+          {...props}
+        >
+          {children}
+        </Swap.Page>
+      </>
+    )
+  }
 
 export default Page

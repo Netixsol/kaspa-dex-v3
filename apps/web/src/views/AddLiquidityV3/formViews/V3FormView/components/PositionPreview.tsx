@@ -45,8 +45,8 @@ export const PositionPreview = ({
       ? baseCurrencyDefault === currency0
         ? currency0
         : baseCurrencyDefault === currency1
-        ? currency1
-        : currency0
+          ? currency1
+          : currency0
       : currency0,
   )
 
@@ -76,7 +76,7 @@ export const PositionPreview = ({
             {currency0?.symbol}-{currency1?.symbol}
           </Heading>
         </RowFixed>
-        <RangeTag removed={removed} outOfRange={!inRange} />
+        <RangeTag removed={removed} outOfRange={!inRange} variant='secondary' />
       </RowBetween>
 
       <LightGreyCard>

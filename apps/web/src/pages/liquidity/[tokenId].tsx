@@ -548,12 +548,12 @@ export default function PoolPage() {
                     </Heading>
                     {!isMobile && (
                       <>
-                        {isStakedInMCv3 && (
+                        {/* {isStakedInMCv3 && (
                           <Tag ml="8px" outline variant="warning">
                             {t('Farming')}
                           </Tag>
-                        )}
-                        <RangeTag ml="8px" removed={removed} outOfRange={!inRange} style={{ color: "white" }} />
+                        )} */}
+                        <RangeTag ml="8px" removed={removed} outOfRange={!inRange} style={{ color: "white" }} variant='secondary' />
                       </>
                     )}
                   </Flex>
@@ -581,7 +581,7 @@ export default function PoolPage() {
                 !isMobile &&
                 currency0 &&
                 currency1 && (
-                  <>
+                  <div style={{ display: 'flex', gap: '8px', flexDirection: 'row', marginRight: '20px' }}>
                     <NextLinkFromReactRouter
                       to={`/increase/${currencyId(currency0)}/${currencyId(currency1)}/${feeAmount}/${tokenId}`}
                     >
@@ -596,7 +596,7 @@ export default function PoolPage() {
                         </Button>
                       </NextLinkFromReactRouter>
                     )}
-                  </>
+                  </div>
                 )
               }
             />
@@ -839,13 +839,14 @@ export default function PoolPage() {
                   price={formatPrice(inverted ? pool.token1Price : pool.token0Price, 6, locale)}
                 />
               ) : null}
-              {positionDetails && currency0 && currency1 && (
+              {/* position history commented because its not visible in app.kaspafinance.io */}
+              {/* {positionDetails && currency0 && currency1 && (
                 <PositionHistory
                   tokenId={positionDetails.tokenId.toString()}
                   currency0={currency0}
                   currency1={currency1}
                 />
-              )}
+              )} */}
             </CardBody>
           </>
         )}

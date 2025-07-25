@@ -355,7 +355,7 @@ function Remove({ tokenId }: { tokenId: bigint }) {
         />
         <CardBody>
           <AutoRow justifyContent="space-between" mb="24px">
-            <Box>
+            <Box style={{ display: 'flex', alignItems: 'center', gap: "4px" }}>
               <Flex>
                 <DoubleCurrencyLogo
                   size={24}
@@ -370,18 +370,18 @@ function Remove({ tokenId }: { tokenId: bigint }) {
             </Box>
 
             <Flex>
-              {isStakedInMCv3 && (
+              {/* {isStakedInMCv3 && (
                 <Tag mr="8px" outline variant="warning">
                   {t('Farming')}
                 </Tag>
-              )}
-              <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: 'black' }} />
+              )} */}
+              <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: 'black' }} variant='secondary' />
             </Flex>
           </AutoRow>
           <Text fontSize="12px" color="secondary" bold textTransform="uppercase" mb="4px">
             {t('Amount of Liquidity to Remove')}
           </Text>
-          <BorderCard style={{ padding: '16px' }}>
+          <BorderCard style={{ padding: '16px', backgroundColor: '#120F1F' }}>
             <Text fontSize="40px" bold mb="16px" style={{ lineHeight: 1 }}>
               {percentForSlider}%
             </Text>

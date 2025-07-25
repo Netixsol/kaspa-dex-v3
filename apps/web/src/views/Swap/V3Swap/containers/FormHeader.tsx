@@ -1,8 +1,8 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { FC, useCallback } from 'react'
 
-import CurrencyInputHeader from '../../components/CurrencyInputHeader'
 import dynamic from 'next/dynamic'
+import CurrencyInputHeader from '../../components/CurrencyInputHeader'
 import infoData from '../../components/info.json'
 
 const HoverLottie = dynamic(() => import('components/Menu/GlobalSettings/HoverLottie'), { ssr: false })

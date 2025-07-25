@@ -152,11 +152,11 @@ export default function PoolListPage() {
                 }
                 tags={
                   <>
-                    {p.isStaked && (
-                      <Tag outline variant="warning" mr="8px">
+                    {/* {p.isStaked && (
+                      <Tag outline variant="warning" mr="8px">     //commnt out farming tag because it is not used in apps.kaspafinance.io
                         Farming
                       </Tag>
-                    )}
+                    )} */}
                     <RangeTag removed={removed} outOfRange={outOfRange} style={{ color: 'black' }} />
                   </>
                 }
@@ -204,7 +204,7 @@ export default function PoolListPage() {
       </Flex>
       <AppBody
         style={{
-          maxWidth: '554px',
+          maxWidth: '554px', border: "1px solid #252136"
         }}
       >
         <AppHeader

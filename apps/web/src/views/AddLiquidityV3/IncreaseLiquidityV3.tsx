@@ -157,18 +157,18 @@ export default function IncreaseLiquidityV3({ currencyA: baseCurrency, currencyB
       const { calldata, value } =
         hasExistingPosition && tokenId
           ? interfaceManager.addCallParameters(position, {
-              tokenId,
-              slippageTolerance: basisPointsToPercent(allowedSlippage),
-              deadline: deadline.toString(),
-              useNative,
-            })
+            tokenId,
+            slippageTolerance: basisPointsToPercent(allowedSlippage),
+            deadline: deadline.toString(),
+            useNative,
+          })
           : interfaceManager.addCallParameters(position, {
-              slippageTolerance: basisPointsToPercent(allowedSlippage),
-              recipient: account,
-              deadline: deadline.toString(),
-              useNative,
-              createPool: noLiquidity,
-            })
+            slippageTolerance: basisPointsToPercent(allowedSlippage),
+            recipient: account,
+            deadline: deadline.toString(),
+            useNative,
+            createPool: noLiquidity,
+          })
 
       setAttemptingTxn(true)
       getViemClients({ chainId })
@@ -249,11 +249,9 @@ export default function IncreaseLiquidityV3({ currencyA: baseCurrency, currencyB
     }
   }, [onFieldAInput, router, txHash])
 
-  const pendingText = `Supplying ${
-    !depositADisabled ? formatCurrencyAmount(parsedAmounts[Field.CURRENCY_A], 4, locale) : ''
-  } ${!depositADisabled ? currencies[Field.CURRENCY_A]?.symbol : ''} ${!outOfRange ? 'and' : ''} ${
-    !depositBDisabled ? formatCurrencyAmount(parsedAmounts[Field.CURRENCY_B], 4, locale) : ''
-  } ${!depositBDisabled ? currencies[Field.CURRENCY_B]?.symbol : ''}`
+  const pendingText = `Supplying ${!depositADisabled ? formatCurrencyAmount(parsedAmounts[Field.CURRENCY_A], 4, locale) : ''
+    } ${!depositADisabled ? currencies[Field.CURRENCY_A]?.symbol : ''} ${!outOfRange ? 'and' : ''} ${!depositBDisabled ? formatCurrencyAmount(parsedAmounts[Field.CURRENCY_B], 4, locale) : ''
+    } ${!depositBDisabled ? currencies[Field.CURRENCY_B]?.symbol : ''}`
 
   const [onPresentIncreaseLiquidityModal] = useModal(
     <TransactionConfirmationModal
@@ -320,7 +318,7 @@ export default function IncreaseLiquidityV3({ currencyA: baseCurrency, currencyB
             assetB: currencies[Field.CURRENCY_B]?.symbol ?? '',
           })}
           noConfig
-        />{' '}
+        />
         <CardBody>
           <Box mb="16px">
             {existingPosition && (
@@ -352,23 +350,25 @@ export default function IncreaseLiquidityV3({ currencyA: baseCurrency, currencyB
                 />
               </LockedDeposit>
               <LockedDeposit locked={depositBDisabled} mt="8px">
-                <CurrencyInputPanel
-                  disableCurrencySelect
-                  showUSDPrice
-                  maxAmount={maxAmounts[Field.CURRENCY_B]}
-                  onMax={() => onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')}
-                  onPercentInput={(percent) =>
-                    onFieldBInput(maxAmounts[Field.CURRENCY_B]?.multiply(new Percent(percent, 100)).toExact() ?? '')
-                  }
-                  value={formattedAmounts[Field.CURRENCY_B]}
-                  onUserInput={onFieldBInput}
-                  showQuickInputButton
-                  showMaxButton
-                  currency={currencies[Field.CURRENCY_B]}
-                  id="add-liquidity-input-tokenb"
-                  showCommonBases
-                  commonBasesType={CommonBasesType.LIQUIDITY}
-                />
+                <div style={{ marginTop: "10px" }}>
+                  <CurrencyInputPanel
+                    disableCurrencySelect
+                    showUSDPrice
+                    maxAmount={maxAmounts[Field.CURRENCY_B]}
+                    onMax={() => onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')}
+                    onPercentInput={(percent) =>
+                      onFieldBInput(maxAmounts[Field.CURRENCY_B]?.multiply(new Percent(percent, 100)).toExact() ?? '')
+                    }
+                    value={formattedAmounts[Field.CURRENCY_B]}
+                    onUserInput={onFieldBInput}
+                    showQuickInputButton
+                    showMaxButton
+                    currency={currencies[Field.CURRENCY_B]}
+                    id="add-liquidity-input-tokenb"
+                    showCommonBases
+                    commonBasesType={CommonBasesType.LIQUIDITY}
+                  />
+                </div>
               </LockedDeposit>
             </Box>
           </Box>

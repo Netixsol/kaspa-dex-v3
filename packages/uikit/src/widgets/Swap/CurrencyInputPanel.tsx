@@ -28,9 +28,9 @@ export function CurrencyInputPanel({
 }: CurrencyInputPanelProps) {
   return (
     <AtomBox position="relative" id={id} display="grid" gap="4px">
-      <AtomBox display="flex" alignItems="center" justifyContent="space-between">
+      {/* <AtomBox display="flex" alignItems="center" justifyContent="space-between">
         {top}
-      </AtomBox>
+      </AtomBox> */}
       <AtomBox
         display="flex"
         flexDirection="column"
@@ -68,7 +68,12 @@ export function CurrencyInputPanel({
               onUserInput={(val) => {
                 onUserInput(val);
               }}
+              align="left"
             />
+
+            <AtomBox display="flex" alignItems="center" justifyContent="space-between" backgroundColor='backgroundAlt' style={{ padding: "4px 8px", borderRadius: "20px" }}>
+              {top}
+            </AtomBox>
           </AtomBox>
           {bottom}
         </AtomBox>
@@ -76,6 +81,6 @@ export function CurrencyInputPanel({
           <AtomBox role="presentation" position="absolute" inset="0px" backgroundColor="backgroundAlt" opacity="0.6" />
         )}
       </AtomBox>
-    </AtomBox>
+    </AtomBox >
   );
 }

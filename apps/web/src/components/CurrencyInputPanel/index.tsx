@@ -12,6 +12,7 @@ import {
   Swap as SwapUI,
   ArrowDropDownIcon,
   WalletFilledIcon,
+  ThickArrowIcon,
 } from '@pancakeswap/uikit'
 import styled, { css } from 'styled-components'
 import { isAddress } from 'utils'
@@ -212,7 +213,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
                       : currency?.symbol) || t('Select a currency')}
                   </Text>
                 )}
-                {!currencyLoading && !disableCurrencySelect && <ArrowDropDownIcon />}
+                {!currencyLoading && !disableCurrencySelect && <ThickArrowIcon />}
               </Flex>
             </CurrencySelectButton>
             {token && tokenAddress ? (
@@ -257,7 +258,7 @@ const CurrencyInputPanel = memo(function CurrencyInputPanel({
       bottom={
         <>
           {!!showUSDPrice && (
-            <Flex justifyContent="flex-end" mr="1rem">
+            <Flex justifyContent="flex-start" ml="1rem">
               <Flex maxWidth="200px">
                 {inputLoading ? (
                   <Loading width="14px" height="14px" />

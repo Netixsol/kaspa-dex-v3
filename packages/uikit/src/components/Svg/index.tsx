@@ -8,6 +8,7 @@ export { default as AptosIcon } from "./Icons/Aptos";
 export { default as ArbitrumIcon } from "./Icons/Arbitrum";
 export { default as ArrowBackIcon } from "./Icons/ArrowBack";
 export { default as ArrowDownIcon } from "./Icons/ArrowDown";
+export { default as ThickArrowIcon } from "./Icons/ThickArrow";
 export { default as ArrowDropDownIcon } from "./Icons/ArrowDropDown";
 export { default as ArrowDropUpIcon } from "./Icons/ArrowDropUp";
 export { default as ArrowFirstIcon } from "./Icons/ArrowFirst";
